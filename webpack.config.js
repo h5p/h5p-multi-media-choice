@@ -48,7 +48,9 @@ module.exports = {
               publicPath: ''
             }
           },
-          { loader: "css-loader" },
+          { 
+            loader: "css-loader" 
+          },
           {
             loader: "sass-loader"
           }
