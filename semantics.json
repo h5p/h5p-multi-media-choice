@@ -190,7 +190,103 @@
       "label": "Behavioural settings",
       "importance": "low",
       "description": "These options will let you control how the task behaves.",
-      "fields": []
+      "fields": [
+        {
+          "name": "enmableRetry",
+          "label": "Enable \"Retry\" button",
+          "type": "boolean",
+          "importance": "low",
+          "default": "true",
+          "optional": true
+        },
+        {
+          "name": "enableSolutionsButton",
+          "label": "Enable \"Show Solution\" button",
+          "type": "boolean",
+          "importance": "low",
+          "default": "true",
+          "optional": "true"
+        },
+        {
+          "name": "confirmCheckDialog",
+          "label": "Show confirmation dialog on \"Check\"",
+          "importance": "low",
+          "type": "boolean",
+          "default": false,
+          "optional": true
+
+        },
+        {
+          "name": "confirmRetryDialog",
+          "label": "Show confirmation dialog on \"Retry\"",
+          "importance": "low",
+          "type": "boolean",
+          "default": false,
+          "optional": true
+        },
+        {
+          "name": "type",
+          "type": "select",
+          "label": "Question Type",
+          "importance": "low",
+          "description": "Select the look and behaviour of the question.",
+          "default": "auto",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Automatic"
+            },
+            {
+              "value": "multi",
+              "label": "Multiple Choice (Checkboxes)"
+            },
+            {
+              "value": "single",
+              "label": "Single Choice (Radio Buttons)"
+            }
+          ]
+        },
+        {
+          "name": "aspectRatio",
+          "type": "select",
+          "label": "Aspect ratio",
+          "importance": "low",
+          "description": "Select the aspect ratio of the alternatives",
+          "default": "auto",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Automatic scaling"
+            },
+            {
+              "value": "16x9",
+              "label": "16 by 9"
+            },
+            {
+              "value": "4x3",
+              "label": "4 by 3"
+            },
+            {
+              "value": "3x2",
+              "label": "3 by 2"
+            },
+            {
+              "value": "1x1",
+              "label": "1 by 1"
+            }
+          ]
+        },
+        {
+          "name": "maxAlternativesPerRow",
+          "type": "number",
+          "label": "Maximum alternatives per row",
+          "description": "Set the maximum number of alternatives per row to ensure the questions look alright. Leave empty for automatic scaling",
+          "min": 1,
+          "max": 10,
+          "default": "",
+          "optional": true
+        }
+      ]
     },
     {
       "name": "l10n",
