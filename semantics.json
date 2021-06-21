@@ -1,26 +1,21 @@
 [
     {
-      "name": "taskDescription",
-      "label": "Task description",
+      "name": "question",
       "type": "text",
+      "importance": "medium",
       "widget": "html",
-      "importance": "high",
-      "description": "Describe your task here.",
-      "enterMode": "div",
+      "label": "Question",
+      "enterMode": "p",
       "tags": [
         "strong",
         "em",
-        "u",
-        "a",
-        "ul",
-        "ol",
+        "sub",
+        "sup",
         "h2",
         "h3",
-        "hr",
         "pre",
         "code"
-      ],
-      "optional": true
+      ]
     },
     {
       "name": "answers",
@@ -37,11 +32,11 @@
         "importance": "high",
         "fields": [
           {
-            "name": "image",
+            "name": "media",
             "type": "library",
-            "label": "Image",
+            "label": "Media",
             "optional": false,
-            "description": "Image to display as the choice.",
+            "description": "Media to display as the choice.",
             "options": [
               "H5P.Image 1.1"
             ]
@@ -51,7 +46,16 @@
             "type": "boolean",
             "label": "Disable image zooming",
             "default": false,
-            "optional": true
+            "optional": true,
+            "widget": "showWhen",
+            "showWhen": {
+              "rules": [
+                {
+                  "field": "media",
+                  "equals": "H5P.Image 1.1"
+                }
+              ]
+            }
           },
           {
             "name": "correct",
