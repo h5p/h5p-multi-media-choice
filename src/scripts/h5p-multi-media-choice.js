@@ -25,6 +25,6 @@ export default class MultiMediaChoice extends H5P.Question {
         this.introduction.innerHTML = this.params.taskDescription;
         this.setIntroduction(this.introduction);
       }
-    }
+    };
   }
 }

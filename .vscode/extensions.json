@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "editorconfig.editorconfig",
+        "tevencl.adddoccomments",
+        "naumovs.color-highlight",
+        "eamodio.gitlens",
+        "gruntfuggly.todo-tree"
+    ]
+}
