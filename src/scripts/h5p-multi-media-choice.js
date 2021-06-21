@@ -1,3 +1,5 @@
+import MultiMediaChoiceContent from './h5p-multi-media-choice-content';
+
 /**
  * Class for H5P Multi Media Choice.
  */
@@ -15,16 +17,25 @@ export default class MultiMediaChoice extends H5P.Question {
     this.contentId = contentId;
     this.extras = extras;
 
+    console.log('MultiMediaChoice');
+    console.log(this.params.question);
+
     /**
      * Register the DOM elements with H5P.MultiMediaChoice
      */
     this.registerDomElements = () => {
       // Register task introduction text
-      if (this.params.taskDescription && this.params.taskDescription !== '') {
+      if (this.params.question) {
         this.introduction = document.createElement('div');
-        this.introduction.innerHTML = this.params.taskDescription;
+        this.introduction.innerHTML = this.params.question;
         this.setIntroduction(this.introduction);
       }
+
+      this.content = new MultiMediaChoiceContent(params, {});
+
+      // Register content with H5P.Question
+      this.setContent(this.content.getDOM());
+      this.trigger('resize');
     };
   }
 }

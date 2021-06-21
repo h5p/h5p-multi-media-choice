@@ -2,7 +2,7 @@
     {
       "name": "question",
       "type": "text",
-      "importance": "medium",
+      "importance": "high",
       "widget": "html",
       "label": "Question",
       "enterMode": "p",
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "name": "answers",
+      "name": "options",
       "type": "list",
       "importance": "high",
       "label": "Available options",
@@ -26,7 +26,7 @@
       "min": 1,
       "defaultNum": 2,
       "field": {
-        "name": "answer",
+        "name": "option",
         "type": "group",
         "label": "Option",
         "importance": "high",
