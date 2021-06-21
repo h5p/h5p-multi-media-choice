@@ -190,7 +190,60 @@
       "label": "Behavioural settings",
       "importance": "low",
       "description": "These options will let you control how the task behaves.",
-      "fields": []
+      "fields": [
+        {
+          "name": "enmableRetry",
+          "label": "Enable \"Retry\" button",
+          "type": "boolean",
+          "importance": "low",
+          "default": "true",
+          "optional": true
+        },
+        {
+          "name": "enableSolutionsButton",
+          "label": "Enable \"Show Solution\" button",
+          "type": "boolean",
+          "importance": "low",
+          "default": "true",
+          "optional": "true"
+        },
+        {
+          "name": "type",
+          "type": "select",
+          "label": "Question Type",
+          "importance": "low",
+          "description": "Select the look and behaviour of the question.",
+          "default": "auto",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Automatic"
+            },
+            {
+              "value": "multi",
+              "label": "Multiple Choice (Checkboxes)"
+            },
+            {
+              "value": "single",
+              "label": "Single Choice (Radio Buttons)"
+            }
+          ]
+        },
+        {
+          "label": "Show confirmation dialog on \"Check\"",
+          "importance": "low",
+          "name": "confirmCheckDialog",
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "label": "Show confirmation dialog on \"Retry\"",
+          "importance": "low",
+          "name": "confirmRetryDialog",
+          "type": "boolean",
+          "default": false
+        }
+      ]
     },
     {
       "name": "l10n",
