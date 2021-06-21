@@ -294,14 +294,23 @@
       "common": true,
       "label": "User interface",
       "importance": "low",
-      "fields": []
-    },
-    {
-      "name": "a11y",
-      "type": "group",
-      "common": true,
-      "label": "Readspeaker",
-      "importance": "low",
-      "fields": []
+      "fields": [
+        {
+          "name": "dummy1",
+          "type": "text",
+          "importance": "low",
+          "label": "This is an example text. Here is a description of what it does",
+          "default": "Dummy 1",
+          "optional": true
+        },
+        {
+          "name": "dummy2",
+          "type": "text",
+          "importance": "low",
+          "label": "This is an example text. Here is a description of what it does",
+          "default": "Dummy 2",
+          "optional": true
+        }
+      ]
     }
   ]
