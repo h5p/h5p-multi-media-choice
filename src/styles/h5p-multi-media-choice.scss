@@ -1,5 +1,13 @@
 .h5p-multi-media-choice {
   background: rebeccapurple;
+
+  .h5p-multi-media-choice-content {
+    background: red;
+  }
+
+  .h5p-multi-media-choice-options {
+    background: aquamarine;
+  }
 }
 
 img {

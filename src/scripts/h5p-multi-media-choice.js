@@ -17,9 +17,6 @@ export default class MultiMediaChoice extends H5P.Question {
     this.contentId = contentId;
     this.extras = extras;
 
-    console.log('MultiMediaChoice');
-    console.log(this.params.question);
-
     /**
      * Register the DOM elements with H5P.MultiMediaChoice
      */
@@ -31,7 +28,7 @@ export default class MultiMediaChoice extends H5P.Question {
         this.setIntroduction(this.introduction);
       }
 
-      this.content = new MultiMediaChoiceContent(params, {});
+      this.content = new MultiMediaChoiceContent(params, contentId, {});
 
       // Register content with H5P.Question
       this.setContent(this.content.getDOM());

@@ -3,18 +3,21 @@ export default class MultiMediaChoiceContent {
   /**
    * @constructor
    * @param {object} params Parameters.
+   * @param {number} contentId Content's id.
    * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(params = {}, callbacks = {}) {
+  constructor(params = {}, contentId, callbacks = {}) {
     this.params = params;
+    this.contentId = contentId;
 
     this.content = document.createElement('div');
     this.content.classList.add('h5p-multi-media-choice-content');
 
     // Build n options
-    this.options = params.options.map((option) => this.buildOption(option));
-    this.optionList = this.buildOptionList(this.options);
-    this.content.appendChild(this.optionList);
+    this.options = params.options.map((option, index) =>
+      this.buildOption(option, index)
+    );
+    this.content = this.buildOptionList(this.options);
   }
 
   /**
@@ -41,15 +44,25 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Build option.
-   * @param {boolean} singleAnswer Determines if radio buttons or check boxes are used.
+   * @param {object} option Option object from the editor.
+   * @param {number} key Option object from the editor.
    * @return {MultiMediaChoiceOption} Option. //TODO: not correct
    */
-  buildOption(singleAnswer) {
-    const option = document.createElement('img');
-    option.src =
-      'https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F1%2F1a%2FLipton-mug-tea.jpg%2F1200px-Lipton-mug-tea.jpg&sp=1624282543Td4130d998b3c14a93be3ce983180112f1ea9b075aaf2e7c181a0b13cbf1511c8';
-    return option;
-    // return MultiMediaChoiceOption();
+  buildOption(option, key) {
+    const {
+      alt,
+      title,
+      file: { path },
+    } = option.media.params;
+
+    const image = document.createElement('img');
+    image.setAttribute('src', H5P.getPath(path, this.contentId));
+    image.setAttribute('alt', alt);
+    image.setAttribute('title', title);
+    image.setAttribute('tabindex', key);
+    image.src = H5P.getPath(path, this.contentId);
+
+    return image;
   }
 
   /**
