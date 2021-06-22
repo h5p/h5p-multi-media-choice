@@ -98,7 +98,10 @@ export default class MultiMediaChoiceContent {
       const image = document.createElement('img');
       image.setAttribute('src', H5P.getPath(path, this.contentId));
       image.setAttribute('alt', alt);
-      image.setAttribute('title', title);
+
+      //Do not show title if title is not specified
+      if(title != null)
+        image.setAttribute('title', title);
       image.classList.add('h5p-multi-media-choice-media');
       image.classList.add(`h5p-multi-media-choice-media-${this.params.behaviour.aspectRatio}`);
 
