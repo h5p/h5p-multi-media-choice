@@ -1,4 +1,5 @@
 import MultiMediaChoiceContent from './h5p-multi-media-choice-content';
+import deepExtend from './h5p-multi-media-choice-util';
 
 /**
  * Class for H5P Multi Media Choice.
@@ -13,9 +14,27 @@ export default class MultiMediaChoice extends H5P.Question {
   constructor(params, contentId, extras = {}) {
     super('multi-media-choice');
 
-    this.params = params;
     this.contentId = contentId;
     this.extras = extras;
+
+    // Default values are extended
+    this.params = deepExtend(
+      {
+        question: null,
+        behaviour: {
+          enableSolutionsButton: true,
+          enableRetry: true,
+          type: 'auto',
+          confirmCheckDialog: false,
+          confirmRetryDialog: false,
+        },
+        l10n: {
+          dummy1: 'default dummy text 1',
+          dummy2: 'default dummy text 2',
+        },
+      },
+      params
+    );
 
     /**
      * Register the DOM elements with H5P.MultiMediaChoice
