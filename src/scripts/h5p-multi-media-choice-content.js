@@ -32,15 +32,23 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
+   * Return the indexes of the selected options
+   * @returns {Number[]} A list of indexes
+   */
+  getSelected() {
+    return this.selected;
+  }
+
+  /**
    * Build options.
-   * @param {MultiMediaChoiceOption[]} options List of option objects.
+   * @param {object[]} options List of option objects.
    * @return {HTMLElement} List view of options.
    */
   buildOptionList(options) {
     const optionList = document.createElement('div');
     optionList.classList.add('h5p-multi-media-choice-options');
     options.forEach((option) => {
-      optionList.appendChild(option); // option.getDOM();
+      optionList.appendChild(option);
     });
     return optionList;
   }
@@ -49,7 +57,7 @@ export default class MultiMediaChoiceContent {
    * Build option.
    * @param {object} option Option object from the editor.
    * @param {number} key Option object from the editor.
-   * @return {MultiMediaChoiceOption} Option. //TODO: not correct
+   * @return {HTMLElement} Option.
    */
   buildOption(option, key) {
     const optionContainer = document.createElement('div');
@@ -62,8 +70,10 @@ export default class MultiMediaChoiceContent {
     else
       selectable.setAttribute("type", "checkbox");
 
+    const optionIndex = this.selectables.length;
+    const self = this;
     selectable.addEventListener('click', function () {
-      this.toggleSelected(this.selectables.length); //TODO: check if this works
+      self.toggleSelected(optionIndex);
     });
     this.selectables.push(selectable);
     optionContainer.appendChild(selectable);
@@ -84,7 +94,6 @@ export default class MultiMediaChoiceContent {
     optionContainer.appendChild(image);
 
     return optionContainer;
-    //return image;
   }
 
   /**
@@ -118,17 +127,15 @@ export default class MultiMediaChoiceContent {
       const selIndex = this.selected.indexOf(optionIndex);
       if (selIndex > -1)
         this.selected.splice(selIndex, 1);
-      option.checked = false;
     }
     else {
-      if (this.singleAnswer() && this.selected.length < 0) {
+      if (this.singleAnswer() && this.selected.length > 0) {
         this.selectables[this.selected[0]].checked = false;
         this.selected = {optionIndex};
       }
       else {
         this.selected.push(optionIndex);
       }
-      option.checked = true;
     }
   }
 
