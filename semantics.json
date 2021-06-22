@@ -258,19 +258,19 @@
               "label": "Automatic scaling"
             },
             {
-              "value": "16:9",
+              "value": "16by9",
               "label": "16:9"
             },
             {
-              "value": "4:3",
+              "value": "4by3",
               "label": "4:3"
             },
             {
-              "value": "3:2",
+              "value": "3by2",
               "label": "3:2"
             },
             {
-              "value": "1:1",
+              "value": "1by1",
               "label": "1:1"
             }
           ]
@@ -295,27 +295,40 @@
       "importance": "low",
       "fields": [
         {
-          "name": "checkAnswer",
+          "name": "checkText",
           "type": "text",
           "label": "Text for \"Check\" button",
           "importance": "low",
           "default": "Check"
         },
         {
-          "name": "dummy1",
+          "name": "check",
           "type": "text",
+          "label": "Assistive technology description for \"Check\" button",
           "importance": "low",
-          "label": "This is an example text. Here is a description of what it does",
-          "default": "Dummy 1",
-          "optional": true
+          "default": "Check the characters. The responses will be marked as correct, incorrect, or unanswered."
         },
         {
-          "name": "dummy2",
+          "name": "showSolution",
           "type": "text",
+          "label": "Assistive technology description for \"Show Solution\" button",
           "importance": "low",
-          "label": "This is an example text. Here is a description of what it does",
-          "default": "Dummy 2",
-          "optional": true
+          "default": "Show the solution. The crossword will be filled with its correct solution."
+        },
+        {
+          "name": "retry",
+          "type": "text",
+          "label": "Assistive technology description for \"Retry\" button",
+          "importance": "low",
+          "default": "Retry the task. Reset all responses and start the task over again."
+        },
+        {
+          "name": "result",
+          "type": "text",
+          "label": "Your result",
+          "description": "@score and @total are variables and will be replaced by their respective values.",
+          "importance": "low",
+          "default": "You got @score out of @total points"
         }
       ]
     }

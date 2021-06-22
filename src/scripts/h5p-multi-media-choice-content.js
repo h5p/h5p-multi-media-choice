@@ -89,9 +89,11 @@ export default class MultiMediaChoiceContent {
       image.setAttribute('src', H5P.getPath(path, this.contentId));
       image.setAttribute('alt', alt);
       image.setAttribute('title', title);
+      image.classList.add('h5p-multi-media-choice-media');
+      image.classList.add(`h5p-multi-media-choice-media-${this.params.behaviour.aspectRatio}`)
       optionContainer.appendChild(image);
 
-    return optionContainer;
+      return optionContainer;
     }
   }
 
