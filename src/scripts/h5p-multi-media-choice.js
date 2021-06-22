@@ -30,13 +30,29 @@ export default class MultiMediaChoice extends H5P.Question {
           confirmRetryDialog: false,
         },
         l10n: {
-          checkAnswer: 'Check',
-          dummy1: 'default dummy text 1',
-          dummy2: 'default dummy text 2',
+          checkText: 'Check',
+          check: 'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
+          showSolution: 'Show the solution. The task will be marked with its correct solution.',
+          retry: 'Retry the task. Reset all responses and start the task over again.',
+          result: 'You got @score out of @total points',
         },
       },
       params
     );
+
+    /**
+     * Get score.
+     * @return {number} latest score.
+     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
+     */
+    this.getScore = () => 1; //TODO: Placeholder
+
+    /**
+     * Get maximum possible score.
+     * @return {number} Score necessary for mastering.
+     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
+     */
+    this.getMaxScore = () => 2; //TODO: Placeholder
 
     this.registerDomElements = () => {
       // Register task introduction text
@@ -55,18 +71,33 @@ export default class MultiMediaChoice extends H5P.Question {
 
       this.trigger('resize');
     };
+  }
 
-    /**
-     * Add the buttons that are passed to H5P.Question
-     */
-    this.addButtons = () => {
-      this.addButton('check-answer', this.params.l10n.checkAnswer, () => {
-          this.checkAnswer();
-        }, true, {
-          'aria-label': ""
-        }, {});
-    };
+  /**
+   * Add the buttons that are passed to H5P.Question
+   */
+  addButtons() {
+    this.addButton(
+      'check-answer',
+      this.params.l10n.checkText,
+      () => {
+        this.checkAnswer();
+      },
+      true,
+      { 'aria-label': this.params.l10n.check },
+      {}
+    );
+  }
+
+  /**
+   * Check answer.
+   */
+  checkAnswer() {
+    this.hideButton('check-answer');
+    const score = this.getScore();
+    const maxScore = this.getMaxScore();
+    const textScore = H5P.Question.determineOverallFeedback(this.params.overallFeedback, score / maxScore);
+    const ariaMessage = this.params.l10n.result.replace('@score', score).replace('@total', maxScore);
+    this.setFeedback(textScore, score, maxScore, ariaMessage);
   }
 }
-  ""
-, {}   , {}
