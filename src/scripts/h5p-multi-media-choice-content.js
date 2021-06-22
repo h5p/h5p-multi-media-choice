@@ -10,11 +10,14 @@ export default class MultiMediaChoiceContent {
     this.params = params;
     this.contentId = contentId;
 
+    this.selected = [];
+    this.selectables = [];
+
     this.content = document.createElement('div');
     this.content.classList.add('h5p-multi-media-choice-content');
 
     // Build n options
-    this.options = params.options.map((option, index) =>
+    this.options = this.params.options.map((option, index) =>
       this.buildOption(option, index)
     );
     this.content = this.buildOptionList(this.options);
@@ -49,6 +52,22 @@ export default class MultiMediaChoiceContent {
    * @return {MultiMediaChoiceOption} Option. //TODO: not correct
    */
   buildOption(option, key) {
+    const optionContainer = document.createElement('div');
+
+    const selectable = document.createElement('input');
+    if(this.singleAnswer()) {
+      selectable.setAttribute('type', 'radio');
+      selectable.setAttribute('name', 'options');
+    }
+    else
+      selectable.setAttribute("type", "checkbox");
+
+    selectable.addEventListener('click', function () {
+      this.toggleSelected(this.selectables.length); //TODO: check if this works
+    });
+    this.selectables.push(selectable);
+    optionContainer.appendChild(selectable);
+
     const {
       alt,
       title,
@@ -62,7 +81,10 @@ export default class MultiMediaChoiceContent {
     image.setAttribute('tabindex', key);
     image.src = H5P.getPath(path, this.contentId);
 
-    return image;
+    optionContainer.appendChild(image);
+
+    return optionContainer;
+    //return image;
   }
 
   /**
@@ -70,6 +92,53 @@ export default class MultiMediaChoiceContent {
    * @returns {number} Number of options marked as correct in the editor.
    */
   getNumberOfCorrectOptions() {
-    return params.options.filter((option) => option.correct).length;
+    return this.params.options.filter((option) => option.correct).length;
+  }
+
+  /**
+   * Determines the task type, indicating whether the answers should be
+   * radio buttons or checkboxes.
+   * @returns true if the options should be displayed as radiobuttons,
+   * @returns false if they should be displayed as checkboxes
+   */
+   singleAnswer() {
+    if(this.params.behaviour.type === 'auto')
+      return this.getNumberOfCorrectOptions() === 1;
+    return this.params.behaviour.type === 'single';
+  }
+
+  /**
+   * Toggles the given option. If the options are radio buttons
+   * the previously checked one is unchecked
+   * @param {Number} optionIndex Which option is being selected
+   */
+  toggleSelected(optionIndex) {
+    const option = this.selectables[optionIndex];
+    if (option.checked) {
+      const selIndex = this.selected.indexOf(optionIndex);
+      if (selIndex > -1)
+        this.selected.splice(selIndex, 1);
+      option.checked = false;
+    }
+    else {
+      if (this.singleAnswer() && this.selected.length < 0) {
+        this.selectables[this.selected[0]].checked = false;
+        this.selected = {optionIndex};
+      }
+      else {
+        this.selected.push(optionIndex);
+      }
+      option.checked = true;
+    }
+  }
+
+  /**
+   * Resets all selected options
+   */
+  resetSelections() {
+    this.selected = {};
+    this.selectables.forEach(function (selectable, index) {
+      selectable.checked = false;
+    });
   }
 }
