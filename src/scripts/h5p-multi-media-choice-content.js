@@ -64,7 +64,6 @@ export default class MultiMediaChoiceContent {
     const selectable = document.createElement('input');
     if(this.singleAnswer()) {
       selectable.setAttribute('type', 'radio');
-      selectable.setAttribute('name', 'options');
     }
     else
       selectable.setAttribute("type", "checkbox");
@@ -148,16 +147,18 @@ export default class MultiMediaChoiceContent {
    * @param {number} optionIndex Which option is being selected
    */
   toggleSelected(optionIndex) {
-    const option = this.selectables[optionIndex];
-    if (option.checked) {
-      const selIndex = this.selected.indexOf(optionIndex);
-      if (selIndex > -1)
-        this.selected.splice(selIndex, 1);
+    const selIndex = this.selected.indexOf(optionIndex);
+
+    //If already checked remove from selected list. Radio buttons don't get unchecked
+    if (selIndex > -1 && !this.singleAnswer()) {
+      this.selected.splice(selIndex, 1);
     }
-    else {
-      if (this.singleAnswer() && this.selected.length > 0) {
-        this.selectables[this.selected[0]].checked = false;
-        this.selected = {optionIndex};
+    //if checked add to selected list. If radio make sure others get unselected.
+    else if (selIndex <= -1) {
+      if (this.singleAnswer()) {
+        if(this.selected.length > 0)
+          this.selectables[this.selected[0]].checked = false;
+        this.selected = [optionIndex];
       }
       else {
         this.selected.push(optionIndex);
