@@ -14,9 +14,7 @@ export default class MultiMediaChoiceContent {
     this.content.classList.add('h5p-multi-media-choice-content');
 
     // Build n options
-    this.options = params.options.map((option, index) =>
-      this.buildOption(option, index)
-    );
+    this.options = params.options.map((option) => this.buildOption(option));
     this.content = this.buildOptionList(this.options);
   }
 
@@ -30,14 +28,16 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Build options.
-   * @param {MultiMediaChoiceOption[]} options List of option objects.
+   * @param {MultiMediaChoiceOption[]} options List of option objects. //TODO: not correct
    * @return {HTMLElement} List view of options.
    */
   buildOptionList(options) {
     const optionList = document.createElement('div');
     optionList.classList.add('h5p-multi-media-choice-options');
     options.forEach((option) => {
-      optionList.appendChild(option); // option.getDOM();
+      if (option) {
+        optionList.appendChild(option); // option.getDOM();
+      }
     });
     return optionList;
   }
@@ -45,24 +45,34 @@ export default class MultiMediaChoiceContent {
   /**
    * Build option.
    * @param {object} option Option object from the editor.
-   * @param {number} key Option object from the editor.
    * @return {MultiMediaChoiceOption} Option. //TODO: not correct
    */
-  buildOption(option, key) {
-    const {
-      alt,
-      title,
-      file: { path },
-    } = option.media.params;
+  buildOption(option) {
+    if (this.mediaParamsAreValid(option.media.params)) {
+      const {
+        alt,
+        title,
+        file: { path },
+      } = option.media.params;
 
-    const image = document.createElement('img');
-    image.setAttribute('src', H5P.getPath(path, this.contentId));
-    image.setAttribute('alt', alt);
-    image.setAttribute('title', title);
-    image.setAttribute('tabindex', key);
-    image.src = H5P.getPath(path, this.contentId);
+      const image = document.createElement('img');
+      image.setAttribute('src', H5P.getPath(path, this.contentId));
+      image.setAttribute('alt', alt);
+      image.setAttribute('title', title);
+      return image;
+    }
+  }
 
-    return image;
+  /**
+   * Test if important keys are present in media params.
+   * @param {object} mediaParams Media params from the editor.
+   * @return {boolean} True if all keys are present, false otherwise.
+   * @private
+   */
+  mediaParamsAreValid(mediaParams) {
+    return (
+      ['alt', 'title', 'file'].filter((key) => key in mediaParams).length > 0
+    );
   }
 
   /**
