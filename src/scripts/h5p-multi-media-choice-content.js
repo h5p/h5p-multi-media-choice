@@ -112,12 +112,14 @@ export default class MultiMediaChoiceContent {
       const image = document.createElement('img');
       image.setAttribute('src', H5P.getPath(path, this.contentId));
       image.setAttribute('alt', alt);
-      image.setAttribute('title', title);
+      if (title != null) image.setAttribute('title', title); //Do not show title if title is not specified
+
       image.classList.add('h5p-multi-media-choice-media');
       image.classList.add(`h5p-multi-media-choice-media-${this.params.behaviour.aspectRatio}`);
 
       return image;
     }
+    return null;
   }
 
   /**
@@ -132,7 +134,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Counts options marked as correct
-   * @returns  {number} Number of options marked as correct in the editor.
+   * @returns  {Number} Number of options marked as correct in the editor.
    */
   getNumberOfCorrectOptions() {
     return this.params.options.filter((option) => option.correct).length;
