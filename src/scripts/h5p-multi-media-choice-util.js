@@ -1,3 +1,7 @@
+/**
+ * Merge the contents of two or more objects together and return it
+ * @param  {Object} out
+ */
 export default function deepExtend(out) {
   out = out || {};
 
