@@ -12,7 +12,6 @@ $media-width: 10em;
   }
 }
 
-
 .h5p-multi-media-choice-media {
   display: inline-block;
   width: $media-width;
@@ -21,18 +20,18 @@ $media-width: 10em;
   margin: 1em 1em 1em 1em;
 }
 
-.h5p-multi-media-choice-media-1by1 {
+.h5p-multi-media-choice-media-1to1 {
   height: $media-width;
 }
 
-.h5p-multi-media-choice-media-3by2{
+.h5p-multi-media-choice-media-3to2 {
   height: $media-width * 0.667;
 }
 
-.h5p-multi-media-choice-media-4by3{
+.h5p-multi-media-choice-media-4to3 {
   height: $media-width * 0.75;
 }
 
-.h5p-multi-media-choice-media-16by9{
+.h5p-multi-media-choice-media-16to9 {
   height: $media-width * 0.5625;
 }
