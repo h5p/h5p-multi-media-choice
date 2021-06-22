@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import MultiMediaChoiceContent from './h5p-multi-media-choice-content';
 import deepExtend from './h5p-multi-media-choice-util';
+=======
+import Option from 'h5p-multi-media-choice-option';
+>>>>>>> 8547598 (HFP-3296 Start implementing checkboxes and radio)
 
 /**
  * Class for H5P Multi Media Choice.
@@ -46,12 +50,21 @@ export default class MultiMediaChoice extends H5P.Question {
         this.introduction.innerHTML = this.params.question;
         this.setIntroduction(this.introduction);
       }
+<<<<<<< HEAD
 
       this.content = new MultiMediaChoiceContent(params, contentId, {});
 
       // Register content with H5P.Question
       this.setContent(this.content.getDOM());
       this.trigger('resize');
+=======
+      this.option = new Option({
+        behaviour : {singleAnswer : true},
+        media : null,
+        optionNr: 1
+      })
+      this.setContent(this.option);
+>>>>>>> 8547598 (HFP-3296 Start implementing checkboxes and radio)
     };
   }
 }
