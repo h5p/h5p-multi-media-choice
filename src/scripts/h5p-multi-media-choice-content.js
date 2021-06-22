@@ -17,9 +17,7 @@ export default class MultiMediaChoiceContent {
     this.content.classList.add('h5p-multi-media-choice-content');
 
     // Build n options
-    this.options = this.params.options.map((option, index) =>
-      this.buildOption(option, index)
-    );
+    this.options = params.options.map((option) => this.buildOption(option));
     this.content = this.buildOptionList(this.options);
   }
 
@@ -48,7 +46,9 @@ export default class MultiMediaChoiceContent {
     const optionList = document.createElement('div');
     optionList.classList.add('h5p-multi-media-choice-options');
     options.forEach((option) => {
-      optionList.appendChild(option);
+      if (option) {
+        optionList.appendChild(option);
+      }
     });
     return optionList;
   }
@@ -59,7 +59,7 @@ export default class MultiMediaChoiceContent {
    * @param {number} key Option object from the editor.
    * @return {HTMLElement} Option.
    */
-  buildOption(option, key) {
+  buildOption(option) {
     const optionContainer = document.createElement('div');
 
     const selectable = document.createElement('input');
@@ -78,22 +78,33 @@ export default class MultiMediaChoiceContent {
     this.selectables.push(selectable);
     optionContainer.appendChild(selectable);
 
-    const {
-      alt,
-      title,
-      file: { path },
-    } = option.media.params;
+    if (this.mediaParamsAreValid(option.media.params)) {
+      const {
+        alt,
+        title,
+        file: { path },
+      } = option.media.params;
 
-    const image = document.createElement('img');
-    image.setAttribute('src', H5P.getPath(path, this.contentId));
-    image.setAttribute('alt', alt);
-    image.setAttribute('title', title);
-    image.setAttribute('tabindex', key);
-    image.src = H5P.getPath(path, this.contentId);
-
-    optionContainer.appendChild(image);
+      const image = document.createElement('img');
+      image.setAttribute('src', H5P.getPath(path, this.contentId));
+      image.setAttribute('alt', alt);
+      image.setAttribute('title', title);
+      optionContainer.appendChild(image);
 
     return optionContainer;
+    }
+  }
+
+  /**
+   * Test if important keys are present in media params.
+   * @param {object} mediaParams Media params from the editor.
+   * @return {boolean} True if all keys are present, false otherwise.
+   * @private
+   */
+  mediaParamsAreValid(mediaParams) {
+    return (
+      ['alt', 'title', 'file'].filter((key) => key in mediaParams).length > 0
+    );
   }
 
   /**
