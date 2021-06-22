@@ -192,7 +192,6 @@
       "description": "These options will let you control how the task behaves.",
       "fields": [
         {
-<<<<<<< HEAD
           "name": "enmableRetry",
           "label": "Enable \"Retry\" button",
           "type": "boolean",
@@ -225,8 +224,6 @@
           "optional": true
         },
         {
-=======
->>>>>>> 8547598 (HFP-3296 Start implementing checkboxes and radio)
           "name": "type",
           "type": "select",
           "label": "Question Type",
@@ -247,7 +244,6 @@
               "label": "Single Choice (Radio Buttons)"
             }
           ]
-<<<<<<< HEAD
         },
         {
           "name": "aspectRatio",
@@ -288,8 +284,6 @@
           "max": 10,
           "default": 2,
           "optional": true
-=======
->>>>>>> 8547598 (HFP-3296 Start implementing checkboxes and radio)
         }
       ]
     },
