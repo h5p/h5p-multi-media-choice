@@ -31,7 +31,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Return the indexes of the selected options
-   * @returns {Number[]} A list of indexes
+   * @returns {number[]} A list of indexes
    */
   getSelected() {
     return this.selected;
@@ -56,7 +56,6 @@ export default class MultiMediaChoiceContent {
   /**
    * Build option.
    * @param {object} option Option object from the editor.
-   * @param {number} key Option object from the editor.
    * @return {HTMLElement} Option.
    */
   buildOption(option) {
@@ -78,6 +77,17 @@ export default class MultiMediaChoiceContent {
     this.selectables.push(selectable);
     optionContainer.appendChild(selectable);
 
+    optionContainer.appendChild(this.buildMedia(option));
+
+    return optionContainer;
+  }
+
+  /**
+   * Build media for an option
+   * @param {object} option Option object from the editor
+   * @returns {HTMLElement} The media to be displayed
+   */
+  buildMedia(option) {
     if (this.mediaParamsAreValid(option.media.params)) {
       const {
         alt,
@@ -90,11 +100,11 @@ export default class MultiMediaChoiceContent {
       image.setAttribute('alt', alt);
       image.setAttribute('title', title);
       image.classList.add('h5p-multi-media-choice-media');
-      image.classList.add(`h5p-multi-media-choice-media-${this.params.behaviour.aspectRatio}`)
-      optionContainer.appendChild(image);
+      image.classList.add(`h5p-multi-media-choice-media-${this.params.behaviour.aspectRatio}`);
 
-      return optionContainer;
+      return image;
     }
+    return null;
   }
 
   /**
@@ -132,7 +142,7 @@ export default class MultiMediaChoiceContent {
   /**
    * Toggles the given option. If the options are radio buttons
    * the previously checked one is unchecked
-   * @param {Number} optionIndex Which option is being selected
+   * @param {number} optionIndex Which option is being selected
    */
   toggleSelected(optionIndex) {
     const option = this.selectables[optionIndex];
