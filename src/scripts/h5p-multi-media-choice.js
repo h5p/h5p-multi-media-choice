@@ -1,5 +1,7 @@
 import MultiMediaChoiceContent from './h5p-multi-media-choice-content';
 
+import deepExtend from './h5p-multi-media-choice-util';
+
 /**
  * Class for H5P Multi Media Choice.
  */
@@ -17,26 +19,25 @@ export default class MultiMediaChoice extends H5P.Question {
     this.extras = extras;
 
     // Default values are extended
-    this.params = {
-      ...params,
-      question: null,
-      behaviour: {
-        enableSolutionsButton: true,
-        enableRetry: true,
-        type: 'auto',
-        confirmCheckDialog: false,
-        confirmRetryDialog: false,
+    this.params = deepExtend(
+      {
+        question: null,
+        behaviour: {
+          enableSolutionsButton: true,
+          enableRetry: true,
+          type: 'auto',
+          confirmCheckDialog: false,
+          confirmRetryDialog: false,
+        },
+        l10n: {
+          checkAnswer: 'Check',
+          dummy1: 'default dummy text 1',
+          dummy2: 'default dummy text 2',
+        },
       },
-      l10n: {
-        checkAnswer: 'Check',
-        dummy1: 'default dummy text 1',
-        dummy2: 'default dummy text 2',
-      },
-    };
+      params
+    );
 
-    /**
-     * Register the DOM elements with H5P.MultiMediaChoice
-     */
     this.registerDomElements = () => {
       // Register task introduction text
       if (this.params.question) {
@@ -67,3 +68,5 @@ export default class MultiMediaChoice extends H5P.Question {
     };
   }
 }
+  ""
+, {}   , {}
