@@ -60,6 +60,7 @@ export default class MultiMediaChoiceContent {
    */
   buildOption(option) {
     const optionContainer = document.createElement('div');
+    optionContainer.classList.add('h5p-multi-media-choice-container')
 
     const selectable = document.createElement('input');
     if (this.singleAnswer()) {

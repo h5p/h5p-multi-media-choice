@@ -12,12 +12,16 @@ $media-width: 10em;
   }
 }
 
+.h5p-multi-media-choice-container{
+  display: inline-block;
+  margin: 1em 1em 1em 1em;
+}
+
 .h5p-multi-media-choice-media {
   display: inline-block;
   width: $media-width;
   object-fit: contain;
   background-color: black;
-  margin: 1em 1em 1em 1em;
 }
 
 .h5p-multi-media-choice-media-1to1 {
