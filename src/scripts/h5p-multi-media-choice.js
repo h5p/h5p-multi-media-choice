@@ -28,6 +28,7 @@ export default class MultiMediaChoice extends H5P.Question {
         confirmRetryDialog: false,
       },
       l10n: {
+        checkAnswer: 'Check',
         dummy1: 'default dummy text 1',
         dummy2: 'default dummy text 2',
       },
@@ -48,7 +49,21 @@ export default class MultiMediaChoice extends H5P.Question {
 
       // Register content with H5P.Question
       this.setContent(this.content.getDOM());
+
+      this.addButtons();
+
       this.trigger('resize');
+    };
+
+    /**
+     * Add the buttons that are passed to H5P.Question
+     */
+    this.addButtons = () => {
+      this.addButton('check-answer', this.params.l10n.checkAnswer, () => {
+          this.checkAnswer();
+        }, true, {
+          'aria-label': ""
+        }, {});
     };
   }
 }

@@ -296,6 +296,13 @@
       "importance": "low",
       "fields": [
         {
+          "name": "checkAnswer",
+          "type": "text",
+          "label": "Text for \"Check\" button",
+          "importance": "low",
+          "default": "Check"
+        },
+        {
           "name": "dummy1",
           "type": "text",
           "importance": "low",
