@@ -365,6 +365,98 @@
           "description": "@score and @total are variables and will be replaced by their respective values.",
           "importance": "low",
           "default": "You got @score out of @total points"
+        },
+        {
+          "label": "Check confirmation dialog",
+          "importance": "low",
+          "name": "confirmCheck",
+          "type": "group",
+          "common": "true",
+          "fields": [
+            {
+              "label": "Header text",
+              "importance": "low",
+              "name": "header",
+              "type": "text",
+              "default": "Finish?"
+            },
+            {
+              "label": "Body text",
+              "importance": "low",
+              "name": "body",
+              "type": "text",
+              "default": "Are you sure you want to finish?",
+              "widget": "html",
+              "enterMode": "p",
+              "tags": [
+                "strong",
+                "em",
+                "del",
+                "u",
+                "code"
+              ]
+            },
+            {
+              "label": "Cancel button label",
+              "importance": "low",
+              "name": "cancelLabel",
+              "type": "text",
+              "default": "Cancel"
+            },
+            {
+              "label": "Confirm button label",
+              "importance": "low",
+              "name": "confirmLabel",
+              "type": "text",
+              "default": "Finish"
+            }
+          ]
+        },
+        {
+          "label": "Retry confirmation dialog",
+          "importance": "low",
+          "name": "confirmRetry",
+          "type": "group",
+          "common": true,
+          "fields": [
+            {
+              "label": "Header text",
+              "importance": "low",
+              "name": "header",
+              "type": "text",
+              "default": "Retry?"
+            },
+            {
+              "label": "Body text",
+              "importance": "low",
+              "name": "body",
+              "type": "text",
+              "default": "Are you sure you wish to retry?",
+              "widget": "html",
+              "enterMode": "p",
+              "tags": [
+                "strong",
+                "em",
+                "del",
+                "u",
+                "code"
+              ]
+            },
+            {
+              "label": "Cancel button label",
+              "importance": "low",
+              "name": "cancelLabel",
+              "type": "text",
+              "default": "Cancel"
+            },
+            {
+              "label": "Confirm button label",
+              "importance": "low",
+              "name": "confirmLabel",
+              "type": "text",
+              "default": "Retry"
+            }
+          ]
         }
       ]
     }

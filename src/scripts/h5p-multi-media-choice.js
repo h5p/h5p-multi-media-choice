@@ -39,6 +39,18 @@ export default class MultiMediaChoice extends H5P.Question {
           retryText: 'Retry',
           retry: 'Retry the task. Reset all responses and start the task over again.',
           result: 'You got @score out of @total points',
+          confirmCheck: {
+            header: 'Finish?',
+            body: 'Are you sure you want to finish?',
+            cancelLabel: 'Cancel',
+            confirmLabel: 'Finish'
+          },
+          confirmRetry: {
+            header: 'Retry?',
+            body: 'Are you sure you wish to retry?',
+            cancelLabel: 'Cancel',
+            confirmLabel: 'Retry'
+          }
         },
       },
       params
@@ -108,7 +120,13 @@ export default class MultiMediaChoice extends H5P.Question {
       },
       true,
       { 'aria-label': this.params.l10n.checkAnswer },
-      {}
+      {
+        confirmationDialog: {
+          enable: this.params.behaviour.confirmCheckDialog,
+          l10n: this.params.l10n.confirmCheck,
+          instance: this
+        }
+      }
     );
     this.addButton(
       'show-solution',
@@ -129,7 +147,13 @@ export default class MultiMediaChoice extends H5P.Question {
       },
       false,
       { 'aria-label': this.params.l10n.retry },
-      {}
+      {
+        confirmationDialog: {
+          enable: this.params.behaviour.confirmRetryDialog,
+          l10n: this.params.l10n.confirmRetry,
+          instance: this
+        }
+      }
     );
   }
 
