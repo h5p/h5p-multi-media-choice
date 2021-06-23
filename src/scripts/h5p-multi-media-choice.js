@@ -67,7 +67,7 @@ export default class MultiMediaChoice extends H5P.Question {
       else if (this.params.behaviour.singlePoint) {
         const selectedIndexes = this.content.getSelectedIndexes();
         for (let i = 0; i < this.params.options.length; i++) {
-          if ((this.params.options[i].correct) == (selectedIndexes.indexOf(i) == -1)) {
+          if (this.params.options[i].correct == (selectedIndexes.indexOf(i) == -1)) {
             return 0;
           }
         }
@@ -79,10 +79,10 @@ export default class MultiMediaChoice extends H5P.Question {
         let score = 0;
         for (let i = 0; i < this.content.selectables.length; i++) {
           if (this.isCorrect(this.content.selectables[i])) {
-            score ++;
+            score++;
           }
           else if (this.isIncorrect(this.content.selectables[i])) {
-            score --;
+            score--;
           }
         }
         return score < 0 ? 0 : score;
@@ -111,7 +111,7 @@ export default class MultiMediaChoice extends H5P.Question {
      * @param {object} selectable Selectable object
      * @returns {boolean} True if option is selected and correct
      */
-    this.isCorrect = selectable => {
+    this.isCorrect = (selectable) => {
       const selectedIndex = this.content.getSelectedIndex(selectable);
       if (this.content.getSelected().includes(selectable) && this.params.options[selectedIndex].correct) {
         return true;
@@ -123,7 +123,7 @@ export default class MultiMediaChoice extends H5P.Question {
      * @param {object} selectable Selctable object
      * @returns {boolean} True if option is selected and incorrect
      */
-    this.isIncorrect = selectable => {
+    this.isIncorrect = (selectable) => {
       const selectedIndex = this.content.getSelectedIndex(selectable);
       if (this.content.getSelected().includes(selectable) && !this.params.options[selectedIndex].correct) {
         return true;
@@ -232,7 +232,7 @@ export default class MultiMediaChoice extends H5P.Question {
   }
 
   /**
-   * Resets the options, score and the buttons hidden by showSolutions()
+   * Resets options, buttons and solutions
    *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
    */
@@ -241,22 +241,7 @@ export default class MultiMediaChoice extends H5P.Question {
     this.showButton('check-answer');
     this.hideButton('try-again');
     this.hideButton('show-solution');
-    this.hideSolutions();
-    this.resetScore();
+    this.content.hideSolutions();
     this.removeFeedback();
-  }
-
-  /**
-   * Resets the score and hides the score text
-   */
-  resetScore() {
-    //TODO: Add this when scoring has been implemented
-  }
-
-  /**
-   * Hide the solutions
-   */
-  hideSolutions() {
-    //TODO: Add when solutions has been implemented
   }
 }

@@ -96,6 +96,21 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
+   * Hides the solution(s)
+   */
+  hideSolutions() {
+    const self = this;
+    this.params.options.forEach(function (option, index) {
+      if (option.correct) {
+        self.options[index].classList.remove('h5p-multi-media-choice-correct');
+      }
+      else {
+        self.options[index].classList.remove('h5p-multi-media-choice-wrong');
+      }
+    });
+  }
+
+  /**
    * Build options.
    * @param {object[]} options List of option objects.
    * @return {HTMLElement} List view of options.
