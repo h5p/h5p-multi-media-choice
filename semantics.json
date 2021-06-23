@@ -225,6 +225,14 @@
           "optional": true
         },
         {
+          "name": "singlePoint",
+          "type": "boolean",
+          "label": "Give one point for the whole question",
+          "importance": "low",
+          "description": "Awards one point to the question if all the correct answers are selected",
+          "default": false
+        },
+        {
           "name": "type",
           "type": "select",
           "label": "Question Type",
