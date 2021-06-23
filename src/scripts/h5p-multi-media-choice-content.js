@@ -9,6 +9,8 @@ export default class MultiMediaChoiceContent {
   constructor(params = {}, contentId, callbacks = {}) {
     this.params = params;
     this.contentId = contentId;
+    this.callbacks = callbacks;
+    this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
 
     this.selected = [];
     this.selectables = [];
@@ -30,11 +32,20 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Return the indexes of the selected options
+   * Return the selected objects
    * @returns  {Number[]} A list of indexes
    */
-  getSelected() {
-    return this.selected;
+   getSelected() {
+    return this.selectables.filter(selectable => selectable.checked)
+  }
+
+  getSelectedIndex(selectable) {
+    return this.selectables.indexOf(selectable);
+  }
+
+  getSelectedIndexes() {
+    const selected = this.getSelected()
+    return selected.map(selected => this.getSelectedIndex(selected))
   }
 
   /**
@@ -42,6 +53,14 @@ export default class MultiMediaChoiceContent {
    */
   showSolutions() {
     this.disableSelectables();
+    const self = this;
+    this.params.options.forEach(function (option, index) {
+      if (option.correct) {
+        self.options[index].classList.add('h5p-multi-media-choice-correct');
+      } else {
+        self.options[index].classList.add('h5p-multi-media-choice-wrong');
+      }
+    });
   }
 
   /**
@@ -124,6 +143,7 @@ export default class MultiMediaChoiceContent {
       const image = document.createElement('img');
       image.setAttribute('src', H5P.getPath(path, this.contentId));
       image.setAttribute('alt', alt);
+      image.addEventListener('load', this.callbacks.triggerResize);
       //Do not show title if title is not specified
       if (title != null) {
         image.setAttribute('title', title);
