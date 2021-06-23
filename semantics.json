@@ -233,6 +233,14 @@
         "default": false
       },
       {
+        "label": "Require answer before the solution can be viewed",
+        "importance": "low",
+        "name": "showSolutionsRequiresInput",
+        "type": "boolean",
+        "default": true,
+        "optional": true
+      },
+      {
         "name": "questionType",
         "type": "select",
         "label": "Question Type",
@@ -343,6 +351,14 @@
         "label": "Assistive technology description for \"Show Solution\" button",
         "importance": "low",
         "default": "Show the solution. The crossword will be filled with its correct solution."
+      },
+      {
+        "label": "Text for \"Requires answer\" message",
+        "importance": "low",
+        "name": "noAnswer",
+        "type": "text",
+        "default": "Please answer before viewing the solution",
+        "optional": true
       },
       {
         "name": "retryText",

@@ -29,13 +29,14 @@ export default class MultiMediaChoice extends H5P.Question {
           confirmCheckDialog: false,
           confirmRetryDialog: false,
           aspectRatio: 'auto',
-          sameAspectRatio: false
+          sameAspectRatio: false,
         },
         l10n: {
           checkAnswerButtonText: 'Check',
           checkAnswer: 'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
           showSolutionButtonText: 'Show solution',
           showSolution: 'Show the solution. The task will be marked with its correct solution.',
+          noAnswer: 'Please answer before viewing the solution',
           retryText: 'Retry',
           retry: 'Retry the task. Reset all responses and start the task over again.',
           result: 'You got @score out of @total points',
@@ -61,11 +62,10 @@ export default class MultiMediaChoice extends H5P.Question {
      * @return {boolean} True if answer was given
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
      */
-     this.getAnswersGiven = () => {
+    this.getAnswersGiven = () => {
       if (this.content.getSelected() && this.content.getSelected().length > 0) {
         return true;
-      }
-      else {
+      } else {
         return false;
       }
     };
@@ -85,7 +85,7 @@ export default class MultiMediaChoice extends H5P.Question {
       else if (this.params.behaviour.singlePoint) {
         const selectedIndexes = this.content.getSelected();
         for (let i = 0; i < this.params.options.length; i++) {
-          if ((this.params.options[i].correct) == (selectedIndexes.indexOf(i) == -1)) {
+          if (this.params.options[i].correct == (selectedIndexes.indexOf(i) == -1)) {
             return 0;
           }
         }
@@ -96,11 +96,10 @@ export default class MultiMediaChoice extends H5P.Question {
         const selectedIndexes = this.content.getSelected();
         let score = 0;
         for (let i = 0; i < this.params.options.length; i++) {
-          if(this.params.options[i].correct && selectedIndexes.indexOf(i) != -1) {
-            score ++;
-          }
-          else if (!this.params.options[i].correct && selectedIndexes.indexOf(i) != -1) {
-            score --;
+          if (this.params.options[i].correct && selectedIndexes.indexOf(i) != -1) {
+            score++;
+          } else if (!this.params.options[i].correct && selectedIndexes.indexOf(i) != -1) {
+            score--;
           }
         }
         return score < 0 ? 0 : score;
@@ -116,10 +115,17 @@ export default class MultiMediaChoice extends H5P.Question {
     this.getMaxScore = () => {
       if (this.params.behaviour.singlePoint || this.content.isSingleAnswer()) {
         return 1;
+      } else {
+        return this.content.getNumberOfCorrectOptions();
       }
-      else {
-        return this.content.getNumberOfCorrectOptions()
-      }
+    };
+
+    /**
+     * Let H5P.Question read the specified text.
+     * @param  {string} text Text to read.
+     */
+    this.handleRead = (text) => {
+      this.read(text);
     };
 
     /**
@@ -130,7 +136,13 @@ export default class MultiMediaChoice extends H5P.Question {
       this.hideButton('check-answer');
       this.hideButton('show-solution');
 
-      this.content.showSolutions();
+      if (this.params.behaviour.showSolutionsRequiresInput && !this.content.isAnswerSelected()) {
+        // Require answer before solution can be viewed
+        this.updateFeedbackContent(this.params.l10n.noAnswer);
+        this.handleRead(this.params.l10n.noAnswer);
+      } else {
+        this.content.showSolutions();
+      }
 
       this.trigger('resize');
     };

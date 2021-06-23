@@ -40,10 +40,19 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
+   * Checks if any answer is selcted
+   * @returns  {boolean} True if any answer is selected
+   */
+  isAnswerSelected() {
+    return this.getSelected().length > 0;
+  }
+
+  /**
    * Show the correct solution(s)
    */
   showSolutions() {
     this.disableSelectables();
+
     const self = this;
     this.params.options.forEach(function (option, index) {
       if (option.correct) {
@@ -84,8 +93,7 @@ export default class MultiMediaChoiceContent {
     if (this.isSingleAnswer()) {
       selectable.setAttribute('type', 'radio');
       selectable.setAttribute('name', 'options');
-    }
-    else {
+    } else {
       selectable.setAttribute('type', 'checkbox');
     }
 
