@@ -1,6 +1,5 @@
+@use './colors' as *;
 $media-width: 10em;
-$color-correct: hsl(150, 80%, 30%);
-$color-wrong: hsl(0, 80%, 40%);
 
 .h5p-multi-media-choice {
   background: rebeccapurple;
