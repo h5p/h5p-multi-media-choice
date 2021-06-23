@@ -21,13 +21,31 @@ export default class MultiMediaChoice extends H5P.Question {
     // Default values are extended
     this.params = Util.extendParams(params);
 
+    this.registerDomElements = () => {
+      // Register task introduction text
+      if (this.params.question) {
+        this.introduction = document.createElement('div');
+        this.introduction.innerHTML = this.params.question;
+        this.setIntroduction(this.introduction);
+      }
+
+      this.content = new MultiMediaChoiceContent(params, contentId, {
+        triggerResize: () => {
+          this.trigger('resize');
+        },
+      });
+
+      this.setContent(this.content.getDOM()); // Register content with H5P.Question
+      this.addButtons();
+    };
+
     /**
      * Check if result has been submitted or input has been given.
      * @return {boolean} True if answer was given
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
      */
     this.getAnswersGiven = () => {
-      return (this.content.getSelected().length > 0 || this.content.blankIsCorrect());
+      return this.content.getSelected().length > 0 || this.content.blankIsCorrect();
     };
 
     /**
@@ -36,7 +54,7 @@ export default class MultiMediaChoice extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
      */
     this.getScore = () => {
-      //If no answer is selected score = 0 if there is at least one correct answer
+      // If no answer is selected score = 0 if there is at least one correct answer
       if (!this.content.isAnswerSelected()) {
         return this.content.blankIsCorrect() ? 1 : 0;
       }
@@ -112,26 +130,6 @@ export default class MultiMediaChoice extends H5P.Question {
       }
 
       this.trigger('resize');
-    };
-
-    this.registerDomElements = () => {
-      // Register task introduction text
-      if (this.params.question) {
-        this.introduction = document.createElement('div');
-        this.introduction.innerHTML = this.params.question;
-        this.setIntroduction(this.introduction);
-      }
-
-      this.content = new MultiMediaChoiceContent(params, contentId, {
-        triggerResize: () => {
-          this.trigger('resize');
-        },
-      });
-
-      // Register content with H5P.Question
-      this.setContent(this.content.getDOM());
-
-      this.addButtons();
     };
   }
 
