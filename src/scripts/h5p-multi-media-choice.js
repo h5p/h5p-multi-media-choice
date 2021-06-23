@@ -131,7 +131,9 @@ export default class MultiMediaChoice extends H5P.Question {
         this.setIntroduction(this.introduction);
       }
 
-      this.content = new MultiMediaChoiceContent(params, contentId, {triggerResize: () => {this.trigger('resize')}});
+      this.content = new MultiMediaChoiceContent(params, contentId, {
+        triggerResize: () => { this.trigger('resize') }
+      });
 
       // Register content with H5P.Question
       this.setContent(this.content.getDOM());
