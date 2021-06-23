@@ -30,11 +30,20 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Return the indexes of the selected options
+   * Return the selected objects
    * @returns  {Number[]} A list of indexes
    */
-  getSelected() {
-    return this.selected;
+   getSelected() {
+    return this.selectables.filter(selectable => selectable.checked)
+  }
+
+  getSelectedIndex(selectable) {
+    return this.selectables.indexOf(selectable);
+  }
+
+  getSelectedIndexes() {
+    const selected = this.getSelected()
+    return selected.map(selected => this.getSelectedIndex(selected))
   }
 
   /**

@@ -45,11 +45,56 @@ export default class MultiMediaChoice extends H5P.Question {
     );
 
     /**
+     * Check if result has been submitted or input has been given.
+     * @return {boolean} True if answer was given
+     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
+     */
+     this.getAnswersGiven = () => {
+      if (this.content.getSelected() && this.content.getSelected().length > 0) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    };
+
+    /**
      * Get score.
      * @return {number} latest score.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
      */
-    this.getScore = () => 1; //TODO: Placeholder
+    this.getScore = () => {
+      // Radio buttons, only one answer
+      if (this.content.isSingleAnswer()) {
+        const selectedIndex = this.content.getSelectedIndexes()[0];
+        return this.params.options[selectedIndex].correct ? 1 : 0;
+      }
+      // Checkbox buttons, one point if correctly answered
+      else if (this.params.behaviour.singlePoint) {
+        const selectedIndexes = this.content.getSelectedIndexes();
+        for (let i = 0; i < this.params.options.length; i++) {
+          if ((this.params.options[i].correct) == (selectedIndexes.indexOf(i) == -1)) {
+            return 0;
+          }
+        }
+        return 1;
+      }
+      // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
+      else {
+        const selectedIndexes = this.content.getSelectedIndexes();
+        let score = 0;
+        for (let i = 0; i < this.params.options.length; i++) {
+          if(this.params.options[i].correct && selectedIndexes.indexOf(i) != -1) {
+            score ++;
+          }
+          else if (!this.params.options[i].correct && selectedIndexes.indexOf(i) != -1) {
+            score --;
+          }
+        }
+        return score < 0 ? 0 : score;
+      }
+      //this.content.params.options.forEach(() => {}
+    };
 
     /**
      * Get maximum possible score.
@@ -59,8 +104,9 @@ export default class MultiMediaChoice extends H5P.Question {
     this.getMaxScore = () => {
       if (this.params.behaviour.singlePoint || this.content.isSingleAnswer()) {
         return 1;
-      } else {
-        return this.params.options.filter((option) => option.correct).length;
+      }
+      else {
+        return this.content.getNumberOfCorrectOptions()
       }
     };
 
