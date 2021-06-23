@@ -42,6 +42,14 @@ export default class MultiMediaChoiceContent {
    */
   showSolutions() {
     this.disableSelectables();
+    const self = this;
+    this.params.options.forEach(function (option, index) {
+      if (option.correct) {
+        self.options[index].classList.add('h5p-multi-media-choice-correct');
+      } else {
+        self.options[index].classList.add('h5p-multi-media-choice-wrong');
+      }
+    });
   }
 
   /**
