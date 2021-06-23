@@ -111,7 +111,7 @@ export default class MultiMediaChoice extends H5P.Question {
      * @returns {boolean} True if option is selected and correct
      */
     this.isCorrect = (selectable) => {
-      const selectedIndex = this.content.getSelectedIndex(selectable);
+      const selectedIndex = this.content.getIndex(selectable);
       if (this.content.getSelected().includes(selectable) && this.params.options[selectedIndex].correct) {
         return true;
       }
@@ -123,7 +123,7 @@ export default class MultiMediaChoice extends H5P.Question {
      * @returns {boolean} True if option is selected and incorrect
      */
     this.isIncorrect = (selectable) => {
-      const selectedIndex = this.content.getSelectedIndex(selectable);
+      const selectedIndex = this.content.getIndex(selectable);
       if (this.content.getSelected().includes(selectable) && !this.params.options[selectedIndex].correct) {
         return true;
       }
