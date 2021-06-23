@@ -1,6 +1,6 @@
 import MultiMediaChoiceContent from './h5p-multi-media-choice-content';
 
-import deepExtend from './h5p-multi-media-choice-util';
+import { Util } from './h5p-multi-media-choice-util';
 
 /**
  * Class for H5P Multi Media Choice.
@@ -19,43 +19,25 @@ export default class MultiMediaChoice extends H5P.Question {
     this.extras = extras;
 
     // Default values are extended
-    this.params = deepExtend(
-      {
-        question: null,
-        behaviour: {
-          enableSolutionsButton: true,
-          enableRetry: true,
-          questionType: 'auto',
-          confirmCheckDialog: false,
-          confirmRetryDialog: false,
-          aspectRatio: 'auto',
-          sameAspectRatio: false,
+    this.params = Util.extendParams(params);
+
+    this.registerDomElements = () => {
+      // Register task introduction text
+      if (this.params.question) {
+        this.introduction = document.createElement('div');
+        this.introduction.innerHTML = this.params.question;
+        this.setIntroduction(this.introduction);
+      }
+
+      this.content = new MultiMediaChoiceContent(params, contentId, {
+        triggerResize: () => {
+          this.trigger('resize');
         },
-        l10n: {
-          checkAnswerButtonText: 'Check',
-          checkAnswer: 'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
-          showSolutionButtonText: 'Show solution',
-          showSolution: 'Show the solution. The task will be marked with its correct solution.',
-          noAnswer: 'Please answer before viewing the solution',
-          retryText: 'Retry',
-          retry: 'Retry the task. Reset all responses and start the task over again.',
-          result: 'You got @score out of @total points',
-          confirmCheck: {
-            header: 'Finish?',
-            body: 'Are you sure you want to finish?',
-            cancelLabel: 'Cancel',
-            confirmLabel: 'Finish',
-          },
-          confirmRetry: {
-            header: 'Retry?',
-            body: 'Are you sure you wish to retry?',
-            cancelLabel: 'Cancel',
-            confirmLabel: 'Retry',
-          },
-        },
-      },
-      params
-    );
+      });
+
+      this.setContent(this.content.getDOM()); // Register content with H5P.Question
+      this.addButtons();
+    };
 
     /**
      * Check if result has been submitted or input has been given.
@@ -63,12 +45,7 @@ export default class MultiMediaChoice extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
      */
     this.getAnswersGiven = () => {
-      if (this.content.getSelected() && this.content.getSelected().length > 0) {
-        return true;
-      }
-      else {
-        return false;
-      }
+      return this.content.isAnswerSelected() || this.content.blankIsCorrect();
     };
 
     /**
@@ -77,6 +54,11 @@ export default class MultiMediaChoice extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
      */
     this.getScore = () => {
+      // One point if no correct options and no selected options
+      if (!this.content.isAnswerSelected()) {
+        return this.content.blankIsCorrect() ? 1 : 0;
+      }
+
       // Radio buttons, only one answer
       if (this.content.isSingleAnswer()) {
         return this.isCorrect(this.content.getSelected()[0]) ? 1 : 0;
@@ -175,26 +157,6 @@ export default class MultiMediaChoice extends H5P.Question {
       }
 
       this.trigger('resize');
-    };
-
-    this.registerDomElements = () => {
-      // Register task introduction text
-      if (this.params.question) {
-        this.introduction = document.createElement('div');
-        this.introduction.innerHTML = this.params.question;
-        this.setIntroduction(this.introduction);
-      }
-
-      this.content = new MultiMediaChoiceContent(params, contentId, {
-        triggerResize: () => {
-          this.trigger('resize');
-        },
-      });
-
-      // Register content with H5P.Question
-      this.setContent(this.content.getDOM());
-
-      this.addButtons();
     };
   }
 

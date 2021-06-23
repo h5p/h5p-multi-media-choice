@@ -66,6 +66,19 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
+   * Checks if there are no correct answers
+   * @returns {boolean} True if there are no correct answers
+   */
+  blankIsCorrect() {
+    for (let i = 0; i < this.params.options.length; i++) {
+      if (this.params.options[i].correct) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
    * Show the correct solution(s)
    */
   showSolutions() {
