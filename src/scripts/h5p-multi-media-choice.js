@@ -76,6 +76,16 @@ export default class MultiMediaChoice extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
      */
     this.getScore = () => {
+      //If no answer is selected score = 0 if there is at least one correct answer
+      if (!this.content.isAnswerSelected()) {
+        for (let i = 0; i < this.params.options.length; i++) {
+          if (this.params.options[i].correct) {
+            return 0;
+          }
+        }
+        return 1;
+      }
+
       // Radio buttons, only one answer
       if (this.content.isSingleAnswer()) {
         const selectedIndex = this.content.getSelected()[0];
@@ -115,7 +125,11 @@ export default class MultiMediaChoice extends H5P.Question {
     this.getMaxScore = () => {
       if (this.params.behaviour.singlePoint || this.content.isSingleAnswer()) {
         return 1;
-      } else {
+      }
+      else if (this.content.getNumberOfCorrectOptions() === 0) {
+        return 1;
+      }
+      else {
         return this.content.getNumberOfCorrectOptions();
       }
     };
