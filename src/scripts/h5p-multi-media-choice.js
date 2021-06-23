@@ -1,6 +1,6 @@
 import MultiMediaChoiceContent from './h5p-multi-media-choice-content';
 
-import deepExtend from './h5p-multi-media-choice-util';
+import { Util } from './h5p-multi-media-choice-util';
 
 /**
  * Class for H5P Multi Media Choice.
@@ -19,43 +19,7 @@ export default class MultiMediaChoice extends H5P.Question {
     this.extras = extras;
 
     // Default values are extended
-    this.params = deepExtend(
-      {
-        question: null,
-        behaviour: {
-          enableSolutionsButton: true,
-          enableRetry: true,
-          questionType: 'auto',
-          confirmCheckDialog: false,
-          confirmRetryDialog: false,
-          aspectRatio: 'auto',
-          sameAspectRatio: false,
-        },
-        l10n: {
-          checkAnswerButtonText: 'Check',
-          checkAnswer: 'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
-          showSolutionButtonText: 'Show solution',
-          showSolution: 'Show the solution. The task will be marked with its correct solution.',
-          noAnswer: 'Please answer before viewing the solution',
-          retryText: 'Retry',
-          retry: 'Retry the task. Reset all responses and start the task over again.',
-          result: 'You got @score out of @total points',
-          confirmCheck: {
-            header: 'Finish?',
-            body: 'Are you sure you want to finish?',
-            cancelLabel: 'Cancel',
-            confirmLabel: 'Finish',
-          },
-          confirmRetry: {
-            header: 'Retry?',
-            body: 'Are you sure you wish to retry?',
-            cancelLabel: 'Cancel',
-            confirmLabel: 'Retry',
-          },
-        },
-      },
-      params
-    );
+    this.params = Util.extendParams(params);
 
     /**
      * Check if result has been submitted or input has been given.
@@ -125,11 +89,9 @@ export default class MultiMediaChoice extends H5P.Question {
     this.getMaxScore = () => {
       if (this.params.behaviour.singlePoint || this.content.isSingleAnswer()) {
         return 1;
-      }
-      else if (this.content.getNumberOfCorrectOptions() === 0) {
+      } else if (this.content.getNumberOfCorrectOptions() === 0) {
         return 1;
-      }
-      else {
+      } else {
         return this.content.getNumberOfCorrectOptions();
       }
     };
