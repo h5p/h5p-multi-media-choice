@@ -38,12 +38,20 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
+   * Show the correct solution(s)
+   */
+  showSolutions() {
+    this.disableSelectables();
+  }
+
+  /**
    * Build options.
    * @param   {object[]} options List of option objects.
    * @return  {HTMLElement} List view of options.
    */
   buildOptionList(options) {
-    const optionList = document.createElement('div');
+    const optionList = document.createElement('ul');
+    optionList.setAttribute('role', this.singleAnswer() ? 'radiogroup' : 'group');
     optionList.classList.add('h5p-multi-media-choice-options');
     options.forEach((option) => {
       if (option) {
@@ -65,7 +73,9 @@ export default class MultiMediaChoiceContent {
     const selectable = document.createElement('input');
     if (this.isSingleAnswer()) {
       selectable.setAttribute('type', 'radio');
-    } else {
+      selectable.setAttribute('name', 'options');
+    }
+    else {
       selectable.setAttribute('type', 'checkbox');
     }
 
@@ -114,7 +124,10 @@ export default class MultiMediaChoiceContent {
       const image = document.createElement('img');
       image.setAttribute('src', H5P.getPath(path, this.contentId));
       image.setAttribute('alt', alt);
-      if (title != null) image.setAttribute('title', title); //Do not show title if title is not specified
+      //Do not show title if title is not specified
+      if (title != null) {
+        image.setAttribute('title', title);
+      }
 
       image.classList.add('h5p-multi-media-choice-media');
       if (this.params.behaviour.sameAspectRatio) {
@@ -163,16 +176,15 @@ export default class MultiMediaChoiceContent {
    * @param  {Number} optionIndex Which option is being selected
    */
   toggleSelected(optionIndex) {
-    const selIndex = this.selected.indexOf(optionIndex);
+    const placeInSelected = this.selected.indexOf(optionIndex);
 
     //If already checked remove from selected list. Radio buttons don't get unchecked
-    if (selIndex > -1 && !this.isSingleAnswer()) {
-      this.selected.splice(selIndex, 1);
+    if (placeInSelected !== -1 && !this.isSingleAnswer()) {
+      this.selected.splice(placeInSelected, 1);
     }
     //if being checked add to selected list. If radio make sure others get unselected.
-    else if (selIndex <= -1) {
+    else if (placeInSelected === -1) {
       if (this.isSingleAnswer()) {
-        if (this.selected.length > 0) this.selectables[this.selected[0]].checked = false;
         this.selected = [optionIndex];
       } else {
         this.selected.push(optionIndex);
@@ -185,8 +197,18 @@ export default class MultiMediaChoiceContent {
    */
   resetSelections() {
     this.selected = {};
-    this.selectables.forEach(function (selectable, index) {
-      selectable.checked = false;
+    this.selectables.forEach((selectable) => (selectable.checked = false));
+  }
+
+  enableSelectables() {
+    this.selectables.forEach(function (selectable) {
+      selectable.setAttribute('disabled', false);
+    });
+  }
+
+  disableSelectables() {
+    this.selectables.forEach(function (selectable) {
+      selectable.setAttribute('disabled', true);
     });
   }
 }

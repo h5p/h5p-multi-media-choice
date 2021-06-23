@@ -345,6 +345,13 @@
           "default": "Show the solution. The crossword will be filled with its correct solution."
         },
         {
+          "name": "retryText",
+          "type": "text",
+          "label": "Text for \"Retry\" button",
+          "importance": "low",
+          "default": "Retry"
+        },
+        {
           "name": "retry",
           "type": "text",
           "label": "Assistive technology description for \"Retry\" button",
