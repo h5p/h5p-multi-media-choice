@@ -255,17 +255,21 @@
           ]
         },
         {
+          "name": "sameAspectRatio",
+          "label": "Use the same aspect ratio on all media",
+          "importance": "low",
+          "type": "boolean",
+          "default": false,
+          "optional": true
+        },
+        {
           "name": "aspectRatio",
           "type": "select",
           "label": "Aspect ratio",
           "importance": "low",
           "description": "Select the aspect ratio of the alternatives",
-          "default": "auto",
+          "default": "1to1",
           "options": [
-            {
-              "value": "auto",
-              "label": "Automatic scaling"
-            },
             {
               "value": "16to9",
               "label": "16:9"
@@ -282,7 +286,16 @@
               "value": "1to1",
               "label": "1:1"
             }
-          ]
+          ],
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "sameAspectRatio",
+                "equals": true
+              }
+            ]
+          }
         },
         {
           "name": "maxAlternativesPerRow",
