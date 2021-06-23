@@ -53,7 +53,13 @@ export default class MultiMediaChoice extends H5P.Question {
      * @return {number} Score necessary for mastering.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
      */
-    this.getMaxScore = () => 2; //TODO: Placeholder
+    this.getMaxScore = () => {
+      if (this.params.behaviour.singlePoint || this.content.singleAnswer()) {
+        return 1;
+      } else {
+        return this.params.options.filter(option => option.correct).length
+      }
+    };
 
     this.registerDomElements = () => {
       // Register task introduction text
