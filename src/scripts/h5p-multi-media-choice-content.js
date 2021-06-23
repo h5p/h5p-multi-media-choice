@@ -2,9 +2,9 @@
 export default class MultiMediaChoiceContent {
   /**
    * @constructor
-   * @param {object} params Parameters.
-   * @param {number} contentId Content's id.
-   * @param {object} [callbacks = {}] Callbacks.
+   * @param  {object} params Parameters.
+   * @param  {number} contentId Content's id.
+   * @param  {object} [callbacks = {}] Callbacks.
    */
   constructor(params = {}, contentId, callbacks = {}) {
     this.params = params;
@@ -23,7 +23,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Return the DOM for this class.
-   * @return {HTMLElement} DOM for this class.
+   * @return  {HTMLElement} DOM for this class.
    */
   getDOM() {
     return this.content;
@@ -31,7 +31,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Return the indexes of the selected options
-   * @returns {number[]} A list of indexes
+   * @returns  {Number[]} A list of indexes
    */
   getSelected() {
     return this.selected;
@@ -39,8 +39,8 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Build options.
-   * @param {object[]} options List of option objects.
-   * @return {HTMLElement} List view of options.
+   * @param   {object[]} options List of option objects.
+   * @return  {HTMLElement} List view of options.
    */
   buildOptionList(options) {
     const optionList = document.createElement('div');
@@ -54,19 +54,21 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Build option.
-   * @param {object} option Option object from the editor.
-   * @return {HTMLElement} Option.
+   * Builds a selectable option containing media.
+   * @param   {object} option Option object from the editor.
+   * @return  {HTMLElement} Option.
    */
   buildOption(option) {
     const optionContainer = document.createElement('div');
+    optionContainer.classList.add('h5p-multi-media-choice-container')
 
     const selectable = document.createElement('input');
-    if(this.singleAnswer()) {
+    if (this.singleAnswer()) {
       selectable.setAttribute('type', 'radio');
     }
-    else
-      selectable.setAttribute("type", "checkbox");
+    else {
+      selectable.setAttribute('type', 'checkbox');
+    }
 
     const optionIndex = this.selectables.length;
     const self = this;
@@ -76,18 +78,32 @@ export default class MultiMediaChoiceContent {
     this.selectables.push(selectable);
     optionContainer.appendChild(selectable);
 
-    optionContainer.appendChild(this.buildMedia(option));
-
-    return optionContainer;
+    const media = this.buildMedia(option);
+    if (media) {
+      optionContainer.appendChild(media);
+      return optionContainer;
+    }
   }
-
   /**
-   * Build media for an option
-   * @param {object} option Option object from the editor
-   * @returns {HTMLElement} The media to be displayed
+   * Builds a media element based on option.
+   * @param    {object} option Option object from the editor.
+   * @returns  {HTMLElement} Either [Image] depending on option.
    */
   buildMedia(option) {
-    if (this.mediaParamsAreValid(option.media.params)) {
+    switch (option.media.metadata.contentType) {
+      case 'Image':
+        return this.buildImage(option);
+      default:
+        return undefined;
+    }
+  }
+  /**
+   * Builds an image from options.
+   * @param    {object} option Option object from the editor.
+   * @returns  {HTMLElement} Image.
+   */
+  buildImage(option) {
+    if (this.imageParamsAreValid(option.media.params)) {
       const {
         alt,
         title,
@@ -97,10 +113,8 @@ export default class MultiMediaChoiceContent {
       const image = document.createElement('img');
       image.setAttribute('src', H5P.getPath(path, this.contentId));
       image.setAttribute('alt', alt);
+      if (title != null) image.setAttribute('title', title); //Do not show title if title is not specified
 
-      //Do not show title if title is not specified
-      if(title != null)
-        image.setAttribute('title', title);
       image.classList.add('h5p-multi-media-choice-media');
       image.classList.add(`h5p-multi-media-choice-media-${this.params.behaviour.aspectRatio}`);
 
@@ -110,20 +124,18 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Test if important keys are present in media params.
-   * @param {object} mediaParams Media params from the editor.
-   * @return {boolean} True if all keys are present, false otherwise.
+   * Test if important keys are present in media params for image.
+   * @param   {object} imageParams Media params for image from the editor.
+   * @return  {boolean} True if all three keys are present, false otherwise.
    * @private
    */
-  mediaParamsAreValid(mediaParams) {
-    return (
-      ['alt', 'title', 'file'].filter((key) => key in mediaParams).length > 0
-    );
+  imageParamsAreValid(imageParams) {
+    return ['alt', 'title', 'file'].filter((key) => key in imageParams).length > 0;
   }
 
   /**
    * Counts options marked as correct
-   * @returns {number} Number of options marked as correct in the editor.
+   * @returns  {Number} Number of options marked as correct in the editor.
    */
   getNumberOfCorrectOptions() {
     return this.params.options.filter((option) => option.correct).length;
@@ -132,19 +144,18 @@ export default class MultiMediaChoiceContent {
   /**
    * Determines the task type, indicating whether the answers should be
    * radio buttons or checkboxes.
-   * @returns true if the options should be displayed as radiobuttons,
-   * @returns false if they should be displayed as checkboxes
+   * @returns  true if the options should be displayed as radiobuttons,
+   * @returns  false if they should be displayed as checkboxes
    */
-   singleAnswer() {
-    if(this.params.behaviour.type === 'auto')
-      return this.getNumberOfCorrectOptions() === 1;
+  singleAnswer() {
+    if (this.params.behaviour.type === 'auto') return this.getNumberOfCorrectOptions() === 1;
     return this.params.behaviour.type === 'single';
   }
 
   /**
    * Toggles the given option. If the options are radio buttons
    * the previously checked one is unchecked
-   * @param {number} optionIndex Which option is being selected
+   * @param  {Number} optionIndex Which option is being selected
    */
   toggleSelected(optionIndex) {
     const selIndex = this.selected.indexOf(optionIndex);
@@ -153,7 +164,7 @@ export default class MultiMediaChoiceContent {
     if (selIndex > -1 && !this.singleAnswer()) {
       this.selected.splice(selIndex, 1);
     }
-    //if checked add to selected list. If radio make sure others get unselected.
+    //if being checked add to selected list. If radio make sure others get unselected.
     else if (selIndex <= -1) {
       if (this.singleAnswer()) {
         if(this.selected.length > 0)
