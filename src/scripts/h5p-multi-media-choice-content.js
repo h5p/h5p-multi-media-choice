@@ -32,11 +32,29 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Return the selected objects
-   * @returns {Number[]} A list of indexes
+   * Returns the selected objects
+   * @returns {Object[]} A list of selectable-objects that are selected
    */
-   getSelected() {
-    return this.selected;
+  getSelected() {
+    return this.selectables.filter(selectable => selectable.checked);
+  }
+
+  /**
+   * Returns the indexes of the selected objects
+   * @returns {Number[]} List of indexes of selected selctables
+   */
+  getSelectedIndexes() {
+    const selected = this.getSelected();
+    return selected.map(selected => this.getSelectedIndex(selected));
+  }
+
+  /**
+   * Return the index of the given selctable
+   * @param {object} selectable Selectable object
+   * @returns {number} Index of the selectable
+   */
+  getIndex(selectable) {
+    return this.selectables.indexOf(selectable);
   }
 
   /**
@@ -57,7 +75,8 @@ export default class MultiMediaChoiceContent {
     this.params.options.forEach(function (option, index) {
       if (option.correct) {
         self.options[index].classList.add('h5p-multi-media-choice-correct');
-      } else {
+      }
+      else {
         self.options[index].classList.add('h5p-multi-media-choice-wrong');
       }
     });
@@ -93,7 +112,8 @@ export default class MultiMediaChoiceContent {
     if (this.isSingleAnswer()) {
       selectable.setAttribute('type', 'radio');
       selectable.setAttribute('name', 'options');
-    } else {
+    }
+    else {
       selectable.setAttribute('type', 'checkbox');
     }
 
@@ -205,7 +225,8 @@ export default class MultiMediaChoiceContent {
     else if (placeInSelected === -1) {
       if (this.isSingleAnswer()) {
         this.selected = [optionIndex];
-      } else {
+      }
+      else {
         this.selected.push(optionIndex);
       }
     }
