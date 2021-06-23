@@ -32,7 +32,7 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Return the selected objects
+   * Return the indexes of the selected options
    * @returns {Number[]} A list of indexes
    */
    getSelected() {
@@ -72,6 +72,20 @@ export default class MultiMediaChoiceContent {
         self.options[index].classList.add('h5p-multi-media-choice-correct');
       } else {
         self.options[index].classList.add('h5p-multi-media-choice-wrong');
+      }
+    });
+  }
+
+  /**
+   * Hides the solution(s)
+   */
+  hideSolutions() {
+    const self = this;
+    this.params.options.forEach(function (option, index) {
+      if (option.correct) {
+        self.options[index].classList.remove('h5p-multi-media-choice-correct');
+      } else {
+        self.options[index].classList.remove('h5p-multi-media-choice-wrong');
       }
     });
   }

@@ -205,7 +205,7 @@ export default class MultiMediaChoice extends H5P.Question {
   }
 
   /**
-   * Resets the options, score and the buttons hidden by showSolutions()
+   * Resets options, buttons and solutions
    *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
    */
@@ -214,22 +214,7 @@ export default class MultiMediaChoice extends H5P.Question {
     this.showButton('check-answer');
     this.hideButton('try-again');
     this.hideButton('show-solution');
-    this.hideSolutions();
-    this.resetScore();
+    this.content.hideSolutions();
     this.removeFeedback();
-  }
-
-  /**
-   * Resets the score and hides the score text
-   */
-  resetScore() {
-    //TODO: Add this when scoring has been implemented
-  }
-
-  /**
-   * Hide the solutions
-   */
-  hideSolutions() {
-    //TODO: Add when solutions has been implemented
   }
 }
