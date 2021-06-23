@@ -44,14 +44,14 @@ export default class MultiMediaChoice extends H5P.Question {
             header: 'Finish?',
             body: 'Are you sure you want to finish?',
             cancelLabel: 'Cancel',
-            confirmLabel: 'Finish'
+            confirmLabel: 'Finish',
           },
           confirmRetry: {
             header: 'Retry?',
             body: 'Are you sure you wish to retry?',
             cancelLabel: 'Cancel',
-            confirmLabel: 'Retry'
-          }
+            confirmLabel: 'Retry',
+          },
         },
       },
       params
@@ -136,7 +136,7 @@ export default class MultiMediaChoice extends H5P.Question {
 
     /**
      * Let H5P.Question read the specified text.
-     * @param  {string} text Text to read.
+     * @param {string} text Text to read.
      */
     this.handleRead = (text) => {
       this.read(text);
@@ -170,14 +170,15 @@ export default class MultiMediaChoice extends H5P.Question {
       }
 
       this.content = new MultiMediaChoiceContent(params, contentId, {
-        triggerResize: () => { this.trigger('resize') }
+        triggerResize: () => {
+          this.trigger('resize');
+        },
       });
 
       // Register content with H5P.Question
       this.setContent(this.content.getDOM());
 
       this.addButtons();
-
     };
   }
 
@@ -197,8 +198,8 @@ export default class MultiMediaChoice extends H5P.Question {
         confirmationDialog: {
           enable: this.params.behaviour.confirmCheckDialog,
           l10n: this.params.l10n.confirmCheck,
-          instance: this
-        }
+          instance: this,
+        },
       }
     );
     this.addButton(
@@ -224,8 +225,8 @@ export default class MultiMediaChoice extends H5P.Question {
         confirmationDialog: {
           enable: this.params.behaviour.confirmRetryDialog,
           l10n: this.params.l10n.confirmRetry,
-          instance: this
-        }
+          instance: this,
+        },
       }
     );
   }
