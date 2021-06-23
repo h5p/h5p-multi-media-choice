@@ -75,7 +75,6 @@ export default class MultiMediaChoice extends H5P.Question {
       }
       // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
       else {
-        // const selectedIndexes = this.content.getSelectedIndexes();
         let score = 0;
         for (let i = 0; i < this.content.selectables.length; i++) {
           if (this.isCorrect(this.content.selectables[i])) {

@@ -45,7 +45,7 @@ export default class MultiMediaChoiceContent {
    */
   getSelectedIndexes() {
     const selected = this.getSelected();
-    return selected.map(selected => this.getSelectedIndex(selected));
+    return selected.map(selected => this.getIndex(selected));
   }
 
   /**
