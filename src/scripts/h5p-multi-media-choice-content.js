@@ -60,13 +60,12 @@ export default class MultiMediaChoiceContent {
    */
   buildOption(option) {
     const optionContainer = document.createElement('div');
-    optionContainer.classList.add('h5p-multi-media-choice-container')
+    optionContainer.classList.add('h5p-multi-media-choice-container');
 
     const selectable = document.createElement('input');
-    if (this.singleAnswer()) {
+    if (this.isSingleAnswer()) {
       selectable.setAttribute('type', 'radio');
-    }
-    else {
+    } else {
       selectable.setAttribute('type', 'checkbox');
     }
 
@@ -144,14 +143,16 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Determines the task type, indicating whether the answers should be
+   * Determines the question type, indicating whether the answers should be
    * radio buttons or checkboxes.
-   * @returns  true if the options should be displayed as radiobuttons,
+   * @returns  true if the options should be displayed as radio buttons,
    * @returns  false if they should be displayed as checkboxes
    */
-  singleAnswer() {
-    if (this.params.behaviour.type === 'auto') return this.getNumberOfCorrectOptions() === 1;
-    return this.params.behaviour.type === 'single';
+  isSingleAnswer() {
+    if (this.params.behaviour.questionType === 'auto') {
+      return this.getNumberOfCorrectOptions() === 1;
+    }
+    return this.params.behaviour.questionType === 'single';
   }
 
   /**
@@ -163,17 +164,15 @@ export default class MultiMediaChoiceContent {
     const selIndex = this.selected.indexOf(optionIndex);
 
     //If already checked remove from selected list. Radio buttons don't get unchecked
-    if (selIndex > -1 && !this.singleAnswer()) {
+    if (selIndex > -1 && !this.isSingleAnswer()) {
       this.selected.splice(selIndex, 1);
     }
     //if being checked add to selected list. If radio make sure others get unselected.
     else if (selIndex <= -1) {
-      if (this.singleAnswer()) {
-        if(this.selected.length > 0)
-          this.selectables[this.selected[0]].checked = false;
+      if (this.isSingleAnswer()) {
+        if (this.selected.length > 0) this.selectables[this.selected[0]].checked = false;
         this.selected = [optionIndex];
-      }
-      else {
+      } else {
         this.selected.push(optionIndex);
       }
     }

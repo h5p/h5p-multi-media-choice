@@ -25,7 +25,7 @@ export default class MultiMediaChoice extends H5P.Question {
         behaviour: {
           enableSolutionsButton: true,
           enableRetry: true,
-          type: 'auto',
+          questionType: 'auto',
           confirmCheckDialog: false,
           confirmRetryDialog: false,
           aspectRatio: 'auto',
@@ -55,10 +55,10 @@ export default class MultiMediaChoice extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
      */
     this.getMaxScore = () => {
-      if (this.params.behaviour.singlePoint || this.content.singleAnswer()) {
+      if (this.params.behaviour.singlePoint || this.content.isSingleAnswer()) {
         return 1;
       } else {
-        return this.params.options.filter(option => option.correct).length
+        return this.params.options.filter((option) => option.correct).length;
       }
     };
 

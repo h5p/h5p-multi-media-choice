@@ -233,7 +233,7 @@
           "default": false
         },
         {
-          "name": "type",
+          "name": "questionType",
           "type": "select",
           "label": "Question Type",
           "importance": "low",
