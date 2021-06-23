@@ -163,18 +163,15 @@ export default class MultiMediaChoiceContent {
    * @param  {Number} optionIndex Which option is being selected
    */
   toggleSelected(optionIndex) {
-    const selIndex = this.selected.indexOf(optionIndex);
+    const placeInSelected = this.selected.indexOf(optionIndex);
 
     //If already checked remove from selected list. Radio buttons don't get unchecked
-    if (selIndex > -1 && !this.singleAnswer()) {
-      this.selected.splice(selIndex, 1);
+    if (placeInSelected !== -1 && !this.singleAnswer()) {
+      this.selected.splice(placeInSelected, 1);
     }
     //if being checked add to selected list. If radio make sure others get unselected.
-    else if (selIndex <= -1) {
+    else if (placeInSelected === -1) {
       if (this.singleAnswer()) {
-        if(this.selected.length > 0) {
-          this.selectables[this.selected[0]].checked = false;
-        }
         this.selected = [optionIndex];
       }
       else {
