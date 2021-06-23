@@ -33,8 +33,15 @@ export default class MultiMediaChoiceContent {
    * Return the selected objects
    * @returns  {Number[]} A list of indexes
    */
-   getSelected() {
-    return this.selectables.filter(selectable => selectable.checked)
+  getSelected() {
+    return this.selectables.filter((selectable) => selectable.checked);
+  }
+  /**
+   * Checks if any answer is selcted
+   * @returns  {boolean} True if any answer is selected
+   */
+  isAnswerSelected() {
+    return this.getSelected().length > 0;
   }
 
   getSelectedIndex(selectable) {
@@ -42,8 +49,8 @@ export default class MultiMediaChoiceContent {
   }
 
   getSelectedIndexes() {
-    const selected = this.getSelected()
-    return selected.map(selected => this.getSelectedIndex(selected))
+    const selected = this.getSelected();
+    return selected.map((selected) => this.getSelectedIndex(selected));
   }
 
   /**
@@ -51,6 +58,7 @@ export default class MultiMediaChoiceContent {
    */
   showSolutions() {
     this.disableSelectables();
+
     const self = this;
     this.params.options.forEach(function (option, index) {
       if (option.correct) {
@@ -91,8 +99,7 @@ export default class MultiMediaChoiceContent {
     if (this.isSingleAnswer()) {
       selectable.setAttribute('type', 'radio');
       selectable.setAttribute('name', 'options');
-    }
-    else {
+    } else {
       selectable.setAttribute('type', 'checkbox');
     }
 
