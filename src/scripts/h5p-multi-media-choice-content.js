@@ -43,7 +43,8 @@ export default class MultiMediaChoiceContent {
    * @return  {HTMLElement} List view of options.
    */
   buildOptionList(options) {
-    const optionList = document.createElement('div');
+    const optionList = document.createElement('ul');
+    optionList.setAttribute('role', this.singleAnswer() ? 'radiogroup' : 'group');
     optionList.classList.add('h5p-multi-media-choice-options');
     options.forEach((option) => {
       if (option) {
@@ -60,11 +61,12 @@ export default class MultiMediaChoiceContent {
    */
   buildOption(option) {
     const optionContainer = document.createElement('div');
-    optionContainer.classList.add('h5p-multi-media-choice-container')
+    optionContainer.classList.add('h5p-multi-media-choice-container');
 
     const selectable = document.createElement('input');
     if (this.singleAnswer()) {
       selectable.setAttribute('type', 'radio');
+      selectable.setAttribute('name', 'options');
     }
     else {
       selectable.setAttribute('type', 'checkbox');
@@ -185,8 +187,6 @@ export default class MultiMediaChoiceContent {
    */
   resetSelections() {
     this.selected = {};
-    this.selectables.forEach(function (selectable, index) {
-      selectable.checked = false;
-    });
+    this.selectables.forEach((selectable) => (selectable.checked = false));
   }
 }
