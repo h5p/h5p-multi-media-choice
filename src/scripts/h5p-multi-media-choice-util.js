@@ -1,6 +1,6 @@
 /**
  * Merge the contents of two or more objects together and return it
- * @param  {Object} out
+ * @param {Object} out
  */
 export default function deepExtend(out) {
   out = out || {};
@@ -18,13 +18,11 @@ export default function deepExtend(out) {
 
     for (var key in obj) {
       if (obj.hasOwnProperty(key)) {
-        if (typeof obj[key] === 'object')
-          out[key] = deepExtend(out[key], obj[key]);
-        else
-          out[key] = obj[key];
+        if (typeof obj[key] === 'object') out[key] = deepExtend(out[key], obj[key]);
+        else out[key] = obj[key];
       }
     }
   }
 
   return out;
-};
+}

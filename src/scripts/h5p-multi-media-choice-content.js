@@ -2,9 +2,9 @@
 export default class MultiMediaChoiceContent {
   /**
    * @constructor
-   * @param  {object} params Parameters.
-   * @param  {number} contentId Content's id.
-   * @param  {object} [callbacks = {}] Callbacks.
+   * @param {object} params Parameters.
+   * @param {number} contentId Content's id.
+   * @param {object} [callbacks = {}] Callbacks.
    */
   constructor(params = {}, contentId, callbacks = {}) {
     this.params = params;
@@ -25,7 +25,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Return the DOM for this class.
-   * @return  {HTMLElement} DOM for this class.
+   * @return {HTMLElement} DOM for this class.
    */
   getDOM() {
     return this.content;
@@ -33,14 +33,14 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Return the selected objects
-   * @returns  {Number[]} A list of indexes
+   * @returns {Number[]} A list of indexes
    */
   getSelected() {
     return this.selectables.filter((selectable) => selectable.checked);
   }
   /**
    * Checks if any answer is selcted
-   * @returns  {boolean} True if any answer is selected
+   * @returns {boolean} True if any answer is selected
    */
   isAnswerSelected() {
     return this.getSelected().length > 0;
@@ -73,8 +73,8 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Build options.
-   * @param   {object[]} options List of option objects.
-   * @return  {HTMLElement} List view of options.
+   * @param {object[]} options List of option objects.
+   * @return {HTMLElement} List view of options.
    */
   buildOptionList(options) {
     const optionList = document.createElement('ul');
@@ -90,8 +90,8 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Builds a selectable option containing media.
-   * @param   {object} option Option object from the editor.
-   * @return  {HTMLElement} Option.
+   * @param {object} option Option object from the editor.
+   * @return {HTMLElement} Option.
    */
   buildOption(option) {
     const optionContainer = document.createElement('div');
@@ -122,8 +122,8 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Builds a media element based on option.
-   * @param    {object} option Option object from the editor.
-   * @returns  {HTMLElement} Either [Image] depending on option.
+   * @param {object} option Option object from the editor.
+   * @returns {HTMLElement} Either [Image] depending on option.
    */
   buildMedia(option) {
     switch (option.media.metadata.contentType) {
@@ -136,8 +136,8 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Builds an image from options.
-   * @param    {object} option Option object from the editor.
-   * @returns  {HTMLElement} Image.
+   * @param {object} option Option object from the editor.
+   * @returns {HTMLElement} Image.
    */
   buildImage(option) {
     if (this.imageParamsAreValid(option.media.params)) {
@@ -168,8 +168,8 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Test if important keys are present in media params for image.
-   * @param   {object} imageParams Media params for image from the editor.
-   * @return  {boolean} True if all three keys are present, false otherwise.
+   * @param {object} imageParams Media params for image from the editor.
+   * @return {boolean} True if all three keys are present, false otherwise.
    * @private
    */
   imageParamsAreValid(imageParams) {
@@ -178,7 +178,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Counts options marked as correct
-   * @returns  {Number} Number of options marked as correct in the editor.
+   * @returns {Number} Number of options marked as correct in the editor.
    */
   getNumberOfCorrectOptions() {
     return this.params.options.filter((option) => option.correct).length;
@@ -200,7 +200,7 @@ export default class MultiMediaChoiceContent {
   /**
    * Toggles the given option. If the options are radio buttons
    * the previously checked one is unchecked
-   * @param  {Number} optionIndex Which option is being selected
+   * @param {Number} optionIndex Which option is being selected
    */
   toggleSelected(optionIndex) {
     const placeInSelected = this.selected.indexOf(optionIndex);
