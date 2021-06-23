@@ -304,18 +304,25 @@
       "importance": "low",
       "fields": [
         {
-          "name": "checkText",
+          "name": "checkAnswerButtonText",
           "type": "text",
           "label": "Text for \"Check\" button",
           "importance": "low",
           "default": "Check"
         },
         {
-          "name": "check",
+          "name": "checkAnswer",
           "type": "text",
           "label": "Assistive technology description for \"Check\" button",
           "importance": "low",
           "default": "Check the characters. The responses will be marked as correct, incorrect, or unanswered."
+        },
+        {
+          "name": "showSolutionButtonText",
+          "type": "text",
+          "label": "Text for \"Show solution\" button",
+          "importance": "low",
+          "default": "Show solution"
         },
         {
           "name": "showSolution",

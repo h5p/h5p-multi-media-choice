@@ -84,6 +84,7 @@ export default class MultiMediaChoiceContent {
       return optionContainer;
     }
   }
+
   /**
    * Builds a media element based on option.
    * @param    {object} option Option object from the editor.
@@ -97,6 +98,7 @@ export default class MultiMediaChoiceContent {
         return undefined;
     }
   }
+
   /**
    * Builds an image from options.
    * @param    {object} option Option object from the editor.
