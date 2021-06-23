@@ -25,14 +25,15 @@ export default class MultiMediaChoice extends H5P.Question {
         behaviour: {
           enableSolutionsButton: true,
           enableRetry: true,
-          type: 'auto',
+          questionType: 'auto',
           confirmCheckDialog: false,
           confirmRetryDialog: false,
-          aspectRatio: "auto"
+          aspectRatio: 'auto',
         },
         l10n: {
-          checkText: 'Check',
-          check: 'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
+          checkAnswerButtonText: 'Check',
+          checkAnswer: 'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
+          showSolutionButtonText: 'Show solution',
           showSolution: 'Show the solution. The task will be marked with its correct solution.',
           retry: 'Retry the task. Reset all responses and start the task over again.',
           result: 'You got @score out of @total points',
@@ -54,10 +55,10 @@ export default class MultiMediaChoice extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
      */
     this.getMaxScore = () => {
-      if (this.params.behaviour.singlePoint || this.content.singleAnswer()) {
+      if (this.params.behaviour.singlePoint || this.content.isSingleAnswer()) {
         return 1;
       } else {
-        return this.params.options.filter(option => option.correct).length
+        return this.params.options.filter((option) => option.correct).length;
       }
     };
 
@@ -86,14 +87,25 @@ export default class MultiMediaChoice extends H5P.Question {
   addButtons() {
     this.addButton(
       'check-answer',
-      this.params.l10n.checkText,
+      this.params.l10n.checkAnswerButtonText,
       () => {
         this.checkAnswer();
       },
       true,
-      { 'aria-label': this.params.l10n.check },
+      { 'aria-label': this.params.l10n.checkAnswer },
       {}
     );
+    this.addButton(
+      'show-solution',
+      this.params.l10n.showSolutionButtonText,
+      () => {
+        this.showSolution();
+      },
+      false,
+      { 'aria-label': this.params.l10n.showSolution },
+      {}
+    );
+    // TODO: retry-button
   }
 
   /**
@@ -106,5 +118,16 @@ export default class MultiMediaChoice extends H5P.Question {
     const textScore = H5P.Question.determineOverallFeedback(this.params.overallFeedback, score / maxScore);
     const ariaMessage = this.params.l10n.result.replace('@score', score).replace('@total', maxScore);
     this.setFeedback(textScore, score, maxScore, ariaMessage);
+
+    if (this.params.behaviour.enableSolutionsButton) {
+      this.showButton('show-solution');
+    }
+  }
+  /**
+   * Show solution.
+   */
+  showSolution() {
+    this.hideButton('show-solution');
+    alert('The right answer was C');
   }
 }
