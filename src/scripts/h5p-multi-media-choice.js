@@ -228,6 +228,17 @@ export default class MultiMediaChoice extends H5P.Question {
     if (this.params.behaviour.enableRetry) {
       this.showButton('try-again');
     }
+
+    const selected = this.content.getSelected();
+    for (let i = 0; i < this.content.selected.length; i++) {
+      if (this.isCorrect(selected[i])) {
+        selected[i].parentElement.classList.add('h5p-multi-media-choice-correct');
+      }
+      else {
+        selected[i].parentElement.classList.add('h5p-multi-media-choice-wrong');
+      }
+    }
+
   }
 
   /**
