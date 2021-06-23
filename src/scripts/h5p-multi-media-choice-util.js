@@ -8,7 +8,7 @@ export class Util {
    * @returns {Object} params with defaults included
    */
   static extendParams(params) {
-    return deepExtend(
+    return Util.deepExtend(
       {
         question: null,
         behaviour: {
@@ -67,7 +67,7 @@ export class Util {
 
       for (var key in obj) {
         if (obj.hasOwnProperty(key)) {
-          if (typeof obj[key] === 'object') out[key] = deepExtend(out[key], obj[key]);
+          if (typeof obj[key] === 'object') out[key] = Util.deepExtend(out[key], obj[key]);
           else out[key] = obj[key];
         }
       }

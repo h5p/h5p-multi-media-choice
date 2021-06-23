@@ -27,11 +27,7 @@ export default class MultiMediaChoice extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
      */
     this.getAnswersGiven = () => {
-      if (this.content.getSelected() && this.content.getSelected().length > 0) {
-        return true;
-      } else {
-        return false;
-      }
+      return (this.content.getSelected().length > 0 || this.content.blankIsCorrect());
     };
 
     /**
@@ -42,12 +38,7 @@ export default class MultiMediaChoice extends H5P.Question {
     this.getScore = () => {
       //If no answer is selected score = 0 if there is at least one correct answer
       if (!this.content.isAnswerSelected()) {
-        for (let i = 0; i < this.params.options.length; i++) {
-          if (this.params.options[i].correct) {
-            return 0;
-          }
-        }
-        return 1;
+        return this.content.blankIsCorrect() ? 1 : 0;
       }
 
       // Radio buttons, only one answer
