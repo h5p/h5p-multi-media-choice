@@ -38,6 +38,13 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
+   * Show the correct solution(s)
+   */
+  showSolutions() {
+    this.disableSelectables();
+  }
+
+  /**
    * Build options.
    * @param   {object[]} options List of option objects.
    * @return  {HTMLElement} List view of options.
@@ -183,8 +190,20 @@ export default class MultiMediaChoiceContent {
    */
   resetSelections() {
     this.selected = {};
-    this.selectables.forEach(function (selectable, index) {
+    this.selectables.forEach(function (selectable) {
       selectable.checked = false;
+    });
+  }
+
+  enableSelectables() {
+    this.selectables.forEach(function (selectable) {
+      selectable.setAttribute('disabled', false);
+    });
+  }
+
+  disableSelectables() {
+    this.selectables.forEach(function (selectable) {
+      selectable.setAttribute('disabled', true);
     });
   }
 }

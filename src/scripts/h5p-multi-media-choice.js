@@ -62,6 +62,19 @@ export default class MultiMediaChoice extends H5P.Question {
       }
     };
 
+    /**
+     * Show solutions.
+     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
+     */
+    this.showSolutions = () => {
+      this.hideButton('check-answer');
+      this.hideButton('show-solution');
+
+      this.content.showSolutions();
+
+      this.trigger('resize');
+    };
+
     this.registerDomElements = () => {
       // Register task introduction text
       if (this.params.question) {
@@ -99,7 +112,7 @@ export default class MultiMediaChoice extends H5P.Question {
       'show-solution',
       this.params.l10n.showSolutionButtonText,
       () => {
-        this.showSolution();
+        this.showSolutions();
       },
       false,
       { 'aria-label': this.params.l10n.showSolution },
@@ -113,6 +126,8 @@ export default class MultiMediaChoice extends H5P.Question {
    */
   checkAnswer() {
     this.hideButton('check-answer');
+    this.content.disableSelectables();
+
     const score = this.getScore();
     const maxScore = this.getMaxScore();
     const textScore = H5P.Question.determineOverallFeedback(this.params.overallFeedback, score / maxScore);
@@ -122,12 +137,5 @@ export default class MultiMediaChoice extends H5P.Question {
     if (this.params.behaviour.enableSolutionsButton) {
       this.showButton('show-solution');
     }
-  }
-  /**
-   * Show solution.
-   */
-  showSolution() {
-    this.hideButton('show-solution');
-    alert('The right answer was C');
   }
 }
