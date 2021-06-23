@@ -9,6 +9,8 @@ export default class MultiMediaChoiceContent {
   constructor(params = {}, contentId, callbacks = {}) {
     this.params = params;
     this.contentId = contentId;
+    this.callbacks = callbacks;
+    this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
 
     this.selected = [];
     this.selectables = [];
@@ -141,6 +143,7 @@ export default class MultiMediaChoiceContent {
       const image = document.createElement('img');
       image.setAttribute('src', H5P.getPath(path, this.contentId));
       image.setAttribute('alt', alt);
+      image.addEventListener('load', this.callbacks.triggerResize);
       //Do not show title if title is not specified
       if (title != null) {
         image.setAttribute('title', title);
