@@ -45,7 +45,7 @@ export default class MultiMediaChoice extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
      */
     this.getAnswersGiven = () => {
-      return this.content.getSelected().length > 0 || this.content.blankIsCorrect();
+      return this.content.isAnswerSelected() || this.content.blankIsCorrect();
     };
 
     /**
@@ -54,19 +54,18 @@ export default class MultiMediaChoice extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
      */
     this.getScore = () => {
-      // If no answer is selected score = 0 if there is at least one correct answer
+      // One point if no correct options and no selected options
       if (!this.content.isAnswerSelected()) {
         return this.content.blankIsCorrect() ? 1 : 0;
       }
 
       // Radio buttons, only one answer
       if (this.content.isSingleAnswer()) {
-        const selectedIndex = this.content.getSelected()[0];
-        return this.params.options[selectedIndex].correct ? 1 : 0;
+        return this.isCorrect(this.content.getSelected()[0]) ? 1 : 0;
       }
       // Checkbox buttons, one point if correctly answered
       else if (this.params.behaviour.singlePoint) {
-        const selectedIndexes = this.content.getSelected();
+        const selectedIndexes = this.content.getSelectedIndexes();
         for (let i = 0; i < this.params.options.length; i++) {
           if (this.params.options[i].correct == (selectedIndexes.indexOf(i) == -1)) {
             return 0;
@@ -76,12 +75,12 @@ export default class MultiMediaChoice extends H5P.Question {
       }
       // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
       else {
-        const selectedIndexes = this.content.getSelected();
         let score = 0;
-        for (let i = 0; i < this.params.options.length; i++) {
-          if (this.params.options[i].correct && selectedIndexes.indexOf(i) != -1) {
+        for (let i = 0; i < this.content.selectables.length; i++) {
+          if (this.isCorrect(this.content.selectables[i])) {
             score++;
-          } else if (!this.params.options[i].correct && selectedIndexes.indexOf(i) != -1) {
+          }
+          else if (this.isIncorrect(this.content.selectables[i])) {
             score--;
           }
         }
@@ -98,11 +97,37 @@ export default class MultiMediaChoice extends H5P.Question {
     this.getMaxScore = () => {
       if (this.params.behaviour.singlePoint || this.content.isSingleAnswer()) {
         return 1;
-      } else if (this.content.getNumberOfCorrectOptions() === 0) {
+      }
+      else if (this.content.getNumberOfCorrectOptions() === 0) {
         return 1;
-      } else {
+      }
+      else {
         return this.content.getNumberOfCorrectOptions();
       }
+    };
+
+    /**
+     * @param {object} selectable Selectable object
+     * @returns {boolean} True if option is selected and correct
+     */
+    this.isCorrect = (selectable) => {
+      const selectedIndex = this.content.getIndex(selectable);
+      if (this.content.getSelected().includes(selectable) && this.params.options[selectedIndex].correct) {
+        return true;
+      }
+      return false;
+    };
+
+    /**
+     * @param {object} selectable Selctable object
+     * @returns {boolean} True if option is selected and incorrect
+     */
+    this.isIncorrect = (selectable) => {
+      const selectedIndex = this.content.getIndex(selectable);
+      if (this.content.getSelected().includes(selectable) && !this.params.options[selectedIndex].correct) {
+        return true;
+      }
+      return false;
     };
 
     /**
@@ -125,7 +150,8 @@ export default class MultiMediaChoice extends H5P.Question {
         // Require answer before solution can be viewed
         this.updateFeedbackContent(this.params.l10n.noAnswer);
         this.handleRead(this.params.l10n.noAnswer);
-      } else {
+      }
+      else {
         this.content.showSolutions();
       }
 
@@ -202,10 +228,21 @@ export default class MultiMediaChoice extends H5P.Question {
     if (this.params.behaviour.enableRetry) {
       this.showButton('try-again');
     }
+
+    const selected = this.content.getSelected();
+    for (let i = 0; i < this.content.selected.length; i++) {
+      if (this.isCorrect(selected[i])) {
+        selected[i].parentElement.classList.add('h5p-multi-media-choice-correct');
+      }
+      else {
+        selected[i].parentElement.classList.add('h5p-multi-media-choice-wrong');
+      }
+    }
+
   }
 
   /**
-   * Resets the options, score and the buttons hidden by showSolutions()
+   * Resets options, buttons and solutions
    *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
    */
@@ -214,22 +251,7 @@ export default class MultiMediaChoice extends H5P.Question {
     this.showButton('check-answer');
     this.hideButton('try-again');
     this.hideButton('show-solution');
-    this.hideSolutions();
-    this.resetScore();
+    this.content.hideSolutions();
     this.removeFeedback();
-  }
-
-  /**
-   * Resets the score and hides the score text
-   */
-  resetScore() {
-    //TODO: Add this when scoring has been implemented
-  }
-
-  /**
-   * Hide the solutions
-   */
-  hideSolutions() {
-    //TODO: Add when solutions has been implemented
   }
 }

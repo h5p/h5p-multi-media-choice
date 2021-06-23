@@ -32,11 +32,29 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Return the selected objects
-   * @returns {Number[]} A list of indexes
+   * Returns the selected objects
+   * @returns {Object[]} A list of selectable-objects that are selected
    */
   getSelected() {
-    return this.selected;
+    return this.selectables.filter((selectable) => selectable.checked);
+  }
+
+  /**
+   * Returns the indexes of the selected objects
+   * @returns {Number[]} List of indexes of selected selctables
+   */
+  getSelectedIndexes() {
+    const selected = this.getSelected();
+    return selected.map((selected) => this.getIndex(selected));
+  }
+
+  /**
+   * Return the index of the given selctable
+   * @param {object} selectable Selectable object
+   * @returns {number} Index of the selectable
+   */
+  getIndex(selectable) {
+    return this.selectables.indexOf(selectable);
   }
 
   /**
@@ -72,6 +90,20 @@ export default class MultiMediaChoiceContent {
         self.options[index].classList.add('h5p-multi-media-choice-correct');
       } else {
         self.options[index].classList.add('h5p-multi-media-choice-wrong');
+      }
+    });
+  }
+
+  /**
+   * Hides the solution(s)
+   */
+  hideSolutions() {
+    const self = this;
+    this.params.options.forEach(function (option, index) {
+      if (option.correct) {
+        self.options[index].classList.remove('h5p-multi-media-choice-correct');
+      } else {
+        self.options[index].classList.remove('h5p-multi-media-choice-wrong');
       }
     });
   }
