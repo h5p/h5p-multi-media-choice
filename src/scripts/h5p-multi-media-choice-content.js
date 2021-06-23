@@ -36,16 +36,7 @@ export default class MultiMediaChoiceContent {
    * @returns  {Number[]} A list of indexes
    */
    getSelected() {
-    return this.selectables.filter(selectable => selectable.checked)
-  }
-
-  getSelectedIndex(selectable) {
-    return this.selectables.indexOf(selectable);
-  }
-
-  getSelectedIndexes() {
-    const selected = this.getSelected()
-    return selected.map(selected => this.getSelectedIndex(selected))
+    return this.selected;
   }
 
   /**
@@ -216,7 +207,7 @@ export default class MultiMediaChoiceContent {
    * Resets all selected options
    */
   resetSelections() {
-    this.selected = {};
+    this.selected = [];
     this.selectables.forEach((selectable) => (selectable.checked = false));
     this.enableSelectables();
   }

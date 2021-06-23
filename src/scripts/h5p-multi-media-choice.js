@@ -78,12 +78,12 @@ export default class MultiMediaChoice extends H5P.Question {
     this.getScore = () => {
       // Radio buttons, only one answer
       if (this.content.isSingleAnswer()) {
-        const selectedIndex = this.content.getSelectedIndexes()[0];
+        const selectedIndex = this.content.getSelected()[0];
         return this.params.options[selectedIndex].correct ? 1 : 0;
       }
       // Checkbox buttons, one point if correctly answered
       else if (this.params.behaviour.singlePoint) {
-        const selectedIndexes = this.content.getSelectedIndexes();
+        const selectedIndexes = this.content.getSelected();
         for (let i = 0; i < this.params.options.length; i++) {
           if ((this.params.options[i].correct) == (selectedIndexes.indexOf(i) == -1)) {
             return 0;
@@ -93,7 +93,7 @@ export default class MultiMediaChoice extends H5P.Question {
       }
       // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
       else {
-        const selectedIndexes = this.content.getSelectedIndexes();
+        const selectedIndexes = this.content.getSelected();
         let score = 0;
         for (let i = 0; i < this.params.options.length; i++) {
           if(this.params.options[i].correct && selectedIndexes.indexOf(i) != -1) {
