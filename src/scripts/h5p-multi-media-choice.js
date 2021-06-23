@@ -29,6 +29,7 @@ export default class MultiMediaChoice extends H5P.Question {
           confirmCheckDialog: false,
           confirmRetryDialog: false,
           aspectRatio: 'auto',
+          sameAspectRatio: false
         },
         l10n: {
           checkAnswerButtonText: 'Check',

@@ -117,7 +117,9 @@ export default class MultiMediaChoiceContent {
       if (title != null) image.setAttribute('title', title); //Do not show title if title is not specified
 
       image.classList.add('h5p-multi-media-choice-media');
-      image.classList.add(`h5p-multi-media-choice-media-${this.params.behaviour.aspectRatio}`);
+      if (this.params.behaviour.sameAspectRatio) {
+        image.classList.add(`h5p-multi-media-choice-media-${this.params.behaviour.aspectRatio}`);
+      }
 
       return image;
     }
