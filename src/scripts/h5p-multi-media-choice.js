@@ -29,12 +29,14 @@ export default class MultiMediaChoice extends H5P.Question {
           confirmCheckDialog: false,
           confirmRetryDialog: false,
           aspectRatio: 'auto',
+          sameAspectRatio: false
         },
         l10n: {
           checkAnswerButtonText: 'Check',
           checkAnswer: 'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
           showSolutionButtonText: 'Show solution',
           showSolution: 'Show the solution. The task will be marked with its correct solution.',
+          retryText: 'Retry',
           retry: 'Retry the task. Reset all responses and start the task over again.',
           result: 'You got @score out of @total points',
         },
@@ -118,7 +120,17 @@ export default class MultiMediaChoice extends H5P.Question {
       { 'aria-label': this.params.l10n.showSolution },
       {}
     );
-    // TODO: retry-button
+
+    this.addButton(
+      'try-again',
+      this.params.l10n.retryText,
+      () => {
+        this.resetTask();
+      },
+      false,
+      { 'aria-label': this.params.l10n.retry },
+      {}
+    );
   }
 
   /**
@@ -137,5 +149,38 @@ export default class MultiMediaChoice extends H5P.Question {
     if (this.params.behaviour.enableSolutionsButton) {
       this.showButton('show-solution');
     }
+
+    if (this.params.behaviour.enableRetry) {
+      this.showButton('try-again');
+    }
+  }
+
+  /**
+   * Resets the options, score and the buttons hidden by showSolutions()
+   *
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
+   */
+  resetTask() {
+    this.content.resetSelections();
+    this.showButton('check-answer');
+    this.hideButton('try-again');
+    this.hideButton('show-solution');
+    this.hideSolutions();
+    this.resetScore();
+    this.removeFeedback();
+  }
+
+  /**
+   * Resets the score and hides the score text
+   */
+  resetScore() {
+    //TODO: Add this when scoring has been implemented
+  }
+
+  /**
+   * Hide the solutions
+   */
+  hideSolutions() {
+    //TODO: Add when solutions has been implemented
   }
 }
