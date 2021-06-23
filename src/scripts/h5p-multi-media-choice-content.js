@@ -51,7 +51,7 @@ export default class MultiMediaChoiceContent {
    */
   buildOptionList(options) {
     const optionList = document.createElement('ul');
-    optionList.setAttribute('role', this.singleAnswer() ? 'radiogroup' : 'group');
+    optionList.setAttribute('role', this.isSingleAnswer() ? 'radiogroup' : 'group');
     optionList.classList.add('h5p-multi-media-choice-options');
     options.forEach((option) => {
       if (option) {
@@ -196,17 +196,14 @@ export default class MultiMediaChoiceContent {
   resetSelections() {
     this.selected = {};
     this.selectables.forEach((selectable) => (selectable.checked = false));
+    this.enableSelectables();
   }
 
   enableSelectables() {
-    this.selectables.forEach(function (selectable) {
-      selectable.setAttribute('disabled', false);
-    });
+    this.selectables.forEach((selectable) => (selectable.disabled = false));
   }
 
   disableSelectables() {
-    this.selectables.forEach(function (selectable) {
-      selectable.setAttribute('disabled', true);
-    });
+    this.selectables.forEach((selectable) => (selectable.disabled = true));
   }
 }
