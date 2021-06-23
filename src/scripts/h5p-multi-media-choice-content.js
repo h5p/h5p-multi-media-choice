@@ -113,7 +113,10 @@ export default class MultiMediaChoiceContent {
       const image = document.createElement('img');
       image.setAttribute('src', H5P.getPath(path, this.contentId));
       image.setAttribute('alt', alt);
-      if (title != null) image.setAttribute('title', title); //Do not show title if title is not specified
+      //Do not show title if title is not specified
+      if (title != null) {
+        image.setAttribute('title', title);
+      }
 
       image.classList.add('h5p-multi-media-choice-media');
       image.classList.add(`h5p-multi-media-choice-media-${this.params.behaviour.aspectRatio}`);
@@ -148,7 +151,9 @@ export default class MultiMediaChoiceContent {
    * @returns  false if they should be displayed as checkboxes
    */
   singleAnswer() {
-    if (this.params.behaviour.type === 'auto') return this.getNumberOfCorrectOptions() === 1;
+    if (this.params.behaviour.type === 'auto') {
+      return this.getNumberOfCorrectOptions() === 1;
+    }
     return this.params.behaviour.type === 'single';
   }
 
@@ -167,8 +172,9 @@ export default class MultiMediaChoiceContent {
     //if being checked add to selected list. If radio make sure others get unselected.
     else if (selIndex <= -1) {
       if (this.singleAnswer()) {
-        if(this.selected.length > 0)
+        if(this.selected.length > 0) {
           this.selectables[this.selected[0]].checked = false;
+        }
         this.selected = [optionIndex];
       }
       else {
