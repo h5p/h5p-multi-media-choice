@@ -35,7 +35,7 @@ export default class MultiMediaChoiceContent {
    * Return the selected objects
    * @returns {Number[]} A list of indexes
    */
-   getSelected() {
+  getSelected() {
     return this.selected;
   }
 
