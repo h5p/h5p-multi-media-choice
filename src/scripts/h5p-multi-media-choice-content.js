@@ -14,7 +14,15 @@ export default class MultiMediaChoiceContent {
     this.callbacks = callbacks;
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
 
-    this.isSingleAnswer = this.computeIsSingleAnswer();
+    this.numberOfCorrectOptions = params.options.filter(
+      option => option.correct
+    ).length;
+
+    this.isSingleAnswer =
+      this.params.behaviour.questionType === 'auto'
+        ? this.numberOfCorrectOptions === 1
+        : this.params.behaviour.questionType === 'single';
+
     this.selected = [];
 
     this.content = document.createElement('div');
@@ -115,27 +123,6 @@ export default class MultiMediaChoiceContent {
     this.options.forEach(function (option) {
       option.hideSolution();
     });
-  }
-
-  /**
-   * Counts options marked as correct
-   * @returns {Number} Number of options marked as correct in the editor.
-   */
-  getNumberOfCorrectOptions() {
-    return this.options.filter(option => option.isCorrect).length;
-  }
-
-  /**
-   * Determines the question type, indicating whether the answers should be
-   * radio buttons or checkboxes.
-   * @returns  true if the options should be displayed as radio buttons,
-   * @returns  false if they should be displayed as checkboxes
-   */
-  computeIsSingleAnswer() {
-    if (this.params.behaviour.questionType === 'auto') {
-      return this.getNumberOfCorrectOptions() === 1;
-    }
-    return this.params.behaviour.questionType === 'single';
   }
 
   /**

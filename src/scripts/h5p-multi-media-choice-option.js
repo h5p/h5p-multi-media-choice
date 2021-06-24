@@ -14,13 +14,13 @@ export class MultiMediaChoiceOption {
     this.media = option.media;
     this.disableImageZooming = option.disableImageZooming;
     this.callbacks = callbacks || {};
-    this.callbacks.triggerResize = this.callbacks.onClick || (() => {});
+    this.callbacks.onClick = this.callbacks.onClick || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
 
+    this.isValid = true; // If the media content is valid or not
     this.isCorrect = option.correct;
     this.tipsAndFeedback = option.tipsAndFeedback; // TODO: Currently not used
 
-    this.isValid = true;
     this.content = document.createElement('div');
     this.content.classList.add('h5p-multi-media-choice-option-container');
 
@@ -41,6 +41,7 @@ export class MultiMediaChoiceOption {
       return;
     }
     this.content.appendChild(mediaContent);
+
     //sets the width to control the max number of options per row. 2em is from the margins
     this.content.style.width =
       'calc(' + 100 / this.params.behaviour.maxAlternativesPerRow + '% - 2em)';

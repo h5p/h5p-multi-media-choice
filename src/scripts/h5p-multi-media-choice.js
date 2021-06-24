@@ -105,11 +105,11 @@ export default class MultiMediaChoice extends H5P.Question {
       if (this.params.behaviour.singlePoint || this.content.isSingleAnswer) {
         return 1;
       }
-      else if (this.content.getNumberOfCorrectOptions() === 0) {
+      else if (this.content.numberOfCorrectOptions === 0) {
         return 1;
       }
       else {
-        return this.content.getNumberOfCorrectOptions();
+        return this.content.numberOfCorrectOptions;
       }
     };
 
