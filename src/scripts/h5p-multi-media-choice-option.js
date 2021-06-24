@@ -130,14 +130,23 @@ export class MultiMediaChoiceOption {
     return this.content;
   }
 
+  /**
+   * Unchecks the selectable of the option
+   */
   uncheck() {
     this.selectable.checked = false;
   }
 
+  /**
+   * Enables the selectable of the option
+   */
   enable() {
     this.selectable.disabled = false;
   }
 
+  /**
+   * Disable the selectable of the option
+   */
   disable() {
     this.selectable.disabled = true;
   }

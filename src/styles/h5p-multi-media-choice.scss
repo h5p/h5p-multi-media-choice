@@ -2,10 +2,10 @@
 $media-width: 20em;
 
 .h5p-multi-media-choice {
-  background: rebeccapurple;
+  background: #663399;
 
   .h5p-multi-media-choice-content {
-    background: red;
+    background: #ff0000;
   }
 
   .h5p-multi-media-choice-options {
@@ -15,7 +15,7 @@ $media-width: 20em;
     width: 100%;
     min-width: $media-width;
     padding-inline-start: 0;
-    background: grey;
+    background: #808080;
   }
 
   .h5p-multi-media-choice-option-container {

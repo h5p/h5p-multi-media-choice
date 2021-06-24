@@ -74,6 +74,10 @@ export default class MultiMediaChoiceContent {
     return this.content;
   }
 
+  /**
+   * Get score
+   * @return {number} score based on the behavior settings
+   */
   getScore() {
     // One point if no correct options and no selected options
     const self = this;
@@ -206,10 +210,16 @@ export default class MultiMediaChoiceContent {
     this.enableSelectables();
   }
 
+  /**
+   * Enables all selectables (radio buttons / checkboxes)
+   */
   enableSelectables() {
     this.options.forEach(option => option.enable());
   }
 
+  /**
+   * Disables all selectables (radio buttons / checkboxes)
+   */
   disableSelectables() {
     this.options.forEach(option => option.disable());
   }
