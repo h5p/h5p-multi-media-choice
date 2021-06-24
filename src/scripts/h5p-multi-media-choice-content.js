@@ -19,7 +19,7 @@ export default class MultiMediaChoiceContent {
     this.content.classList.add('h5p-multi-media-choice-content');
 
     // Build n options
-    this.options = params.options.map((option) => this.buildOption(option));
+    this.options = params.options.map(option => this.buildOption(option));
     this.content = this.buildOptionList(this.options);
   }
 
@@ -36,7 +36,7 @@ export default class MultiMediaChoiceContent {
    * @returns {Object[]} A list of selectable-objects that are selected
    */
   getSelected() {
-    return this.selectables.filter((selectable) => selectable.checked);
+    return this.selectables.filter(selectable => selectable.checked);
   }
 
   /**
@@ -45,7 +45,7 @@ export default class MultiMediaChoiceContent {
    */
   getSelectedIndexes() {
     const selected = this.getSelected();
-    return selected.map((selected) => this.getIndex(selected));
+    return selected.map(selected => this.getIndex(selected));
   }
 
   /**
@@ -88,7 +88,8 @@ export default class MultiMediaChoiceContent {
     this.params.options.forEach(function (option, index) {
       if (option.correct) {
         self.options[index].classList.add('h5p-multi-media-choice-correct');
-      } else {
+      }
+      else {
         self.options[index].classList.add('h5p-multi-media-choice-wrong');
       }
     });
@@ -102,7 +103,8 @@ export default class MultiMediaChoiceContent {
     this.params.options.forEach(function (option, index) {
       if (option.correct) {
         self.options[index].classList.remove('h5p-multi-media-choice-correct');
-      } else {
+      }
+      else {
         self.options[index].classList.remove('h5p-multi-media-choice-wrong');
       }
     });
@@ -115,9 +117,12 @@ export default class MultiMediaChoiceContent {
    */
   buildOptionList(options) {
     const optionList = document.createElement('ul');
-    optionList.setAttribute('role', this.isSingleAnswer() ? 'radiogroup' : 'group');
+    optionList.setAttribute(
+      'role',
+      this.isSingleAnswer() ? 'radiogroup' : 'group'
+    );
     optionList.classList.add('h5p-multi-media-choice-options');
-    options.forEach((option) => {
+    options.forEach(option => {
       if (option) {
         optionList.appendChild(option);
       }
@@ -138,7 +143,8 @@ export default class MultiMediaChoiceContent {
     if (this.isSingleAnswer()) {
       selectable.setAttribute('type', 'radio');
       selectable.setAttribute('name', 'options');
-    } else {
+    }
+    else {
       selectable.setAttribute('type', 'checkbox');
     }
 
@@ -195,7 +201,9 @@ export default class MultiMediaChoiceContent {
 
       image.classList.add('h5p-multi-media-choice-media');
       if (this.params.behaviour.sameAspectRatio) {
-        image.classList.add(`h5p-multi-media-choice-media-${this.params.behaviour.aspectRatio}`);
+        image.classList.add(
+          `h5p-multi-media-choice-media-${this.params.behaviour.aspectRatio}`
+        );
       }
 
       return image;
@@ -210,7 +218,9 @@ export default class MultiMediaChoiceContent {
    * @private
    */
   imageParamsAreValid(imageParams) {
-    return ['alt', 'title', 'file'].filter((key) => key in imageParams).length > 0;
+    return (
+      ['alt', 'title', 'file'].filter(key => key in imageParams).length > 0
+    );
   }
 
   /**
@@ -218,7 +228,7 @@ export default class MultiMediaChoiceContent {
    * @returns {Number} Number of options marked as correct in the editor.
    */
   getNumberOfCorrectOptions() {
-    return this.params.options.filter((option) => option.correct).length;
+    return this.params.options.filter(option => option.correct).length;
   }
 
   /**
@@ -250,7 +260,8 @@ export default class MultiMediaChoiceContent {
     else if (placeInSelected === -1) {
       if (this.isSingleAnswer()) {
         this.selected = [optionIndex];
-      } else {
+      }
+      else {
         this.selected.push(optionIndex);
       }
     }
@@ -261,15 +272,15 @@ export default class MultiMediaChoiceContent {
    */
   resetSelections() {
     this.selected = [];
-    this.selectables.forEach((selectable) => (selectable.checked = false));
+    this.selectables.forEach(selectable => (selectable.checked = false));
     this.enableSelectables();
   }
 
   enableSelectables() {
-    this.selectables.forEach((selectable) => (selectable.disabled = false));
+    this.selectables.forEach(selectable => (selectable.disabled = false));
   }
 
   disableSelectables() {
-    this.selectables.forEach((selectable) => (selectable.disabled = true));
+    this.selectables.forEach(selectable => (selectable.disabled = true));
   }
 }
