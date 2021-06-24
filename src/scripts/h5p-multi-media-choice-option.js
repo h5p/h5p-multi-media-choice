@@ -2,18 +2,27 @@
 export class MultiMediaChoiceOption {
   /**
    * @constructor
+   * @param {object} params Parameters from editor
+   * @param {number} contentId Content's id.
    * @param {object} option Option object from the editor
    * @param {boolean} singleAnswer true for radio buttons, false for checkboxes
-   * @param {function} onClick callback that fires when the option is selected
+   * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(option, singleAnswer, onClick) {
+  constructor(params, contentId, option, singleAnswer, callbacks) {
+    this.params = params;
+    this.contentId = contentId;
     this.media = option.media;
     this.disableImageZooming = option.disableImageZooming;
+    this.callbacks = callbacks || {};
+    this.callbacks.onClick = this.callbacks.onClick || (() => {});
+    this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
+
+    this.isValid = true; // If the media content is valid or not
     this.isCorrect = option.correct;
     this.tipsAndFeedback = option.tipsAndFeedback; // TODO: Currently not used
 
     this.content = document.createElement('div');
-    this.content.classList.add('h5p-multi-media-choice-container');
+    this.content.classList.add('h5p-multi-media-choice-option-container');
 
     this.selectable = document.createElement('input');
     if (singleAnswer) {
@@ -23,35 +32,19 @@ export class MultiMediaChoiceOption {
     else {
       this.selectable.setAttribute('type', 'checkbox');
     }
-    this.selectable.addEventListener('click', onClick);
+    this.selectable.addEventListener('click', this.callbacks.onClick);
     this.content.appendChild(this.selectable);
 
     const mediaContent = this.createMediaContent();
-    if (mediaContent) {
-      this.content.appendChild(mediaContent);
+    if (!mediaContent) {
+      this.isValid = false;
+      return;
     }
-  }
-  /**
-   * @returns {boolean} If the options is marked as correct
-   */
-  isCorrect() {
-    return this.isCorrect;
-  }
+    this.content.appendChild(mediaContent);
 
-  /**
-   * Return the DOM for this class
-   * @return {HTMLElement} DOM for this class
-   */
-  getDOM() {
-    return this.content;
-  }
-
-  /**
-   * Return the selectable element
-   * @return {HTMLElement} Input of type radio or checkbox
-   */
-  get selectable() {
-    return this.selectable;
+    //sets the width to control the max number of options per row. 2em is from the margins
+    this.content.style.width =
+      'calc(' + 100 / this.params.behaviour.maxAlternativesPerRow + '% - 2em)';
   }
 
   /**
@@ -74,7 +67,7 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} Image tag.
    */
   buildImage() {
-    if (this.imageParamsAreInvalid(this.option.media.params)) {
+    if (this.imageParamsAreInvalid(this.media.params)) {
       return;
     }
 
@@ -82,7 +75,7 @@ export class MultiMediaChoiceOption {
       alt,
       title,
       file: { path },
-    } = this.option.media.params;
+    } = this.media.params;
 
     const image = document.createElement('img');
     image.setAttribute('src', H5P.getPath(path, this.contentId));
@@ -111,8 +104,35 @@ export class MultiMediaChoiceOption {
    */
   imageParamsAreInvalid(imageParams) {
     return (
-      ['alt', 'title', 'file'].filter(key => key in imageParams).length > 0
+      ['alt', 'title', 'file'].filter(key => key in imageParams).length === 0
     );
+  }
+
+  /**
+   * @returns {boolean} If the options is marked as correct
+   */
+  isChecked() {
+    return this.selectable.checked;
+  }
+
+  /**
+   * Return the DOM for this class
+   * @return {HTMLElement} DOM for this class
+   */
+  getDOM() {
+    return this.content;
+  }
+
+  uncheck() {
+    this.selectable.checked = false;
+  }
+
+  enable() {
+    this.selectable.disabled = false;
+  }
+
+  disable() {
+    this.selectable.disabled = true;
   }
 
   /**
@@ -131,7 +151,7 @@ export class MultiMediaChoiceOption {
    * Hides any information about solution in the UI
    */
   hideSolution() {
-    this.content.classList.add('h5p-multi-media-choice-correct');
-    this.content.classList.add('h5p-multi-media-choice-wrong');
+    this.content.classList.remove('h5p-multi-media-choice-correct');
+    this.content.classList.remove('h5p-multi-media-choice-wrong');
   }
 }
