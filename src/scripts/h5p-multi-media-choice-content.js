@@ -57,6 +57,7 @@ export default class MultiMediaChoiceContent {
       'role',
       this.isSingleAnswer ? 'radiogroup' : 'group'
     );
+    optionList.setAttribute('aria-labelledby', `h5p-mmc${this.contentId}`);
     optionList.classList.add('h5p-multi-media-choice-options');
     this.options.forEach(option => {
       if (option.isValid) {

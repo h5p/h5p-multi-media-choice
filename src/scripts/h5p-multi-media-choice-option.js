@@ -21,7 +21,7 @@ export class MultiMediaChoiceOption {
     this.correct = option.correct;
     this.tipsAndFeedback = option.tipsAndFeedback; // TODO: Currently not used
 
-    this.content = document.createElement('div');
+    this.content = document.createElement('li');
     this.content.classList.add('h5p-multi-media-choice-option-container');
 
     this.selectable = document.createElement('input');

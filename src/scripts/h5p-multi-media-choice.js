@@ -26,6 +26,7 @@ export default class MultiMediaChoice extends H5P.Question {
       if (this.params.question) {
         this.introduction = document.createElement('div');
         this.introduction.innerHTML = this.params.question;
+        this.introduction.setAttribute('id', `h5p-mmc${contentId}`);
         this.setIntroduction(this.introduction);
       }
 
@@ -92,7 +93,9 @@ export default class MultiMediaChoice extends H5P.Question {
         this.params.overallFeedback,
         score / maxScore
       );
-      const selectedOptions = this.content.getOptions().filter(options => options.isSelected());
+      const selectedOptions = this.content
+        .getOptions()
+        .filter(options => options.isSelected());
 
       this.setFeedback(textScore, score, maxScore, this.params.l10n.result);
 
