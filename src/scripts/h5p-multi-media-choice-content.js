@@ -112,18 +112,14 @@ export default class MultiMediaChoiceContent {
    */
   showSolutions() {
     this.disableSelectables();
-    this.options.forEach(function (option) {
-      option.showSolution();
-    });
+    this.options.forEach((option) => option.showSolution());
   }
 
   /**
    * Show the correct solution(s)
    */
   hideSolutions() {
-    this.options.forEach(function (option) {
-      option.hideSolution();
-    });
+    this.options.forEach((option) => option.hideSolution());
   }
 
   /**
