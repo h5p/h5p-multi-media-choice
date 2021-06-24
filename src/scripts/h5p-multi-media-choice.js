@@ -56,31 +56,7 @@ export default class MultiMediaChoice extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
      */
     this.getScore = () => {
-      // One point if no correct options and no selected options
-      if (!this.content.isAnyAnswerSelected()) {
-        return this.content.isBlankCorrect() ? 1 : 0;
-      }
-
-      // Radio buttons, only one answer
-      if (this.content.isSingleAnswer) {
-        return this.content.getSelected()[0].isCorrect ? 1 : 0;
-      }
-
-      let score = 0;
-      this.content.options.forEach(option => {
-        if (option.isChecked()) {
-          option.isCorrect ? score++ : score--;
-        }
-      }, 0);
-
-      score = Math.max(0, score); // Negative score not allowed
-      if (this.params.behaviour.singlePoint) {
-        // Checkbox buttons, one point if correctly answered
-        score = Math.min(1, score);
-      }
-
-      // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
-      return score;
+      return this.content.getScore();
     };
 
     /**
