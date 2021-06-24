@@ -103,7 +103,7 @@ export default class MultiMediaChoiceContent {
    * Checks if there are no correct answers
    * @returns {boolean} True if there are no correct answers
    */
-  blankIsCorrect() {
+  isBlankCorrect() {
     return this.options.filter(option => option.isCorrect).length == 0;
   }
 
@@ -112,14 +112,14 @@ export default class MultiMediaChoiceContent {
    */
   showSolutions() {
     this.disableSelectables();
-    this.options.forEach((option) => option.showSolution());
+    this.options.forEach(option => option.showSolution());
   }
 
   /**
    * Show the correct solution(s)
    */
   hideSolutions() {
-    this.options.forEach((option) => option.hideSolution());
+    this.options.forEach(option => option.hideSolution());
   }
 
   /**

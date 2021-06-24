@@ -46,7 +46,7 @@ export default class MultiMediaChoice extends H5P.Question {
      */
     this.getAnswersGiven = () => {
       return (
-        this.content.isAnyAnswerSelected() || this.content.blankIsCorrect()
+        this.content.isAnyAnswerSelected() || this.content.isBlankCorrect()
       );
     };
 
@@ -58,42 +58,29 @@ export default class MultiMediaChoice extends H5P.Question {
     this.getScore = () => {
       // One point if no correct options and no selected options
       if (!this.content.isAnyAnswerSelected()) {
-        return this.content.blankIsCorrect() ? 1 : 0;
+        return this.content.isBlankCorrect() ? 1 : 0;
       }
 
       // Radio buttons, only one answer
       if (this.content.isSingleAnswer) {
-        return this.isCorrect(this.content.getSelected()[0]) ? 1 : 0;
+        return this.content.getSelected()[0].isCorrect ? 1 : 0;
       }
-      // Checkbox buttons, one point if correctly answered
-      else if (this.params.behaviour.singlePoint) {
-        const selectedIndexes = this.content.getSelectedIndexes();
-        for (let i = 0; i < this.params.options.length; i++) {
-          if (
-            this.params.options[i].correct ==
-            (selectedIndexes.indexOf(i) == -1)
-          ) {
-            return 0;
-          }
+
+      let score = 0;
+      this.content.options.forEach(option => {
+        if (option.isChecked()) {
+          option.isCorrect ? score++ : score--;
         }
-        return 1;
+      }, 0);
+
+      score = Math.max(0, score); // Negative score not allowed
+      if (this.params.behaviour.singlePoint) {
+        // Checkbox buttons, one point if correctly answered
+        score = Math.min(1, score);
       }
+
       // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
-      else {
-        let score = 0;
-        this.content.options.forEach(option => {
-          if (option.isChecked()) {
-            if (option.isCorrect) {
-              score++;
-            }
-            else {
-              score--;
-            }
-          }
-        });
-        return score < 0 ? 0 : score;
-      }
-      //this.content.params.options.forEach(() => {}
+      return score;
     };
 
     /**
