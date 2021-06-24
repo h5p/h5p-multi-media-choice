@@ -22,7 +22,7 @@ export class MultiMediaChoiceOption {
 
     this.isValid = true;
     this.content = document.createElement('div');
-    this.content.classList.add('h5p-multi-media-choice-container');
+    this.content.classList.add('h5p-multi-media-choice-option-container');
 
     this.selectable = document.createElement('input');
     if (singleAnswer) {
@@ -41,6 +41,9 @@ export class MultiMediaChoiceOption {
       return;
     }
     this.content.appendChild(mediaContent);
+    //sets the width to control the max number of options per row. 2em is from the margins
+    this.content.style.width =
+      'calc(' + 100 / this.params.behaviour.maxAlternativesPerRow + '% - 2em)';
   }
 
   /**

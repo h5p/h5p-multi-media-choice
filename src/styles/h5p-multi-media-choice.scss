@@ -1,5 +1,5 @@
 @use './colors' as *;
-$media-width: 10em;
+$media-width: 20em;
 
 .h5p-multi-media-choice {
   background: rebeccapurple;
@@ -9,17 +9,29 @@ $media-width: 10em;
   }
 
   .h5p-multi-media-choice-options {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    min-width: $media-width;
+    padding-inline-start: 0;
     background: grey;
   }
 
-  .h5p-multi-media-choice-container {
-    display: inline-block;
+  .h5p-multi-media-choice-option-container {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     margin: 1em 1em 1em 1em;
 
     border-style: solid;
     border-width: medium;
     border-radius: 3px;
     border-color: transparent;
+
+    box-sizing: border-box;
+    min-width: $media-width;
   }
 
   .h5p-multi-media-choice-media {
