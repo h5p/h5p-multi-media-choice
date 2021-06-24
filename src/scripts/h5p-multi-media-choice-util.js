@@ -22,12 +22,15 @@ export class Util {
         },
         l10n: {
           checkAnswerButtonText: 'Check',
-          checkAnswer: 'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
+          checkAnswer:
+            'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
           showSolutionButtonText: 'Show solution',
-          showSolution: 'Show the solution. The task will be marked with its correct solution.',
+          showSolution:
+            'Show the solution. The task will be marked with its correct solution.',
           noAnswer: 'Please answer before viewing the solution',
           retryText: 'Retry',
-          retry: 'Retry the task. Reset all responses and start the task over again.',
+          retry:
+            'Retry the task. Reset all responses and start the task over again.',
           result: 'You got :num out of :total points',
           confirmCheck: {
             header: 'Finish?',
@@ -66,8 +69,9 @@ export class Util {
       }
 
       for (var key in obj) {
-        if (obj.hasOwnProperty(key)) {
-          if (typeof obj[key] === 'object') out[key] = Util.deepExtend(out[key], obj[key]);
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          if (typeof obj[key] === 'object')
+            out[key] = Util.deepExtend(out[key], obj[key]);
           else out[key] = obj[key];
         }
       }

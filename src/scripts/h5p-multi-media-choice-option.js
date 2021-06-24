@@ -2,8 +2,8 @@ export class MultiMediaChoiceOption {
   constructor(option) {
     this.media = option.media;
     this.disableImageZooming = option.disableImageZooming;
-    this.isCorrect = options.correct;
-    this.tipsAndFeedback = options.tipsAndFeedback;
+    this.isCorrect = option.correct;
+    this.tipsAndFeedback = option.tipsAndFeedback; // TODO: Currently not used
 
     this.content = this.buildContent();
   }
@@ -31,7 +31,7 @@ export class MultiMediaChoiceOption {
   createContent() {
     switch (this.media.metadata.contentType) {
       case 'Image':
-        return this.buildImage(option);
+        return this.buildImage(this.option);
       default:
         return undefined;
     }
@@ -42,7 +42,7 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} Image tag.
    */
   buildImage() {
-    if (this.imageParamsAreInvalid(option.media.params)) {
+    if (this.imageParamsAreInvalid(this.option.media.params)) {
       return;
     }
 
@@ -50,7 +50,7 @@ export class MultiMediaChoiceOption {
       alt,
       title,
       file: { path },
-    } = option.media.params;
+    } = this.option.media.params;
 
     const image = document.createElement('img');
     image.setAttribute('src', H5P.getPath(path, this.contentId));
@@ -63,7 +63,9 @@ export class MultiMediaChoiceOption {
 
     image.classList.add('h5p-multi-media-choice-media');
     if (this.params.behaviour.sameAspectRatio) {
-      image.classList.add(`h5p-multi-media-choice-media-${this.params.behaviour.aspectRatio}`);
+      image.classList.add(
+        `h5p-multi-media-choice-media-${this.params.behaviour.aspectRatio}`
+      );
     }
 
     return image;
@@ -76,7 +78,9 @@ export class MultiMediaChoiceOption {
    * @private
    */
   imageParamsAreInvalid(imageParams) {
-    return ['alt', 'title', 'file'].filter((key) => key in imageParams).length > 0;
+    return (
+      ['alt', 'title', 'file'].filter(key => key in imageParams).length > 0
+    );
   }
 
   /**
@@ -85,7 +89,8 @@ export class MultiMediaChoiceOption {
   showSolution() {
     if (this.isCorrect) {
       this.content.classList.add('h5p-multi-media-choice-correct');
-    } else {
+    }
+    else {
       this.content.classList.add('h5p-multi-media-choice-wrong');
     }
   }
