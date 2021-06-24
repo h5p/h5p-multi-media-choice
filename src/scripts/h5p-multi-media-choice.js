@@ -214,13 +214,13 @@ export default class MultiMediaChoice extends H5P.Question {
     const score = this.getScore();
     const maxScore = this.getMaxScore();
     const textScore = H5P.Question.determineOverallFeedback(this.params.overallFeedback, score / maxScore);
-    this.setFeedback(textScore, score, maxScore, ariaMessage);
+    this.setFeedback(textScore, score, maxScore);
 
-    if (this.params.behaviour.enableSolutionsButton) {
+    if (this.params.behaviour.enableSolutionsButton && this.getScore() !== this.getMaxScore()) {
       this.showButton('show-solution');
     }
 
-    if (this.params.behaviour.enableRetry) {
+    if (this.params.behaviour.enableRetry && this.getScore() !== this.getMaxScore()) {
       this.showButton('try-again');
     }
 
