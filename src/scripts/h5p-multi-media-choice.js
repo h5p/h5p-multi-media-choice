@@ -77,36 +77,6 @@ export default class MultiMediaChoice extends H5P.Question {
     };
 
     /**
-     * @param {object} selectable Selectable object
-     * @returns {boolean} True if option is selected and correct
-     */
-    this.isCorrect = selectable => {
-      const selectedIndex = this.content.getIndex(selectable);
-      if (
-        this.content.getSelected().includes(selectable) &&
-        this.params.options[selectedIndex].correct
-      ) {
-        return true;
-      }
-      return false;
-    };
-
-    /**
-     * @param {object} selectable Selctable object
-     * @returns {boolean} True if option is selected and incorrect
-     */
-    this.isIncorrect = selectable => {
-      const selectedIndex = this.content.getIndex(selectable);
-      if (
-        this.content.getSelected().includes(selectable) &&
-        !this.params.options[selectedIndex].correct
-      ) {
-        return true;
-      }
-      return false;
-    };
-
-    /**
      * Let H5P.Question read the specified text.
      * @param {string} text Text to read.
      */
