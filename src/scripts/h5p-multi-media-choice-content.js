@@ -42,7 +42,8 @@ export default class MultiMediaChoiceContent {
           }
         )
     );
-    this.content = this.buildOptionList(this.options);
+
+    this.content.appendChild(this.buildOptionList(this.options));
   }
 
   /**
