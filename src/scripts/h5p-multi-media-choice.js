@@ -50,11 +50,6 @@ export default class MultiMediaChoice extends H5P.Question {
       );
     };
 
-    /**
-     * Get score.
-     * @return {number} latest score.
-     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
-     */
     this.getScore = () => {
       // One point if no correct options and no selected options
       if (!this.content.isAnyAnswerSelected()) {
@@ -62,38 +57,42 @@ export default class MultiMediaChoice extends H5P.Question {
       }
 
       // Radio buttons, only one answer
-      if (this.content.isSingleAnswer) {
-        return this.isCorrect(this.content.getSelected()[0]) ? 1 : 0;
+      if (this.content.isRadioButtons()) {
+        const selectedIndex = this.content.getSelectedIndexes()[0];
+        return this.content.getOptions()[selectedIndex].isCorrect() ? 1 : 0;
       }
+
       // Checkbox buttons, one point if correctly answered
       else if (this.params.behaviour.singlePoint) {
-        const selectedIndexes = this.content.getSelectedIndexes();
-        for (let i = 0; i < this.params.options.length; i++) {
-          if (
-            this.params.options[i].correct ==
-            (selectedIndexes.indexOf(i) == -1)
-          ) {
-            return 0;
+        let score = 1;
+        const options = this.content.getOptions();
+        options.forEach(option => {
+          if (option.isCorrect() && !option.isSelected()) {
+            score = 0;
           }
-        }
-        return 1;
+          else if (!option.isCorrect() && option.isSelected()) {
+            score = 0;
+          }
+        });
+        return score;
       }
+
       // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
       else {
         let score = 0;
-        this.content.options.forEach(option => {
-          if (option.isChecked()) {
-            if (option.isCorrect) {
-              score++;
+        const options = this.content.getOptions();
+        options.forEach(option => {
+          if (option.isSelected()) {
+            if (option.isCorrect()) {
+              score ++;
             }
             else {
-              score--;
+              score --;
             }
           }
         });
         return score < 0 ? 0 : score;
       }
-      //this.content.params.options.forEach(() => {}
     };
 
     /**
@@ -102,45 +101,15 @@ export default class MultiMediaChoice extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
      */
     this.getMaxScore = () => {
-      if (this.params.behaviour.singlePoint || this.content.isSingleAnswer) {
+      if (this.params.behaviour.singlePoint || this.content.isRadioButtons()) {
         return 1;
       }
-      else if (this.content.numberOfCorrectOptions === 0) {
+      else if (this.content.blankIsCorrect() === 0) {
         return 1;
       }
       else {
-        return this.content.numberOfCorrectOptions;
+        return this.content.getNumberOfCorrectOptions();
       }
-    };
-
-    /**
-     * @param {object} selectable Selectable object
-     * @returns {boolean} True if option is selected and correct
-     */
-    this.isCorrect = selectable => {
-      const selectedIndex = this.content.getIndex(selectable);
-      if (
-        this.content.getSelected().includes(selectable) &&
-        this.params.options[selectedIndex].correct
-      ) {
-        return true;
-      }
-      return false;
-    };
-
-    /**
-     * @param {object} selectable Selctable object
-     * @returns {boolean} True if option is selected and incorrect
-     */
-    this.isIncorrect = selectable => {
-      const selectedIndex = this.content.getIndex(selectable);
-      if (
-        this.content.getSelected().includes(selectable) &&
-        !this.params.options[selectedIndex].correct
-      ) {
-        return true;
-      }
-      return false;
     };
 
     /**
@@ -237,7 +206,7 @@ export default class MultiMediaChoice extends H5P.Question {
       this.params.overallFeedback,
       score / maxScore
     );
-    const selectedOptions = this.content.getSelected();
+    const selectedOptions = this.content.getOptions().filter(options => options.isSelected());
 
     this.setFeedback(textScore, score, maxScore, this.params.l10n.result);
 

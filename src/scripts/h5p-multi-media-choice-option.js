@@ -18,7 +18,7 @@ export class MultiMediaChoiceOption {
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
 
     this.isValid = true; // If the media content is valid or not
-    this.isCorrect = option.correct;
+    this.correct = option.correct;
     this.tipsAndFeedback = option.tipsAndFeedback; // TODO: Currently not used
 
     this.content = document.createElement('div');
@@ -109,10 +109,17 @@ export class MultiMediaChoiceOption {
   }
 
   /**
-   * @returns {boolean} If the options is marked as correct
+   * @returns {boolean} If the options is selected
    */
-  isChecked() {
+  isSelected() {
     return this.selectable.checked;
+  }
+
+  /**
+   * @returns {boolean} True if the option is correct
+   */
+  isCorrect() {
+    return this.correct;
   }
 
   /**
@@ -139,7 +146,7 @@ export class MultiMediaChoiceOption {
    * Shows if the answer is correct or wrong in the UI
    */
   showSolution() {
-    if (this.isCorrect) {
+    if (this.correct) {
       this.content.classList.add('h5p-multi-media-choice-correct');
     }
     else {

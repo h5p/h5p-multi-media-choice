@@ -75,20 +75,25 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Returns the selected objects
-   * @returns {Object[]} A list of selectable-objects that are selected
+   * @returns {Object[]} Array of options objects
    */
-  getSelected() {
-    return this.options.filter(option => option.isChecked());
+  getOptions() {
+    return this.options;
   }
 
   /**
-   * Returns the indexes of the selected objects
-   * @returns {Number[]} List of indexes of selected selctables
+   * Returns the selected objects
+   * @returns {Number[]} Array of indexes of selected selctables
    */
   getSelectedIndexes() {
-    const selectedOptions = this.getSelected();
-    return selectedOptions.map(option => this.options.indexOf(option));
+    return this.selected;
+  }
+
+  /**
+   * @returns {boolean} True if the options are displayed as radio buttons
+   */
+  isRadioButtons() {
+    return this.isSingleAnswer;
   }
 
   /**
@@ -96,7 +101,7 @@ export default class MultiMediaChoiceContent {
    * @returns {boolean} True if any answer is selected
    */
   isAnyAnswerSelected() {
-    return this.getSelected().length > 0;
+    return this.getSelectedIndexes().length > 0;
   }
 
   /**
@@ -104,7 +109,14 @@ export default class MultiMediaChoiceContent {
    * @returns {boolean} True if there are no correct answers
    */
   blankIsCorrect() {
-    return this.options.filter(option => option.isCorrect).length == 0;
+    return this.options.filter(option => option.isCorrect()).length == 0;
+  }
+
+  /**
+   * @returns {number} Number of correct options
+   */
+  getNumberOfCorrectOptions() {
+    return this.numberOfCorrectOptions;
   }
 
   /**
