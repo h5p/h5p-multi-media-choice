@@ -84,13 +84,12 @@ export default class MultiMediaChoiceContent {
   showSolutions() {
     this.disableSelectables();
 
-    const self = this;
-    this.params.options.forEach(function (option, index) {
+    this.params.options.forEach((option, index)  => {
       if (option.correct) {
-        self.options[index].classList.add('h5p-multi-media-choice-correct');
+        this.options[index].classList.add('h5p-multi-media-choice-correct');
       }
       else {
-        self.options[index].classList.add('h5p-multi-media-choice-wrong');
+        this.options[index].classList.add('h5p-multi-media-choice-wrong');
       }
     });
   }
@@ -99,13 +98,12 @@ export default class MultiMediaChoiceContent {
    * Hides the solution(s)
    */
   hideSolutions() {
-    const self = this;
-    this.params.options.forEach(function (option, index) {
+    this.params.options.forEach((option, index) => {
       if (option.correct) {
-        self.options[index].classList.remove('h5p-multi-media-choice-correct');
+        this.options[index].classList.remove('h5p-multi-media-choice-correct');
       }
       else {
-        self.options[index].classList.remove('h5p-multi-media-choice-wrong');
+        this.options[index].classList.remove('h5p-multi-media-choice-wrong');
       }
     });
   }
