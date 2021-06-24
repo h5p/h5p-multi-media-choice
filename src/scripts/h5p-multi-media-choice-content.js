@@ -108,7 +108,7 @@ export default class MultiMediaChoiceContent {
     // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
     let score = 0;
     self.options.forEach(option => {
-      if (option.isChecked()) {
+      if (option.isSelected()) {
         option.isCorrect() ? score++ : score--;
       }
     });
