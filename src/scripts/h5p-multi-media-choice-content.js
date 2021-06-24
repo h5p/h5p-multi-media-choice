@@ -74,6 +74,46 @@ export default class MultiMediaChoiceContent {
     return this.content;
   }
 
+  getScore() {
+    // One point if no correct options and no selected options
+    const self = this;
+    if (!self.isAnyAnswerSelected()) {
+      return self.isBlankCorrect() ? 1 : 0;
+    }
+
+    // Radio buttons, only one answer
+    if (self.isSingleAnswer) {
+      const selectedIndex = self.getSelectedIndexes()[0];
+      return self.getOptions()[selectedIndex].isCorrect() ? 1 : 0;
+    }
+
+    // Checkbox buttons, one point if correctly answered
+    else if (self.params.behaviour.singlePoint) {
+      let score = 1;
+      self.options.forEach(option => {
+        if (option.isCorrect() && !option.isSelected()) {
+          score = 0;
+        }
+        else if (!option.isCorrect() && option.isSelected()) {
+          score = 0;
+        }
+      });
+      return score;
+    }
+
+    // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
+    let score = 0;
+    self.options.forEach(option => {
+      if (option.isChecked()) {
+        option.isCorrect() ? score++ : score--;
+      }
+    });
+
+    score = Math.max(0, score); // Negative score not allowed
+
+    return score;
+  }
+
   /**
    * @returns {Object[]} Array of options objects
    */
@@ -108,7 +148,7 @@ export default class MultiMediaChoiceContent {
    * Checks if there are no correct answers
    * @returns {boolean} True if there are no correct answers
    */
-  blankIsCorrect() {
+  isBlankCorrect() {
     return this.options.filter(option => option.isCorrect()).length == 0;
   }
 
@@ -124,14 +164,14 @@ export default class MultiMediaChoiceContent {
    */
   showSolutions() {
     this.disableSelectables();
-    this.options.forEach((option) => option.showSolution());
+    this.options.forEach(option => option.showSolution());
   }
 
   /**
    * Show the correct solution(s)
    */
   hideSolutions() {
-    this.options.forEach((option) => option.hideSolution());
+    this.options.forEach(option => option.hideSolution());
   }
 
   /**

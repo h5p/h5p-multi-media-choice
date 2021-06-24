@@ -46,53 +46,12 @@ export default class MultiMediaChoice extends H5P.Question {
      */
     this.getAnswersGiven = () => {
       return (
-        this.content.isAnyAnswerSelected() || this.content.blankIsCorrect()
+        this.content.isAnyAnswerSelected() || this.content.isBlankCorrect()
       );
     };
 
     this.getScore = () => {
-      // One point if no correct options and no selected options
-      if (!this.content.isAnyAnswerSelected()) {
-        return this.content.blankIsCorrect() ? 1 : 0;
-      }
-
-      // Radio buttons, only one answer
-      if (this.content.isRadioButtons()) {
-        const selectedIndex = this.content.getSelectedIndexes()[0];
-        return this.content.getOptions()[selectedIndex].isCorrect() ? 1 : 0;
-      }
-
-      // Checkbox buttons, one point if correctly answered
-      else if (this.params.behaviour.singlePoint) {
-        let score = 1;
-        const options = this.content.getOptions();
-        options.forEach(option => {
-          if (option.isCorrect() && !option.isSelected()) {
-            score = 0;
-          }
-          else if (!option.isCorrect() && option.isSelected()) {
-            score = 0;
-          }
-        });
-        return score;
-      }
-
-      // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
-      else {
-        let score = 0;
-        const options = this.content.getOptions();
-        options.forEach(option => {
-          if (option.isSelected()) {
-            if (option.isCorrect()) {
-              score ++;
-            }
-            else {
-              score --;
-            }
-          }
-        });
-        return score < 0 ? 0 : score;
-      }
+      return this.content.getScore();
     };
 
     /**
@@ -121,6 +80,36 @@ export default class MultiMediaChoice extends H5P.Question {
     };
 
     /**
+     * Check answer.
+     */
+    this.checkAnswer = () => {
+      this.hideButton('check-answer');
+      this.content.disableSelectables();
+
+      const score = this.getScore();
+      const maxScore = this.getMaxScore();
+      const textScore = H5P.Question.determineOverallFeedback(
+        this.params.overallFeedback,
+        score / maxScore
+      );
+      const selectedOptions = this.content.getOptions().filter(options => options.isSelected());
+
+      this.setFeedback(textScore, score, maxScore, this.params.l10n.result);
+
+      if (this.params.behaviour.enableSolutionsButton && score !== maxScore) {
+        this.showButton('show-solution');
+      }
+
+      if (this.params.behaviour.enableRetry && score !== maxScore) {
+        this.showButton('try-again');
+      }
+
+      selectedOptions.forEach(option => {
+        option.showSolution();
+      });
+    };
+
+    /**
      * Show solutions.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
      */
@@ -141,6 +130,20 @@ export default class MultiMediaChoice extends H5P.Question {
       }
 
       this.trigger('resize');
+    };
+
+    /**
+     * Resets options, buttons and solutions
+     *
+     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
+     */
+    this.resetTask = () => {
+      this.content.resetSelections();
+      this.showButton('check-answer');
+      this.hideButton('try-again');
+      this.hideButton('show-solution');
+      this.content.hideSolutions();
+      this.removeFeedback();
     };
   }
 
@@ -191,49 +194,5 @@ export default class MultiMediaChoice extends H5P.Question {
         },
       }
     );
-  }
-
-  /**
-   * Check answer.
-   */
-  checkAnswer() {
-    this.hideButton('check-answer');
-    this.content.disableSelectables();
-
-    const score = this.getScore();
-    const maxScore = this.getMaxScore();
-    const textScore = H5P.Question.determineOverallFeedback(
-      this.params.overallFeedback,
-      score / maxScore
-    );
-    const selectedOptions = this.content.getOptions().filter(options => options.isSelected());
-
-    this.setFeedback(textScore, score, maxScore, this.params.l10n.result);
-
-    if (this.params.behaviour.enableSolutionsButton && score !== maxScore) {
-      this.showButton('show-solution');
-    }
-
-    if (this.params.behaviour.enableRetry && score !== maxScore) {
-      this.showButton('try-again');
-    }
-
-    selectedOptions.forEach(option => {
-      option.showSolution();
-    });
-  }
-
-  /**
-   * Resets options, buttons and solutions
-   *
-   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
-   */
-  resetTask() {
-    this.content.resetSelections();
-    this.showButton('check-answer');
-    this.hideButton('try-again');
-    this.hideButton('show-solution');
-    this.content.hideSolutions();
-    this.removeFeedback();
   }
 }
