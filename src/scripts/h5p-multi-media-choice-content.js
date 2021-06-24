@@ -74,6 +74,34 @@ export default class MultiMediaChoiceContent {
     return this.content;
   }
 
+  getScore() {
+    // One point if no correct options and no selected options
+    if (!this.isAnyAnswerSelected()) {
+      return this.isBlankCorrect() ? 1 : 0;
+    }
+
+    // Radio buttons, only one answer
+    if (this.isSingleAnswer) {
+      return this.getSelected()[0].isCorrect ? 1 : 0;
+    }
+
+    let score = 0;
+    this.options.forEach(option => {
+      if (option.isChecked()) {
+        option.isCorrect ? score++ : score--;
+      }
+    }, 0);
+
+    score = Math.max(0, score); // Negative score not allowed
+    if (this.params.behaviour.singlePoint) {
+      // Checkbox buttons, one point if correctly answered
+      score = Math.min(1, score);
+    }
+
+    // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
+    return score;
+  }
+
   /**
    * Returns the selected objects
    * @returns {Object[]} A list of selectable-objects that are selected
@@ -103,7 +131,7 @@ export default class MultiMediaChoiceContent {
    * Checks if there are no correct answers
    * @returns {boolean} True if there are no correct answers
    */
-  blankIsCorrect() {
+  isBlankCorrect() {
     return this.options.filter(option => option.isCorrect).length == 0;
   }
 
@@ -112,14 +140,14 @@ export default class MultiMediaChoiceContent {
    */
   showSolutions() {
     this.disableSelectables();
-    this.options.forEach((option) => option.showSolution());
+    this.options.forEach(option => option.showSolution());
   }
 
   /**
    * Show the correct solution(s)
    */
   hideSolutions() {
-    this.options.forEach((option) => option.hideSolution());
+    this.options.forEach(option => option.hideSolution());
   }
 
   /**
