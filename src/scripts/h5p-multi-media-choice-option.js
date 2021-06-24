@@ -82,7 +82,7 @@ export class MultiMediaChoiceOption {
     image.setAttribute('alt', alt);
     image.addEventListener('load', this.callbacks.triggerResize);
     // Do not show title if title is not specified
-    if (title != null) {
+    if (title !== null) {
       image.setAttribute('title', title);
     }
 
