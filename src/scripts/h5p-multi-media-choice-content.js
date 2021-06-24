@@ -23,6 +23,10 @@ export default class MultiMediaChoiceContent {
         ? this.numberOfCorrectOptions === 1
         : this.params.behaviour.questionType === 'single';
 
+    this.aspectRatio = this.params.behaviour.sameAspectRatio
+      ? this.params.behaviour.aspectRatio
+      : '';
+
     this.selected = [];
 
     this.content = document.createElement('div');
@@ -32,9 +36,10 @@ export default class MultiMediaChoiceContent {
     this.options = params.options.map(
       (option, index) =>
         new MultiMediaChoiceOption(
-          params,
-          contentId,
           option,
+          contentId,
+          this.aspectRatio,
+          this.params.behaviour.maxAlternativesPerRow,
           this.isSingleAnswer,
           {
             onClick: () => this.toggleSelected(index),
@@ -77,7 +82,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Get score
-   * @return {number} score based on the behavior settings
+   * @return {number} score based on the behaviour settings
    */
   getScore() {
     // One point if no correct options and no selected options
