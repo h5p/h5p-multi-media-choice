@@ -137,7 +137,7 @@ export default class MultiMediaChoiceContent {
    */
   buildOption(option) {
     const optionContainer = document.createElement('div');
-    optionContainer.classList.add('h5p-multi-media-choice-container');
+    optionContainer.classList.add('h5p-multi-media-choice-option-container');
 
     const selectable = document.createElement('input');
     if (this.isSingleAnswer()) {
@@ -159,6 +159,9 @@ export default class MultiMediaChoiceContent {
     const media = this.buildMedia(option);
     if (media) {
       optionContainer.appendChild(media);
+
+      //sets the width to control the max number of options per row. 2em is from the margins
+      optionContainer.style.width = 'calc('+ 100 / this.params.behaviour.maxAlternativesPerRow +'% - 2em)';
       return optionContainer;
     }
   }
