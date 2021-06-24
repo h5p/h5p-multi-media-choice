@@ -97,9 +97,9 @@ export class MultiMediaChoiceOption {
   }
 
   /**
-   * Test if important keys are present in media params for image.
-   * @param {object} imageParams Media params for image from the editor.
-   * @return {boolean} True if all three keys are present, false otherwise.
+   * Test if important keys missing in media params for image
+   * @param {object} imageParams Media params for image from the editor
+   * @return {boolean} False if any of the three keys are present, true otherwise
    * @private
    */
   imageParamsAreInvalid(imageParams) {
