@@ -229,38 +229,28 @@ export default class MultiMediaChoice extends H5P.Question {
 
     const score = this.getScore();
     const maxScore = this.getMaxScore();
-    const textScore = H5P.Question.determineOverallFeedback(
-      this.params.overallFeedback,
-      score / maxScore
-    );
-    const ariaMessage = this.params.l10n.result;
-    this.setFeedback(textScore, score, maxScore, ariaMessage);
+    const textScore = H5P.Question.determineOverallFeedback(this.params.overallFeedback, score / maxScore);
+    const selectedIndexes = this.content.selected;
+    const selectables = this.content.selectables;
 
-    if (
-      this.params.behaviour.enableSolutionsButton &&
-      this.getScore() !== this.getMaxScore()
-    ) {
+    this.setFeedback(textScore, score, maxScore);
+
+    if (this.params.behaviour.enableSolutionsButton && score !== maxScore) {
       this.showButton('show-solution');
     }
 
-    if (
-      this.params.behaviour.enableRetry &&
-      this.getScore() !== this.getMaxScore()
-    ) {
+    if (this.params.behaviour.enableRetry && score !== maxScore) {
       this.showButton('try-again');
     }
 
-    const selected = this.content.getSelected();
-    for (let i = 0; i < this.content.selected.length; i++) {
-      if (this.isCorrect(selected[i])) {
-        selected[i].parentElement.classList.add(
-          'h5p-multi-media-choice-correct'
-        );
+    selectedIndexes.forEach(selectedIndex => {
+      if (this.params.options[selectedIndex].correct) {
+        selectables[selectedIndex].parentElement.classList.add('h5p-multi-media-choice-correct');
       }
       else {
-        selected[i].parentElement.classList.add('h5p-multi-media-choice-wrong');
+        selectables[selectedIndex].parentElement.classList.add('h5p-multi-media-choice-wrong');
       }
-    }
+    });
   }
 
   /**
