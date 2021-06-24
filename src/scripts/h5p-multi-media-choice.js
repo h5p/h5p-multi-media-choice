@@ -79,8 +79,7 @@ export default class MultiMediaChoice extends H5P.Question {
         for (let i = 0; i < this.content.selectables.length; i++) {
           if (this.isCorrect(this.content.selectables[i])) {
             score++;
-          }
-          else if (this.isIncorrect(this.content.selectables[i])) {
+          } else if (this.isIncorrect(this.content.selectables[i])) {
             score--;
           }
         }
@@ -97,11 +96,9 @@ export default class MultiMediaChoice extends H5P.Question {
     this.getMaxScore = () => {
       if (this.params.behaviour.singlePoint || this.content.isSingleAnswer()) {
         return 1;
-      }
-      else if (this.content.getNumberOfCorrectOptions() === 0) {
+      } else if (this.content.getNumberOfCorrectOptions() === 0) {
         return 1;
-      }
-      else {
+      } else {
         return this.content.getNumberOfCorrectOptions();
       }
     };
@@ -150,8 +147,7 @@ export default class MultiMediaChoice extends H5P.Question {
         // Require answer before solution can be viewed
         this.updateFeedbackContent(this.params.l10n.noAnswer);
         this.handleRead(this.params.l10n.noAnswer);
-      }
-      else {
+      } else {
         this.content.showSolutions();
       }
 
@@ -218,7 +214,6 @@ export default class MultiMediaChoice extends H5P.Question {
     const score = this.getScore();
     const maxScore = this.getMaxScore();
     const textScore = H5P.Question.determineOverallFeedback(this.params.overallFeedback, score / maxScore);
-    const ariaMessage = this.params.l10n.result.replace('@score', score).replace('@total', maxScore);
     this.setFeedback(textScore, score, maxScore, ariaMessage);
 
     if (this.params.behaviour.enableSolutionsButton) {
@@ -233,12 +228,10 @@ export default class MultiMediaChoice extends H5P.Question {
     for (let i = 0; i < this.content.selected.length; i++) {
       if (this.isCorrect(selected[i])) {
         selected[i].parentElement.classList.add('h5p-multi-media-choice-correct');
-      }
-      else {
+      } else {
         selected[i].parentElement.classList.add('h5p-multi-media-choice-wrong');
       }
     }
-
   }
 
   /**

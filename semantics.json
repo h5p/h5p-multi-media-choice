@@ -378,9 +378,9 @@
         "name": "result",
         "type": "text",
         "label": "Your result",
-        "description": "@score and @total are variables and will be replaced by their respective values.",
+        "description": ":num and :total are variables and will be replaced by their respective values.",
         "importance": "low",
-        "default": "You got @score out of @total points"
+        "default": "You got :num out of :total points"
       },
       {
         "label": "Check confirmation dialog",

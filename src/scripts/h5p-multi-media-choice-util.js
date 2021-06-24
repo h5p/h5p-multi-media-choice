@@ -28,7 +28,7 @@ export class Util {
           noAnswer: 'Please answer before viewing the solution',
           retryText: 'Retry',
           retry: 'Retry the task. Reset all responses and start the task over again.',
-          result: 'You got @score out of @total points',
+          result: 'You got :num out of :total points',
           confirmCheck: {
             header: 'Finish?',
             body: 'Are you sure you want to finish?',
