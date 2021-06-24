@@ -2,6 +2,7 @@
     "recommendations": [
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
+        "rvest.vs-code-prettier-eslint",
         "editorconfig.editorconfig",
         "stevencl.adddoccomments",
         "naumovs.color-highlight",
