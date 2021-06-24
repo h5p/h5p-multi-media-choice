@@ -64,7 +64,7 @@ export default class MultiMediaChoice extends H5P.Question {
       if (this.params.behaviour.singlePoint || this.content.isRadioButtons()) {
         return 1;
       }
-      else if (this.content.blankIsCorrect() === 0) {
+      else if (this.content.isBlankCorrect() === 0) {
         return 1;
       }
       else {
