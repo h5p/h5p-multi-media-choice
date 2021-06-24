@@ -233,7 +233,7 @@ export default class MultiMediaChoice extends H5P.Question {
     const selectedIndexes = this.content.selected;
     const selectables = this.content.selectables;
 
-    this.setFeedback(textScore, score, maxScore);
+    this.setFeedback(textScore, score, maxScore, this.params.l10n.result);
 
     if (this.params.behaviour.enableSolutionsButton && score !== maxScore) {
       this.showButton('show-solution');
