@@ -165,9 +165,11 @@ export class MultiMediaChoiceOption {
   toggle() {
     if (this.isSelected()) {
       this.content.setAttribute('aria-checked', 'false');
+      this.content.classList.remove('h5p-multi-media-choice-selected');
     }
     else {
       this.content.setAttribute('aria-checked', 'true');
+      this.content.classList.add('h5p-multi-media-choice-selected');
     }
   }
 
@@ -176,6 +178,7 @@ export class MultiMediaChoiceOption {
    */
   uncheck() {
     this.content.setAttribute('aria-checked', 'false');
+    this.content.classList.remove('h5p-multi-media-choice-selected');
   }
 
   /**
@@ -183,6 +186,7 @@ export class MultiMediaChoiceOption {
    */
   enable() {
     this.content.setAttribute('aria-disabled', 'false');
+    this.content.classList.remove('h5p-multi-media-choice-selected');
   }
 
   /**

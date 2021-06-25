@@ -1,18 +1,13 @@
 @use './colors' as *;
+$media-width: 15em;
 
 .h5p-multi-media-choice {
-  background: #663399;
-
-  .h5p-multi-media-choice-content {
-    background: #ff0000;
-  }
 
   .h5p-multi-media-choice-options {
     flex-wrap: wrap;
     justify-content: space-around;
     width: calc(100% - 2em);
     padding-inline-start: 0;
-    background: #808080;
     padding: 1em;
   }
 
@@ -29,7 +24,7 @@
     background-color: black;
 
     box-sizing: border-box;
-    min-width: #{$media-width};
+    min-width: $media-width;
   }
 
   .h5p-multi-media-choice-media {
@@ -46,5 +41,9 @@
 
   .h5p-multi-media-choice-wrong {
     border-color: $color-wrong;
+  }
+
+  .h5p-multi-media-choice-selected {
+    border-color: $color-focus
   }
 }
