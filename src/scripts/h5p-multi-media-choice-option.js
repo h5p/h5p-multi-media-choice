@@ -40,8 +40,9 @@ export class MultiMediaChoiceOption {
     else {
       this.content.setAttribute('role', 'checkbox');
     }
-    this.content.setAttribute('aria-checked', false);
-    this.content.setAttribute('aria-disabled', false);
+    this.content.setAttribute('aria-checked', 'false');
+    this.content.setAttribute('aria-disabled', 'false');
+    this.content.setAttribute('tabindex', '0');
     this.content.addEventListener('click', this.callbacks.onClick);
 
     this.container = document.createElement('div');
@@ -57,8 +58,14 @@ export class MultiMediaChoiceOption {
 
     // Set the width to control the max number of options per row.
     setTimeout(() => {
-      const style = window.getComputedStyle(this.content) || this.content.currentStyle;
-      this.content.style.width = 'calc(' + 100 / this.maxAlternativesPerRow + '% - ' + (style.marginLeft + style.marginRight) + ')';
+      const style =
+        window.getComputedStyle(this.content) || this.content.currentStyle;
+      this.content.style.width =
+        'calc(' +
+        100 / this.maxAlternativesPerRow +
+        '% - ' +
+        (style.marginLeft + style.marginRight) +
+        ')';
     }, 0);
   }
 
@@ -165,10 +172,10 @@ export class MultiMediaChoiceOption {
    */
   toggle() {
     if (this.isSelected()) {
-      this.content.setAttribute('aria-checked', false);
+      this.content.setAttribute('aria-checked', 'false');
     }
     else {
-      this.content.setAttribute('aria-checked', true);
+      this.content.setAttribute('aria-checked', 'true');
     }
   }
 
@@ -176,21 +183,21 @@ export class MultiMediaChoiceOption {
    * Unchecks the selectable of the option
    */
   uncheck() {
-    this.content.setAttribute('aria-checked', false);
+    this.content.setAttribute('aria-checked', 'false');
   }
 
   /**
    * Enables the selectable of the option
    */
   enable() {
-    this.content.setAttribute('aria-disabled', false);
+    this.content.setAttribute('aria-disabled', 'false');
   }
 
   /**
    * Disable the selectable of the option
    */
   disable() {
-    this.content.setAttribute('aria-disabled', true);
+    this.content.setAttribute('aria-disabled', 'true');
   }
 
   /**
