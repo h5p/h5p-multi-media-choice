@@ -191,10 +191,7 @@ export class MultiMediaChoiceOption {
   }
 
   scaleMedia() {
-    if (this.aspectRatio === '') {
-      // TODO: Implement what happens here
-    }
-    else {
+    if (this.aspectRatio !== '') {
       const container = this.content;
       const width = container.clientWidth;
       const borderWidth = 3;
