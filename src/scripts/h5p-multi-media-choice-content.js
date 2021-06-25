@@ -27,7 +27,7 @@ export default class MultiMediaChoiceContent {
       ? this.params.behaviour.aspectRatio
       : '';
 
-    this.selected = [];
+    this.lastSelected = null;
 
     this.content = document.createElement('div');
     this.content.classList.add('h5p-multi-media-choice-content');
@@ -93,8 +93,7 @@ export default class MultiMediaChoiceContent {
 
     // Radio buttons, only one answer
     if (self.isSingleAnswer) {
-      const selectedIndex = self.getSelectedIndexes()[0];
-      return self.getOptions()[selectedIndex].isCorrect() ? 1 : 0;
+      return self.lastSelected.isCorrect() ? 1 : 0;
     }
 
     // Checkbox buttons, one point if correctly answered
@@ -119,9 +118,7 @@ export default class MultiMediaChoiceContent {
       }
     });
 
-    score = Math.max(0, score); // Negative score not allowed
-
-    return score;
+    return Math.max(0, score); // Negative score not allowed;
   }
 
   /**
@@ -135,8 +132,8 @@ export default class MultiMediaChoiceContent {
    * Returns the selected objects
    * @returns {Number[]} Array of indexes of selected selctables
    */
-  getSelectedIndexes() {
-    return this.selected;
+  getSelectedOptions() {
+    return this.options.filter(option => option.isSelected());
   }
 
   /**
@@ -151,7 +148,7 @@ export default class MultiMediaChoiceContent {
    * @returns {boolean} True if any answer is selected
    */
   isAnyAnswerSelected() {
-    return this.getSelectedIndexes().length > 0;
+    return this.getSelectedOptions().length > 0;
   }
 
   /**
@@ -187,24 +184,26 @@ export default class MultiMediaChoiceContent {
   /**
    * Toggles the given option. If the options are radio buttons
    * the previously checked one is unchecked
-   * @param {Number} optionIndex Which option is being selected
+   * @param {number} optionIndex Which option is being selected
    */
   toggleSelected(optionIndex) {
-    const placeInSelected = this.selected.indexOf(optionIndex);
-
-    //If already checked remove from selected list. Radio buttons don't get unchecked
-    if (placeInSelected !== -1 && !this.isSingleAnswer) {
-      this.selected.splice(placeInSelected, 1);
+    const option = this.options[optionIndex];
+    if (option.isDisabled()) {
+      return;
     }
-    //if being checked add to selected list. If radio make sure others get unselected.
-    else if (placeInSelected === -1) {
-      if (this.isSingleAnswer) {
-        this.selected = [optionIndex];
+    if (this.isSingleAnswer) {
+      if (option.isSelected()) {
+        return;
+      }
+      if (!this.lastSelected) {
+        this.lastSelected = option;
       }
       else {
-        this.selected.push(optionIndex);
+        this.lastSelected.toggle();
+        this.lastSelected = option;
       }
     }
+    option.toggle();
   }
 
   /**

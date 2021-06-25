@@ -33,28 +33,30 @@ export class MultiMediaChoiceOption {
     this.isValid = true; // If the media content is valid or not
 
     this.content = document.createElement('li');
-    this.content.classList.add('h5p-multi-media-choice-option-container');
 
-    this.selectable = document.createElement('input');
     if (singleAnswer) {
-      this.selectable.setAttribute('type', 'radio');
-      this.selectable.setAttribute('name', 'options');
+      this.content.setAttribute('role', 'radio');
     }
     else {
-      this.selectable.setAttribute('type', 'checkbox');
+      this.content.setAttribute('role', 'checkbox');
     }
-    this.selectable.addEventListener('click', this.callbacks.onClick);
-    this.content.appendChild(this.selectable);
+    this.content.setAttribute('aria-checked', false);
+    this.content.setAttribute('aria-disabled', false);
+    this.content.addEventListener('click', this.callbacks.onClick);
+
+    this.container = document.createElement('div');
+    this.container.classList.add('h5p-multi-media-choice-option-container');
+    this.content.appendChild(this.container);
 
     const mediaContent = this.createMediaContent();
     if (!mediaContent) {
       this.isValid = false;
       return;
     }
-    this.content.appendChild(mediaContent);
+    this.container.appendChild(mediaContent);
 
     //sets the width to control the max number of options per row. 2em is from the margins
-    this.content.style.width =
+    this.container.style.width =
       'calc(' + 100 / this.maxAlternativesPerRow + '% - 2em)';
   }
 
@@ -121,7 +123,7 @@ export class MultiMediaChoiceOption {
    * @returns {boolean} If the options is selected
    */
   isSelected() {
-    return this.selectable.checked;
+    return this.content.getAttribute('aria-checked') === 'true';
   }
 
   /**
@@ -129,6 +131,13 @@ export class MultiMediaChoiceOption {
    */
   isCorrect() {
     return this.correct;
+  }
+
+  /**
+   * @returns {boolean} True if the option is disabled
+   */
+  isDisabled() {
+    return this.content.getAttribute('aria-disabled') === 'true';
   }
 
   /**
@@ -142,22 +151,34 @@ export class MultiMediaChoiceOption {
   /**
    * Unchecks the selectable of the option
    */
+  toggle() {
+    if (this.isSelected()) {
+      this.content.setAttribute('aria-checked', false);
+    }
+    else {
+      this.content.setAttribute('aria-checked', true);
+    }
+  }
+
+  /**
+   * Unchecks the selectable of the option
+   */
   uncheck() {
-    this.selectable.checked = false;
+    this.content.setAttribute('aria-checked', false);
   }
 
   /**
    * Enables the selectable of the option
    */
   enable() {
-    this.selectable.disabled = false;
+    this.content.setAttribute('aria-disabled', false);
   }
 
   /**
    * Disable the selectable of the option
    */
   disable() {
-    this.selectable.disabled = true;
+    this.content.setAttribute('aria-disabled', true);
   }
 
   /**
@@ -165,10 +186,10 @@ export class MultiMediaChoiceOption {
    */
   showSolution() {
     if (this.correct) {
-      this.content.classList.add('h5p-multi-media-choice-correct');
+      this.container.classList.add('h5p-multi-media-choice-correct');
     }
     else {
-      this.content.classList.add('h5p-multi-media-choice-wrong');
+      this.container.classList.add('h5p-multi-media-choice-wrong');
     }
   }
 
@@ -176,7 +197,7 @@ export class MultiMediaChoiceOption {
    * Hides any information about solution in the UI
    */
   hideSolution() {
-    this.content.classList.remove('h5p-multi-media-choice-correct');
-    this.content.classList.remove('h5p-multi-media-choice-wrong');
+    this.container.classList.remove('h5p-multi-media-choice-correct');
+    this.container.classList.remove('h5p-multi-media-choice-wrong');
   }
 }
