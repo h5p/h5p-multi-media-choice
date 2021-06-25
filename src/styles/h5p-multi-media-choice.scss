@@ -35,8 +35,7 @@
   .h5p-multi-media-choice-media {
 
     display: inline-block;
-    //Remove $checkbox-width when the checkbox are removed
-    width: calc(100% - #{$checkbox-width});
+    width: calc(100%);
     height: 100%;
     object-fit: contain;
   }
@@ -47,11 +46,5 @@
 
   .h5p-multi-media-choice-wrong {
     border-color: $color-wrong;
-  }
-
-  /* Sets the margins for checkboxes and radio buttons equal,
-  which is necessary to get the right the container size */
-  input[type="radio" i], input[type="checkbox" i] {
-    margin: 3px;
   }
 }
