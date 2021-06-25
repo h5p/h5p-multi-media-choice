@@ -136,7 +136,9 @@ export default class MultiMediaChoiceContent {
    * @returns {Number[]} Array of indexes of selected options
    */
   getSelectedIndexes() {
-    return this.getSelectedOptions().map((option) => this.options.indexOf(option));
+    return this.getSelectedOptions().map(option =>
+      this.options.indexOf(option)
+    );
   }
 
   /**
@@ -223,7 +225,7 @@ export default class MultiMediaChoiceContent {
    * Resets all selected options
    */
   resetSelections() {
-    this.selected = [];
+    this.lastSelected = null;
     this.options.forEach(option => option.uncheck());
     this.enableSelectables();
   }
