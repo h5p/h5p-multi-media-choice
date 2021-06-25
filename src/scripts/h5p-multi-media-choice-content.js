@@ -13,6 +13,8 @@ export default class MultiMediaChoiceContent {
     this.contentId = contentId;
     this.callbacks = callbacks;
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
+    this.callbacks.triggerInteracted =
+      this.callbacks.triggerInteracted || (() => {});
 
     this.numberOfCorrectOptions = params.options.filter(
       option => option.correct
@@ -81,6 +83,14 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
+   * Return a list of the displayed options
+   * @returns {MultiMediaChoiceOption[]} An array of HTML options
+   */
+  getOptions() {
+    return this.options;
+  }
+
+  /**
    * Get score
    * @return {number} score based on the behaviour settings
    */
@@ -122,13 +132,6 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * @returns {Object[]} Array of options objects
-   */
-  getOptions() {
-    return this.options;
-  }
-
-  /**
    * Returns the selected objects
    * @returns {Number[]} Array of indexes of selected selctables
    */
@@ -156,7 +159,7 @@ export default class MultiMediaChoiceContent {
    * @returns {boolean} True if there are no correct answers
    */
   isBlankCorrect() {
-    return this.options.filter(option => option.isCorrect()).length == 0;
+    return this.options.filter(option => option.isCorrect()).length === 0;
   }
 
   /**
@@ -204,6 +207,8 @@ export default class MultiMediaChoiceContent {
       }
     }
     option.toggle();
+
+    this.callbacks.triggerInteracted();
   }
 
   /**

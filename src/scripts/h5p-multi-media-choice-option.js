@@ -55,7 +55,7 @@ export class MultiMediaChoiceOption {
     }
     this.container.appendChild(mediaContent);
 
-    //sets the width to control the max number of options per row. 2em is from the margins
+    // Sets the width to control the max number of options per row. 2em is from the margins
     this.container.style.width =
       'calc(' + 100 / this.maxAlternativesPerRow + '% - 2em)';
   }
@@ -72,6 +72,19 @@ export class MultiMediaChoiceOption {
         return this.buildImage(this.option);
       default:
         return undefined;
+    }
+  }
+
+  /**
+   * Returns the appropriate description depending on the content type
+   * @returns {string} the description of the option
+   */
+  getDescription() {
+    switch (this.media.metadata.contentType) {
+      case 'Image':
+        return this.media.params.alt; // Alternative text
+      default:
+        return '';
     }
   }
 
@@ -95,14 +108,11 @@ export class MultiMediaChoiceOption {
     image.setAttribute('alt', alt);
     image.addEventListener('load', this.callbacks.triggerResize);
     // Do not show title if title is not specified
-    if (title != null) {
+    if (title !== null) {
       image.setAttribute('title', title);
     }
 
     image.classList.add('h5p-multi-media-choice-media');
-    if (this.aspectRatio) {
-      image.classList.add(`h5p-multi-media-choice-media-${this.aspectRatio}`);
-    }
 
     return image;
   }
@@ -199,5 +209,18 @@ export class MultiMediaChoiceOption {
   hideSolution() {
     this.container.classList.remove('h5p-multi-media-choice-correct');
     this.container.classList.remove('h5p-multi-media-choice-wrong');
+  }
+
+  scaleMedia() {
+    if (this.aspectRatio !== '') {
+      const container = this.content;
+      const width = container.clientWidth;
+      const borderWidth = 3;
+      const checkboxWidth = 19;
+      let values = this.aspectRatio.split('to');
+      let height = ((width - checkboxWidth) / values[0]) * values[1];
+      //Calculate width based on height and 2*border pixel values
+      container.style.height = height + borderWidth * 2 + 'px';
+    }
   }
 }
