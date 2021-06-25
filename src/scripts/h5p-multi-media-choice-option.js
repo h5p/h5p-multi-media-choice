@@ -33,6 +33,7 @@ export class MultiMediaChoiceOption {
     this.isValid = true; // If the media content is valid or not
 
     this.content = document.createElement('li');
+    this.content.classList.add('h5p-multi-media-choice-option-container');
 
     if (singleAnswer) {
       this.content.setAttribute('role', 'radio');
@@ -44,16 +45,12 @@ export class MultiMediaChoiceOption {
     this.content.setAttribute('aria-disabled', false);
     this.content.addEventListener('click', this.callbacks.onClick);
 
-    this.container = document.createElement('div');
-    this.container.classList.add('h5p-multi-media-choice-option-container');
-    this.content.appendChild(this.container);
-
     const mediaContent = this.createMediaContent();
     if (!mediaContent) {
       this.isValid = false;
       return;
     }
-    this.container.appendChild(mediaContent);
+    this.content.appendChild(mediaContent);
 
     // Set the width to control the max number of options per row.
     setTimeout(() => {
@@ -198,10 +195,10 @@ export class MultiMediaChoiceOption {
    */
   showSolution() {
     if (this.correct) {
-      this.container.classList.add('h5p-multi-media-choice-correct');
+      this.content.classList.add('h5p-multi-media-choice-correct');
     }
     else {
-      this.container.classList.add('h5p-multi-media-choice-wrong');
+      this.content.classList.add('h5p-multi-media-choice-wrong');
     }
   }
 
@@ -209,8 +206,8 @@ export class MultiMediaChoiceOption {
    * Hides any information about solution in the UI
    */
   hideSolution() {
-    this.container.classList.remove('h5p-multi-media-choice-correct');
-    this.container.classList.remove('h5p-multi-media-choice-wrong');
+    this.content.classList.remove('h5p-multi-media-choice-correct');
+    this.content.classList.remove('h5p-multi-media-choice-wrong');
   }
 
   scaleMedia() {
@@ -218,9 +215,8 @@ export class MultiMediaChoiceOption {
       const container = this.content;
       const width = container.clientWidth;
       const borderWidth = 3;
-      const checkboxWidth = 19;
       let values = this.aspectRatio.split('to');
-      let height = ((width - checkboxWidth) / values[0]) * values[1];
+      let height = (width / values[0]) * values[1];
       //Calculate width based on height and 2*border pixel values
       container.style.height = height + borderWidth * 2 + 'px';
     }
