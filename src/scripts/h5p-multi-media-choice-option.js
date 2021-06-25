@@ -54,8 +54,8 @@ export class MultiMediaChoiceOption {
 
     // Set the width to control the max number of options per row.
     setTimeout(() => {
-      const style = window.getComputedStyle(this.content) || this.content.currentStyle;
-      this.content.style.width = 'calc(' + 100 / this.maxAlternativesPerRow + '% - ' + (style.marginLeft + style.marginRight) + ')';
+      const computedStyle = window.getComputedStyle(this.content) || this.content.currentStyle;
+      this.content.style.width = 'calc(' + 100 / this.maxAlternativesPerRow + '% - (' + computedStyle.marginLeft + ' + ' + computedStyle.marginRight + '))';
     }, 0);
   }
 
