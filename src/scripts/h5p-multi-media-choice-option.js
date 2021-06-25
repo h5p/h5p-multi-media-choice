@@ -53,7 +53,7 @@ export class MultiMediaChoiceOption {
     }
     this.content.appendChild(mediaContent);
 
-    //sets the width to control the max number of options per row. 2em is from the margins
+    // Sets the width to control the max number of options per row. 2em is from the margins
     this.content.style.width =
       'calc(' + 100 / this.maxAlternativesPerRow + '% - 2em)';
   }
@@ -98,7 +98,7 @@ export class MultiMediaChoiceOption {
     const {
       alt,
       title,
-      file: { path },
+      file: { path }
     } = this.media.params;
 
     const image = document.createElement('img');

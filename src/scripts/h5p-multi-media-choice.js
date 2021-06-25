@@ -174,8 +174,8 @@ export default class MultiMediaChoice extends H5P.Question {
         confirmationDialog: {
           enable: this.params.behaviour.confirmCheckDialog,
           l10n: this.params.l10n.confirmCheck,
-          instance: this,
-        },
+          instance: this
+        }
       }
     );
     this.addButton(
@@ -201,8 +201,8 @@ export default class MultiMediaChoice extends H5P.Question {
         confirmationDialog: {
           enable: this.params.behaviour.confirmRetryDialog,
           l10n: this.params.l10n.confirmRetry,
-          instance: this,
-        },
+          instance: this
+        }
       }
     );
   }

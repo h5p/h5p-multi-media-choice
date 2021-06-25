@@ -161,7 +161,7 @@ export default class MultiMediaChoiceContent {
    * @returns {boolean} True if there are no correct answers
    */
   isBlankCorrect() {
-    return this.options.filter(option => option.isCorrect()).length == 0;
+    return this.options.filter(option => option.isCorrect()).length === 0;
   }
 
   /**
@@ -194,11 +194,11 @@ export default class MultiMediaChoiceContent {
   toggleSelected(optionIndex) {
     const placeInSelected = this.selected.indexOf(optionIndex);
 
-    //If already checked remove from selected list. Radio buttons don't get unchecked
+    // If already checked remove from selected list. Radio buttons don't get unchecked
     if (placeInSelected !== -1 && !this.isSingleAnswer) {
       this.selected.splice(placeInSelected, 1);
     }
-    //if being checked add to selected list. If radio make sure others get unselected.
+    // if being checked add to selected list. If radio make sure others get unselected.
     else if (placeInSelected === -1) {
       if (this.isSingleAnswer) {
         this.selected = [optionIndex];
