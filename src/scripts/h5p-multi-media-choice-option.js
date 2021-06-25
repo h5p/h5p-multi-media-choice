@@ -200,6 +200,7 @@ export class MultiMediaChoiceOption {
    * Shows if the answer is correct or wrong in the UI
    */
   showSolution() {
+    this.content.classList.remove('h5p-multi-media-choice-selected');
     if (this.correct) {
       this.content.classList.add('h5p-multi-media-choice-correct');
     }
