@@ -53,9 +53,11 @@ export class MultiMediaChoiceOption {
     }
     this.content.appendChild(mediaContent);
 
-    // Sets the width to control the max number of options per row. 2em is from the margins
-    this.content.style.width =
-      'calc(' + 100 / this.maxAlternativesPerRow + '% - 2em)';
+    // Set the width to control the max number of options per row.
+    setTimeout(() => {
+      const style = window.getComputedStyle(this.content) || this.content.currentStyle;
+      this.content.style.width = 'calc(' + 100 / this.maxAlternativesPerRow + '% - ' + (style.marginLeft + style.marginRight) + ')';
+    }, 0);
   }
 
   /**
