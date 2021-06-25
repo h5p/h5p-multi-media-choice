@@ -1,5 +1,4 @@
 @use './colors' as *;
-$media-width: 20em;
 
 .h5p-multi-media-choice {
   background: #663399;
@@ -9,36 +8,37 @@ $media-width: 20em;
   }
 
   .h5p-multi-media-choice-options {
-    display: inline-flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    width: 100%;
-    min-width: $media-width;
+    width: calc(100% - 2em);
     padding-inline-start: 0;
     background: #808080;
+    padding: 1em;
   }
 
   .h5p-multi-media-choice-option-container {
     display: inline-flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 1em 1em 1em 1em;
+    margin: 1em;
 
     border-style: solid;
     border-width: medium;
     border-radius: 3px;
     border-color: transparent;
+    background-color: black;
 
     box-sizing: border-box;
-    min-width: $media-width;
+    min-width: #{$media-width};
   }
 
   .h5p-multi-media-choice-media {
+
     display: inline-block;
-    width: $media-width;
+    //Remove $checkbox-width when the checkbox are removed
+    width: calc(100% - #{$checkbox-width});
+    height: 100%;
     object-fit: contain;
-    background: black;
   }
 
   .h5p-multi-media-choice-correct {

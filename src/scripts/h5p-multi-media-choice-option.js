@@ -98,9 +98,6 @@ export class MultiMediaChoiceOption {
     }
 
     image.classList.add('h5p-multi-media-choice-media');
-    if (this.aspectRatio) {
-      image.classList.add(`h5p-multi-media-choice-media-${this.aspectRatio}`);
-    }
 
     return image;
   }
@@ -178,5 +175,21 @@ export class MultiMediaChoiceOption {
   hideSolution() {
     this.content.classList.remove('h5p-multi-media-choice-correct');
     this.content.classList.remove('h5p-multi-media-choice-wrong');
+  }
+
+  scaleMedia() {
+    if (this.aspectRatio === '') {
+      // TODO: Implement what happens here
+    }
+    else {
+      const container = this.content;
+      const width = container.clientWidth;
+      const borderWidth = 3;
+      const checkboxWidth = 20;
+      let values = this.aspectRatio.split('to');
+      let height = (width - checkboxWidth) / values[0] * values[1];
+      //Calculate width based on height and 2*border pixel values
+      container.style.height = height + borderWidth * 2 + 'px';
+    }
   }
 }
