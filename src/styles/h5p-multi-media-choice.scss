@@ -49,22 +49,6 @@
     border-color: $color-wrong;
   }
 
-  .h5p-multi-media-choice-media-1to1 {
-    height: $media-width;
-  }
-
-  .h5p-multi-media-choice-media-3to2 {
-    height: $media-width * 0.667;
-  }
-
-  .h5p-multi-media-choice-media-4to3 {
-    height: $media-width * 0.75;
-  }
-
-  .h5p-multi-media-choice-media-16to9 {
-    height: $media-width * 0.5625;
-  }
-
   /* Sets the margins for checkboxes and radio buttons equal,
   which is necessary to get the right the container size */
   input[type="radio" i], input[type="checkbox" i] {
