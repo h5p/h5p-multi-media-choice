@@ -314,6 +314,16 @@
         "max": 10,
         "default": 2,
         "optional": true
+      },
+      {
+        "label": "Pass percentage",
+        "name": "passPercentage",
+        "type": "number",
+        "description": "This setting often won't have any effect. It is the percentage of the total score required for getting 1 point when one point for the entire task is enabled, and for getting result.success in xAPI statements.",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 100
       }
     ]
   },

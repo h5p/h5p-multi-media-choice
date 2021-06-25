@@ -63,6 +63,19 @@ export class MultiMediaChoiceOption {
   }
 
   /**
+   * Returns the appropriate description depending on the content type
+   * @returns {string} the description of the option
+   */
+  getDescription() {
+    switch (this.media.metadata.contentType) {
+      case 'Image':
+        return this.media.params.alt; // Alternative text
+      default:
+        return '';
+    }
+  }
+
+  /**
    * Builds an image from from media
    * @returns {HTMLElement} Image tag.
    */

@@ -13,6 +13,7 @@ export default class MultiMediaChoiceContent {
     this.contentId = contentId;
     this.callbacks = callbacks;
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
+    this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
 
     this.numberOfCorrectOptions = params.options.filter(
       option => option.correct
@@ -38,7 +39,7 @@ export default class MultiMediaChoiceContent {
           this.isSingleAnswer,
           {
             onClick: () => this.toggleSelected(index),
-            triggerResize: this.callbacks.triggerResize,
+            triggerResize: this.callbacks.triggerResize
           }
         )
     );
@@ -72,6 +73,14 @@ export default class MultiMediaChoiceContent {
    */
   getDOM() {
     return this.content;
+  }
+
+  /**
+   * Return a list of the displayed options
+   * @returns {MultiMediaChoiceOption[]} An array of HTML options
+   */
+  getOptions() {
+    return this.options;
   }
 
   getScore() {
@@ -171,6 +180,8 @@ export default class MultiMediaChoiceContent {
         this.selected.push(optionIndex);
       }
     }
+
+    this.callbacks.triggerInteracted();
   }
 
   /**

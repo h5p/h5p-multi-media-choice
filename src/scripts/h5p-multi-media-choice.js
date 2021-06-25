@@ -1,6 +1,7 @@
 import MultiMediaChoiceContent from './h5p-multi-media-choice-content';
 
 import { Util } from './h5p-multi-media-choice-util';
+import { XAPIHandler } from './h5p-multi-mediachoice-xapi';
 
 /**
  * Class for H5P Multi Media Choice.
@@ -33,7 +34,12 @@ export default class MultiMediaChoice extends H5P.Question {
         triggerResize: () => {
           this.trigger('resize');
         },
+        triggerInteracted: () => {
+          this.triggerXAPI('interacted');
+        }
       });
+
+      this.xAPIHandler = new XAPIHandler(this.params, this, this.content, this.introduction.innerText);
 
       this.setContent(this.content.getDOM()); // Register content with H5P.Question
       this.addButtons();
@@ -142,6 +148,8 @@ export default class MultiMediaChoice extends H5P.Question {
       selectedOptions.forEach(option => {
         option.showSolution();
       });
+
+      this.trigger(this.xAPIHandler.getAnsweredXAPIEvent());
     };
 
     /**
@@ -229,5 +237,24 @@ export default class MultiMediaChoice extends H5P.Question {
         },
       }
     );
+  }
+
+  /**
+   * Packs the current state of the users interactivity into a
+   * serializable object.
+   *
+   * @public
+   */
+  getCurrentState() {
+    return this.xAPIHandler.getCurrentState();
+  }
+
+  /**
+   * Retrieves the xAPI data necessary for generating result reports
+   *
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
+   */
+  getXAPIData() {
+    return this.xAPIHandler.getXAPIData();
   }
 }
