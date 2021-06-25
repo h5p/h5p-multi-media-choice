@@ -41,7 +41,7 @@ export default class MultiMediaChoiceContent {
           option,
           contentId,
           this.aspectRatio,
-          this.params.behaviour.maxAlternativesPerRow,
+          Math.min(this.params.behaviour.maxAlternativesPerRow, this.params.options.length),
           this.isSingleAnswer,
           {
             onClick: () => this.toggleSelected(index),
