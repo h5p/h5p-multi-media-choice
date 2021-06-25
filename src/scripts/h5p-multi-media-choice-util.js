@@ -18,7 +18,7 @@ export class Util {
           confirmCheckDialog: false,
           confirmRetryDialog: false,
           aspectRatio: 'auto',
-          sameAspectRatio: false,
+          sameAspectRatio: false
         },
         l10n: {
           checkAnswerButtonText: 'Check',
@@ -36,15 +36,15 @@ export class Util {
             header: 'Finish?',
             body: 'Are you sure you want to finish?',
             cancelLabel: 'Cancel',
-            confirmLabel: 'Finish',
+            confirmLabel: 'Finish'
           },
           confirmRetry: {
             header: 'Retry?',
             body: 'Are you sure you wish to retry?',
             cancelLabel: 'Cancel',
-            confirmLabel: 'Retry',
-          },
-        },
+            confirmLabel: 'Retry'
+          }
+        }
       },
       params
     );
@@ -57,8 +57,8 @@ export class Util {
   static deepExtend(out) {
     out = out || {};
 
-    for (var i = 1; i < arguments.length; i++) {
-      var obj = arguments[i];
+    for (let i = 1; i < arguments.length; i++) {
+      const obj = arguments[i];
 
       if (!obj) {
         continue;
@@ -68,11 +68,14 @@ export class Util {
         out = obj;
       }
 
-      for (var key in obj) {
+      for (const key in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, key)) {
-          if (typeof obj[key] === 'object')
+          if (typeof obj[key] === 'object') {
             out[key] = Util.deepExtend(out[key], obj[key]);
-          else out[key] = obj[key];
+          }
+          else {
+            out[key] = obj[key];
+          }
         }
       }
     }

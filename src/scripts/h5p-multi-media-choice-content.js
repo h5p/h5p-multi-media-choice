@@ -13,6 +13,7 @@ export default class MultiMediaChoiceContent {
     this.contentId = contentId;
     this.callbacks = callbacks;
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
+    this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
 
     this.numberOfCorrectOptions = params.options.filter(
       option => option.correct
@@ -43,7 +44,7 @@ export default class MultiMediaChoiceContent {
           this.isSingleAnswer,
           {
             onClick: () => this.toggleSelected(index),
-            triggerResize: this.callbacks.triggerResize,
+            triggerResize: this.callbacks.triggerResize
           }
         )
     );
@@ -78,6 +79,14 @@ export default class MultiMediaChoiceContent {
    */
   getDOM() {
     return this.content;
+  }
+
+  /**
+   * Return a list of the displayed options
+   * @returns {MultiMediaChoiceOption[]} An array of HTML options
+   */
+  getOptions() {
+    return this.options;
   }
 
   /**
@@ -125,13 +134,6 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * @returns {Object[]} Array of options objects
-   */
-  getOptions() {
-    return this.options;
-  }
-
-  /**
    * Returns the selected objects
    * @returns {Number[]} Array of indexes of selected selctables
    */
@@ -159,7 +161,7 @@ export default class MultiMediaChoiceContent {
    * @returns {boolean} True if there are no correct answers
    */
   isBlankCorrect() {
-    return this.options.filter(option => option.isCorrect()).length == 0;
+    return this.options.filter(option => option.isCorrect()).length === 0;
   }
 
   /**
@@ -192,11 +194,11 @@ export default class MultiMediaChoiceContent {
   toggleSelected(optionIndex) {
     const placeInSelected = this.selected.indexOf(optionIndex);
 
-    //If already checked remove from selected list. Radio buttons don't get unchecked
+    // If already checked remove from selected list. Radio buttons don't get unchecked
     if (placeInSelected !== -1 && !this.isSingleAnswer) {
       this.selected.splice(placeInSelected, 1);
     }
-    //if being checked add to selected list. If radio make sure others get unselected.
+    // if being checked add to selected list. If radio make sure others get unselected.
     else if (placeInSelected === -1) {
       if (this.isSingleAnswer) {
         this.selected = [optionIndex];
@@ -205,6 +207,8 @@ export default class MultiMediaChoiceContent {
         this.selected.push(optionIndex);
       }
     }
+
+    this.callbacks.triggerInteracted();
   }
 
   /**
