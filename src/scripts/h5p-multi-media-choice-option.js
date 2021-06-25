@@ -198,7 +198,7 @@ export class MultiMediaChoiceOption {
       const container = this.content;
       const width = container.clientWidth;
       const borderWidth = 3;
-      const checkboxWidth = 20;
+      const checkboxWidth = 19;
       let values = this.aspectRatio.split('to');
       let height = (width - checkboxWidth) / values[0] * values[1];
       //Calculate width based on height and 2*border pixel values
