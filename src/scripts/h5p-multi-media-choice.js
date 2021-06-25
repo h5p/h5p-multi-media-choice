@@ -27,6 +27,7 @@ export default class MultiMediaChoice extends H5P.Question {
       if (this.params.question) {
         this.introduction = document.createElement('div');
         this.introduction.innerHTML = this.params.question;
+        this.introduction.setAttribute('id', `h5p-mmc${contentId}`);
         this.setIntroduction(this.introduction);
       }
 
@@ -56,11 +57,6 @@ export default class MultiMediaChoice extends H5P.Question {
       );
     };
 
-    /**
-     * Get score.
-     * @return {number} latest score.
-     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
-     */
     this.getScore = () => {
       return this.content.getScore();
     };
@@ -71,45 +67,15 @@ export default class MultiMediaChoice extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
      */
     this.getMaxScore = () => {
-      if (this.params.behaviour.singlePoint || this.content.isSingleAnswer) {
+      if (this.params.behaviour.singlePoint || this.content.isRadioButtons()) {
         return 1;
       }
-      else if (this.content.numberOfCorrectOptions === 0) {
+      else if (this.content.isBlankCorrect() === 0) {
         return 1;
       }
       else {
-        return this.content.numberOfCorrectOptions;
+        return this.content.getNumberOfCorrectOptions();
       }
-    };
-
-    /**
-     * @param {object} selectable Selectable object
-     * @returns {boolean} True if option is selected and correct
-     */
-    this.isCorrect = selectable => {
-      const selectedIndex = this.content.getIndex(selectable);
-      if (
-        this.content.getSelected().includes(selectable) &&
-        this.params.options[selectedIndex].correct
-      ) {
-        return true;
-      }
-      return false;
-    };
-
-    /**
-     * @param {object} selectable Selctable object
-     * @returns {boolean} True if option is selected and incorrect
-     */
-    this.isIncorrect = selectable => {
-      const selectedIndex = this.content.getIndex(selectable);
-      if (
-        this.content.getSelected().includes(selectable) &&
-        !this.params.options[selectedIndex].correct
-      ) {
-        return true;
-      }
-      return false;
     };
 
     /**
@@ -133,7 +99,9 @@ export default class MultiMediaChoice extends H5P.Question {
         this.params.overallFeedback,
         score / maxScore
       );
-      const selectedOptions = this.content.getSelected();
+      const selectedOptions = this.content
+        .getOptions()
+        .filter(options => options.isSelected());
 
       this.setFeedback(textScore, score, maxScore, this.params.l10n.result);
 

@@ -2,26 +2,37 @@
 export class MultiMediaChoiceOption {
   /**
    * @constructor
-   * @param {object} params Parameters from editor
+   * @param {Object} option Option object from the editor
    * @param {number} contentId Content's id.
-   * @param {object} option Option object from the editor
+   * @param {string} aspectRatio Aspect ratio used if all options should conform to the same size
+   * @param {number} maxAlternativesPerRow Max allowed alternatives pers row if space is availiable
    * @param {boolean} singleAnswer true for radio buttons, false for checkboxes
-   * @param {object} [callbacks = {}] Callbacks.
+   * @param {Object} [callbacks = {}] Callbacks.
    */
-  constructor(params, contentId, option, singleAnswer, callbacks) {
-    this.params = params;
+  constructor(
+    option,
+    contentId,
+    aspectRatio,
+    maxAlternativesPerRow,
+    singleAnswer,
+    callbacks
+  ) {
     this.contentId = contentId;
+    this.aspectRatio = aspectRatio;
+    this.maxAlternativesPerRow = maxAlternativesPerRow;
+
     this.media = option.media;
     this.disableImageZooming = option.disableImageZooming;
+    this.correct = option.correct;
+    this.tipsAndFeedback = option.tipsAndFeedback; // TODO: Currently not used
+
     this.callbacks = callbacks || {};
     this.callbacks.onClick = this.callbacks.onClick || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
 
     this.isValid = true; // If the media content is valid or not
-    this.isCorrect = option.correct;
-    this.tipsAndFeedback = option.tipsAndFeedback; // TODO: Currently not used
 
-    this.content = document.createElement('div');
+    this.content = document.createElement('li');
     this.content.classList.add('h5p-multi-media-choice-option-container');
 
     this.selectable = document.createElement('input');
@@ -44,7 +55,7 @@ export class MultiMediaChoiceOption {
 
     //sets the width to control the max number of options per row. 2em is from the margins
     this.content.style.width =
-      'calc(' + 100 / this.params.behaviour.maxAlternativesPerRow + '% - 2em)';
+      'calc(' + 100 / this.maxAlternativesPerRow + '% - 2em)';
   }
 
   /**
@@ -100,19 +111,17 @@ export class MultiMediaChoiceOption {
     }
 
     image.classList.add('h5p-multi-media-choice-media');
-    if (this.params.behaviour.sameAspectRatio) {
-      image.classList.add(
-        `h5p-multi-media-choice-media-${this.params.behaviour.aspectRatio}`
-      );
+    if (this.aspectRatio) {
+      image.classList.add(`h5p-multi-media-choice-media-${this.aspectRatio}`);
     }
 
     return image;
   }
 
   /**
-   * Test if important keys are present in media params for image.
-   * @param {object} imageParams Media params for image from the editor.
-   * @return {boolean} True if all three keys are present, false otherwise.
+   * Test if important keys missing in media params for image
+   * @param {object} imageParams Media params for image from the editor
+   * @return {boolean} False if any of the three keys are present, true otherwise
    * @private
    */
   imageParamsAreInvalid(imageParams) {
@@ -122,10 +131,17 @@ export class MultiMediaChoiceOption {
   }
 
   /**
-   * @returns {boolean} If the options is marked as correct
+   * @returns {boolean} If the options is selected
    */
-  isChecked() {
+  isSelected() {
     return this.selectable.checked;
+  }
+
+  /**
+   * @returns {boolean} True if the option is correct
+   */
+  isCorrect() {
+    return this.correct;
   }
 
   /**
@@ -136,14 +152,23 @@ export class MultiMediaChoiceOption {
     return this.content;
   }
 
+  /**
+   * Unchecks the selectable of the option
+   */
   uncheck() {
     this.selectable.checked = false;
   }
 
+  /**
+   * Enables the selectable of the option
+   */
   enable() {
     this.selectable.disabled = false;
   }
 
+  /**
+   * Disable the selectable of the option
+   */
   disable() {
     this.selectable.disabled = true;
   }
@@ -152,7 +177,7 @@ export class MultiMediaChoiceOption {
    * Shows if the answer is correct or wrong in the UI
    */
   showSolution() {
-    if (this.isCorrect) {
+    if (this.correct) {
       this.content.classList.add('h5p-multi-media-choice-correct');
     }
     else {

@@ -24,6 +24,10 @@ export default class MultiMediaChoiceContent {
         ? this.numberOfCorrectOptions === 1
         : this.params.behaviour.questionType === 'single';
 
+    this.aspectRatio = this.params.behaviour.sameAspectRatio
+      ? this.params.behaviour.aspectRatio
+      : '';
+
     this.selected = [];
 
     this.content = document.createElement('div');
@@ -33,9 +37,10 @@ export default class MultiMediaChoiceContent {
     this.options = params.options.map(
       (option, index) =>
         new MultiMediaChoiceOption(
-          params,
-          contentId,
           option,
+          contentId,
+          this.aspectRatio,
+          this.params.behaviour.maxAlternativesPerRow,
           this.isSingleAnswer,
           {
             onClick: () => this.toggleSelected(index),
@@ -58,6 +63,7 @@ export default class MultiMediaChoiceContent {
       'role',
       this.isSingleAnswer ? 'radiogroup' : 'group'
     );
+    optionList.setAttribute('aria-labelledby', `h5p-mmc${this.contentId}`);
     optionList.classList.add('h5p-multi-media-choice-options');
     this.options.forEach(option => {
       if (option.isValid) {
@@ -83,49 +89,63 @@ export default class MultiMediaChoiceContent {
     return this.options;
   }
 
+  /**
+   * Get score
+   * @return {number} score based on the behaviour settings
+   */
   getScore() {
     // One point if no correct options and no selected options
-    if (!this.isAnyAnswerSelected()) {
-      return this.isBlankCorrect() ? 1 : 0;
+    const self = this;
+    if (!self.isAnyAnswerSelected()) {
+      return self.isBlankCorrect() ? 1 : 0;
     }
 
     // Radio buttons, only one answer
-    if (this.isSingleAnswer) {
-      return this.getSelected()[0].isCorrect ? 1 : 0;
+    if (self.isSingleAnswer) {
+      const selectedIndex = self.getSelectedIndexes()[0];
+      return self.getOptions()[selectedIndex].isCorrect() ? 1 : 0;
     }
 
-    let score = 0;
-    this.options.forEach(option => {
-      if (option.isChecked()) {
-        option.isCorrect ? score++ : score--;
-      }
-    }, 0);
-
-    score = Math.max(0, score); // Negative score not allowed
-    if (this.params.behaviour.singlePoint) {
-      // Checkbox buttons, one point if correctly answered
-      score = Math.min(1, score);
+    // Checkbox buttons, one point if correctly answered
+    else if (self.params.behaviour.singlePoint) {
+      let score = 1;
+      self.options.forEach(option => {
+        if (option.isCorrect() && !option.isSelected()) {
+          score = 0;
+        }
+        else if (!option.isCorrect() && option.isSelected()) {
+          score = 0;
+        }
+      });
+      return score;
     }
 
     // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
+    let score = 0;
+    self.options.forEach(option => {
+      if (option.isSelected()) {
+        option.isCorrect() ? score++ : score--;
+      }
+    });
+
+    score = Math.max(0, score); // Negative score not allowed
+
     return score;
   }
 
   /**
    * Returns the selected objects
-   * @returns {Object[]} A list of selectable-objects that are selected
+   * @returns {Number[]} Array of indexes of selected selctables
    */
-  getSelected() {
-    return this.options.filter(option => option.isChecked());
+  getSelectedIndexes() {
+    return this.selected;
   }
 
   /**
-   * Returns the indexes of the selected objects
-   * @returns {Number[]} List of indexes of selected selctables
+   * @returns {boolean} True if the options are displayed as radio buttons
    */
-  getSelectedIndexes() {
-    const selectedOptions = this.getSelected();
-    return selectedOptions.map(option => this.options.indexOf(option));
+  isRadioButtons() {
+    return this.isSingleAnswer;
   }
 
   /**
@@ -133,7 +153,7 @@ export default class MultiMediaChoiceContent {
    * @returns {boolean} True if any answer is selected
    */
   isAnyAnswerSelected() {
-    return this.getSelected().length > 0;
+    return this.getSelectedIndexes().length > 0;
   }
 
   /**
@@ -141,7 +161,14 @@ export default class MultiMediaChoiceContent {
    * @returns {boolean} True if there are no correct answers
    */
   isBlankCorrect() {
-    return this.options.filter(option => option.isCorrect).length == 0;
+    return this.options.filter(option => option.isCorrect()).length == 0;
+  }
+
+  /**
+   * @returns {number} Number of correct options
+   */
+  getNumberOfCorrectOptions() {
+    return this.numberOfCorrectOptions;
   }
 
   /**
@@ -193,10 +220,16 @@ export default class MultiMediaChoiceContent {
     this.enableSelectables();
   }
 
+  /**
+   * Enables all selectables (radio buttons / checkboxes)
+   */
   enableSelectables() {
     this.options.forEach(option => option.enable());
   }
 
+  /**
+   * Disables all selectables (radio buttons / checkboxes)
+   */
   disableSelectables() {
     this.options.forEach(option => option.disable());
   }
