@@ -158,7 +158,7 @@ export default class MultiMediaChoice extends H5P.Question {
       this.removeFeedback();
     };
 
-    window.addEventListener('resize', () => {
+    this.on('resize', () => {
       this.content.getOptions().forEach(option => {
         option.scaleMedia();
       });
