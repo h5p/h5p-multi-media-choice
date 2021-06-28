@@ -136,7 +136,7 @@ export default class MultiMediaChoiceContent {
 
     // Checkbox buttons, one point if above pass percentage
     if (self.params.behaviour.singlePoint) {
-      return (score * 100) / this.getMaxScore() >=
+      return (score * 100) / this.numberOfCorrectOptions >=
         this.params.behaviour.passPercentage
         ? 1
         : 0;
