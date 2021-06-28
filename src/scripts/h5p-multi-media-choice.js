@@ -102,9 +102,7 @@ export default class MultiMediaChoice extends H5P.Question {
         this.params.overallFeedback,
         score / maxScore
       );
-      const selectedOptions = this.content
-        .getOptions()
-        .filter(options => options.isSelected());
+      const selectedOptions = this.content.getSelectedOptions();
 
       this.setFeedback(textScore, score, maxScore, this.params.l10n.result);
 
