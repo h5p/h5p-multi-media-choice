@@ -55,9 +55,16 @@ export class MultiMediaChoiceOption {
 
     // Set the width to control the max number of options per row.
     setTimeout(() => {
-      const computedStyle = window.getComputedStyle(this.content) || this.content.currentStyle;
-      this.content.style.width = 'calc(' + 100 / this.maxAlternativesPerRow + '% - (' +
-      computedStyle.marginLeft + ' + ' + computedStyle.marginRight + '))';
+      const computedStyle =
+        window.getComputedStyle(this.content) || this.content.currentStyle;
+      this.content.style.width =
+        'calc(' +
+        100 / this.maxAlternativesPerRow +
+        '% - (' +
+        computedStyle.marginLeft +
+        ' + ' +
+        computedStyle.marginRight +
+        '))';
     }, 0);
   }
 
@@ -221,11 +228,11 @@ export class MultiMediaChoiceOption {
     if (this.aspectRatio !== '') {
       const container = this.content;
       const width = container.clientWidth;
-      const borderWidth = 3;
-      let values = this.aspectRatio.split('to');
-      let height = (width / values[0]) * values[1];
-      //Calculate width based on height and 2*border pixel values
-      container.style.height = height + borderWidth * 2 + 'px';
+      const borderWidths = container.offsetWidth - width; // 2 * border-radius since left and right border is inluced
+      let [x, y] = this.aspectRatio.split('to');
+      let height = (width / x) * y;
+      // Calculate width based on height and borders pixel values
+      container.style.height = height + borderWidths + 'px';
     }
   }
 }
