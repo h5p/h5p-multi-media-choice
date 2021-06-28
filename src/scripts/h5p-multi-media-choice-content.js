@@ -48,7 +48,8 @@ export default class MultiMediaChoiceContent {
           this.isSingleAnswer,
           {
             onClick: () => this.toggleSelected(index),
-            triggerResize: this.callbacks.triggerResize,
+            onKeyboardSelect: () => this.toggleSelected(index),
+            triggerResize: this.callbacks.triggerResize
           }
         )
     );

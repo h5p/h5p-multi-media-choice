@@ -28,6 +28,7 @@ export class MultiMediaChoiceOption {
 
     this.callbacks = callbacks || {};
     this.callbacks.onClick = this.callbacks.onClick || (() => {});
+    this.callbacks.onKeyboardSelect = this.callbacks.onKeyboardSelect || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
 
     this.isValid = true; // If the media content is valid or not
@@ -42,7 +43,7 @@ export class MultiMediaChoiceOption {
       this.content.setAttribute('role', 'checkbox');
     }
     this.content.setAttribute('aria-checked', 'false');
-    this.content.setAttribute('aria-disabled', 'false');
+    this.enable();
     this.content.setAttribute('tabindex', '0');
     this.content.addEventListener('click', this.callbacks.onClick);
 
@@ -66,6 +67,8 @@ export class MultiMediaChoiceOption {
         computedStyle.marginRight +
         '))';
     }, 0);
+
+    this.addKeyboardHandlers(this.content);
   }
 
   /**
@@ -193,6 +196,7 @@ export class MultiMediaChoiceOption {
    */
   enable() {
     this.content.setAttribute('aria-disabled', 'false');
+    this.content.classList.add('h5p-multi-media-choice-enabled');
     this.content.classList.remove('h5p-multi-media-choice-selected');
   }
 
@@ -201,6 +205,7 @@ export class MultiMediaChoiceOption {
    */
   disable() {
     this.content.setAttribute('aria-disabled', 'true');
+    this.content.classList.remove('h5p-multi-media-choice-enabled');
   }
 
   /**
@@ -234,5 +239,19 @@ export class MultiMediaChoiceOption {
       // Calculate width based on height and borders pixel values
       container.style.height = height + borderWidths + 'px';
     }
+  }
+
+  addKeyboardHandlers(content) {
+    content.addEventListener('keydown', event => {
+      switch (event.code) {
+        case 'Enter':
+          if (this.isDisabled()) {
+            return;
+          }
+
+          this.callbacks.onKeyboardSelect(this);
+          break;
+      }
+    });
   }
 }
