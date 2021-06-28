@@ -1,7 +1,7 @@
 import MultiMediaChoiceContent from './h5p-multi-media-choice-content';
 
 import { Util } from './h5p-multi-media-choice-util';
-import { XAPIHandler } from './h5p-multi-mediachoice-xapi';
+import { XAPIHandler } from './h5p-multi-media-choice-xapi';
 
 /**
  * Class for H5P Multi Media Choice.
