@@ -148,6 +148,16 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
+  * Returns the indexes of the selected options
+  * @returns {Number[]} Array of indexes of selected options
+  */
+  getSelectedIndexes() {
+    return this.getSelectedOptions().map(option =>
+      this.options.indexOf(option)
+    );
+  }
+
+  /**
    * Returns the selected options
    * @returns {Object[]} Array of selected options
    */
