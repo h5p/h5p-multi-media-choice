@@ -106,20 +106,6 @@ export default class MultiMediaChoiceContent {
       return self.lastSelected.isCorrect() ? 1 : 0;
     }
 
-    // Checkbox buttons, one point if correctly answered
-    else if (self.params.behaviour.singlePoint) {
-      let score = 1;
-      self.options.forEach(option => {
-        if (option.isCorrect() && !option.isSelected()) {
-          score = 0;
-        }
-        else if (!option.isCorrect() && option.isSelected()) {
-          score = 0;
-        }
-      });
-      return score;
-    }
-
     // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
     let score = 0;
     self.options.forEach(option => {
@@ -127,6 +113,11 @@ export default class MultiMediaChoiceContent {
         option.isCorrect() ? score++ : score--;
       }
     });
+
+    // Checkbox buttons, one point if correctly answered
+    if (self.params.behaviour.singlePoint) {
+      return (score*100/this.numberOfCorrectOptions) >= this.params.behaviour.passPercentage ? 1 : 0;
+    }
 
     return Math.max(0, score); // Negative score not allowed;
   }
