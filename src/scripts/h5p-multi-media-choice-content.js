@@ -41,7 +41,10 @@ export default class MultiMediaChoiceContent {
           option,
           contentId,
           this.aspectRatio,
-          Math.min(this.params.behaviour.maxAlternativesPerRow, this.params.options.length),
+          Math.min(
+            this.params.behaviour.maxAlternativesPerRow,
+            this.params.options.length
+          ),
           this.isSingleAnswer,
           {
             onClick: () => this.toggleSelected(index),
@@ -75,8 +78,8 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Return the DOM for this class.
-   * @return {HTMLElement} DOM for this class.
+   * Return the DOM for this class
+   * @return {HTMLElement} DOM for this class
    */
   getDOM() {
     return this.content;
@@ -114,12 +117,15 @@ export default class MultiMediaChoiceContent {
       }
     });
 
-    // Checkbox buttons, one point if correctly answered
+    // Checkbox buttons, one point if above pass percentage
     if (self.params.behaviour.singlePoint) {
-      return (score*100/this.numberOfCorrectOptions) >= this.params.behaviour.passPercentage ? 1 : 0;
+      return (score * 100) / this.numberOfCorrectOptions >=
+        this.params.behaviour.passPercentage
+        ? 1
+        : 0;
     }
 
-    return Math.max(0, score); // Negative score not allowed;
+    return Math.max(0, score); // Negative score not allowed
   }
 
   /**
@@ -133,7 +139,7 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Returns the selected objects
+   * Returns the selected options
    * @returns {Object[]} Array of selected options
    */
   getSelectedOptions() {
@@ -171,7 +177,7 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Show the correct solution(s)
+   * Show which options are right and which are wrong
    */
   showSolutions() {
     this.disableSelectables();
@@ -179,7 +185,7 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Show the correct solution(s)
+   * Hide the solution(s) cues
    */
   hideSolutions() {
     this.options.forEach(option => option.hideSolution());
@@ -195,9 +201,9 @@ export default class MultiMediaChoiceContent {
     if (option.isDisabled()) {
       return;
     }
-    if (this.isSingleAnswer) {
+    if (this.isRadioButtons()) {
       if (option.isSelected()) {
-        return;
+        return; // Disables unchecking radio buttons
       }
       if (!this.lastSelected) {
         this.lastSelected = option;
