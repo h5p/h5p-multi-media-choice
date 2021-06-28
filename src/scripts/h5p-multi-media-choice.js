@@ -62,23 +62,6 @@ export default class MultiMediaChoice extends H5P.Question {
     };
 
     /**
-     * Get maximum possible score.
-     * @return {number} Score necessary for mastering.
-     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
-     */
-    this.getMaxScore = () => {
-      if (this.params.behaviour.singlePoint || this.content.isRadioButtons()) {
-        return 1;
-      }
-      else if (this.content.isBlankCorrect() === 0) {
-        return 1;
-      }
-      else {
-        return this.content.getNumberOfCorrectOptions();
-      }
-    };
-
-    /**
      * Let H5P.Question read the specified text.
      * @param {string} text Text to read.
      */
@@ -94,7 +77,7 @@ export default class MultiMediaChoice extends H5P.Question {
       this.content.disableSelectables();
 
       const score = this.getScore();
-      const maxScore = this.getMaxScore();
+      const maxScore = this.content.getMaxScore();
       const textScore = H5P.Question.determineOverallFeedback(
         this.params.overallFeedback,
         score / maxScore

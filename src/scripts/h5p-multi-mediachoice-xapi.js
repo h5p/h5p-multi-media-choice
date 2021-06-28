@@ -70,7 +70,7 @@ export class XAPIHandler {
    * @param {H5P.XAPIEvent} xAPIEvent to add a response to
    */
   addResponseToXAPI(xAPIEvent) {
-    const maxScore = this.app.getMaxScore();
+    const maxScore = this.content.getMaxScore();
     const score = this.app.getScore();
     const success = (100 * score / maxScore) >= this.params.behaviour.passPercentage;
 
