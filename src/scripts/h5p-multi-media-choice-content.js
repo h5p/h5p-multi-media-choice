@@ -100,14 +100,14 @@ export default class MultiMediaChoiceContent {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
    */
   getMaxScore() {
-    if (this.params.behaviour.singlePoint || this.isRadioButtons()) {
+    if (this.params.behaviour.singlePoint || this.isSingleAnswer) {
       return 1;
     }
     else if (this.isBlankCorrect()) {
       return 1;
     }
     else {
-      return this.getNumberOfCorrectOptions();
+      return this.numberOfCorrectOptions;
     }
   }
 
@@ -147,28 +147,11 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Returns the indexes of the selected options
-   * @returns {Number[]} Array of indexes of selected options
-   */
-  getSelectedIndexes() {
-    return this.getSelectedOptions().map(option =>
-      this.options.indexOf(option)
-    );
-  }
-
-  /**
    * Returns the selected options
    * @returns {Object[]} Array of selected options
    */
   getSelectedOptions() {
     return this.options.filter(option => option.isSelected());
-  }
-
-  /**
-   * @returns {boolean} True if the options are displayed as radio buttons
-   */
-  isRadioButtons() {
-    return this.isSingleAnswer;
   }
 
   /**
@@ -184,14 +167,7 @@ export default class MultiMediaChoiceContent {
    * @returns {boolean} True if there are no correct answers
    */
   isBlankCorrect() {
-    return this.options.filter(option => option.isCorrect()).length === 0;
-  }
-
-  /**
-   * @returns {number} Number of correct options
-   */
-  getNumberOfCorrectOptions() {
-    return this.numberOfCorrectOptions;
+    return this.numberOfCorrectOptions === 0;
   }
 
   /**
@@ -219,7 +195,7 @@ export default class MultiMediaChoiceContent {
     if (option.isDisabled()) {
       return;
     }
-    if (this.isRadioButtons()) {
+    if (this.isSingleAnswer) {
       if (option.isSelected()) {
         return; // Disables unchecking radio buttons
       }
