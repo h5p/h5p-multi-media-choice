@@ -37,10 +37,15 @@ export default class MultiMediaChoice extends H5P.Question {
         },
         triggerInteracted: () => {
           this.triggerXAPI('interacted');
-        }
+        },
       });
 
-      this.xAPIHandler = new XAPIHandler(this.params, this, this.content, this.introduction.innerText);
+      this.xAPIHandler = new XAPIHandler(
+        this.params,
+        this,
+        this.content,
+        this.introduction.innerText
+      );
 
       this.setContent(this.content.getDOM()); // Register content with H5P.Question
       this.addButtons();
@@ -57,13 +62,28 @@ export default class MultiMediaChoice extends H5P.Question {
       );
     };
 
+    /**
+     * Get latest score
+     * @return {number} latest score
+     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
+     */
     this.getScore = () => {
       return this.content.getScore();
     };
 
     /**
-     * Let H5P.Question read the specified text.
-     * @param {string} text Text to read.
+     * Get maximum possible score
+     * @return {number} Score necessary for mastering
+     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
+     */
+
+    this.getMaxScore = () => {
+      return this.content.getMaxScore();
+    };
+
+    /**
+     * Let H5P.Question read the specified text
+     * @param {string} text Text to read
      */
     this.handleRead = text => {
       this.read(text);
@@ -77,7 +97,7 @@ export default class MultiMediaChoice extends H5P.Question {
       this.content.disableSelectables();
 
       const score = this.getScore();
-      const maxScore = this.content.getMaxScore();
+      const maxScore = this.getMaxScore();
       const textScore = H5P.Question.determineOverallFeedback(
         this.params.overallFeedback,
         score / maxScore
@@ -140,7 +160,7 @@ export default class MultiMediaChoice extends H5P.Question {
       this.removeFeedback();
     };
 
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       this.content.getOptions().forEach(option => {
         option.scaleMedia();
       });
@@ -163,8 +183,8 @@ export default class MultiMediaChoice extends H5P.Question {
         confirmationDialog: {
           enable: this.params.behaviour.confirmCheckDialog,
           l10n: this.params.l10n.confirmCheck,
-          instance: this
-        }
+          instance: this,
+        },
       }
     );
     this.addButton(
@@ -190,8 +210,8 @@ export default class MultiMediaChoice extends H5P.Question {
         confirmationDialog: {
           enable: this.params.behaviour.confirmRetryDialog,
           l10n: this.params.l10n.confirmRetry,
-          instance: this
-        }
+          instance: this,
+        },
       }
     );
   }
@@ -199,7 +219,6 @@ export default class MultiMediaChoice extends H5P.Question {
   /**
    * Packs the current state of the users interactivity into a
    * serializable object.
-   *
    * @public
    */
   getCurrentState() {
@@ -208,7 +227,6 @@ export default class MultiMediaChoice extends H5P.Question {
 
   /**
    * Retrieves the xAPI data necessary for generating result reports
-   *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
    */
   getXAPIData() {
