@@ -29,6 +29,7 @@ export class MultiMediaChoiceOption {
     this.callbacks = callbacks || {};
     this.callbacks.onClick = this.callbacks.onClick || (() => {});
     this.callbacks.onKeyboardSelect = this.callbacks.onKeyboardSelect || (() => {});
+    this.callbacks.onKeyboardArrowKey = this.callbacks.onKeyboardArrowKey || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
 
     this.isValid = true; // If the media content is valid or not
@@ -251,7 +252,35 @@ export class MultiMediaChoiceOption {
 
           this.callbacks.onKeyboardSelect(this);
           break;
+
+        case 'Space':
+          if (this.isDisabled()) {
+            return;
+          }
+
+          this.callbacks.onKeyboardSelect(this);
+          break;
+
+        case 'ArrowLeft':
+          if (this.getDOM() === this.getDOM().parentNode.firstChild) {
+            return;
+          }
+
+          this.callbacks.onKeyboardArrowKey(this, 'left');
+          break;
+
+        case 'ArrowRight':
+          if (this.getDOM() === this.getDOM().parentNode.lastChild) {
+            return;
+          }
+
+          this.callbacks.onKeyboardArrowKey(this, 'right');
+          break;
       }
     });
+  }
+
+  focus() {
+    this.content.focus();
   }
 }

@@ -49,6 +49,7 @@ export default class MultiMediaChoiceContent {
           {
             onClick: () => this.toggleSelected(index),
             onKeyboardSelect: () => this.toggleSelected(index),
+            onKeyboardArrowKey: (optionObj, direction) => this.handleOptionArrowKey(optionObj, index, direction),
             triggerResize: this.callbacks.triggerResize
           }
         )
@@ -233,5 +234,20 @@ export default class MultiMediaChoiceContent {
    */
   disableSelectables() {
     this.options.forEach(option => option.disable());
+  }
+
+  handleOptionArrowKey(option, index, direction) {
+    if ((index === 0 && direction === 'left') ||
+    (index === this.options.length - 1 && direction === 'right') ||
+    (direction !== 'left' && direction !== 'right')) {
+      return; // Invalid move or invalid direction
+    }
+
+    if (direction === 'left') {
+      this.options[index - 1].focus();
+    }
+    else if (direction === 'right') {
+      this.options[index + 1].focus();
+    }
   }
 }
