@@ -1,5 +1,5 @@
 @use './colors' as *;
-$media-width: 15em;
+@use  './sizes' as *;
 
 .h5p-multi-media-choice {
 
@@ -19,7 +19,7 @@ $media-width: 15em;
 
     border-style: solid;
     border-width: medium;
-    border-radius: 3px;
+    border-radius: $border-size;
     border-color: transparent;
     background-color: black;
 
