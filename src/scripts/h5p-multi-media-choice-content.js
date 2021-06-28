@@ -91,6 +91,23 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
+   * Get maximum possible score.
+   * @return {number} Score necessary for mastering.
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
+   */
+  getMaxScore() {
+    if (this.params.behaviour.singlePoint || this.isRadioButtons()) {
+      return 1;
+    }
+    else if (this.isBlankCorrect()) {
+      return 1;
+    }
+    else {
+      return this.getNumberOfCorrectOptions();
+    }
+  }
+
+  /**
    * Get score
    * @return {number} score based on the behaviour settings
    */
@@ -116,7 +133,7 @@ export default class MultiMediaChoiceContent {
 
     // Checkbox buttons, one point if correctly answered
     if (self.params.behaviour.singlePoint) {
-      return (score*100/this.numberOfCorrectOptions) >= this.params.behaviour.passPercentage ? 1 : 0;
+      return (score*100/this.getMaxScore()) >= this.params.behaviour.passPercentage ? 1 : 0;
     }
 
     return Math.max(0, score); // Negative score not allowed;
