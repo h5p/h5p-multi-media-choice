@@ -249,17 +249,17 @@ export default class MultiMediaChoiceContent {
 
   handleOptionArrowKey(option, index, direction) {
     if (
-      (index === 0 && direction === 'left') ||
-      (index === this.options.length - 1 && direction === 'right') ||
-      (direction !== 'left' && direction !== 'right')
+      (index === 0 && (direction === 'Left' || direction === 'Up')) ||
+      (index === this.options.length - 1 && (direction === 'Right' || direction === 'Down')) ||
+      (!['Left', 'Right', 'Up', 'Down'].includes(direction))
     ) {
       return; // Invalid move or invalid direction
     }
 
-    if (direction === 'left') {
+    if ((direction === 'Left') || (direction === 'Up')) {
       this.options[index - 1].focus();
     }
-    else if (direction === 'right') {
+    else if (direction === 'Right' || direction === 'Down') {
       this.options[index + 1].focus();
     }
   }

@@ -262,19 +262,23 @@ export class MultiMediaChoiceOption {
           break;
 
         case 'ArrowLeft':
+        case 'ArrowUp':
+          event.preventDefault(); // Disable scrolling
           if (this.getDOM() === this.getDOM().parentNode.firstChild) {
             return;
           }
 
-          this.callbacks.onKeyboardArrowKey(this, 'left');
+          this.callbacks.onKeyboardArrowKey(this, event.code.replace('Arrow', ''));
           break;
 
         case 'ArrowRight':
+        case 'ArrowDown':
+          event.preventDefault(); // Disable scrolling
           if (this.getDOM() === this.getDOM().parentNode.lastChild) {
             return;
           }
 
-          this.callbacks.onKeyboardArrowKey(this, 'right');
+          this.callbacks.onKeyboardArrowKey(this, event.code.replace('Arrow', ''));
           break;
       }
     });
