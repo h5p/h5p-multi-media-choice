@@ -29,7 +29,7 @@ export default class MultiMediaChoiceContent {
       ? this.params.behaviour.aspectRatio
       : '';
 
-    this.lastSelected = null;
+    this.lastSelectedRadioButtonOption = null;
 
     this.content = document.createElement('div');
     this.content.classList.add('h5p-multi-media-choice-content');
@@ -49,8 +49,9 @@ export default class MultiMediaChoiceContent {
           {
             onClick: () => this.toggleSelected(index),
             onKeyboardSelect: () => this.toggleSelected(index),
-            onKeyboardArrowKey: (optionObj, direction) => this.handleOptionArrowKey(optionObj, index, direction),
-            triggerResize: this.callbacks.triggerResize
+            onKeyboardArrowKey: (optionObj, direction) =>
+              this.handleOptionArrowKey(optionObj, index, direction),
+            triggerResize: this.callbacks.triggerResize,
           }
         )
     );
@@ -125,7 +126,7 @@ export default class MultiMediaChoiceContent {
 
     // Radio buttons, only one answer
     if (self.isSingleAnswer) {
-      return self.lastSelected.isCorrect() ? 1 : 0;
+      return self.lastSelectedRadioButtonOption.isCorrect() ? 1 : 0;
     }
 
     // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
@@ -148,9 +149,9 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-  * Returns the indexes of the selected options
-  * @returns {Number[]} Array of indexes of selected options
-  */
+   * Returns the indexes of the selected options
+   * @returns {Number[]} Array of indexes of selected options
+   */
   getSelectedIndexes() {
     return this.getSelectedOptions().map(option =>
       this.options.indexOf(option)
@@ -210,12 +211,12 @@ export default class MultiMediaChoiceContent {
       if (option.isSelected()) {
         return; // Disables unchecking radio buttons
       }
-      if (!this.lastSelected) {
-        this.lastSelected = option;
+      if (!this.lastSelectedRadioButtonOption) {
+        this.lastSelectedRadioButtonOption = option;
       }
       else {
-        this.lastSelected.toggle();
-        this.lastSelected = option;
+        this.lastSelectedRadioButtonOption.uncheck();
+        this.lastSelectedRadioButtonOption = option;
       }
     }
     option.toggle();
@@ -227,7 +228,7 @@ export default class MultiMediaChoiceContent {
    * Resets all selected options
    */
   resetSelections() {
-    this.lastSelected = null;
+    this.lastSelectedRadioButtonOption = null;
     this.options.forEach(option => option.uncheck());
     this.enableSelectables();
   }
@@ -247,9 +248,11 @@ export default class MultiMediaChoiceContent {
   }
 
   handleOptionArrowKey(option, index, direction) {
-    if ((index === 0 && direction === 'left') ||
-    (index === this.options.length - 1 && direction === 'right') ||
-    (direction !== 'left' && direction !== 'right')) {
+    if (
+      (index === 0 && direction === 'left') ||
+      (index === this.options.length - 1 && direction === 'right') ||
+      (direction !== 'left' && direction !== 'right')
+    ) {
       return; // Invalid move or invalid direction
     }
 
