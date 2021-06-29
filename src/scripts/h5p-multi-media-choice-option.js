@@ -105,35 +105,26 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} Image tag.
    */
   buildImage() {
-    if (this.imageParamsAreInvalid(this.media.params)) {
-      return;
-    }
-
-    const {
-      alt,
-      title,
-      file: { path },
-    } = this.media.params;
-
+    const alt = this.isEmpty(this.media.params.alt) ? '' : this.media.params.alt;
+    const title = this.isEmpty(this.media.params.title) ? '' : this.media.params.alt;
+    const path = this.isEmpty(this.media.params.file) ? '' : this.media.params.file.path;
     const image = document.createElement('img');
     image.setAttribute('src', H5P.getPath(path, this.contentId));
     image.setAttribute('alt', alt);
     image.addEventListener('load', this.callbacks.triggerResize);
-    // Do not show title if title is not specified
-    image.setAttribute('title', (title !== null && title !== undefined) ? title : '');
+    image.setAttribute('title', title);
     image.classList.add('h5p-multi-media-choice-media');
 
     return image;
   }
 
   /**
-   * Test if important keys missing in media params for image
-   * @param {object} imageParams Media params for image from the editor
-   * @return {boolean} False if any of the three keys are present, true otherwise
-   * @private
+   * Checks if string is empty
+   * @param {string} text
+   * @returns {boolean} True if empty
    */
-  imageParamsAreInvalid(imageParams) {
-    return ['alt', 'file'].filter(key => key in imageParams).length !== 2;
+  isEmpty(text) {
+    return text === null || text === undefined || text === '';
   }
 
   /**
