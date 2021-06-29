@@ -27,6 +27,27 @@ export default class MultiMediaChoice extends H5P.Question {
     this.params = Util.extendParams(params);
 
     this.registerDomElements = () => {
+      // Register task media
+      if (this.params.media && this.params.media.type && this.params.media.type.library) {
+        const media = this.params.media.type;
+        // Register task image
+        if (media.library.includes('H5P.Image')) {
+          if (media.params.file) {
+            this.setImage(media.params.file.path, {
+              disableImageZooming: params.media.disableImageZooming || false,
+              alt: media.params.alt,
+              title: media.params.title
+            });
+          }
+        }
+        else if (media.library.includes('H5P.Video')) {
+          if (media.params.sources) {
+            // Register task video
+            this.setVideo(media);
+          }
+        }
+      }
+
       // Register task introduction text
       if (this.params.question) {
         this.introduction = document.createElement('div');
