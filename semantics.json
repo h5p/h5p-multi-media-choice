@@ -1,21 +1,46 @@
 [
   {
+    "name": "media",
+    "type": "group",
+    "label": "Media",
+    "importance": "medium",
+    "fields": [
+      {
+        "name": "type",
+        "type": "library",
+        "label": "Type",
+        "importance": "medium",
+        "options": ["H5P.Image 1.1", "H5P.Video 1.5"],
+        "optional": true,
+        "description": "Optional media to display above the question."
+      },
+      {
+        "name": "disableImageZooming",
+        "type": "boolean",
+        "label": "Disable image zooming",
+        "importance": "low",
+        "default": false,
+        "optional": true,
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "type",
+              "equals": "H5P.Image 1.1"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
     "name": "question",
     "type": "text",
     "importance": "high",
     "widget": "html",
     "label": "Question",
     "enterMode": "p",
-    "tags": [
-      "strong",
-      "em",
-      "sub",
-      "sup",
-      "h2",
-      "h3",
-      "pre",
-      "code"
-    ]
+    "tags": ["strong", "em", "sub", "sup", "h2", "h3", "pre", "code"]
   },
   {
     "name": "options",
@@ -38,9 +63,7 @@
           "label": "Media",
           "optional": false,
           "description": "Media to display as the choice.",
-          "options": [
-            "H5P.Image 1.1"
-          ]
+          "options": ["H5P.Image 1.1"]
         },
         {
           "name": "disableImageZooming",
@@ -79,14 +102,7 @@
               "importance": "low",
               "description": "Hint for the user. This will appear before user checks his answer/answers.",
               "optional": true,
-              "tags": [
-                "p",
-                "br",
-                "strong",
-                "em",
-                "a",
-                "code"
-              ]
+              "tags": ["p", "br", "strong", "em", "a", "code"]
             },
             {
               "name": "chosenFeedback",
@@ -96,14 +112,7 @@
               "importance": "low",
               "description": "Message will appear below the answer on \"check\" if this answer is selected.",
               "optional": true,
-              "tags": [
-                "strong",
-                "em",
-                "sub",
-                "sup",
-                "a",
-                "code"
-              ]
+              "tags": ["strong", "em", "sub", "sup", "a", "code"]
             },
             {
               "name": "notChosenFeedback",
@@ -113,14 +122,7 @@
               "importance": "low",
               "description": "Message will appear below the answer on \"check\" if this answer is not selected.",
               "optional": true,
-              "tags": [
-                "strong",
-                "em",
-                "sub",
-                "sup",
-                "a",
-                "code"
-              ]
+              "tags": ["strong", "em", "sub", "sup", "a", "code"]
             }
           ]
         }
@@ -414,13 +416,7 @@
             "default": "Are you sure you want to finish?",
             "widget": "html",
             "enterMode": "p",
-            "tags": [
-              "strong",
-              "em",
-              "del",
-              "u",
-              "code"
-            ]
+            "tags": ["strong", "em", "del", "u", "code"]
           },
           {
             "label": "Cancel button label",
@@ -460,13 +456,7 @@
             "default": "Are you sure you wish to retry?",
             "widget": "html",
             "enterMode": "p",
-            "tags": [
-              "strong",
-              "em",
-              "del",
-              "u",
-              "code"
-            ]
+            "tags": ["strong", "em", "del", "u", "code"]
           },
           {
             "label": "Cancel button label",
