@@ -130,19 +130,11 @@ export default class MultiMediaChoiceContent {
     }
 
     // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
-    let score = 0;
-    self.options.forEach(option => {
-      if (option.isSelected()) {
-        option.isCorrect() ? score++ : score--;
-      }
-    });
+    const score = this.getRawScore();
 
     // Checkbox buttons, one point if above pass percentage
     if (self.params.behaviour.singlePoint) {
-      return (score * 100) / this.numberOfCorrectOptions >=
-        this.params.behaviour.passPercentage
-        ? 1
-        : 0;
+      return this.isPassed(score) ? 1 : 0;
     }
 
     return Math.max(0, score); // Negative score not allowed
@@ -156,6 +148,21 @@ export default class MultiMediaChoiceContent {
     return this.getSelectedOptions().map(option =>
       this.options.indexOf(option)
     );
+  }
+
+  /**
+   * Returns the raw score without any behaviour settings applied
+   * @return {number} raw score (1 point for correct answer, -1 point for incorrect answer)
+   * @private
+   */
+  getRawScore() {
+    let score = 0;
+    this.options.forEach(option => {
+      if (option.isSelected()) {
+        option.isCorrect() ? score++ : score--;
+      }
+    });
+    return score;
   }
 
   /**
@@ -180,6 +187,18 @@ export default class MultiMediaChoiceContent {
    */
   isBlankCorrect() {
     return this.numberOfCorrectOptions === 0;
+  }
+
+  /**
+   * Checks if the score is above the pass percentage
+   * @returns {boolean} True if score is above the pass percentage
+   */
+  isPassed() {
+    const score = this.getRawScore();
+    return (
+      (score * 100) / this.numberOfCorrectOptions >=
+      this.params.behaviour.passPercentage
+    );
   }
 
   /**
