@@ -211,13 +211,10 @@ export default class MultiMediaChoiceContent {
       if (option.isSelected()) {
         return; // Disables unchecking radio buttons
       }
-      if (!this.lastSelectedRadioButtonOption) {
-        this.lastSelectedRadioButtonOption = option;
-      }
-      else {
+      if (this.lastSelectedRadioButtonOption) {
         this.lastSelectedRadioButtonOption.uncheck();
-        this.lastSelectedRadioButtonOption = option;
       }
+      this.lastSelectedRadioButtonOption = option;
     }
     option.toggle();
 
@@ -229,15 +226,10 @@ export default class MultiMediaChoiceContent {
    */
   resetSelections() {
     this.lastSelectedRadioButtonOption = null;
-    this.options.forEach(option => option.uncheck());
-    this.enableSelectables();
-  }
-
-  /**
-   * Enables all selectables (radio buttons / checkboxes)
-   */
-  enableSelectables() {
-    this.options.forEach(option => option.enable());
+    this.options.forEach(option => {
+      option.uncheck();
+      option.enable();
+    });
   }
 
   /**
