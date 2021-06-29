@@ -196,7 +196,6 @@ export class MultiMediaChoiceOption {
   enable() {
     this.content.setAttribute('aria-disabled', 'false');
     this.content.classList.add('h5p-multi-media-choice-enabled');
-    this.content.classList.remove('h5p-multi-media-choice-selected');
   }
 
   /**
