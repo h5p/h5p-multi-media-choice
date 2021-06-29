@@ -120,10 +120,7 @@ export class MultiMediaChoiceOption {
     image.setAttribute('alt', alt);
     image.addEventListener('load', this.callbacks.triggerResize);
     // Do not show title if title is not specified
-    if (title !== null) {
-      image.setAttribute('title', title);
-    }
-
+    image.setAttribute('title', (title !== null && title !== undefined) ? title : '');
     image.classList.add('h5p-multi-media-choice-media');
 
     return image;
