@@ -43,6 +43,10 @@
     border-color: $color-focus;
   }
 
+  .h5p-multi-media-choice-enabled:hover {
+    cursor: pointer;
+  }
+
   .h5p-multi-media-choice-selected:focus{
     outline:none;
     border-color: $color-mixed;
