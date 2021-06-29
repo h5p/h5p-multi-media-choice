@@ -108,40 +108,26 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} Image tag.
    */
   buildImage() {
-    if (this.imageParamsAreInvalid(this.media.params)) {
-      return;
-    }
-
-    const {
-      alt,
-      title,
-      file: { path },
-    } = this.media.params;
-
+    const alt = this.isEmpty(this.media.params.alt) ? '' : this.media.params.alt;
+    const title = this.isEmpty(this.media.params.title) ? '' : this.media.params.alt;
+    const path = this.isEmpty(this.media.params.file) ? '' : this.media.params.file.path;
     const image = document.createElement('img');
     image.setAttribute('src', H5P.getPath(path, this.contentId));
     image.setAttribute('alt', alt);
     image.addEventListener('load', this.callbacks.triggerResize);
-    // Do not show title if title is not specified
-    if (title !== null) {
-      image.setAttribute('title', title);
-    }
-
+    image.setAttribute('title', title);
     image.classList.add('h5p-multi-media-choice-media');
 
     return image;
   }
 
   /**
-   * Test if important keys missing in media params for image
-   * @param {object} imageParams Media params for image from the editor
-   * @return {boolean} False if any of the three keys are present, true otherwise
-   * @private
+   * Checks if string is empty
+   * @param {string} text
+   * @returns {boolean} True if empty
    */
-  imageParamsAreInvalid(imageParams) {
-    return (
-      ['alt', 'title', 'file'].filter(key => key in imageParams).length === 0
-    );
+  isEmpty(text) {
+    return text === null || text === undefined || text === '';
   }
 
   /**
@@ -208,7 +194,6 @@ export class MultiMediaChoiceOption {
   enable() {
     this.content.setAttribute('aria-disabled', 'false');
     this.content.classList.add('h5p-multi-media-choice-enabled');
-    this.content.classList.remove('h5p-multi-media-choice-selected');
   }
 
   /**
@@ -272,19 +257,23 @@ export class MultiMediaChoiceOption {
           break;
 
         case 'ArrowLeft':
+        case 'ArrowUp':
+          event.preventDefault(); // Disable scrolling
           if (this.getDOM() === this.getDOM().parentNode.firstChild) {
             return;
           }
 
-          this.callbacks.onKeyboardArrowKey(this, 'left');
+          this.callbacks.onKeyboardArrowKey(this, event.code.replace('Arrow', ''));
           break;
 
         case 'ArrowRight':
+        case 'ArrowDown':
+          event.preventDefault(); // Disable scrolling
           if (this.getDOM() === this.getDOM().parentNode.lastChild) {
             return;
           }
 
-          this.callbacks.onKeyboardArrowKey(this, 'right');
+          this.callbacks.onKeyboardArrowKey(this, event.code.replace('Arrow', ''));
           break;
       }
     });
