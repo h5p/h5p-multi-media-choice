@@ -61,12 +61,7 @@ export default class MultiMediaChoice extends H5P.Question {
         },
       });
 
-      this.xAPIHandler = new XAPIHandler(
-        this.params,
-        this,
-        this.content,
-        this.introduction.innerText
-      );
+      this.xAPIHandler = new XAPIHandler();
 
       this.setContent(this.content.getDOM()); // Register content with H5P.Question
       this.addButtons();
@@ -139,7 +134,16 @@ export default class MultiMediaChoice extends H5P.Question {
         option.showSolution();
       });
 
-      this.trigger(this.xAPIHandler.getAnsweredXAPIEvent());
+      this.trigger(
+        this.xAPIHandler.getAnsweredXAPIEvent(
+          this,
+          this.question,
+          this.content.getOptions(),
+          this.getScore(),
+          this.getMaxScore(),
+          this.content.isPassed()
+        )
+      );
     };
 
     /**
@@ -241,7 +245,7 @@ export default class MultiMediaChoice extends H5P.Question {
    * @public
    */
   getCurrentState() {
-    return this.xAPIHandler.getCurrentState();
+    return this.xAPIHandler.getCurrentState(this.content.selectedIndexes());
   }
 
   /**
@@ -249,6 +253,13 @@ export default class MultiMediaChoice extends H5P.Question {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
    */
   getXAPIData() {
-    return this.xAPIHandler.getXAPIData();
+    return this.xAPIHandler.getXAPIData(
+      this,
+      this.question,
+      this.content.getOptions(),
+      this.getScore(),
+      this.getMaxScore(),
+      this.content.isPassed()
+    );
   }
 }

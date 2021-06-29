@@ -20,6 +20,7 @@ export class MultiMediaChoiceOption {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.maxAlternativesPerRow = maxAlternativesPerRow;
+    this.singleAnswer = singleAnswer;
 
     this.media = option.media;
     this.disableImageZooming = option.disableImageZooming;
@@ -28,8 +29,10 @@ export class MultiMediaChoiceOption {
 
     this.callbacks = callbacks || {};
     this.callbacks.onClick = this.callbacks.onClick || (() => {});
-    this.callbacks.onKeyboardSelect = this.callbacks.onKeyboardSelect || (() => {});
-    this.callbacks.onKeyboardArrowKey = this.callbacks.onKeyboardArrowKey || (() => {});
+    this.callbacks.onKeyboardSelect =
+      this.callbacks.onKeyboardSelect || (() => {});
+    this.callbacks.onKeyboardArrowKey =
+      this.callbacks.onKeyboardArrowKey || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
 
     this.isValid = true; // If the media content is valid or not
@@ -125,6 +128,13 @@ export class MultiMediaChoiceOption {
    */
   isEmpty(text) {
     return text === null || text === undefined || text === '';
+  }
+
+  /**
+   * @returns {boolean} True if the option is single answer
+   */
+  isSingleAnswer() {
+    return this.singleAnswer;
   }
 
   /**
