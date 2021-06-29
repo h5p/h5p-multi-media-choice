@@ -136,9 +136,7 @@ export class MultiMediaChoiceOption {
    * @private
    */
   imageParamsAreInvalid(imageParams) {
-    return (
-      ['alt', 'title', 'file'].filter(key => key in imageParams).length === 0
-    );
+    return ['alt', 'title', 'file'].filter(key => key in imageParams).length !== 3;
   }
 
   /**
