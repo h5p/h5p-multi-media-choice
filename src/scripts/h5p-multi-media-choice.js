@@ -1,11 +1,7 @@
 import MultiMediaChoiceContent from './h5p-multi-media-choice-content';
 
 import { Util } from './h5p-multi-media-choice-util';
-import {
-  getCurrentState,
-  getXAPIData,
-  getAnsweredXAPIEvent,
-} from './h5p-multi-media-choice-xapi';
+import { getCurrentState, getXAPIData, getAnsweredXAPIEvent } from './h5p-multi-media-choice-xapi';
 
 /**
  * Class for H5P Multi Media Choice.
@@ -36,7 +32,7 @@ export default class MultiMediaChoice extends H5P.Question {
             this.setImage(media.params.file.path, {
               disableImageZooming: params.media.disableImageZooming || false,
               alt: media.params.alt,
-              title: media.params.title
+              title: media.params.title,
             });
           }
         }
@@ -75,9 +71,7 @@ export default class MultiMediaChoice extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
      */
     this.getAnswersGiven = () => {
-      return (
-        this.content.isAnyAnswerSelected() || this.content.isBlankCorrect()
-      );
+      return this.content.isAnyAnswerSelected() || this.content.isBlankCorrect();
     };
 
     /**
@@ -156,10 +150,7 @@ export default class MultiMediaChoice extends H5P.Question {
       this.hideButton('check-answer');
       this.hideButton('show-solution');
 
-      if (
-        this.params.behaviour.showSolutionsRequiresInput &&
-        !this.content.isAnyAnswerSelected()
-      ) {
+      if (this.params.behaviour.showSolutionsRequiresInput && !this.content.isAnyAnswerSelected()) {
         // Require answer before solution can be viewed
         this.updateFeedbackContent(this.params.l10n.noAnswer);
         this.handleRead(this.params.l10n.noAnswer);

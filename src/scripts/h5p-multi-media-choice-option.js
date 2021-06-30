@@ -9,14 +9,7 @@ export class MultiMediaChoiceOption {
    * @param {boolean} singleAnswer true for radio buttons, false for checkboxes
    * @param {Object} [callbacks = {}] Callbacks.
    */
-  constructor(
-    option,
-    contentId,
-    aspectRatio,
-    maxAlternativesPerRow,
-    singleAnswer,
-    callbacks
-  ) {
+  constructor(option, contentId, aspectRatio, maxAlternativesPerRow, singleAnswer, callbacks) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.maxAlternativesPerRow = maxAlternativesPerRow;
@@ -28,10 +21,8 @@ export class MultiMediaChoiceOption {
 
     this.callbacks = callbacks || {};
     this.callbacks.onClick = this.callbacks.onClick || (() => {});
-    this.callbacks.onKeyboardSelect =
-      this.callbacks.onKeyboardSelect || (() => {});
-    this.callbacks.onKeyboardArrowKey =
-      this.callbacks.onKeyboardArrowKey || (() => {});
+    this.callbacks.onKeyboardSelect = this.callbacks.onKeyboardSelect || (() => {});
+    this.callbacks.onKeyboardArrowKey = this.callbacks.onKeyboardArrowKey || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
 
     this.isValid = true; // If the media content is valid or not
@@ -93,15 +84,9 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} Image tag.
    */
   buildImage() {
-    const alt = this.isEmpty(this.media.params.alt)
-      ? ''
-      : this.media.params.alt;
-    const title = this.isEmpty(this.media.params.title)
-      ? ''
-      : this.media.params.alt;
-    const path = this.isEmpty(this.media.params.file)
-      ? ''
-      : this.media.params.file.path;
+    const alt = this.isEmpty(this.media.params.alt) ? '' : this.media.params.alt;
+    const title = this.isEmpty(this.media.params.title) ? '' : this.media.params.alt;
+    const path = this.isEmpty(this.media.params.file) ? '' : this.media.params.file.path;
     const image = document.createElement('img');
     image.setAttribute('src', H5P.getPath(path, this.contentId));
     image.setAttribute('alt', alt);
@@ -158,7 +143,7 @@ export class MultiMediaChoiceOption {
   }
 
   /**
-   * Unchecks the selectable of the option
+   * Uncheck the selectable of the option
    */
   toggle() {
     if (this.isSelected()) {
@@ -172,7 +157,7 @@ export class MultiMediaChoiceOption {
   }
 
   /**
-   * Unchecks the selectable of the option
+   * Uncheck the selectable of the option
    */
   uncheck() {
     this.content.setAttribute('aria-checked', 'false');
@@ -221,8 +206,7 @@ export class MultiMediaChoiceOption {
       const container = this.content;
       const width = container.clientWidth;
       const border = container.offsetWidth - width;
-      const padding =
-        window.getComputedStyle(container).padding.replace('px', '') * 2;
+      const padding = window.getComputedStyle(container).padding.replace('px', '') * 2;
       let [x, y] = this.aspectRatio.split('to');
       let height = ((width - padding) / x) * y;
       container.style.height = height + border + padding + 'px';
@@ -255,10 +239,7 @@ export class MultiMediaChoiceOption {
             return;
           }
 
-          this.callbacks.onKeyboardArrowKey(
-            this,
-            event.code.replace('Arrow', '')
-          );
+          this.callbacks.onKeyboardArrowKey(this, event.code.replace('Arrow', ''));
           break;
 
         case 'ArrowRight':
@@ -268,10 +249,7 @@ export class MultiMediaChoiceOption {
             return;
           }
 
-          this.callbacks.onKeyboardArrowKey(
-            this,
-            event.code.replace('Arrow', '')
-          );
+          this.callbacks.onKeyboardArrowKey(this, event.code.replace('Arrow', ''));
           break;
       }
     });

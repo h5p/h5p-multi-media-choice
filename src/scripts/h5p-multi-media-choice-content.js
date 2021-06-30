@@ -13,12 +13,9 @@ export default class MultiMediaChoiceContent {
     this.contentId = contentId;
     this.callbacks = callbacks;
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
-    this.callbacks.triggerInteracted =
-      this.callbacks.triggerInteracted || (() => {});
+    this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
 
-    this.numberOfCorrectOptions = params.options.filter(
-      option => option.correct
-    ).length;
+    this.numberOfCorrectOptions = params.options.filter(option => option.correct).length;
 
     this.isSingleAnswer =
       this.params.behaviour.questionType === 'auto'
@@ -41,10 +38,7 @@ export default class MultiMediaChoiceContent {
           option,
           contentId,
           this.aspectRatio,
-          Math.min(
-            this.params.behaviour.maxAlternativesPerRow,
-            this.params.options.length
-          ),
+          Math.min(this.params.behaviour.maxAlternativesPerRow, this.params.options.length),
           this.isSingleAnswer,
           {
             onClick: () => this.toggleSelected(index),
@@ -66,10 +60,7 @@ export default class MultiMediaChoiceContent {
    */
   buildOptionList() {
     const optionList = document.createElement('ul');
-    optionList.setAttribute(
-      'role',
-      this.isSingleAnswer ? 'radiogroup' : 'group'
-    );
+    optionList.setAttribute('role', this.isSingleAnswer ? 'radiogroup' : 'group');
     optionList.setAttribute('aria-labelledby', `h5p-mmc${this.contentId}`);
     optionList.classList.add('h5p-multi-media-choice-options');
     optionList.style.columnCount = this.params.behaviour.maxAlternativesPerRow;
@@ -147,9 +138,7 @@ export default class MultiMediaChoiceContent {
    * @returns {Number[]} Array of indexes of selected options
    */
   getSelectedIndexes() {
-    return this.getSelectedOptions().map(option =>
-      this.options.indexOf(option)
-    );
+    return this.getSelectedOptions().map(option => this.options.indexOf(option));
   }
 
   /**
@@ -197,10 +186,7 @@ export default class MultiMediaChoiceContent {
    */
   isPassed() {
     const score = this.getRawScore();
-    return (
-      (score * 100) / this.numberOfCorrectOptions >=
-      this.params.behaviour.passPercentage
-    );
+    return (score * 100) / this.numberOfCorrectOptions >= this.params.behaviour.passPercentage;
   }
 
   /**
@@ -263,8 +249,7 @@ export default class MultiMediaChoiceContent {
   handleOptionArrowKey(option, index, direction) {
     if (
       (index === 0 && (direction === 'Left' || direction === 'Up')) ||
-      (index === this.options.length - 1 &&
-        (direction === 'Right' || direction === 'Down')) ||
+      (index === this.options.length - 1 && (direction === 'Right' || direction === 'Down')) ||
       !['Left', 'Right', 'Up', 'Down'].includes(direction)
     ) {
       return; // Invalid move or invalid direction

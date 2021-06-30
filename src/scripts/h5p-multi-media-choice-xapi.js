@@ -10,28 +10,14 @@ export function getCurrentState(selectedIndexes) {
  * Retrieves the xAPI data necessary for generating result reports
  */
 export function getXAPIData(app, question, options, score, maxScore, success) {
-  const xAPIEvent = getAnsweredXAPIEvent(
-    app,
-    question,
-    options,
-    score,
-    maxScore,
-    success
-  );
+  const xAPIEvent = getAnsweredXAPIEvent(app, question, options, score, maxScore, success);
   return { statement: xAPIEvent.data.statement };
 }
 
 /**
  * Generates the xAPI event for answered.
  */
-export function getAnsweredXAPIEvent(
-  app,
-  question,
-  options,
-  score,
-  maxScore,
-  success
-) {
+export function getAnsweredXAPIEvent(app, question, options, score, maxScore, success) {
   const xAPIEvent = app.createXAPIEventTemplate('answered');
 
   addQuestionToXAPI(xAPIEvent, options, question);
@@ -46,10 +32,7 @@ export function getAnsweredXAPIEvent(
  * @param {H5P.XAPIEvent} xAPIEvent to add a question to
  */
 function addQuestionToXAPI(xAPIEvent, options, question) {
-  const definition = xAPIEvent.getVerifiedStatementValue([
-    'object',
-    'definition',
-  ]);
+  const definition = xAPIEvent.getVerifiedStatementValue(['object', 'definition']);
   definition.description = {
     'en-US': question,
   };
