@@ -120,13 +120,6 @@ export class MultiMediaChoiceOption {
   }
 
   /**
-   * @returns {boolean} True if the option is single answer
-   */
-  isSingleAnswer() {
-    return this.singleAnswer;
-  }
-
-  /**
    * @returns {boolean} If the options is selected
    */
   isSelected() {
