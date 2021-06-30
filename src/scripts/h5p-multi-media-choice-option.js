@@ -215,11 +215,11 @@ export class MultiMediaChoiceOption {
     if (this.aspectRatio !== '') {
       const container = this.content;
       const width = container.clientWidth;
-      const borderWidths = container.offsetWidth - width; // 2 * border-radius since left and right border is inluced
+      const border = container.offsetWidth - width;
+      const padding = window.getComputedStyle(container).padding.replace('px', '') * 2;
       let [x, y] = this.aspectRatio.split('to');
-      let height = (width / x) * y;
-      // Calculate width based on height and borders pixel values
-      container.style.height = height + borderWidths + 'px';
+      let height = ((width - padding) / x) * y;
+      container.style.height = height + border + padding + 'px';
     }
   }
 

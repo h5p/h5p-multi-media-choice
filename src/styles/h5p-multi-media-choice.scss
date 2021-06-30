@@ -21,10 +21,10 @@
     box-sizing: border-box;
 
     border-style: solid;
-    border-width: medium;
-    border-radius: $border-size;
-    border-color: transparent;
-    background-color: black;
+    border-width: $border-size;
+    border-radius: 2 * $border-size;
+    border-color: $background-color;
+    padding: 1em;
 
     &:focus {
       outline:none;
@@ -32,8 +32,9 @@
   }
 
   .h5p-multi-media-choice-media {
+    background-color: $background-color;
     display: inline-block;
-    width: calc(100%);
+    width: 100%;
     height: 100%;
     object-fit: contain;
   }
