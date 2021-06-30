@@ -9,7 +9,15 @@ export class MultiMediaChoiceOption {
    * @param {boolean} singleAnswer true for radio buttons, false for checkboxes
    * @param {Object} [callbacks = {}] Callbacks.
    */
-  constructor(option, contentId, aspectRatio, maxAlternativesPerRow, singleAnswer, assetsFilePath, callbacks) {
+  constructor(
+    option,
+    contentId,
+    aspectRatio,
+    maxAlternativesPerRow,
+    singleAnswer,
+    assetsFilePath,
+    callbacks
+  ) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.maxAlternativesPerRow = maxAlternativesPerRow;
@@ -79,19 +87,16 @@ export class MultiMediaChoiceOption {
   buildImage() {
     const alt = this.isEmpty(this.media.params.alt) ? '' : this.media.params.alt;
     const title = this.isEmpty(this.media.params.title) ? '' : this.media.params.alt;
+
     let path = '';
     if (this.isEmpty(this.media.params.file)) {
-      path = this.assetsFilePath + 'placeholder';
-      if (this.aspectRatio === 'auto') {
-        path += '1to1.svg';
-      }
-      else {
-        path += this.aspectRatio + '.svg';
-      }
+      const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
+      path = `${this.assetsFilePath}/placeholder${placeholderAspectRatio}.svg`;
     }
     else {
       path = H5P.getPath(this.media.params.file.path, this.contentId);
     }
+
     const image = document.createElement('img');
     image.setAttribute('src', path);
     image.setAttribute('alt', alt);
