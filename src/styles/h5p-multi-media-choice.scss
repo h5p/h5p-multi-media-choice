@@ -13,6 +13,7 @@
   }
 
   .h5p-multi-media-choice-option-container {
+    background-color: #ffffff;
     display: inline-block;
     margin: $option-gap / 2 0;
     width: 100%;
@@ -20,8 +21,8 @@
     box-sizing: border-box;
 
     border-style: solid;
-    border-width: $border-size;
-    border-radius: 2 * $border-size;
+    border-width: $border-stroke-width;
+    border-radius: $border-radius;
     border-color: $color-option-background;
     padding: 1em;
   }
@@ -59,7 +60,7 @@
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 (2 * $border-size) $border-size $color-border-interaction;
+      box-shadow: 0 0 $border-radius $border-stroke-width $color-border-interaction;
     }
   }
 
@@ -88,10 +89,21 @@
   }
 
   .h5p-multi-media-choice-correct {
-    border-color: $color-correct;
+    background-color: $color-correct-light;
+    border-color: $color-correct-dark;
+    border-width: 2 * $border-stroke-width;
+  }
+
+  .h5p-multi-media-choice-show-correct {
+    background-color: $color-show-correct-light;
+    border-color: $color-show-correct-dark;
+    border-width: 2 * $border-stroke-width;
+    border-style: dotted;
   }
 
   .h5p-multi-media-choice-wrong {
-    border-color: $color-wrong;
+    background-color: $color-wrong-light;
+    border-color: $color-wrong-dark;
+    border-width: 2 * $border-stroke-width;
   }
 }
