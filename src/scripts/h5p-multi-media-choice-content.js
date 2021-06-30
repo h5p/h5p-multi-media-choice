@@ -72,6 +72,8 @@ export default class MultiMediaChoiceContent {
     );
     optionList.setAttribute('aria-labelledby', `h5p-mmc${this.contentId}`);
     optionList.classList.add('h5p-multi-media-choice-options');
+    optionList.style.columnCount = this.params.behaviour.maxAlternativesPerRow;
+
     this.options.forEach(option => {
       if (option.isValid) {
         optionList.appendChild(option.getDOM());
@@ -174,7 +176,7 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Checks if any answer is selcted
+   * Checks if any answer is selected
    * @returns {boolean} True if any answer is selected
    */
   isAnyAnswerSelected() {
@@ -261,13 +263,14 @@ export default class MultiMediaChoiceContent {
   handleOptionArrowKey(option, index, direction) {
     if (
       (index === 0 && (direction === 'Left' || direction === 'Up')) ||
-      (index === this.options.length - 1 && (direction === 'Right' || direction === 'Down')) ||
-      (!['Left', 'Right', 'Up', 'Down'].includes(direction))
+      (index === this.options.length - 1 &&
+        (direction === 'Right' || direction === 'Down')) ||
+      !['Left', 'Right', 'Up', 'Down'].includes(direction)
     ) {
       return; // Invalid move or invalid direction
     }
 
-    if ((direction === 'Left') || (direction === 'Up')) {
+    if (direction === 'Left' || direction === 'Up') {
       this.options[index - 1].focus();
     }
     else if (direction === 'Right' || direction === 'Down') {

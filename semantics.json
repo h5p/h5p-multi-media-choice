@@ -258,8 +258,7 @@
         "label": "Maximum alternatives per row",
         "description": "Set the maximum number of alternatives per row to ensure the questions look alright.",
         "min": 1,
-        "max": 10,
-        "default": 2,
+        "default": 5,
         "optional": true
       },
       {

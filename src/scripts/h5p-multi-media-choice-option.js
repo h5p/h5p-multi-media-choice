@@ -5,7 +5,7 @@ export class MultiMediaChoiceOption {
    * @param {Object} option Option object from the editor
    * @param {number} contentId Content's id.
    * @param {string} aspectRatio Aspect ratio used if all options should conform to the same size
-   * @param {number} maxAlternativesPerRow Max allowed alternatives pers row if space is availiable
+   * @param {number} maxAlternativesPerRow Max allowed alternatives per row if space is available
    * @param {boolean} singleAnswer true for radio buttons, false for checkboxes
    * @param {Object} [callbacks = {}] Callbacks.
    */
@@ -57,20 +57,6 @@ export class MultiMediaChoiceOption {
       return;
     }
     this.content.appendChild(mediaContent);
-
-    // Set the width to control the max number of options per row.
-    setTimeout(() => {
-      const computedStyle =
-        window.getComputedStyle(this.content) || this.content.currentStyle;
-      this.content.style.width =
-        'calc(' +
-        100 / this.maxAlternativesPerRow +
-        '% - (' +
-        computedStyle.marginLeft +
-        ' + ' +
-        computedStyle.marginRight +
-        '))';
-    }, 0);
 
     this.addKeyboardHandlers(this.content);
   }
