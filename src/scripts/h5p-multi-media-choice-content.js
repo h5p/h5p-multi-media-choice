@@ -134,7 +134,9 @@ export default class MultiMediaChoiceContent {
      * One point if (score / number of correct options) is above pass percentage
      */
     if (self.params.behaviour.singlePoint) {
-      return (score * 100) / this.numberOfCorrectOptions >= this.params.behaviour.passPercentage ? 1 : 0;
+      return (score * 100) / this.numberOfCorrectOptions >= this.params.behaviour.passPercentage
+        ? 1
+        : 0;
     }
 
     return Math.max(0, score); // Negative score not allowed
@@ -177,15 +179,22 @@ export default class MultiMediaChoiceContent {
    * @returns {boolean} True if score is above the pass percentage
    */
   isPassed() {
-    return this.getScore() * 100 / this.getMaxScore() >= this.params.behaviour.passPercentage;
+    return (this.getScore() * 100) / this.getMaxScore() >= this.params.behaviour.passPercentage;
   }
 
   /**
-   * Show which options are right and which are wrong
+   * Show which selected options are right and which are wrong
    */
-  showSolutions() {
+  showSelectedSolutions() {
     this.disableSelectables();
-    this.options.forEach(option => option.showSolution());
+    this.options.forEach(option => option.showSelectedSolution());
+  }
+
+  /**
+   * Show which unselected options were right
+   */
+  showUnselectedSolutions() {
+    this.options.forEach(option => option.showUnselectedSolution());
   }
 
   /**

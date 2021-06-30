@@ -54,14 +54,19 @@ export default class MultiMediaChoice extends H5P.Question {
         this.setIntroduction(this.introduction);
       }
 
-      this.content = new MultiMediaChoiceContent(params, contentId, {
-        triggerResize: () => {
-          this.trigger('resize');
+      this.content = new MultiMediaChoiceContent(
+        params,
+        contentId,
+        {
+          triggerResize: () => {
+            this.trigger('resize');
+          },
+          triggerInteracted: () => {
+            this.triggerXAPI('interacted');
+          },
         },
-        triggerInteracted: () => {
-          this.triggerXAPI('interacted');
-        },
-      }, this.getLibraryFilePath('assets/'));
+        this.getLibraryFilePath('assets/')
+      );
 
       this.setContent(this.content.getDOM()); // Register content with H5P.Question
       this.addButtons();
@@ -116,7 +121,6 @@ export default class MultiMediaChoice extends H5P.Question {
         this.params.overallFeedback,
         score / maxScore
       );
-      const selectedOptions = this.content.getSelectedOptions();
 
       this.setFeedback(textScore, score, maxScore, this.params.l10n.result);
 
@@ -128,9 +132,7 @@ export default class MultiMediaChoice extends H5P.Question {
         this.showButton('try-again');
       }
 
-      selectedOptions.forEach(option => {
-        option.showSolution();
-      });
+      this.content.showSelectedSolutions();
 
       this.trigger(
         getAnsweredXAPIEvent(
@@ -158,7 +160,7 @@ export default class MultiMediaChoice extends H5P.Question {
         this.handleRead(this.params.l10n.noAnswer);
       }
       else {
-        this.content.showSolutions();
+        this.content.showUnselectedSolutions();
       }
 
       this.trigger('resize');

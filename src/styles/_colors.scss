@@ -1,5 +1,9 @@
 $color-option-background: #dbe2e8;
 $color-border-interaction: #1a73d9;
 
-$color-correct: #0f8a4d;
-$color-wrong: #b81414;
+$color-correct-light: #edfff0;
+$color-correct-dark: #6ea776;
+$color-wrong-light: #ffe6e3;
+$color-wrong-dark: #d33120;
+$color-show-correct-dark: $color-border-interaction;
+$color-show-correct-light: #e4edf7;

@@ -184,15 +184,26 @@ export class MultiMediaChoiceOption {
   }
 
   /**
-   * Shows if the answer is correct or wrong in the UI
+   * Shows if the answer selected is correct or wrong in the UI if selected
    */
-  showSolution() {
+  showSelectedSolution() {
     this.content.classList.remove('h5p-multi-media-choice-selected');
-    if (this.correct) {
-      this.content.classList.add('h5p-multi-media-choice-correct');
+    if (this.isSelected()) {
+      if (this.correct) {
+        this.content.classList.add('h5p-multi-media-choice-correct');
+      }
+      else {
+        this.content.classList.add('h5p-multi-media-choice-wrong');
+      }
     }
-    else {
-      this.content.classList.add('h5p-multi-media-choice-wrong');
+  }
+
+  /**
+   * Shows if the answer was correct in the UI
+   */
+  showUnselectedSolution() {
+    if (this.correct && !this.isSelected()) {
+      this.content.classList.add('h5p-multi-media-choice-show-correct');
     }
   }
 
@@ -201,6 +212,7 @@ export class MultiMediaChoiceOption {
    */
   hideSolution() {
     this.content.classList.remove('h5p-multi-media-choice-correct');
+    this.content.classList.remove('h5p-multi-media-choice-show-correct');
     this.content.classList.remove('h5p-multi-media-choice-wrong');
   }
 
