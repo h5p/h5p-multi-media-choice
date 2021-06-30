@@ -7,13 +7,15 @@ export default class MultiMediaChoiceContent {
    * @param {object} params Parameters.
    * @param {number} contentId Content's id.
    * @param {object} [callbacks = {}] Callbacks.
+   * @param {string} assetsFilePath File path to the assets folder
    */
-  constructor(params = {}, contentId, callbacks = {}) {
+  constructor(params = {}, contentId, callbacks = {}, assetsFilePath) {
     this.params = params;
     this.contentId = contentId;
     this.callbacks = callbacks;
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
     this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
+    this.assetsFilePath = assetsFilePath;
 
     this.numberOfCorrectOptions = params.options.filter(option => option.correct).length;
 
@@ -38,6 +40,7 @@ export default class MultiMediaChoiceContent {
           this.aspectRatio,
           Math.min(this.params.behaviour.maxAlternativesPerRow, this.params.options.length),
           this.isSingleAnswer,
+          assetsFilePath,
           {
             onClick: () => this.toggleSelected(index),
             onKeyboardSelect: () => this.toggleSelected(index),

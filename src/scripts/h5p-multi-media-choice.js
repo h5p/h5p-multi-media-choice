@@ -49,6 +49,8 @@ export default class MultiMediaChoice extends H5P.Question {
         this.introduction = document.createElement('div');
         this.introduction.innerHTML = this.params.question;
         this.introduction.setAttribute('id', `h5p-mmc${contentId}`);
+        const div = document.createElement('img');
+        div.src = this.getLibraryFilePath('assets/placeholder1to1.svg');
         this.setIntroduction(this.introduction);
       }
 
@@ -59,7 +61,7 @@ export default class MultiMediaChoice extends H5P.Question {
         triggerInteracted: () => {
           this.triggerXAPI('interacted');
         },
-      });
+      }, this.getLibraryFilePath('assets/'));
 
       this.setContent(this.content.getDOM()); // Register content with H5P.Question
       this.addButtons();
