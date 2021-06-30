@@ -89,7 +89,7 @@ export class MultiMediaChoiceOption {
     let path = '';
     if (this.isEmpty(this.media.params.file)) {
       let localPath = 'assets/placeholder';
-      if (this.aspectRatio === '') {
+      if (this.aspectRatio === 'auto') {
         localPath += '1to1.svg';
       }
       else {
