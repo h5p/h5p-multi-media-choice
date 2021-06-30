@@ -25,7 +25,6 @@ export class MultiMediaChoiceOption {
     this.media = option.media;
     this.disableImageZooming = option.disableImageZooming;
     this.correct = option.correct;
-    this.tipsAndFeedback = option.tipsAndFeedback; // TODO: Currently not used
 
     this.callbacks = callbacks || {};
     this.callbacks.onClick = this.callbacks.onClick || (() => {});
@@ -94,9 +93,15 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} Image tag.
    */
   buildImage() {
-    const alt = this.isEmpty(this.media.params.alt) ? '' : this.media.params.alt;
-    const title = this.isEmpty(this.media.params.title) ? '' : this.media.params.alt;
-    const path = this.isEmpty(this.media.params.file) ? '' : this.media.params.file.path;
+    const alt = this.isEmpty(this.media.params.alt)
+      ? ''
+      : this.media.params.alt;
+    const title = this.isEmpty(this.media.params.title)
+      ? ''
+      : this.media.params.alt;
+    const path = this.isEmpty(this.media.params.file)
+      ? ''
+      : this.media.params.file.path;
     const image = document.createElement('img');
     image.setAttribute('src', H5P.getPath(path, this.contentId));
     image.setAttribute('alt', alt);
@@ -216,7 +221,8 @@ export class MultiMediaChoiceOption {
       const container = this.content;
       const width = container.clientWidth;
       const border = container.offsetWidth - width;
-      const padding = window.getComputedStyle(container).padding.replace('px', '') * 2;
+      const padding =
+        window.getComputedStyle(container).padding.replace('px', '') * 2;
       let [x, y] = this.aspectRatio.split('to');
       let height = ((width - padding) / x) * y;
       container.style.height = height + border + padding + 'px';
@@ -249,7 +255,10 @@ export class MultiMediaChoiceOption {
             return;
           }
 
-          this.callbacks.onKeyboardArrowKey(this, event.code.replace('Arrow', ''));
+          this.callbacks.onKeyboardArrowKey(
+            this,
+            event.code.replace('Arrow', '')
+          );
           break;
 
         case 'ArrowRight':
@@ -259,7 +268,10 @@ export class MultiMediaChoiceOption {
             return;
           }
 
-          this.callbacks.onKeyboardArrowKey(this, event.code.replace('Arrow', ''));
+          this.callbacks.onKeyboardArrowKey(
+            this,
+            event.code.replace('Arrow', '')
+          );
           break;
       }
     });
