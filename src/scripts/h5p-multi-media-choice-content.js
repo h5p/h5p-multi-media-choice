@@ -7,13 +7,15 @@ export default class MultiMediaChoiceContent {
    * @param {object} params Parameters.
    * @param {number} contentId Content's id.
    * @param {object} [callbacks = {}] Callbacks.
+   * @param {string} assetsFilePath File path to the assets folder
    */
-  constructor(params = {}, contentId, callbacks = {}) {
+  constructor(params = {}, contentId, callbacks = {}, assetsFilePath) {
     this.params = params;
     this.contentId = contentId;
     this.callbacks = callbacks;
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
     this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
+    this.assetsFilePath = assetsFilePath;
 
     this.numberOfCorrectOptions = params.options.filter(option => option.correct).length;
 
@@ -38,6 +40,7 @@ export default class MultiMediaChoiceContent {
           this.aspectRatio,
           Math.min(this.params.behaviour.maxAlternativesPerRow, this.params.options.length),
           this.isSingleAnswer,
+          assetsFilePath,
           {
             onClick: () => this.toggleSelected(index),
             onKeyboardSelect: () => this.toggleSelected(index),
@@ -121,11 +124,19 @@ export default class MultiMediaChoiceContent {
     }
 
     // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
-    const score = this.getRawScore();
+    let score = 0;
+    this.options.forEach(option => {
+      if (option.isSelected()) {
+        option.isCorrect() ? score++ : score--;
+      }
+    });
 
-    // Checkbox buttons, one point if above pass percentage
+    /**
+     * Checkbox buttons with single point.
+     * One point if (score / number of correct options) is above pass percentage
+     */
     if (self.params.behaviour.singlePoint) {
-      return this.isPassed(score) ? 1 : 0;
+      return (score * 100) / this.numberOfCorrectOptions >= this.params.behaviour.passPercentage ? 1 : 0;
     }
 
     return Math.max(0, score); // Negative score not allowed
@@ -137,21 +148,6 @@ export default class MultiMediaChoiceContent {
    */
   getSelectedIndexes() {
     return this.getSelectedOptions().map(option => this.options.indexOf(option));
-  }
-
-  /**
-   * Returns the raw score without any behaviour settings applied
-   * @return {number} raw score (1 point for correct answer, -1 point for incorrect answer)
-   * @private
-   */
-  getRawScore() {
-    let score = 0;
-    this.options.forEach(option => {
-      if (option.isSelected()) {
-        option.isCorrect() ? score++ : score--;
-      }
-    });
-    return score;
   }
 
   /**
@@ -183,8 +179,7 @@ export default class MultiMediaChoiceContent {
    * @returns {boolean} True if score is above the pass percentage
    */
   isPassed() {
-    const score = this.getRawScore();
-    return (score * 100) / this.numberOfCorrectOptions >= this.params.behaviour.passPercentage;
+    return this.getScore() * 100 / this.getMaxScore() >= this.params.behaviour.passPercentage ? true : false;
   }
 
   /**

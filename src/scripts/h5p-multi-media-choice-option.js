@@ -9,11 +9,12 @@ export class MultiMediaChoiceOption {
    * @param {boolean} singleAnswer true for radio buttons, false for checkboxes
    * @param {Object} [callbacks = {}] Callbacks.
    */
-  constructor(option, contentId, aspectRatio, maxAlternativesPerRow, singleAnswer, callbacks) {
+  constructor(option, contentId, aspectRatio, maxAlternativesPerRow, singleAnswer, assetsFilePath, callbacks) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.maxAlternativesPerRow = maxAlternativesPerRow;
     this.singleAnswer = singleAnswer;
+    this.assetsFilePath = assetsFilePath;
 
     this.media = option.media;
     this.disableImageZooming = option.disableImageZooming;
@@ -86,9 +87,21 @@ export class MultiMediaChoiceOption {
   buildImage() {
     const alt = this.isEmpty(this.media.params.alt) ? '' : this.media.params.alt;
     const title = this.isEmpty(this.media.params.title) ? '' : this.media.params.alt;
-    const path = this.isEmpty(this.media.params.file) ? '' : this.media.params.file.path;
+    let path = '';
+    if (this.isEmpty(this.media.params.file)) {
+      path = this.assetsFilePath + 'placeholder';
+      if (this.aspectRatio === 'auto') {
+        path += '1to1.svg';
+      }
+      else {
+        path += this.aspectRatio + '.svg';
+      }
+    }
+    else {
+      path = H5P.getPath(this.media.params.file.path, this.contentId);
+    }
     const image = document.createElement('img');
-    image.setAttribute('src', H5P.getPath(path, this.contentId));
+    image.setAttribute('src', path);
     image.setAttribute('alt', alt);
     image.addEventListener('load', this.callbacks.triggerResize);
     image.setAttribute('title', title);
@@ -104,13 +117,6 @@ export class MultiMediaChoiceOption {
    */
   isEmpty(text) {
     return text === null || text === undefined || text === '';
-  }
-
-  /**
-   * @returns {boolean} True if the option is single answer
-   */
-  isSingleAnswer() {
-    return this.singleAnswer;
   }
 
   /**
