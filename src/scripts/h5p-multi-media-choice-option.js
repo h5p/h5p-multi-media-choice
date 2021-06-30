@@ -26,8 +26,6 @@ export class MultiMediaChoiceOption {
     this.callbacks.onKeyboardArrowKey = this.callbacks.onKeyboardArrowKey || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
 
-    this.isValid = true; // If the media content is valid or not
-
     this.content = document.createElement('li');
     this.content.classList.add('h5p-multi-media-choice-option-container');
 
@@ -43,10 +41,6 @@ export class MultiMediaChoiceOption {
     this.content.addEventListener('click', this.callbacks.onClick);
 
     const mediaContent = this.createMediaContent();
-    if (!mediaContent) {
-      this.isValid = false;
-      return;
-    }
     this.content.appendChild(mediaContent);
 
     this.addKeyboardHandlers(this.content);
@@ -62,8 +56,6 @@ export class MultiMediaChoiceOption {
     switch (this.media.metadata.contentType) {
       case 'Image':
         return this.buildImage(this.option);
-      default:
-        return undefined;
     }
   }
 
