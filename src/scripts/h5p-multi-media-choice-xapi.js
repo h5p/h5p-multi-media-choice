@@ -3,9 +3,7 @@
  * serializable object.
  */
 export function getCurrentState(selectedIndexes) {
-  const state = { answers: selectedIndexes.toString() };
-  // TODO: Update this if answers are randomized
-  return state;
+  return { answers: selectedIndexes.toString() };
 }
 
 /**
