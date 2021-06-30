@@ -202,7 +202,7 @@ export class MultiMediaChoiceOption {
   }
 
   scaleMedia() {
-    if (this.aspectRatio !== '') {
+    if (this.aspectRatio !== 'auto') {
       const container = this.content;
       const width = container.clientWidth;
       const border = container.offsetWidth - width;

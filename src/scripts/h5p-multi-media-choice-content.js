@@ -22,9 +22,7 @@ export default class MultiMediaChoiceContent {
         ? this.numberOfCorrectOptions === 1
         : this.params.behaviour.questionType === 'single';
 
-    this.aspectRatio = this.params.behaviour.sameAspectRatio
-      ? this.params.behaviour.aspectRatio
-      : '';
+    this.aspectRatio = this.params.behaviour.aspectRatio;
 
     this.lastSelectedRadioButtonOption = null;
 
