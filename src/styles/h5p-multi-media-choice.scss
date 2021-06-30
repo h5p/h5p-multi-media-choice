@@ -15,7 +15,7 @@
 
   .h5p-multi-media-choice-option-container {
     display: inline-block;
-    margin: 0 0 $option-gap;
+    margin: $option-gap / 2 0;
     width: 100%;
 
     box-sizing: border-box;
