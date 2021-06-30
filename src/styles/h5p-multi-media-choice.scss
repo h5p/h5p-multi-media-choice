@@ -13,7 +13,10 @@
   }
 
   .h5p-multi-media-choice-option-container {
-    display: inline-block;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    display: block;
     margin: $option-gap / 2 0;
     width: 100%;
 
