@@ -86,7 +86,20 @@ export class MultiMediaChoiceOption {
   buildImage() {
     const alt = this.isEmpty(this.media.params.alt) ? '' : this.media.params.alt;
     const title = this.isEmpty(this.media.params.title) ? '' : this.media.params.alt;
-    const path = this.isEmpty(this.media.params.file) ? '' : this.media.params.file.path;
+    let path = '';
+    if (this.isEmpty(this.media.params.file)) {
+      let localPath = 'assets/placeholder';
+      if (this.aspectRatio === '') {
+        localPath += '1to1.svg';
+      }
+      else {
+        localPath += this.aspectRatio + '.svg';
+      }
+      path = H5P.getLibraryPath(localPath);
+    }
+    else {
+      path = this.media.params.file.path;
+    }
     const image = document.createElement('img');
     image.setAttribute('src', H5P.getPath(path, this.contentId));
     image.setAttribute('alt', alt);
