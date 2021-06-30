@@ -1,8 +1,7 @@
 @use './colors' as *;
-@use  './sizes' as *;
+@use './sizes' as *;
 
 .h5p-multi-media-choice {
-
   .h5p-multi-media-choice-options {
     column-count: 5; // overwritten by editor value "maxAlternativesPerRow", 5 is the fallback
     column-width: $option-width;
@@ -53,7 +52,7 @@
           width: 100%;
           height: 100%;
           background-color: $color-border-interaction;
-          opacity: .15;
+          opacity: 0.15;
         }
       }
     }
@@ -78,22 +77,21 @@
         width: 100%;
         height: 100%;
         background-color: $color-border-interaction;
-        opacity: .15;
+        opacity: 0.15;
       }
     }
 
     &:focus {
-      outline:none;
+      outline: none;
       border-color: $color-border-interaction;
     }
   }
 
-  .h5p-multi-media-choice-correct{
+  .h5p-multi-media-choice-correct {
     border-color: $color-correct;
   }
 
   .h5p-multi-media-choice-wrong {
     border-color: $color-wrong;
   }
-
 }
