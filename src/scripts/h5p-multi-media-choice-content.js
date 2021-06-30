@@ -67,9 +67,7 @@ export default class MultiMediaChoiceContent {
     optionList.style.columnCount = this.params.behaviour.maxAlternativesPerRow;
 
     this.options.forEach(option => {
-      if (option.isValid) {
-        optionList.appendChild(option.getDOM());
-      }
+      optionList.appendChild(option.getDOM());
     });
     return optionList;
   }
