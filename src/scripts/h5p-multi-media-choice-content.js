@@ -179,7 +179,7 @@ export default class MultiMediaChoiceContent {
    * @returns {boolean} True if score is above the pass percentage
    */
   isPassed() {
-    return this.getScore() * 100 / this.getMaxScore() >= this.params.behaviour.passPercentage ? true : false;
+    return this.getScore() * 100 / this.getMaxScore() >= this.params.behaviour.passPercentage;
   }
 
   /**
