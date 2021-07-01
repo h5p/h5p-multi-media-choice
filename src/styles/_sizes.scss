@@ -1,4 +1,7 @@
 $option-gap: 1em;
 $option-width: 15em;
 $border-radius: 4px;
-$border-stroke-width: 2px;
+$border-thin-stroke-width: 2px;
+$border-thick-stroke-width: 4px;
+$option-padding-default: 1em;
+$border-stroke-width-difference: $border-thick-stroke-width - $border-thin-stroke-width;
