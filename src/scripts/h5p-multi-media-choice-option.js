@@ -85,11 +85,11 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} Image tag.
    */
   buildImage() {
-    const alt = this.isEmpty(this.media.params.alt) ? '' : this.media.params.alt;
-    const title = this.isEmpty(this.media.params.title) ? '' : this.media.params.alt;
+    const alt = !this.media.params.alt ? '' : this.media.params.alt;
+    const title = !this.media.params.title ? '' : this.media.params.alt;
 
     let path = '';
-    if (this.isEmpty(this.media.params.file)) {
+    if (!this.media.params.file) {
       const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
       path = `${this.assetsFilePath}/placeholder${placeholderAspectRatio}.svg`;
     }
@@ -105,15 +105,6 @@ export class MultiMediaChoiceOption {
     image.classList.add('h5p-multi-media-choice-media');
 
     return image;
-  }
-
-  /**
-   * Checks if string is empty
-   * @param {string} text
-   * @returns {boolean} True if empty
-   */
-  isEmpty(text) {
-    return text === null || text === undefined || text === '';
   }
 
   /**
