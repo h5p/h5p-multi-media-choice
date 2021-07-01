@@ -1,4 +1,5 @@
 @use './colors' as *;
+@use './mixins' as *;
 @use './sizes' as *;
 @use 'sass:math';
 
@@ -54,15 +55,7 @@
         border-color: $color-border-interaction;
 
         &:after {
-          // Adds the overlay effect
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: $color-border-interaction;
-          opacity: 0.15;
+          @include hover-overlay();
         }
       }
     }
@@ -79,15 +72,7 @@
 
     &:hover {
       &:after {
-        // Adds the overlay effect
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: $color-border-interaction;
-        opacity: 0.15;
+        @include hover-overlay();
       }
     }
 
@@ -100,11 +85,13 @@
   @keyframes slide-right-fade {
     from {
       opacity: 0;
-      transform: translate(0);
+      left: 0%;
+      transform: translate(0%);
     }
     to {
       opacity: 1;
-      transform: translate(math.div($option-width, 2) - 2 * $option-icon + 1em);
+      left: 50%;
+      transform: translate(-50%);
     }
   }
 
@@ -115,14 +102,7 @@
     position: relative;
 
     &:before {
-      position: absolute;
-      top: 0;
-      animation: slide-right-fade 0.25s forwards ease-out;
-
-      font-family: 'Material Icons';
-      font-size: $option-icon;
-      content: '\e994';
-      color: $color-correct-dark;
+      @include solution-button('\e86c', $color-correct-dark);
     }
   }
 
@@ -134,14 +114,7 @@
     position: relative;
 
     &:before {
-      position: absolute;
-      top: 0;
-      animation: slide-right-fade 0.25s forwards ease-out;
-
-      font-family: 'Material Icons';
-      font-size: $option-icon;
-      content: '\e994';
-      color: $color-show-correct-dark;
+      @include solution-button('\e86c', $color-show-correct-dark);
     }
   }
 
@@ -152,14 +125,7 @@
     position: relative;
 
     &:before {
-      position: absolute;
-      top: 0;
-      animation: slide-right-fade 0.25s forwards ease-out;
-
-      font-family: 'Material Icons';
-      font-size: $option-icon;
-      content: '\e99d';
-      color: $color-wrong-dark;
+      @include solution-button('\e5c9', $color-wrong-dark);
     }
   }
 }
