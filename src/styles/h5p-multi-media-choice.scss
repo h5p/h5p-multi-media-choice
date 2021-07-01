@@ -132,4 +132,10 @@
       @include solution-button('\e5c9', $color-wrong-dark);
     }
   }
+
+  @media only screen and (max-width: 900px) {
+    .h5p-multi-media-choice-option-list {
+      column-count: 2 !important;
+    }
+  }
 }
