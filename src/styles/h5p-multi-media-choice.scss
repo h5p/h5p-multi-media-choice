@@ -7,7 +7,7 @@
   .h5p-multi-media-choice-option-list {
     column-count: 5; // overwritten by editor value "maxAlternativesPerRow", 5 is the fallback
     column-width: $option-width;
-    column-gap: $option-gap;
+    column-gap: $masonry-gap;
     display: inline-block;
 
     // Removes <ul> default indentation
@@ -18,8 +18,7 @@
   .h5p-multi-media-choice-list-item {
     display: block;
     box-sizing: border-box;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding: math.div($masonry-gap, 2) 0;
     break-inside: avoid;
   }
 
