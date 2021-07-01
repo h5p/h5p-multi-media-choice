@@ -179,7 +179,6 @@ export default class MultiMediaChoiceContent {
    * Show which selected options are right and which are wrong
    */
   showSelectedSolutions() {
-    this.disableSelectables();
     this.options.forEach(option => option.showSelectedSolution());
   }
 
