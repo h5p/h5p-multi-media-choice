@@ -101,15 +101,10 @@ export default class MultiMediaChoiceContent {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
    */
   getMaxScore() {
-    if (this.params.behaviour.singlePoint || this.isSingleAnswer) {
+    if (this.params.behaviour.singlePoint || this.isSingleAnswer || this.isBlankCorrect()) {
       return 1;
     }
-    else if (this.isBlankCorrect()) {
-      return 1;
-    }
-    else {
-      return this.numberOfCorrectOptions;
-    }
+    return this.numberOfCorrectOptions;
   }
 
   /**
@@ -118,14 +113,13 @@ export default class MultiMediaChoiceContent {
    */
   getScore() {
     // One point if no correct options and no selected options
-    const self = this;
-    if (!self.isAnyAnswerSelected()) {
-      return self.isBlankCorrect() ? 1 : 0;
+    if (!this.isAnyAnswerSelected()) {
+      return this.isBlankCorrect() ? 1 : 0;
     }
 
     // Radio buttons, only one answer
-    if (self.isSingleAnswer) {
-      return self.lastSelectedRadioButtonOption.isCorrect() ? 1 : 0;
+    if (this.isSingleAnswer) {
+      return this.lastSelectedRadioButtonOption.isCorrect() ? 1 : 0;
     }
 
     // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
@@ -140,7 +134,7 @@ export default class MultiMediaChoiceContent {
      * Checkbox buttons with single point.
      * One point if (score / number of correct options) is above pass percentage
      */
-    if (self.params.behaviour.singlePoint) {
+    if (this.params.behaviour.singlePoint) {
       return (score * 100) / this.numberOfCorrectOptions >= this.params.behaviour.passPercentage
         ? 1
         : 0;
