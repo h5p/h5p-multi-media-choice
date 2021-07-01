@@ -31,10 +31,10 @@
     background-color: #ffffff;
 
     border-style: solid;
-    border-width: $border-stroke-width;
+    border-width: $border-thin-stroke-width;
     border-radius: $border-radius;
     border-color: $color-option-background;
-    padding: 1em;
+    padding: $option-padding-default;
   }
 
   .h5p-multi-media-choice-media {
@@ -62,7 +62,7 @@
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 $border-radius $border-stroke-width $color-border-interaction;
+      box-shadow: 0 0 $border-radius $border-thin-stroke-width $color-border-interaction;
     }
   }
 
@@ -98,7 +98,9 @@
   .h5p-multi-media-choice-correct {
     background-color: $color-correct-light;
     border-color: $color-correct-dark;
-    border-width: 2 * $border-stroke-width;
+    border-width: $border-thick-stroke-width;
+    // This ensures the option stays the same size (padding + border is constant)
+    padding: calc(#{$option-padding-default} - #{$border-stroke-width-difference});
     position: relative;
 
     &:before {
@@ -108,9 +110,9 @@
 
   .h5p-multi-media-choice-show-correct {
     background-color: $color-show-correct-light;
-    border-color: $color-show-correct-dark;
-    border-width: 2 * $border-stroke-width;
-    border-style: dotted;
+    border: $color-show-correct-dark dotted $border-thick-stroke-width;
+    // This ensures the option stays the same size (padding + border is constant)
+    padding: calc(#{$option-padding-default} - #{$border-stroke-width-difference});
     position: relative;
 
     &:before {
@@ -121,7 +123,9 @@
   .h5p-multi-media-choice-wrong {
     background-color: $color-wrong-light;
     border-color: $color-wrong-dark;
-    border-width: 2 * $border-stroke-width;
+    border-width: $border-thick-stroke-width;
+    // This ensures the option stays the same size (padding + border is constant)
+    padding: calc(#{$option-padding-default} - #{$border-stroke-width-difference});
     position: relative;
 
     &:before {

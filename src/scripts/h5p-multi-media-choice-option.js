@@ -5,7 +5,6 @@ export class MultiMediaChoiceOption {
    * @param {Object} option Option object from the editor
    * @param {number} contentId Content's id.
    * @param {string} aspectRatio Aspect ratio used if all options should conform to the same size
-   * @param {number} maxAlternativesPerRow Max allowed alternatives per row if space is available
    * @param {boolean} singleAnswer true for radio buttons, false for checkboxes
    * @param {Object} [callbacks = {}] Callbacks.
    */
@@ -13,14 +12,12 @@ export class MultiMediaChoiceOption {
     option,
     contentId,
     aspectRatio,
-    maxAlternativesPerRow,
     singleAnswer,
     assetsFilePath,
     callbacks
   ) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
-    this.maxAlternativesPerRow = maxAlternativesPerRow;
     this.singleAnswer = singleAnswer;
     this.assetsFilePath = assetsFilePath;
 

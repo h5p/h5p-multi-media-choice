@@ -31,6 +31,14 @@ export default class MultiMediaChoiceContent {
     this.content = document.createElement('div');
     this.content.classList.add('h5p-multi-media-choice-content');
 
+    // Calculate max alternatives per row
+    this.maxAlternativesPerRow = 5; // Default value
+    if (this.params.behaviour.maxAlternativesPerRow) {
+      this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
+    }
+    // Max alternatives per row should not be greater than the number of alternatives
+    this.maxAlternativesPerRow = Math.min(this.params.options.length, this.maxAlternativesPerRow);
+
     // Build n options
     this.options = params.options.map(
       (option, index) =>
@@ -38,7 +46,6 @@ export default class MultiMediaChoiceContent {
           option,
           contentId,
           this.aspectRatio,
-          Math.min(this.params.behaviour.maxAlternativesPerRow, this.params.options.length),
           this.isSingleAnswer,
           assetsFilePath,
           {
@@ -64,7 +71,7 @@ export default class MultiMediaChoiceContent {
     optionList.setAttribute('role', this.isSingleAnswer ? 'radiogroup' : 'group');
     optionList.setAttribute('aria-labelledby', `h5p-mmc${this.contentId}`);
     optionList.classList.add('h5p-multi-media-choice-option-list');
-    optionList.style.columnCount = this.params.behaviour.maxAlternativesPerRow;
+    optionList.style.columnCount = this.maxAlternativesPerRow;
 
     this.options.forEach(option => {
       optionList.appendChild(option.getDOM());
