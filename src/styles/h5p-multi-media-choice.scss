@@ -112,6 +112,7 @@
     background-color: $color-correct-light;
     border-color: $color-correct-dark;
     border-width: $border-thick-stroke-width;
+    // This ensures the option stays the same size (padding + border is constant)
     padding: calc(#{$option-padding-default} - #{$border-stroke-width-difference});
     position: relative;
 
@@ -130,6 +131,7 @@
   .h5p-multi-media-choice-show-correct {
     background-color: $color-show-correct-light;
     border: $color-show-correct-dark dotted $border-thick-stroke-width;
+    // This ensures the option stays the same size (padding + border is constant)
     padding: calc(#{$option-padding-default} - #{$border-stroke-width-difference});
     position: relative;
 
@@ -149,6 +151,7 @@
     background-color: $color-wrong-light;
     border-color: $color-wrong-dark;
     border-width: $border-thick-stroke-width;
+    // This ensures the option stays the same size (padding + border is constant)
     padding: calc(#{$option-padding-default} - #{$border-stroke-width-difference});
     position: relative;
 
