@@ -36,6 +36,11 @@
         "machineName": "H5P.Image",
         "majorVersion": 1,
         "minorVersion": 1
+      },
+      {
+        "machineName": "H5P.MaterialDesignIcons",
+        "majorVersion": 1,
+        "minorVersion": 0
       }
     ],
     "editorDependencies": [

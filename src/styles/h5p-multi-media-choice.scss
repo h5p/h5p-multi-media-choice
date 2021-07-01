@@ -1,5 +1,6 @@
 @use './colors' as *;
 @use './sizes' as *;
+@use 'sass:math';
 
 .h5p-multi-media-choice {
   .h5p-multi-media-choice-option-list {
@@ -96,10 +97,33 @@
     }
   }
 
+  @keyframes slide-right-fade {
+    from {
+      opacity: 0;
+      transform: translate(0);
+    }
+    to {
+      opacity: 1;
+      transform: translate(math.div($option-width, 2) - 2 * $option-icon + 1em);
+    }
+  }
+
   .h5p-multi-media-choice-correct {
     background-color: $color-correct-light;
     border-color: $color-correct-dark;
     border-width: 2 * $border-stroke-width;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      animation: slide-right-fade 0.25s forwards ease-out;
+
+      font-family: 'Material Icons';
+      font-size: $option-icon;
+      content: '\e994';
+      color: $color-correct-dark;
+    }
   }
 
   .h5p-multi-media-choice-show-correct {
@@ -107,11 +131,35 @@
     border-color: $color-show-correct-dark;
     border-width: 2 * $border-stroke-width;
     border-style: dotted;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      animation: slide-right-fade 0.25s forwards ease-out;
+
+      font-family: 'Material Icons';
+      font-size: $option-icon;
+      content: '\e994';
+      color: $color-show-correct-dark;
+    }
   }
 
   .h5p-multi-media-choice-wrong {
     background-color: $color-wrong-light;
     border-color: $color-wrong-dark;
     border-width: 2 * $border-stroke-width;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      animation: slide-right-fade 0.25s forwards ease-out;
+
+      font-family: 'Material Icons';
+      font-size: $option-icon;
+      content: '\e99d';
+      color: $color-wrong-dark;
+    }
   }
 }
