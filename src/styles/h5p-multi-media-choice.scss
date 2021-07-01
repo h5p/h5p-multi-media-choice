@@ -9,20 +9,22 @@
     display: inline-block;
 
     // Removes <ul> default indentation
+    padding: 0;
     list-style-type: none;
   }
 
   .h5p-multi-media-choice-list-item {
     display: block;
     box-sizing: border-box;
-    list-style-type: none;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     break-inside: avoid;
   }
 
   .h5p-multi-media-choice-option {
+    // Removes space below images
     line-height: 0;
+
     box-sizing: border-box;
     background-color: #ffffff;
 
