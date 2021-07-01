@@ -63,7 +63,7 @@ export default class MultiMediaChoiceContent {
     const optionList = document.createElement('ul');
     optionList.setAttribute('role', this.isSingleAnswer ? 'radiogroup' : 'group');
     optionList.setAttribute('aria-labelledby', `h5p-mmc${this.contentId}`);
-    optionList.classList.add('h5p-multi-media-choice-options');
+    optionList.classList.add('h5p-multi-media-choice-option-list');
     optionList.style.columnCount = this.params.behaviour.maxAlternativesPerRow;
 
     this.options.forEach(option => {

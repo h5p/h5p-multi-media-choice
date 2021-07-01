@@ -34,8 +34,11 @@ export class MultiMediaChoiceOption {
     this.callbacks.onKeyboardArrowKey = this.callbacks.onKeyboardArrowKey || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
 
-    this.content = document.createElement('li');
-    this.content.classList.add('h5p-multi-media-choice-option-container');
+    this.listItem = document.createElement('li');
+    this.listItem.classList.add('h5p-multi-media-choice-list-item');
+    this.content = document.createElement('div');
+    this.content.classList.add('h5p-multi-media-choice-option');
+    this.listItem.appendChild(this.content);
 
     if (singleAnswer) {
       this.content.setAttribute('role', 'radio');
@@ -142,7 +145,7 @@ export class MultiMediaChoiceOption {
    * @return {HTMLElement} DOM for this class
    */
   getDOM() {
-    return this.content;
+    return this.listItem;
   }
 
   /**

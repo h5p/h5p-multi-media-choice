@@ -2,26 +2,29 @@
 @use './sizes' as *;
 
 .h5p-multi-media-choice {
-  .h5p-multi-media-choice-options {
+  .h5p-multi-media-choice-option-list {
     column-count: 5; // overwritten by editor value "maxAlternativesPerRow", 5 is the fallback
     column-width: $option-width;
     column-gap: $option-gap;
+    display: inline-block;
 
     // Removes <ul> default indentation
-    padding: 0;
     list-style-type: none;
   }
 
-  .h5p-multi-media-choice-option-container {
-    background-color: #ffffff;
-    -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-    break-inside: avoid;
+  .h5p-multi-media-choice-list-item {
     display: block;
-    margin: $option-gap / 2 0;
-    width: 100%;
-
     box-sizing: border-box;
+    list-style-type: none;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    break-inside: avoid;
+  }
+
+  .h5p-multi-media-choice-option {
+    line-height: 0;
+    box-sizing: border-box;
+    background-color: #ffffff;
 
     border-style: solid;
     border-width: $border-stroke-width;
