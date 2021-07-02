@@ -8,14 +8,7 @@ export class MultiMediaChoiceOption {
    * @param {boolean} singleAnswer true for radio buttons, false for checkboxes
    * @param {Object} [callbacks = {}] Callbacks.
    */
-  constructor(
-    option,
-    contentId,
-    aspectRatio,
-    singleAnswer,
-    assetsFilePath,
-    callbacks
-  ) {
+  constructor(option, contentId, aspectRatio, singleAnswer, assetsFilePath, callbacks) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.singleAnswer = singleAnswer;
@@ -181,19 +174,22 @@ export class MultiMediaChoiceOption {
   disable() {
     this.content.setAttribute('aria-disabled', 'true');
     this.content.classList.remove('h5p-multi-media-choice-enabled');
+    this.content.setAttribute('tabindex', '-1');
   }
 
   /**
    * Shows if the answer selected is correct or wrong in the UI if selected
    */
-  showSelectedSolution() {
+  showSelectedSolution({ correctAnswer, wrongAnswer }) {
     this.content.classList.remove('h5p-multi-media-choice-selected');
     if (this.isSelected()) {
       if (this.correct) {
         this.content.classList.add('h5p-multi-media-choice-correct');
+        this.addAccessibilitySolutionText(correctAnswer);
       }
       else {
         this.content.classList.add('h5p-multi-media-choice-wrong');
+        this.addAccessibilitySolutionText(wrongAnswer);
       }
     }
   }
@@ -201,10 +197,26 @@ export class MultiMediaChoiceOption {
   /**
    * Shows if the answer was correct in the UI
    */
-  showUnselectedSolution() {
-    if (this.correct && !this.isSelected()) {
-      this.content.classList.add('h5p-multi-media-choice-show-correct');
+  showUnselectedSolution({ shouldCheck, shouldNotCheck }) {
+    if (!this.isSelected()) {
+      if (this.correct) {
+        this.content.classList.add('h5p-multi-media-choice-show-correct');
+        this.addAccessibilitySolutionText(shouldCheck);
+      }
+      else {
+        this.addAccessibilitySolutionText(shouldNotCheck);
+      }
     }
+  }
+
+  /**
+   * Adds solution feedback for screen reader
+   */
+  addAccessibilitySolutionText(solutionText) {
+    this.accessibilitySolutionText = document.createElement('span');
+    this.accessibilitySolutionText.classList.add('hidden-accessibility-solution-text');
+    this.accessibilitySolutionText.innerText = `${solutionText}.`;
+    this.content.appendChild(this.accessibilitySolutionText);
   }
 
   /**
@@ -214,6 +226,9 @@ export class MultiMediaChoiceOption {
     this.content.classList.remove('h5p-multi-media-choice-correct');
     this.content.classList.remove('h5p-multi-media-choice-show-correct');
     this.content.classList.remove('h5p-multi-media-choice-wrong');
+    if (this.accessibilitySolutionText) {
+      this.accessibilitySolutionText.parentNode.removeChild(this.accessibilitySolutionText);
+    }
   }
 
   scaleMedia() {

@@ -179,14 +179,24 @@ export default class MultiMediaChoiceContent {
    * Show which selected options are right and which are wrong
    */
   showSelectedSolutions() {
-    this.options.forEach(option => option.showSelectedSolution());
+    this.options.forEach(option =>
+      option.showSelectedSolution({
+        correctAnswer: this.params.l10n.correctAnswer,
+        wrongAnswer: this.params.l10n.wrongAnswer,
+      })
+    );
   }
 
   /**
    * Show which unselected options were right
    */
   showUnselectedSolutions() {
-    this.options.forEach(option => option.showUnselectedSolution());
+    this.options.forEach(option =>
+      option.showUnselectedSolution({
+        shouldCheck: this.params.l10n.shouldCheck,
+        shouldNotCheck: this.params.l10n.shouldNotCheck,
+      })
+    );
   }
 
   /**

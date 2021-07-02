@@ -132,6 +132,16 @@
     }
   }
 
+  .hidden-accessibility-solution-text {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
   @media only screen and (max-width: 900px) {
     .h5p-multi-media-choice-option-list {
       column-count: 2 !important;

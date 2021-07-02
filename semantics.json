@@ -296,6 +296,36 @@
         "default": "Show the solution. The crossword will be filled with its correct solution."
       },
       {
+        "name": "correctAnswer",
+        "type": "text",
+        "label": "Correct Answer (not displayed)",
+        "importance": "low",
+        "default": "Correct answer"
+      },
+      {
+        "name": "wrongAnswer",
+        "type": "text",
+        "label": "Wrong Answer (not displayed)",
+        "importance": "low",
+        "default": "Wrong answer"
+      },
+      {
+        "name": "shouldCheck",
+        "type": "text",
+        "label": "Option should have been checked",
+        "importance": "low",
+        "default": "Should have been checked",
+        "optional": true
+      },
+      {
+        "name": "shouldNotCheck",
+        "type": "text",
+        "label": "Option should not have been checked",
+        "importance": "low",
+        "default": "Should not have been checked",
+        "optional": true
+      },
+      {
         "label": "Text for \"Requires answer\" message",
         "importance": "low",
         "name": "noAnswer",
