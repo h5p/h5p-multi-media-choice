@@ -199,6 +199,19 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
+   * Focuses on an unselected solution (if present)
+   * This is useful for the screen reader especially
+   */
+  focusUnselectedSolution() {
+    const unselectedSolution = document.getElementsByClassName(
+      'h5p-multi-media-choice-show-correct'
+    )[0];
+    if (unselectedSolution) {
+      unselectedSolution.focus();
+    }
+  }
+
+  /**
    * Hide the solution(s) cues
    */
   hideSolutions() {
