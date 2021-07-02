@@ -54,9 +54,16 @@ export class MultiMediaChoiceOption {
    * @returns {undefined} Undefined if the content type cannot be created
    */
   createMediaContent() {
+    const mediaWrapper = document.createElement('div');
+    mediaWrapper.classList.add('h5p-multi-media-choice-media-wrapper');
+    if (this.aspectRatio !== 'auto') {
+      mediaWrapper.classList.add('h5p-multi-media-choice-media-wrapper-specific-ratio');
+      mediaWrapper.classList.add(`h5p-multi-media-choice-media-wrapper-${this.aspectRatio}`);
+    }
     switch (this.media.metadata.contentType) {
       case 'Image':
-        return this.buildImage(this.option);
+        mediaWrapper.appendChild(this.buildImage(this.option));
+        return mediaWrapper;
     }
   }
 
@@ -78,11 +85,11 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} Image tag.
    */
   buildImage() {
-    const alt = this.isEmpty(this.media.params.alt) ? '' : this.media.params.alt;
-    const title = this.isEmpty(this.media.params.title) ? '' : this.media.params.alt;
+    const alt = !this.media.params.alt ? '' : this.media.params.alt;
+    const title = !this.media.params.title ? '' : this.media.params.alt;
 
     let path = '';
-    if (this.isEmpty(this.media.params.file)) {
+    if (!this.media.params.file) {
       const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
       path = `${this.assetsFilePath}/placeholder${placeholderAspectRatio}.svg`;
     }
@@ -97,16 +104,11 @@ export class MultiMediaChoiceOption {
     image.setAttribute('title', title);
     image.classList.add('h5p-multi-media-choice-media');
 
-    return image;
-  }
+    if (this.aspectRatio !== 'auto') {
+      image.classList.add('h5p-multi-media-choice-media-specific-ratio');
+    }
 
-  /**
-   * Checks if string is empty
-   * @param {string} text
-   * @returns {boolean} True if empty
-   */
-  isEmpty(text) {
-    return text === null || text === undefined || text === '';
+    return image;
   }
 
   /**
@@ -231,17 +233,6 @@ export class MultiMediaChoiceOption {
     }
   }
 
-  scaleMedia() {
-    if (this.aspectRatio !== 'auto') {
-      const container = this.content;
-      const width = container.clientWidth;
-      const border = container.offsetWidth - width;
-      const padding = window.getComputedStyle(container).padding.replace('px', '') * 2;
-      let [x, y] = this.aspectRatio.split('to');
-      let height = ((width - padding) / x) * y;
-      container.style.height = height + border + padding + 'px';
-    }
-  }
 
   addKeyboardHandlers(content) {
     content.addEventListener('keydown', event => {
