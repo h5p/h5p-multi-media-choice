@@ -174,7 +174,8 @@
     width: 1px;
   }
 
-  @media only screen and (max-width: 900px) {
+  //Set the max number of columns to 2 when the screen size becomes to small to detect
+  @media only screen and (max-width: $minimun-auto-scaling-size) {
     .h5p-multi-media-choice-option-list {
       column-count: 2 !important;
     }
