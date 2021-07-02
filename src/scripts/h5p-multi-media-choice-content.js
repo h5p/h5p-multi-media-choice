@@ -262,6 +262,7 @@ export default class MultiMediaChoiceContent {
    */
   disableSelectables() {
     this.options.forEach(option => option.disable());
+    this.setTabIndexes(-1);
   }
 
   setTabIndexes(value = null) {
