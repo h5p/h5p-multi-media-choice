@@ -19,6 +19,7 @@
   filter: drop-shadow(7px 7px 4px #00000065);
 
   z-index: 1;
+  overflow: overlay;
 }
 
 @mixin hover-overlay() {

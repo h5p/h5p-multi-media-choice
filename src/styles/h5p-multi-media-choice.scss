@@ -19,7 +19,8 @@
   .h5p-multi-media-choice-list-item {
     display: block;
     box-sizing: border-box;
-    padding: math.div($masonry-gap, 2) 0;
+    padding-top: $masonry-gap * 0.75;
+    padding-bottom: $masonry-gap * 0.25;
     break-inside: avoid;
   }
 
