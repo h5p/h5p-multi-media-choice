@@ -51,8 +51,7 @@ export default class MultiMediaChoiceContent {
           {
             onClick: () => this.toggleSelected(index),
             onKeyboardSelect: () => this.toggleSelected(index),
-            onKeyboardArrowKey: direction =>
-              this.handleOptionArrowKey(index, direction),
+            onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
             triggerResize: this.callbacks.triggerResize,
           }
         )
