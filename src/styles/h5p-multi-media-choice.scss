@@ -13,6 +13,7 @@
     // Removes <ul> default indentation
     padding-left: 0;
     list-style-type: none;
+    width: 100%;
   }
 
   .h5p-multi-media-choice-list-item {
@@ -36,12 +37,42 @@
     padding: $option-padding-default;
   }
 
+  .h5p-multi-media-choice-media-wrapper {
+    // Using the padding-top trick to have a specific ratio
+    &.h5p-multi-media-choice-media-wrapper-specific-ratio {
+      height: 0;
+      overflow: hidden;
+      position: relative;
+    }
+    &.h5p-multi-media-choice-media-wrapper-1to1 {
+      padding-top: 100%;
+    }
+
+    &.h5p-multi-media-choice-media-wrapper-3to2 {
+      padding-top: 66.67%;
+    }
+
+    &.h5p-multi-media-choice-media-wrapper-4to3 {
+      padding-top: 75%;
+    }
+
+    &.h5p-multi-media-choice-media-wrapper-16to9 {
+      padding-top: 56.25%;
+    }
+  }
+
   .h5p-multi-media-choice-media {
     background-color: $color-option-background;
     display: inline-block;
     object-fit: contain;
     width: 100%;
     height: 100%;
+
+    &.h5p-multi-media-choice-media-specific-ratio {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   }
 
   .h5p-multi-media-choice-enabled {

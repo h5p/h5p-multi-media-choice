@@ -61,9 +61,16 @@ export class MultiMediaChoiceOption {
    * @returns {undefined} Undefined if the content type cannot be created
    */
   createMediaContent() {
+    const mediaWrapper = document.createElement('div');
+    mediaWrapper.classList.add('h5p-multi-media-choice-media-wrapper');
+    if (this.aspectRatio !== 'auto') {
+      mediaWrapper.classList.add('h5p-multi-media-choice-media-wrapper-specific-ratio');
+      mediaWrapper.classList.add(`h5p-multi-media-choice-media-wrapper-${this.aspectRatio}`);
+    }
     switch (this.media.metadata.contentType) {
       case 'Image':
-        return this.buildImage(this.option);
+        mediaWrapper.appendChild(this.buildImage(this.option));
+        return mediaWrapper;
     }
   }
 
@@ -103,6 +110,10 @@ export class MultiMediaChoiceOption {
     image.addEventListener('load', this.callbacks.triggerResize);
     image.setAttribute('title', title);
     image.classList.add('h5p-multi-media-choice-media');
+
+    if (this.aspectRatio !== 'auto') {
+      image.classList.add('h5p-multi-media-choice-media-specific-ratio');
+    }
 
     return image;
   }
@@ -207,17 +218,6 @@ export class MultiMediaChoiceOption {
     this.content.classList.remove('h5p-multi-media-choice-wrong');
   }
 
-  scaleMedia() {
-    if (this.aspectRatio !== 'auto') {
-      const container = this.content;
-      const width = container.clientWidth;
-      const border = container.offsetWidth - width;
-      const padding = window.getComputedStyle(container).padding.replace('px', '') * 2;
-      let [x, y] = this.aspectRatio.split('to');
-      let height = ((width - padding) / x) * y;
-      container.style.height = height + border + padding + 'px';
-    }
-  }
 
   addKeyboardHandlers(content) {
     content.addEventListener('keydown', event => {
