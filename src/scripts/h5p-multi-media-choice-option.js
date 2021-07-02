@@ -228,11 +228,10 @@ export class MultiMediaChoiceOption {
     this.content.classList.remove('h5p-multi-media-choice-correct');
     this.content.classList.remove('h5p-multi-media-choice-show-correct');
     this.content.classList.remove('h5p-multi-media-choice-wrong');
-    if (this.accessibilitySolutionText) {
+    if (this.accessibilitySolutionText.parentNode) {
       this.accessibilitySolutionText.parentNode.removeChild(this.accessibilitySolutionText);
     }
   }
-
 
   addKeyboardHandlers(content) {
     content.addEventListener('keydown', event => {
