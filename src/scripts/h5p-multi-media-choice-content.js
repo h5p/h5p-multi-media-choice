@@ -36,8 +36,6 @@ export default class MultiMediaChoiceContent {
     if (this.params.behaviour.maxAlternativesPerRow) {
       this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
     }
-    // Max alternatives per row should not be greater than the number of alternatives
-    this.maxAlternativesPerRow = Math.min(this.params.options.length, this.maxAlternativesPerRow);
 
     // Build n options
     this.options = params.options.map(
@@ -71,7 +69,7 @@ export default class MultiMediaChoiceContent {
     optionList.setAttribute('role', this.isSingleAnswer ? 'radiogroup' : 'group');
     optionList.setAttribute('aria-labelledby', `h5p-mmc${this.contentId}`);
     optionList.classList.add('h5p-multi-media-choice-option-list');
-    optionList.style.columnCount = this.maxAlternativesPerRow;
+    this.setColumnProperties(optionList, this.params.options.length);
 
     this.options.forEach(option => {
       optionList.appendChild(option.getDOM());
@@ -306,6 +304,30 @@ export default class MultiMediaChoiceContent {
       this.options[index + 1].focus();
       this.options[index + 1].setTabIndex(0);
       this.options[index].setTabIndex(-1);
+    }
+  }
+
+  /**
+   * Calculates the number of columns for each width
+   *
+   * @param {HTMLElement} element Unordered list containing all the options
+   * @param {number} numberOfOptions Number of options in the list
+   */
+  setColumnProperties(element, numberOfOptions) {
+    let numberOfColumns = numberOfOptions === 1 ? 1 : 2;
+    element.style.setProperty('--columns-var-1', numberOfColumns);
+    let numberOfRows = Math.ceil(numberOfOptions/numberOfColumns);
+    let newNumberOfRows = 0;
+    for (let i = 3; i <= 10; i++) {
+      newNumberOfRows = Math.ceil(numberOfOptions/i);
+      if (newNumberOfRows < numberOfRows) {
+        numberOfRows = newNumberOfRows;
+        numberOfColumns = Math.min(i, this.maxAlternativesPerRow);
+      }
+      else if (this.aspectRatio === 'auto' && i * 2 < numberOfOptions) {
+        numberOfColumns = Math.min(i, this.maxAlternativesPerRow);
+      }
+      element.style.setProperty('--columns-var-' + (i - 1), numberOfColumns);
     }
   }
 }
