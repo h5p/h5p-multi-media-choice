@@ -38,7 +38,6 @@ export class MultiMediaChoiceOption {
     }
     this.content.setAttribute('aria-checked', 'false');
     this.enable();
-    this.content.setAttribute('tabindex', '0');
     this.content.addEventListener('click', this.callbacks.onClick);
 
     const mediaContent = this.createMediaContent();
@@ -134,10 +133,20 @@ export class MultiMediaChoiceOption {
 
   /**
    * Return the DOM for this class
+   *
    * @return {HTMLElement} DOM for this class
    */
   getDOM() {
     return this.listItem;
+  }
+
+  /**
+   * Set tab index.
+   *
+   * @param {number} tabIndex TabIndex.
+   */
+  setTabIndex(tabIndex) {
+    this.content.setAttribute('tabindex', tabIndex);
   }
 
   /**
@@ -238,13 +247,6 @@ export class MultiMediaChoiceOption {
     content.addEventListener('keydown', event => {
       switch (event.code) {
         case 'Enter':
-          if (this.isDisabled()) {
-            return;
-          }
-
-          this.callbacks.onKeyboardSelect(this);
-          break;
-
         case 'Space':
           if (this.isDisabled()) {
             return;
@@ -255,22 +257,28 @@ export class MultiMediaChoiceOption {
 
         case 'ArrowLeft':
         case 'ArrowUp':
+          if (!this.singleAnswer) {
+            return;
+          }
           event.preventDefault(); // Disable scrolling
           if (this.getDOM() === this.getDOM().parentNode.firstChild) {
             return;
           }
 
-          this.callbacks.onKeyboardArrowKey(this, event.code.replace('Arrow', ''));
+          this.callbacks.onKeyboardArrowKey(event.code.replace('Arrow', ''));
           break;
 
         case 'ArrowRight':
         case 'ArrowDown':
+          if (!this.singleAnswer) {
+            return;
+          }
           event.preventDefault(); // Disable scrolling
           if (this.getDOM() === this.getDOM().parentNode.lastChild) {
             return;
           }
 
-          this.callbacks.onKeyboardArrowKey(this, event.code.replace('Arrow', ''));
+          this.callbacks.onKeyboardArrowKey(event.code.replace('Arrow', ''));
           break;
       }
     });

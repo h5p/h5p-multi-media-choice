@@ -59,6 +59,7 @@ export default class MultiMediaChoiceContent {
     );
 
     this.content.appendChild(this.buildOptionList(this.options));
+    this.setTabIndexes();
   }
 
   /**
@@ -222,8 +223,10 @@ export default class MultiMediaChoiceContent {
       }
       if (this.lastSelectedRadioButtonOption) {
         this.lastSelectedRadioButtonOption.uncheck();
+        this.lastSelectedRadioButtonOption.setTabIndex(-1);
       }
       this.lastSelectedRadioButtonOption = option;
+      this.lastSelectedRadioButtonOption.setTabIndex(0);
     }
     option.toggle();
 
@@ -235,6 +238,7 @@ export default class MultiMediaChoiceContent {
    */
   resetSelections() {
     this.lastSelectedRadioButtonOption = null;
+    this.setTabIndexes();
     this.options.forEach(option => {
       option.uncheck();
       option.enable();
@@ -248,6 +252,16 @@ export default class MultiMediaChoiceContent {
     this.options.forEach(option => option.disable());
   }
 
+  setTabIndexes(value = null) {
+    if (this.isSingleAnswer) {
+      this.options.forEach(option => option.setTabIndex(value !== null ? value : -1));
+      this.options[0].setTabIndex(value !== null ? value : 0);
+    }
+    else {
+      this.options.forEach(option => option.setTabIndex(value !== null ? value : 0));
+    }
+  }
+
   handleOptionArrowKey(index, direction) {
     if (
       (index === 0 && (direction === 'Left' || direction === 'Up')) ||
@@ -259,9 +273,13 @@ export default class MultiMediaChoiceContent {
 
     if (direction === 'Left' || direction === 'Up') {
       this.options[index - 1].focus();
+      this.options[index - 1].setTabIndex(0);
+      this.options[index].setTabIndex(-1);
     }
     else if (direction === 'Right' || direction === 'Down') {
       this.options[index + 1].focus();
+      this.options[index + 1].setTabIndex(0);
+      this.options[index].setTabIndex(-1);
     }
   }
 }

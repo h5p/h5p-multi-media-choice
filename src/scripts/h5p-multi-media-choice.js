@@ -114,6 +114,7 @@ export default class MultiMediaChoice extends H5P.Question {
     this.checkAnswer = () => {
       this.hideButton('check-answer');
       this.content.disableSelectables();
+      this.content.setTabIndexes();
 
       const score = this.getScore();
       const maxScore = this.getMaxScore();
