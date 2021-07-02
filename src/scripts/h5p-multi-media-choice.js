@@ -162,6 +162,7 @@ export default class MultiMediaChoice extends H5P.Question {
       }
       else {
         this.content.showUnselectedSolutions();
+        this.content.focusUnselectedSolution();
       }
 
       this.trigger('resize');

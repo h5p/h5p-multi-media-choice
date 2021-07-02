@@ -51,8 +51,7 @@ export default class MultiMediaChoiceContent {
           {
             onClick: () => this.toggleSelected(index),
             onKeyboardSelect: () => this.toggleSelected(index),
-            onKeyboardArrowKey: direction =>
-              this.handleOptionArrowKey(index, direction),
+            onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
             triggerResize: this.callbacks.triggerResize,
           }
         )
@@ -198,6 +197,19 @@ export default class MultiMediaChoiceContent {
         shouldNotCheck: this.params.l10n.shouldNotCheck,
       })
     );
+  }
+
+  /**
+   * Focuses on an unselected solution (if present)
+   * This is useful for the screen reader especially
+   */
+  focusUnselectedSolution() {
+    const unselectedSolution = document.getElementsByClassName(
+      'h5p-multi-media-choice-show-correct'
+    )[0];
+    if (unselectedSolution) {
+      unselectedSolution.focus();
+    }
   }
 
   /**

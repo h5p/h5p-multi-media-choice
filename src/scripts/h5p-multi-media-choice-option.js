@@ -189,7 +189,7 @@ export class MultiMediaChoiceOption {
   }
 
   /**
-   * Shows if the answer selected is correct or wrong in the UI if selected
+   * Shows if the answer selected is correct or wrong in the UI and screen reader if selected
    */
   showSelectedSolution({ correctAnswer, wrongAnswer }) {
     this.content.classList.remove('h5p-multi-media-choice-selected');
@@ -206,7 +206,7 @@ export class MultiMediaChoiceOption {
   }
 
   /**
-   * Shows if the answer was correct in the UI
+   * Shows if the answer was correct in the UI and screen reader
    */
   showUnselectedSolution({ shouldCheck, shouldNotCheck }) {
     if (!this.isSelected()) {
@@ -231,17 +231,18 @@ export class MultiMediaChoiceOption {
   }
 
   /**
-   * Hides any information about solution in the UI
+   * Hides any information about solution in the UI and screen reader
    */
   hideSolution() {
     this.content.classList.remove('h5p-multi-media-choice-correct');
     this.content.classList.remove('h5p-multi-media-choice-show-correct');
     this.content.classList.remove('h5p-multi-media-choice-wrong');
     if (this.accessibilitySolutionText) {
-      this.accessibilitySolutionText.parentNode.removeChild(this.accessibilitySolutionText);
+      if (this.accessibilitySolutionText.parentNode) {
+        this.accessibilitySolutionText.parentNode.removeChild(this.accessibilitySolutionText);
+      }
     }
   }
-
 
   addKeyboardHandlers(content) {
     content.addEventListener('keydown', event => {
