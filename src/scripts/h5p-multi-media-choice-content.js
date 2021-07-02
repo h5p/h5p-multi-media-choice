@@ -265,6 +265,13 @@ export default class MultiMediaChoiceContent {
     this.setTabIndexes(-1);
   }
 
+  /**
+   * Set the tabindex of every option.
+   * For checkbox options, all options are tabbable.
+   * For radio button options, only the first option is tabbable.
+   *
+   * @param {number} [value=null] Tabindex to set to all options.
+   */
   setTabIndexes(value = null) {
     if (this.isSingleAnswer) {
       this.options.forEach(option => option.setTabIndex(value !== null ? value : -1));
@@ -275,6 +282,12 @@ export default class MultiMediaChoiceContent {
     }
   }
 
+  /**
+   * Handle arrow keys pressed on options
+   *
+   * @param {number} index Index of option pressed
+   * @param {string} direction Direction of arrow key pressed
+   */
   handleOptionArrowKey(index, direction) {
     if (
       (index === 0 && (direction === 'Left' || direction === 'Up')) ||

@@ -43,7 +43,7 @@ export class MultiMediaChoiceOption {
     const mediaContent = this.createMediaContent();
     this.content.appendChild(mediaContent);
 
-    this.addKeyboardHandlers(this.content);
+    this.addKeyboardHandlers();
   }
 
   /**
@@ -244,8 +244,12 @@ export class MultiMediaChoiceOption {
     }
   }
 
-  addKeyboardHandlers(content) {
-    content.addEventListener('keydown', event => {
+  /**
+   * Handlers for pressed keys on options
+   * @param {HTMLElement} content Option HTML element
+   */
+  addKeyboardHandlers() {
+    this.content.addEventListener('keydown', event => {
       switch (event.code) {
         case 'Enter':
         case 'Space':
@@ -285,6 +289,9 @@ export class MultiMediaChoiceOption {
     });
   }
 
+  /**
+   * Set focus to this object
+   */
   focus() {
     this.content.focus();
   }
