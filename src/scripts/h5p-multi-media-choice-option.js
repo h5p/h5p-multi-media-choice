@@ -141,12 +141,21 @@ export class MultiMediaChoiceOption {
   }
 
   /**
-   * Set tab index.
-   *
-   * @param {number} tabIndex TabIndex.
+   * Sets the tab index to either -1 or 0
+   * If anything else is passed as an argument, then 0 will be used
+   * @param {number} tabIndex -1 or 0
    */
   setTabIndex(tabIndex) {
-    this.content.setAttribute('tabindex', tabIndex);
+    switch (tabIndex) {
+      case -1:
+        this.content.setAttribute('tabindex', '-1');
+        break;
+      case 0:
+        this.content.setAttribute('tabindex', '0');
+        break;
+      default:
+        this.content.setAttribute('tabindex', '0');
+    }
   }
 
   /**
