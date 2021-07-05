@@ -84,8 +84,8 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} Image tag.
    */
   buildImage() {
-    const alt = !this.media.params.alt ? '' : this.media.params.alt;
-    const title = !this.media.params.title ? '' : this.media.params.alt;
+    const alt = this.media.params.alt ? this.media.params.alt : '';
+    const title = this.media.params.title ? this.media.params.alt : '';
 
     let path = '';
     if (!this.media.params.file) {
@@ -100,7 +100,7 @@ export class MultiMediaChoiceOption {
     image.setAttribute('src', path);
     image.setAttribute('alt', alt);
     image.addEventListener('load', this.callbacks.triggerResize);
-    image.setAttribute('title', title);
+    this.content.setAttribute('title', title);
     image.classList.add('h5p-multi-media-choice-media');
 
     if (this.aspectRatio !== 'auto') {
