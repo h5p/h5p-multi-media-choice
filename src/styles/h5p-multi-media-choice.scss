@@ -15,39 +15,12 @@
     width: 100%;
 
     // Scale number of columns based on screen width and number of elements
-
     column-count: var(--columns-var-1);
 
-    @media only screen and (min-width: $minimum-auto-scaling-size) {
-      column-count: var(--columns-var-2);
-    }
-
-    @media only screen and (min-width: calc(#{$minimum-auto-scaling-size} + #{$scaling-interval})) {
-      column-count: var(--columns-var-3);
-    }
-
-    @media only screen and (min-width: calc(#{$minimum-auto-scaling-size} + #{$scaling-interval} * 2)) {
-      column-count: var(--columns-var-4);
-    }
-
-    @media only screen and (min-width: calc(#{$minimum-auto-scaling-size} + #{$scaling-interval} * 3)) {
-      column-count: var(--columns-var-5);
-    }
-
-    @media only screen and (min-width: calc(#{$minimum-auto-scaling-size} + #{$scaling-interval} * 4)) {
-      column-count: var(--columns-var-6);
-    }
-
-    @media only screen and (min-width: calc(#{$minimum-auto-scaling-size} + #{$scaling-interval} * 5)) {
-      column-count: var(--columns-var-7);
-    }
-
-    @media only screen and (min-width: calc(#{$minimum-auto-scaling-size} + #{$scaling-interval} * 6)) {
-      column-count: var(--columns-var-8);
-    }
-
-    @media only screen and (min-width: calc(#{$minimum-auto-scaling-size} + #{$scaling-interval} * 7)) {
-      column-count: var(--columns-var-9);
+    @for $i from 0 through 7 {
+      @media only screen and (min-width: calc(#{$minimum-auto-scaling-size} + #{$scaling-interval} * #{$i})) {
+        column-count: var(--columns-var-#{$i + 2});
+      }
     }
   }
 
@@ -80,6 +53,7 @@
       overflow: hidden;
       position: relative;
     }
+
     &.h5p-multi-media-choice-media-wrapper-1to1 {
       padding-top: 100%;
     }
