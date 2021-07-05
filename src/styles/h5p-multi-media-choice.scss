@@ -6,7 +6,7 @@
 .h5p-multi-media-choice {
   .h5p-multi-media-choice-option-list {
     column-width: $option-width;
-    column-gap: $masonry-gap;
+    column-gap: 0;
     display: inline-block;
 
     // Removes <ul> default indentation
@@ -27,9 +27,9 @@
   .h5p-multi-media-choice-list-item {
     display: block;
     box-sizing: border-box;
-    padding-top: $masonry-gap * 0.75;
-    padding-bottom: $masonry-gap * 0.25;
+    padding: $masonry-gap * 0.75 $masonry-gap * 0.5 $masonry-gap * 0.25 $masonry-gap * 0.5;
     break-inside: avoid;
+    overflow: hidden;
   }
 
   .h5p-multi-media-choice-option {
