@@ -2,11 +2,11 @@
 export class MultiMediaChoiceOption {
   /**
    * @constructor
-   * @param {Object} option Option object from the editor
+   * @param {object} option Option object from the editor
    * @param {number} contentId Content's id.
    * @param {string} aspectRatio Aspect ratio used if all options should conform to the same size
    * @param {boolean} singleAnswer true for radio buttons, false for checkboxes
-   * @param {Object} [callbacks = {}] Callbacks.
+   * @param {object} [callbacks = {}] Callbacks.
    */
   constructor(option, contentId, aspectRatio, singleAnswer, assetsFilePath, callbacks) {
     this.contentId = contentId;

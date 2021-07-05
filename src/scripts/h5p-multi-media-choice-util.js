@@ -4,8 +4,8 @@
 export class Util {
   /**
    * Extends params
-   * @param {Object} params params from the editor
-   * @returns {Object} params with defaults included
+   * @param {object} params params from the editor
+   * @returns {object} params with defaults included
    */
   static extendParams(params) {
     return Util.deepExtend(
@@ -53,7 +53,7 @@ export class Util {
 
   /**
    * Merge the contents of two or more objects together and return it
-   * @param {Object} out
+   * @param {object} out
    */
   static deepExtend(out) {
     out = out || {};

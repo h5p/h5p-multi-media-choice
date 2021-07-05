@@ -10,9 +10,9 @@ export function getCurrentState(selectedIndexes) {
 /**
  * Retrieves the xAPI data necessary for generating result reports
  *
- * @param {Object} app Multi media choice object
+ * @param {object} app Multi media choice object
  * @param {string} question Question text
- * @param {Object[]} options Array containing the option objects
+ * @param {object[]} options Array containing the option objects
  * @param {number} score Score given for answering the question
  * @param {number} maxScore Maximum possible score that can be achieved for the question
  * @param {boolean} success True if the task was passed according to passPercentage
@@ -25,9 +25,9 @@ export function getXAPIData(app, question, options, score, maxScore, success) {
 /**
  * Generates the xAPI event for answered.
  *
- * @param {Object} app Multi media choice object
+ * @param {object} app Multi media choice object
  * @param {string} question Question text
- * @param {Object[]} options Array containing the option objects
+ * @param {object[]} options Array containing the option objects
  * @param {number} score Score given for answering the question
  * @param {number} maxScore Maximum possible score that can be achieved for the question
  * @param {boolean} success True if the task was passed according to passPercentage
@@ -45,7 +45,7 @@ export function getAnsweredXAPIEvent(app, question, options, score, maxScore, su
  * Adds the question to the definition part of an xAPIEvent
  *
  * @param {H5P.XAPIEvent} xAPIEvent to add a question to
- * @param {Object[]} options Array containing the option objects
+ * @param {object[]} options Array containing the option objects
  * @param {string} question Question text
  */
 function addQuestionToXAPI(xAPIEvent, options, question) {
@@ -64,7 +64,7 @@ function addQuestionToXAPI(xAPIEvent, options, question) {
  * Adds the response to the definition part of an xAPIEvent
  *
  * @param {H5P.XAPIEvent} xAPIEvent to add a response to
- * @param {Object[]} options Array containing the option objects
+ * @param {object[]} options Array containing the option objects
  */
 function addResponseToXAPI(xAPIEvent, options) {
   xAPIEvent.data.statement.result.response = options
@@ -81,8 +81,8 @@ function addResponseToXAPI(xAPIEvent, options) {
 /**
  * Creates a list of choice objects with id and description
  *
- * @param {Object[]} options Array containing the option objects
- * @returns {Object[]} List of options the player could choose from
+ * @param {object[]} options Array containing the option objects
+ * @returns {object[]} List of options the player could choose from
  */
 function getChoices(options) {
   return options.map((option, index) => ({
@@ -96,7 +96,7 @@ function getChoices(options) {
 /**
  * Creates a list of correct response patterns for an xAPI event
  *
- * @param {Object[]} options Array containing the option objects
+ * @param {object[]} options Array containing the option objects
  * @returns {String[]} Correct response patterns for the task
  */
 function getCorrectOptions(options) {

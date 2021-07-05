@@ -154,7 +154,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Returns the selected options
-   * @returns {Object[]} Array of selected options
+   * @returns {object[]} Array of selected options
    */
   getSelectedOptions() {
     return this.options.filter(option => option.isSelected());
@@ -329,10 +329,10 @@ export default class MultiMediaChoiceContent {
   setColumnProperties(element, numberOfOptions) {
     let numberOfColumns = numberOfOptions === 1 ? 1 : 2;
     element.style.setProperty('--columns-var-1', numberOfColumns);
-    let numberOfRows = Math.ceil(numberOfOptions/numberOfColumns);
+    let numberOfRows = Math.ceil(numberOfOptions / numberOfColumns);
     let newNumberOfRows = 0;
     for (let i = 3; i <= 10; i++) {
-      newNumberOfRows = Math.ceil(numberOfOptions/i);
+      newNumberOfRows = Math.ceil(numberOfOptions / i);
       if (newNumberOfRows < numberOfRows) {
         numberOfRows = newNumberOfRows;
         numberOfColumns = Math.min(i, this.maxAlternativesPerRow);
