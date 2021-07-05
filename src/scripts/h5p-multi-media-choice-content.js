@@ -74,6 +74,9 @@ export default class MultiMediaChoiceContent {
     this.options.forEach(option => {
       optionList.appendChild(option.getDOM());
     });
+    if (this.isSingleAnswer) {
+      this.toggleSelected(0);
+    }
     return optionList;
   }
 
@@ -83,6 +86,14 @@ export default class MultiMediaChoiceContent {
    */
   getDOM() {
     return this.content;
+  }
+
+  /**
+   * Returns whether the user can select only a single answer
+   * @returns {boolean} True if only a single answer can be selcted
+   */
+  singleAnswer() {
+    return this.isSingleAnswer;
   }
 
   /**
@@ -296,11 +307,13 @@ export default class MultiMediaChoiceContent {
     }
 
     if (direction === 'Left' || direction === 'Up') {
+      this.toggleSelected(index - 1);
       this.options[index - 1].focus();
       this.options[index - 1].setTabIndex(0);
       this.options[index].setTabIndex(-1);
     }
     else if (direction === 'Right' || direction === 'Down') {
+      this.toggleSelected(index + 1);
       this.options[index + 1].focus();
       this.options[index + 1].setTabIndex(0);
       this.options[index].setTabIndex(-1);
