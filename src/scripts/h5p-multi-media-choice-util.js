@@ -38,15 +38,15 @@ export class Util {
             header: 'Finish?',
             body: 'Are you sure you want to finish?',
             cancelLabel: 'Cancel',
-            confirmLabel: 'Finish',
+            confirmLabel: 'Finish'
           },
           confirmRetry: {
             header: 'Retry?',
             body: 'Are you sure you wish to retry?',
             cancelLabel: 'Cancel',
-            confirmLabel: 'Retry',
-          },
-        },
+            confirmLabel: 'Retry'
+          }
+        }
       },
       params
     );

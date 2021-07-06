@@ -51,7 +51,7 @@ export function getAnsweredXAPIEvent(app, question, options, score, maxScore, su
 function addQuestionToXAPI(xAPIEvent, options, question) {
   const definition = xAPIEvent.getVerifiedStatementValue(['object', 'definition']);
   definition.description = {
-    'en-US': question,
+    'en-US': question
   };
   definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
   definition.interactionType = 'choice';
@@ -88,8 +88,8 @@ function getChoices(options) {
   return options.map((option, index) => ({
     id: index.toString(),
     description: {
-      'en-US': option.getDescription(),
-    },
+      'en-US': option.getDescription()
+    }
   }));
 }
 
