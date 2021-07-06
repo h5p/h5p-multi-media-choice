@@ -136,6 +136,8 @@ export default class MultiMediaChoiceContent {
       }
     });
 
+    score = Math.max(0, score); // Negative score not allowed
+
     /**
      * Checkbox buttons with single point.
      * One point if (score / number of correct options) is above pass percentage
@@ -146,7 +148,7 @@ export default class MultiMediaChoiceContent {
         : 0;
     }
 
-    return Math.max(0, score); // Negative score not allowed
+    return score;
   }
 
   /**
