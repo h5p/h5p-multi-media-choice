@@ -1,5 +1,4 @@
 import { MultiMediaChoiceOption } from './h5p-multi-media-choice-option';
-import { Util } from './h5p-multi-media-choice-util';
 
 /** Class representing the content */
 export default class MultiMediaChoiceContent {
@@ -307,9 +306,8 @@ export default class MultiMediaChoiceContent {
       Up: -1,
     };
 
-    const length = this.options.length;
     const directionVector = directions[direction];
-    const nextIndex = Util.mod(index + directionVector, length);
+    const nextIndex = index + directionVector;
 
     this.toggleSelected(nextIndex);
     this.options[nextIndex].focus();

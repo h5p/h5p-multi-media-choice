@@ -83,13 +83,4 @@ export class Util {
 
     return out;
   }
-
-  /**
-   * Computes n mod m
-   * @param {number} n number
-   * @param {number} m modulus
-   */
-  static mod(n, m) {
-    return ((n % m) + m) % m;
-  }
 }
