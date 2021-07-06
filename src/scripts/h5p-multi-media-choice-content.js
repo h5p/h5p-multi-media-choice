@@ -75,9 +75,6 @@ export default class MultiMediaChoiceContent {
     this.options.forEach(option => {
       optionList.appendChild(option.getDOM());
     });
-    if (this.isSingleAnswer) {
-      this.toggleSelected(0);
-    }
     return optionList;
   }
 
@@ -140,6 +137,8 @@ export default class MultiMediaChoiceContent {
       }
     });
 
+    score = Math.max(0, score); // Negative score not allowed
+
     /**
      * Checkbox buttons with single point.
      * One point if (score / number of correct options) is above pass percentage
@@ -150,7 +149,7 @@ export default class MultiMediaChoiceContent {
         : 0;
     }
 
-    return Math.max(0, score); // Negative score not allowed
+    return score;
   }
 
   /**
@@ -299,26 +298,24 @@ export default class MultiMediaChoiceContent {
    * @param {string} direction Direction of arrow key pressed
    */
   handleOptionArrowKey(index, direction) {
-    if (
-      (index === 0 && (direction === 'Left' || direction === 'Up')) ||
-      (index === this.options.length - 1 && (direction === 'Right' || direction === 'Down')) ||
-      !['Left', 'Right', 'Up', 'Down'].includes(direction)
-    ) {
+    if (!['Left', 'Right', 'Up', 'Down'].includes(direction)) {
       return; // Invalid move or invalid direction
     }
 
-    if (direction === 'Left' || direction === 'Up') {
-      this.toggleSelected(index - 1);
-      this.options[index - 1].focus();
-      this.options[index - 1].setTabIndex(0);
-      this.options[index].setTabIndex(-1);
-    }
-    else if (direction === 'Right' || direction === 'Down') {
-      this.toggleSelected(index + 1);
-      this.options[index + 1].focus();
-      this.options[index + 1].setTabIndex(0);
-      this.options[index].setTabIndex(-1);
-    }
+    const directions = {
+      Right: 1,
+      Down: 1,
+      Left: -1,
+      Up: -1,
+    };
+
+    const directionVector = directions[direction];
+    const nextIndex = index + directionVector;
+
+    this.toggleSelected(nextIndex);
+    this.options[nextIndex].focus();
+    this.options[nextIndex].setTabIndex(0);
+    this.options[index].setTabIndex(-1);
   }
 
   /**
