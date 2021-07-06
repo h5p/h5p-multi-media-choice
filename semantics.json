@@ -176,7 +176,7 @@
         "type": "boolean",
         "label": "Give one point for the whole question",
         "importance": "low",
-        "description": "Awards one point to the question if all the correct answers are selected",
+        "description": "Awards one point to the question if the percentage score is higher than the pass percentage",
         "default": false
       },
       {
