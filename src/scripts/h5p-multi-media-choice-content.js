@@ -329,18 +329,70 @@ export default class MultiMediaChoiceContent {
   setColumnProperties(element, numberOfOptions) {
     let numberOfColumns = numberOfOptions === 1 ? 1 : 2;
     element.style.setProperty('--columns-var-1', numberOfColumns);
-    let numberOfRows = Math.ceil(numberOfOptions/numberOfColumns);
-    let newNumberOfRows = 0;
-    for (let i = 3; i <= 10; i++) {
-      newNumberOfRows = Math.ceil(numberOfOptions/i);
-      if (newNumberOfRows < numberOfRows) {
-        numberOfRows = newNumberOfRows;
-        numberOfColumns = Math.min(i, this.maxAlternativesPerRow);
+    if (this.aspectRatio !== 'auto') {
+      let numberOfRows = Math.ceil(numberOfOptions/numberOfColumns);
+      let newNumberOfRows = 0;
+      for (let i = 3; i <= 10; i++) {
+        newNumberOfRows = Math.ceil(numberOfOptions/i);
+        if (newNumberOfRows < numberOfRows) {
+          numberOfRows = newNumberOfRows;
+          numberOfColumns = Math.min(i, this.maxAlternativesPerRow);
+        }
+        else if (this.aspectRatio === 'auto' && i * 2 < numberOfOptions) {
+          numberOfColumns = Math.min(i, this.maxAlternativesPerRow);
+        }
+        element.style.setProperty('--columns-var-' + (i - 1), numberOfColumns);
       }
-      else if (this.aspectRatio === 'auto' && i * 2 < numberOfOptions) {
-        numberOfColumns = Math.min(i, this.maxAlternativesPerRow);
+    }
+    else {
+      // Store scaled height of every image in an array
+      let imageHeights = [];
+      // let images = document.getElementsByClassName('h5p-multi-media-choice-media');
+      for (let i = 0; i < this.params.options.length; i++) {
+        if (!this.params.options[i].media.params.file) {
+          imageHeights.push(1); // Default is 1to1 aspect ratio, 1 / 1 = 1
+        }
+        else {
+          let path = H5P.getPath(this.params.options[i].media.params.file.path, this.contentId);
+          const image = document.createElement('img');
+          image.setAttribute('src', path);
+          imageHeights.push(image.naturalHeight/image.naturalWidth);
+        }
       }
-      element.style.setProperty('--columns-var-' + (i - 1), numberOfColumns);
+      let height = this.recursiveHeightCalculator(Array.from(imageHeights), 2, 1);
+      for (let i = 3; i <= 10; i++) {
+        let newHeight = this.recursiveHeightCalculator(Array.from(imageHeights), i, 1);
+        if (newHeight < height) {
+          numberOfColumns = i;
+          height = newHeight;
+        }
+        element.style.setProperty('--columns-var-' + (i - 1), numberOfColumns);
+      }
+    }
+  }
+
+  recursiveHeightCalculator(heights, columns, recursion) {
+    if (heights.length < columns) {
+      return heights.reduce((a, b) => Math.max(a, b));
+    }
+    if (heights.length === 1) {
+      return heights[0];
+    }
+    if (columns === 1) {
+      return heights.reduce((a, b) => a + b, 0);
+    }
+    for (let i = 0; i < heights.length; i++) {
+      let thisHeight = heights.shift();
+      while (heights.length) {
+        let nextHeight = this.recursiveHeightCalculator(Array.from(heights), columns - 1, recursion + 1);
+        if (thisHeight > nextHeight) {
+          return Math.max(thisHeight, nextHeight);
+        }
+        thisHeight += heights.shift();
+        if (thisHeight > nextHeight) {
+          return nextHeight;
+        }
+      }
     }
   }
 }
