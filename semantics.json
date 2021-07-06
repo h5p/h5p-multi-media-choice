@@ -293,7 +293,7 @@
         "type": "text",
         "label": "Assistive technology description for \"Show Solution\" button",
         "importance": "low",
-        "default": "Show the solution. The crossword will be filled with its correct solution."
+        "default": "Show the solution. The correct options will be marked."
       },
       {
         "name": "correctAnswer",
