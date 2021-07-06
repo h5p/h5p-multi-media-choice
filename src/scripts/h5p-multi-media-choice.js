@@ -179,9 +179,6 @@ export default class MultiMediaChoice extends H5P.Question {
       this.hideButton('show-solution');
       this.content.hideSolutions();
       this.removeFeedback();
-      if (this.content.singleAnswer()) {
-        this.content.toggleSelected(0);
-      }
     };
   }
 

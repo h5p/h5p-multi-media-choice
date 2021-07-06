@@ -1,4 +1,5 @@
 import { MultiMediaChoiceOption } from './h5p-multi-media-choice-option';
+import { Util } from './h5p-multi-media-choice-util';
 
 /** Class representing the content */
 export default class MultiMediaChoiceContent {
@@ -74,9 +75,6 @@ export default class MultiMediaChoiceContent {
     this.options.forEach(option => {
       optionList.appendChild(option.getDOM());
     });
-    if (this.isSingleAnswer) {
-      this.toggleSelected(0);
-    }
     return optionList;
   }
 
@@ -298,26 +296,25 @@ export default class MultiMediaChoiceContent {
    * @param {string} direction Direction of arrow key pressed
    */
   handleOptionArrowKey(index, direction) {
-    if (
-      (index === 0 && (direction === 'Left' || direction === 'Up')) ||
-      (index === this.options.length - 1 && (direction === 'Right' || direction === 'Down')) ||
-      !['Left', 'Right', 'Up', 'Down'].includes(direction)
-    ) {
+    if (!['Left', 'Right', 'Up', 'Down'].includes(direction)) {
       return; // Invalid move or invalid direction
     }
 
-    if (direction === 'Left' || direction === 'Up') {
-      this.toggleSelected(index - 1);
-      this.options[index - 1].focus();
-      this.options[index - 1].setTabIndex(0);
-      this.options[index].setTabIndex(-1);
-    }
-    else if (direction === 'Right' || direction === 'Down') {
-      this.toggleSelected(index + 1);
-      this.options[index + 1].focus();
-      this.options[index + 1].setTabIndex(0);
-      this.options[index].setTabIndex(-1);
-    }
+    const directions = {
+      Right: 1,
+      Down: 1,
+      Left: -1,
+      Up: -1,
+    };
+
+    const length = this.options.length;
+    const directionVector = directions[direction];
+    const nextIndex = Util.mod(index + directionVector, length);
+
+    this.toggleSelected(nextIndex);
+    this.options[nextIndex].focus();
+    this.options[nextIndex].setTabIndex(0);
+    this.options[index].setTabIndex(-1);
   }
 
   /**
@@ -356,7 +353,7 @@ export default class MultiMediaChoiceContent {
           let path = H5P.getPath(this.params.options[i].media.params.file.path, this.contentId);
           const image = document.createElement('img');
           image.setAttribute('src', path);
-          imageHeights.push(image.naturalHeight/image.naturalWidth);
+          imageHeights.push(image.naturalHeight / image.naturalWidth);
         }
       }
       let height = this.recursiveHeightCalculator(Array.from(imageHeights), 2, 1);
@@ -384,7 +381,11 @@ export default class MultiMediaChoiceContent {
     for (let i = 0; i < heights.length; i++) {
       let thisHeight = heights.shift();
       while (heights.length) {
-        let nextHeight = this.recursiveHeightCalculator(Array.from(heights), columns - 1, recursion + 1);
+        let nextHeight = this.recursiveHeightCalculator(
+          Array.from(heights),
+          columns - 1,
+          recursion + 1
+        );
         if (thisHeight > nextHeight) {
           return Math.max(thisHeight, nextHeight);
         }
