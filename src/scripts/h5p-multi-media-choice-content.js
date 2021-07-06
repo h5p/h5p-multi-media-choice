@@ -31,6 +31,8 @@ export default class MultiMediaChoiceContent {
     this.content = document.createElement('div');
     this.content.classList.add('h5p-multi-media-choice-content');
 
+    this.minOptionWidth = 210;
+
     // Calculate max alternatives per row
     this.maxAlternativesPerRow = 5; // Default value
     if (this.params.behaviour.maxAlternativesPerRow) {
@@ -54,8 +56,8 @@ export default class MultiMediaChoiceContent {
           }
         )
     );
-
-    this.content.appendChild(this.buildOptionList(this.options));
+    this.optionList = this.buildOptionList(this.options);
+    this.content.appendChild(this.optionList);
     this.setTabIndexes();
   }
 
@@ -69,7 +71,6 @@ export default class MultiMediaChoiceContent {
     optionList.setAttribute('role', this.isSingleAnswer ? 'radiogroup' : 'group');
     optionList.setAttribute('aria-labelledby', `h5p-mmc${this.contentId}`);
     optionList.classList.add('h5p-multi-media-choice-option-list');
-    this.setColumnProperties(optionList, this.params.options.length);
 
     this.options.forEach(option => {
       optionList.appendChild(option.getDOM());
@@ -321,78 +322,31 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Calculates the number of columns for each width
-   *
-   * @param {HTMLElement} element Unordered list containing all the options
-   * @param {number} numberOfOptions Number of options in the list
+   * Set row height for an element in grid
+   * @param  {HTMLElement} item
    */
-  setColumnProperties(element, numberOfOptions) {
-    let numberOfColumns = numberOfOptions === 1 ? 1 : 2;
-    element.style.setProperty('--columns-var-1', numberOfColumns);
-    if (this.aspectRatio !== 'auto') {
-      let numberOfRows = Math.ceil(numberOfOptions / numberOfColumns);
-      let newNumberOfRows = 0;
-      for (let i = 3; i <= 10; i++) {
-        newNumberOfRows = Math.ceil(numberOfOptions / i);
-        if (newNumberOfRows < numberOfRows) {
-          numberOfRows = newNumberOfRows;
-          numberOfColumns = Math.min(i, this.maxAlternativesPerRow);
-        }
-        else if (this.aspectRatio === 'auto' && i * 2 < numberOfOptions) {
-          numberOfColumns = Math.min(i, this.maxAlternativesPerRow);
-        }
-        element.style.setProperty('--columns-var-' + (i - 1), numberOfColumns);
-      }
-    }
-    else {
-      // Store scaled height of every image in an array
-      let imageHeights = [];
-      // let images = document.getElementsByClassName('h5p-multi-media-choice-media');
-      for (let i = 0; i < this.params.options.length; i++) {
-        if (!this.params.options[i].media.params.file) {
-          imageHeights.push(1); // Default is 1to1 aspect ratio, 1 / 1 = 1
-        }
-        else {
-          let path = H5P.getPath(this.params.options[i].media.params.file.path, this.contentId);
-          const image = document.createElement('img');
-          image.setAttribute('src', path);
-          imageHeights.push(image.naturalHeight/image.naturalWidth);
-        }
-      }
-      let height = this.recursiveHeightCalculator(Array.from(imageHeights), 2, 1);
-      for (let i = 3; i <= 10; i++) {
-        let newHeight = this.recursiveHeightCalculator(Array.from(imageHeights), i, 1);
-        if (newHeight < height) {
-          numberOfColumns = i;
-          height = newHeight;
-        }
-        element.style.setProperty('--columns-var-' + (i - 1), numberOfColumns);
-      }
-    }
+  resizeGridItem(item) {
+    // Reset grid height to get the real height
+    item.style.gridRowEnd = "";
+    const rowHeight = 5;
+    const rowSpan = Math.ceil((item.getBoundingClientRect().height) / (rowHeight));
+
+    item.style.gridRowEnd = "span " + rowSpan;
   }
 
-  recursiveHeightCalculator(heights, columns, recursion) {
-    if (heights.length < columns) {
-      return heights.reduce((a, b) => Math.max(a, b));
-    }
-    if (heights.length === 1) {
-      return heights[0];
-    }
-    if (columns === 1) {
-      return heights.reduce((a, b) => a + b, 0);
-    }
-    for (let i = 0; i < heights.length; i++) {
-      let thisHeight = heights.shift();
-      while (heights.length) {
-        let nextHeight = this.recursiveHeightCalculator(Array.from(heights), columns - 1, recursion + 1);
-        if (thisHeight > nextHeight) {
-          return Math.max(thisHeight, nextHeight);
-        }
-        thisHeight += heights.shift();
-        if (thisHeight > nextHeight) {
-          return nextHeight;
-        }
-      }
+  /**
+   * Set the number of columns and each element's size
+   */
+  setColumnProperties() {
+    const columnSpaceCount = this.optionList.getBoundingClientRect().width / this.minOptionWidth;
+
+    // Find the number of columns from whichever is smalles: space, max values and number of options 
+    const columns = Math.floor(Math.min(columnSpaceCount, this.maxAlternativesPerRow, this.options.length));
+
+    this.optionList.style.gridTemplateColumns = `repeat(${columns}, minmax(${this.minOptionWidth}px, 1fr))`;
+
+    for (let x = 0; x < this.options.length; x++) {
+      this.resizeGridItem(this.options[x].getDOM());
     }
   }
 }

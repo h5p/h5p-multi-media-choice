@@ -70,6 +70,8 @@ export default class MultiMediaChoice extends H5P.Question {
 
       this.setContent(this.content.getDOM()); // Register content with H5P.Question
       this.addButtons();
+
+      this.on('resize', () => this.content.setColumnProperties());
     };
 
     /**
