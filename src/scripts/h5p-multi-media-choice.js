@@ -32,7 +32,7 @@ export default class MultiMediaChoice extends H5P.Question {
             this.setImage(media.params.file.path, {
               disableImageZooming: params.media.disableImageZooming || false,
               alt: media.params.alt,
-              title: media.params.title,
+              title: media.params.title
             });
           }
         }
@@ -63,7 +63,7 @@ export default class MultiMediaChoice extends H5P.Question {
           },
           triggerInteracted: () => {
             this.triggerXAPI('interacted');
-          },
+          }
         },
         this.getLibraryFilePath('assets/')
       );
@@ -201,8 +201,8 @@ export default class MultiMediaChoice extends H5P.Question {
         confirmationDialog: {
           enable: this.params.behaviour.confirmCheckDialog,
           l10n: this.params.l10n.confirmCheck,
-          instance: this,
-        },
+          instance: this
+        }
       }
     );
     this.addButton(
@@ -228,8 +228,8 @@ export default class MultiMediaChoice extends H5P.Question {
         confirmationDialog: {
           enable: this.params.behaviour.confirmRetryDialog,
           l10n: this.params.l10n.confirmRetry,
-          instance: this,
-        },
+          instance: this
+        }
       }
     );
   }

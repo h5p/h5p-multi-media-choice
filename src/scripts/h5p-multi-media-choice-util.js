@@ -17,7 +17,7 @@ export class Util {
           questionType: 'auto',
           confirmCheckDialog: false,
           confirmRetryDialog: false,
-          aspectRatio: 'auto',
+          aspectRatio: 'auto'
         },
         l10n: {
           checkAnswerButtonText: 'Check',
@@ -37,15 +37,15 @@ export class Util {
             header: 'Finish?',
             body: 'Are you sure you want to finish?',
             cancelLabel: 'Cancel',
-            confirmLabel: 'Finish',
+            confirmLabel: 'Finish'
           },
           confirmRetry: {
             header: 'Retry?',
             body: 'Are you sure you wish to retry?',
             cancelLabel: 'Cancel',
-            confirmLabel: 'Retry',
-          },
-        },
+            confirmLabel: 'Retry'
+          }
+        }
       },
       params
     );
