@@ -34,10 +34,7 @@ export default class MultiMediaChoiceContent {
     this.minOptionWidth = 210;
 
     // Calculate max alternatives per row
-    this.maxAlternativesPerRow = 5; // Default value
-    if (this.params.behaviour.maxAlternativesPerRow) {
-      this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
-    }
+    this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
 
     // Build n options
     this.options = params.options.map(
@@ -325,8 +322,9 @@ export default class MultiMediaChoiceContent {
   resizeGridItem(item) {
     // Reset grid height to get the real height
     item.style.gridRowEnd = "";
-    const rowHeight = 5;
-    const rowSpan = Math.ceil((item.getBoundingClientRect().height) / (rowHeight));
+    // Defines how precise the calculation of the row height will be
+    const spanStep = 5;
+    const rowSpan = Math.ceil((item.getBoundingClientRect().height) / (spanStep));
 
     item.style.gridRowEnd = "span " + rowSpan;
   }

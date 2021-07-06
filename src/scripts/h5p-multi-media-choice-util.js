@@ -18,6 +18,7 @@ export class Util {
           confirmCheckDialog: false,
           confirmRetryDialog: false,
           aspectRatio: 'auto',
+          maxAlternativesPerRow: 5
         },
         l10n: {
           checkAnswerButtonText: 'Check',
