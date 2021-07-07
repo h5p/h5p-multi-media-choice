@@ -221,7 +221,9 @@ export default class MultiMediaChoiceContent {
       'h5p-multi-media-choice-show-correct'
     )[0];
     if (unselectedSolution) {
-      unselectedSolution.focus();
+      if (unselectedSolution.parentNode) {
+        unselectedSolution.parentNode.focus();
+      }
     }
   }
 
