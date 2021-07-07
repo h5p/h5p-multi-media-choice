@@ -120,6 +120,10 @@ export default class MultiMediaChoiceContent {
    */
   getScore() {
     // One point if no correct options and no selected options
+    if (this.params.behaviour.singlePoint && this.params.behaviour.passPercentage === 0) {
+      return 1;
+    }
+
     if (!this.isAnyAnswerSelected()) {
       return this.isBlankCorrect() ? 1 : 0;
     }
