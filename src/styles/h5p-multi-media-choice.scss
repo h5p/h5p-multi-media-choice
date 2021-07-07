@@ -87,6 +87,9 @@
         cursor: pointer;
         border-style: dotted;
         border-color: $color-border-interaction;
+        border-width: $border-thick-stroke-width;
+        // This ensures the option stays the same size (padding + border is constant)
+        padding: calc(#{$option-padding-default} - #{$border-stroke-width-difference});
 
         &:after {
           @include hover-overlay();
@@ -102,6 +105,9 @@
 
   .h5p-multi-media-choice-selected {
     border-color: $color-border-interaction;
+    border-width: $border-thick-stroke-width;
+    // This ensures the option stays the same size (padding + border is constant)
+    padding: calc(#{$option-padding-default} - #{$border-stroke-width-difference});
     position: relative; // Used for the overlay
 
     &:hover {
@@ -112,7 +118,6 @@
 
     &:focus {
       outline: none;
-      border-color: $color-border-interaction;
     }
   }
 
