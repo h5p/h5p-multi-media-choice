@@ -19,7 +19,7 @@ export default class MultiMediaChoiceContent {
     this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
     this.assetsFilePath = assetsFilePath;
 
-    this.numberOfCorrectOptions = params.options.filter(option => option.correct).length;
+    this.numberOfCorrectOptions = params.options ? params.options.filter(option => option.correct).length : 0;
 
     this.isSingleAnswer =
       this.params.behaviour.questionType === 'auto'
@@ -40,22 +40,24 @@ export default class MultiMediaChoiceContent {
     }
 
     // Build n options
-    this.options = params.options.map(
-      (option, index) =>
-        new MultiMediaChoiceOption(
-          option,
-          contentId,
-          this.aspectRatio,
-          this.isSingleAnswer,
-          assetsFilePath,
-          {
-            onClick: () => this.toggleSelected(index),
-            onKeyboardSelect: () => this.toggleSelected(index),
-            onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
-            triggerResize: this.callbacks.triggerResize
-          }
-        )
-    );
+    this.options = params.options
+      ? params.options.map(
+        (option, index) =>
+          new MultiMediaChoiceOption(
+            option,
+            contentId,
+            this.aspectRatio,
+            this.isSingleAnswer,
+            assetsFilePath,
+            {
+              onClick: () => this.toggleSelected(index),
+              onKeyboardSelect: () => this.toggleSelected(index),
+              onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
+              triggerResize: this.callbacks.triggerResize
+            }
+          )
+      )
+      : [];
     this.optionList = this.buildOptionList(this.options);
     this.content.appendChild(this.optionList);
     this.setTabIndexes();
