@@ -24,6 +24,15 @@
     break-inside: avoid;
     overflow: hidden;
     padding: 0.75em 0.5em 0.25em 0.5em;
+
+    &:focus {
+      outline: none;
+
+      .h5p-multi-media-choice-enabled {
+        outline: none;
+        box-shadow: 0 0 $border-radius $border-thin-stroke-width $color-border-interaction;
+      }
+    }
   }
 
   .h5p-multi-media-choice-option {
@@ -32,6 +41,7 @@
 
     box-sizing: border-box;
     background-color: #ffffff;
+    outline: none;
 
     border-style: solid;
     border-width: $border-thin-stroke-width;
@@ -96,11 +106,6 @@
         }
       }
     }
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 $border-radius $border-thin-stroke-width $color-border-interaction;
-    }
   }
 
   .h5p-multi-media-choice-selected {
@@ -114,10 +119,6 @@
       &:after {
         @include hover-overlay();
       }
-    }
-
-    &:focus {
-      outline: none;
     }
   }
 
