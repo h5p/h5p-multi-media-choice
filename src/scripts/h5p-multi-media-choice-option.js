@@ -16,7 +16,6 @@ export class MultiMediaChoiceOption {
     this.assetsFilePath = assetsFilePath;
 
     this.media = option.media;
-    this.disableImageZooming = option.disableImageZooming;
     this.correct = option.correct;
 
     this.callbacks = callbacks || {};
@@ -182,6 +181,13 @@ export class MultiMediaChoiceOption {
   }
 
   /**
+   * Set focus to this object
+   */
+  focus() {
+    this.content.focus();
+  }
+
+  /**
    * Enables the selectable of the option
    */
   enable() {
@@ -296,12 +302,5 @@ export class MultiMediaChoiceOption {
           break;
       }
     });
-  }
-
-  /**
-   * Set focus to this object
-   */
-  focus() {
-    this.content.focus();
   }
 }

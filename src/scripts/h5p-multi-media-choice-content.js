@@ -90,7 +90,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Returns whether the user can select only a single answer
-   * @returns {boolean} True if only a single answer can be selcted
+   * @returns {boolean} True if only a single answer can be selected
    */
   singleAnswer() {
     return this.isSingleAnswer;
@@ -334,7 +334,7 @@ export default class MultiMediaChoiceContent {
     // Reset grid height to get the real height
     item.style.gridRowEnd = '';
     const rowHeight = 5;
-    const rowSpan = Math.ceil((item.getBoundingClientRect().height) / (rowHeight));
+    const rowSpan = Math.ceil(item.getBoundingClientRect().height / rowHeight);
 
     item.style.gridRowEnd = 'span ' + rowSpan;
   }
@@ -346,7 +346,9 @@ export default class MultiMediaChoiceContent {
     const columnSpaceCount = this.optionList.getBoundingClientRect().width / optionMinWidth;
 
     // Find the number of columns from whichever is smaller: space, max values and number of options
-    const columns = Math.floor(Math.min(columnSpaceCount, this.maxAlternativesPerRow, this.options.length));
+    const columns = Math.floor(
+      Math.min(columnSpaceCount, this.maxAlternativesPerRow, this.options.length)
+    );
 
     this.optionList.style.gridTemplateColumns = `repeat(${columns}, minmax(${optionMinWidth}px, 1fr))`;
 
