@@ -259,13 +259,14 @@ export class MultiMediaChoiceOption {
    */
   addKeyboardHandlers() {
     this.content.addEventListener('keydown', event => {
-      switch (event.code) {
+      switch (event.key) {
         case 'Enter':
-        case 'Space':
+        case ' ': // The space key
           if (this.isDisabled()) {
             return;
           }
 
+          event.preventDefault(); // Disable scrolling
           this.callbacks.onKeyboardSelect(this);
           break;
 
