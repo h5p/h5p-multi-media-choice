@@ -33,8 +33,11 @@ export default class MultiMediaChoiceContent {
     this.content = document.createElement('div');
     this.content.classList.add('h5p-multi-media-choice-content');
 
-    // Calculate max alternatives per row
-    this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
+    // If max alternatives is left empty in the editor we set it to the default value
+    this.maxAlternativesPerRow = 10;
+    if (this.params.behaviour.maxAlternativesPerRow) {
+      this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
+    }
 
     // Build n options
     this.options = params.options.map(
