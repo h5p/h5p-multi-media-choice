@@ -2,9 +2,6 @@
 @use 'sizes' as sizes;
 
 @mixin solution-button($icon, $color) {
-  // Prevents the icons being displayed as scrollbars before loading
-  overflow: hidden;
-
   position: absolute;
   top: -0.35em;
   animation: slide-right-fade 0.25s forwards ease-out;
