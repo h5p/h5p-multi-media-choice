@@ -3,9 +3,10 @@ export class MultiMediaChoiceOption {
   /**
    * @constructor
    * @param {object} option Option object from the editor
-   * @param {number} contentId Content's id.
+   * @param {number} contentId Content's id
    * @param {string} aspectRatio Aspect ratio used if all options should conform to the same size
    * @param {boolean} singleAnswer true for radio buttons, false for checkboxes
+   * @param {boolean} assetsFilePath //TODO: what is this?
    * @param {object} [callbacks = {}] Callbacks.
    */
   constructor(option, contentId, aspectRatio, singleAnswer, assetsFilePath, callbacks) {
@@ -15,7 +16,6 @@ export class MultiMediaChoiceOption {
     this.assetsFilePath = assetsFilePath;
 
     this.media = option.media;
-    this.disableImageZooming = option.disableImageZooming;
     this.correct = option.correct;
 
     this.callbacks = callbacks || {};
@@ -24,11 +24,11 @@ export class MultiMediaChoiceOption {
     this.callbacks.onKeyboardArrowKey = this.callbacks.onKeyboardArrowKey || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
 
-    this.listItem = document.createElement('li');
-    this.listItem.classList.add('h5p-multi-media-choice-list-item');
-    this.content = document.createElement('div');
-    this.content.classList.add('h5p-multi-media-choice-option');
-    this.listItem.appendChild(this.content);
+    this.content = document.createElement('li');
+    this.content.classList.add('h5p-multi-media-choice-list-item');
+    this.wrapper = document.createElement('div');
+    this.wrapper.classList.add('h5p-multi-media-choice-option');
+    this.content.appendChild(this.wrapper);
 
     if (singleAnswer) {
       this.content.setAttribute('role', 'radio');
@@ -41,7 +41,7 @@ export class MultiMediaChoiceOption {
     this.content.addEventListener('click', this.callbacks.onClick);
 
     const mediaContent = this.createMediaContent();
-    this.content.appendChild(mediaContent);
+    this.wrapper.appendChild(mediaContent);
 
     this.addKeyboardHandlers();
   }
@@ -137,7 +137,7 @@ export class MultiMediaChoiceOption {
    * @return {HTMLElement} DOM for this class
    */
   getDOM() {
-    return this.listItem;
+    return this.content;
   }
 
   /**
@@ -164,11 +164,11 @@ export class MultiMediaChoiceOption {
   toggle() {
     if (this.isSelected()) {
       this.content.setAttribute('aria-checked', 'false');
-      this.content.classList.remove('h5p-multi-media-choice-selected');
+      this.wrapper.classList.remove('h5p-multi-media-choice-selected');
     }
     else {
       this.content.setAttribute('aria-checked', 'true');
-      this.content.classList.add('h5p-multi-media-choice-selected');
+      this.wrapper.classList.add('h5p-multi-media-choice-selected');
     }
   }
 
@@ -177,7 +177,14 @@ export class MultiMediaChoiceOption {
    */
   uncheck() {
     this.content.setAttribute('aria-checked', 'false');
-    this.content.classList.remove('h5p-multi-media-choice-selected');
+    this.wrapper.classList.remove('h5p-multi-media-choice-selected');
+  }
+
+  /**
+   * Set focus to this object
+   */
+  focus() {
+    this.content.focus();
   }
 
   /**
@@ -185,7 +192,7 @@ export class MultiMediaChoiceOption {
    */
   enable() {
     this.content.setAttribute('aria-disabled', 'false');
-    this.content.classList.add('h5p-multi-media-choice-enabled');
+    this.wrapper.classList.add('h5p-multi-media-choice-enabled');
   }
 
   /**
@@ -193,22 +200,22 @@ export class MultiMediaChoiceOption {
    */
   disable() {
     this.content.setAttribute('aria-disabled', 'true');
-    this.content.classList.remove('h5p-multi-media-choice-enabled');
     this.content.setAttribute('tabindex', '-1');
+    this.wrapper.classList.remove('h5p-multi-media-choice-enabled');
   }
 
   /**
    * Shows if the answer selected is correct or wrong in the UI and screen reader if selected
    */
   showSelectedSolution({ correctAnswer, wrongAnswer }) {
-    this.content.classList.remove('h5p-multi-media-choice-selected');
+    this.wrapper.classList.remove('h5p-multi-media-choice-selected');
     if (this.isSelected()) {
       if (this.correct) {
-        this.content.classList.add('h5p-multi-media-choice-correct');
+        this.wrapper.classList.add('h5p-multi-media-choice-correct');
         this.addAccessibilitySolutionText(correctAnswer);
       }
       else {
-        this.content.classList.add('h5p-multi-media-choice-wrong');
+        this.wrapper.classList.add('h5p-multi-media-choice-wrong');
         this.addAccessibilitySolutionText(wrongAnswer);
       }
     }
@@ -220,7 +227,7 @@ export class MultiMediaChoiceOption {
   showUnselectedSolution({ shouldCheck, shouldNotCheck }) {
     if (!this.isSelected()) {
       if (this.correct) {
-        this.content.classList.add('h5p-multi-media-choice-show-correct');
+        this.wrapper.classList.add('h5p-multi-media-choice-show-correct');
         this.addAccessibilitySolutionText(shouldCheck);
       }
       else {
@@ -236,16 +243,16 @@ export class MultiMediaChoiceOption {
     this.accessibilitySolutionText = document.createElement('span');
     this.accessibilitySolutionText.classList.add('hidden-accessibility-solution-text');
     this.accessibilitySolutionText.innerText = `${solutionText}.`;
-    this.content.appendChild(this.accessibilitySolutionText);
+    this.wrapper.appendChild(this.accessibilitySolutionText);
   }
 
   /**
    * Hides any information about solution in the UI and screen reader
    */
   hideSolution() {
-    this.content.classList.remove('h5p-multi-media-choice-correct');
-    this.content.classList.remove('h5p-multi-media-choice-show-correct');
-    this.content.classList.remove('h5p-multi-media-choice-wrong');
+    this.wrapper.classList.remove('h5p-multi-media-choice-correct');
+    this.wrapper.classList.remove('h5p-multi-media-choice-show-correct');
+    this.wrapper.classList.remove('h5p-multi-media-choice-wrong');
     if (this.accessibilitySolutionText) {
       if (this.accessibilitySolutionText.parentNode) {
         this.accessibilitySolutionText.parentNode.removeChild(this.accessibilitySolutionText);
@@ -259,13 +266,14 @@ export class MultiMediaChoiceOption {
    */
   addKeyboardHandlers() {
     this.content.addEventListener('keydown', event => {
-      switch (event.code) {
+      switch (event.key) {
         case 'Enter':
-        case 'Space':
+        case ' ': // The space key
           if (this.isDisabled()) {
             return;
           }
 
+          event.preventDefault(); // Disable scrolling
           this.callbacks.onKeyboardSelect(this);
           break;
 
@@ -294,12 +302,5 @@ export class MultiMediaChoiceOption {
           break;
       }
     });
-  }
-
-  /**
-   * Set focus to this object
-   */
-  focus() {
-    this.content.focus();
   }
 }

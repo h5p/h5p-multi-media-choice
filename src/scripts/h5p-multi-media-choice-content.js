@@ -19,7 +19,7 @@ export default class MultiMediaChoiceContent {
     this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
     this.assetsFilePath = assetsFilePath;
 
-    this.numberOfCorrectOptions = params.options.filter(option => option.correct).length;
+    this.numberOfCorrectOptions = params.options ? params.options.filter(option => option.correct).length : 0;
 
     this.isSingleAnswer =
       this.params.behaviour.questionType === 'auto'
@@ -40,22 +40,24 @@ export default class MultiMediaChoiceContent {
     }
 
     // Build n options
-    this.options = params.options.map(
-      (option, index) =>
-        new MultiMediaChoiceOption(
-          option,
-          contentId,
-          this.aspectRatio,
-          this.isSingleAnswer,
-          assetsFilePath,
-          {
-            onClick: () => this.toggleSelected(index),
-            onKeyboardSelect: () => this.toggleSelected(index),
-            onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
-            triggerResize: this.callbacks.triggerResize
-          }
-        )
-    );
+    this.options = params.options
+      ? params.options.map(
+        (option, index) =>
+          new MultiMediaChoiceOption(
+            option,
+            contentId,
+            this.aspectRatio,
+            this.isSingleAnswer,
+            assetsFilePath,
+            {
+              onClick: () => this.toggleSelected(index),
+              onKeyboardSelect: () => this.toggleSelected(index),
+              onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
+              triggerResize: this.callbacks.triggerResize
+            }
+          )
+      )
+      : [];
     this.optionList = this.buildOptionList(this.options);
     this.content.appendChild(this.optionList);
     this.setTabIndexes();
@@ -88,7 +90,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Returns whether the user can select only a single answer
-   * @returns {boolean} True if only a single answer can be selcted
+   * @returns {boolean} True if only a single answer can be selected
    */
   singleAnswer() {
     return this.isSingleAnswer;
@@ -120,6 +122,10 @@ export default class MultiMediaChoiceContent {
    */
   getScore() {
     // One point if no correct options and no selected options
+    if (this.params.behaviour.singlePoint && this.params.behaviour.passPercentage === 0) {
+      return 1;
+    }
+
     if (!this.isAnyAnswerSelected()) {
       return this.isBlankCorrect() ? 1 : 0;
     }
@@ -217,7 +223,9 @@ export default class MultiMediaChoiceContent {
       'h5p-multi-media-choice-show-correct'
     )[0];
     if (unselectedSolution) {
-      unselectedSolution.focus();
+      if (unselectedSolution.parentNode) {
+        unselectedSolution.parentNode.focus();
+      }
     }
   }
 
@@ -326,7 +334,7 @@ export default class MultiMediaChoiceContent {
     // Reset grid height to get the real height
     item.style.gridRowEnd = '';
     const rowHeight = 5;
-    const rowSpan = Math.ceil((item.getBoundingClientRect().height) / (rowHeight));
+    const rowSpan = Math.ceil(item.getBoundingClientRect().height / rowHeight);
 
     item.style.gridRowEnd = 'span ' + rowSpan;
   }
@@ -338,7 +346,9 @@ export default class MultiMediaChoiceContent {
     const columnSpaceCount = this.optionList.getBoundingClientRect().width / optionMinWidth;
 
     // Find the number of columns from whichever is smaller: space, max values and number of options
-    const columns = Math.floor(Math.min(columnSpaceCount, this.maxAlternativesPerRow, this.options.length));
+    const columns = Math.floor(
+      Math.min(columnSpaceCount, this.maxAlternativesPerRow, this.options.length)
+    );
 
     this.optionList.style.gridTemplateColumns = `repeat(${columns}, minmax(${optionMinWidth}px, 1fr))`;
 

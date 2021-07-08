@@ -279,7 +279,7 @@
         "type": "text",
         "label": "Assistive technology description for \"Check\" button",
         "importance": "low",
-        "default": "Check the characters. The responses will be marked as correct, incorrect, or unanswered."
+        "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
       },
       {
         "name": "showSolutionButtonText",
