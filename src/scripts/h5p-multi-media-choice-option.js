@@ -283,9 +283,6 @@ export class MultiMediaChoiceOption {
             return;
           }
           event.preventDefault(); // Disable scrolling
-          if (this.getDOM() === this.getDOM().parentNode.firstChild) {
-            return;
-          }
           this.callbacks.onKeyboardArrowKey(event.code.replace('Arrow', ''));
           break;
 
@@ -295,9 +292,6 @@ export class MultiMediaChoiceOption {
             return;
           }
           event.preventDefault(); // Disable scrolling
-          if (this.getDOM() === this.getDOM().parentNode.lastChild) {
-            return;
-          }
           this.callbacks.onKeyboardArrowKey(event.code.replace('Arrow', ''));
           break;
       }
