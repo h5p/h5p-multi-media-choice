@@ -98,7 +98,7 @@ export class MultiMediaChoiceOption {
 
     const image = document.createElement('img');
     image.setAttribute('src', path);
-    image.setAttribute('alt', alt);
+    this.content.setAttribute('aria-label', alt);
     image.addEventListener('load', this.callbacks.triggerResize);
     this.content.setAttribute('title', title);
     image.classList.add('h5p-multi-media-choice-media');

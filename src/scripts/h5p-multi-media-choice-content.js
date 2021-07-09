@@ -19,7 +19,9 @@ export default class MultiMediaChoiceContent {
     this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
     this.assetsFilePath = assetsFilePath;
 
-    this.numberOfCorrectOptions = params.options ? params.options.filter(option => option.correct).length : 0;
+    this.numberOfCorrectOptions = params.options
+      ? params.options.filter(option => option.correct).length
+      : 0;
 
     this.isSingleAnswer =
       this.params.behaviour.questionType === 'auto'
@@ -71,7 +73,7 @@ export default class MultiMediaChoiceContent {
   buildOptionList() {
     const optionList = document.createElement('ul');
     optionList.setAttribute('role', this.isSingleAnswer ? 'radiogroup' : 'group');
-    optionList.setAttribute('aria-labelledby', `h5p-mmc${this.contentId}`);
+    optionList.setAttribute('aria-labelledby', `h5p-media-choice${this.contentId}`);
     optionList.classList.add('h5p-multi-media-choice-option-list');
 
     this.options.forEach(option => {
