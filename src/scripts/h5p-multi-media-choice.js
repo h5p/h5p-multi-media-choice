@@ -48,7 +48,7 @@ export default class MultiMediaChoice extends H5P.Question {
       if (this.params.question) {
         this.introduction = document.createElement('div');
         this.introduction.innerHTML = this.params.question;
-        this.introduction.setAttribute('id', `h5p-mmc${contentId}`);
+        this.introduction.setAttribute('id', `h5p-media-choice${contentId}`);
         const div = document.createElement('img');
         div.src = this.getLibraryFilePath('assets/placeholder1to1.svg');
         this.setIntroduction(this.introduction);
