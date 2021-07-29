@@ -321,10 +321,6 @@ export default class MultiMediaChoiceContent {
 
     const directionVector = directions[direction];
     const nextIndex = index + directionVector;
-    if (nextIndex < 0 || nextIndex === this.options.length) {
-      return;
-    }
-
 
     this.toggleSelected(nextIndex);
     this.options[nextIndex].focus();
@@ -333,7 +329,20 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Set the number of rows and columns, and position each element
+   * Set row height for an element in grid
+   * @param  {HTMLElement} item
+   */
+  resizeGridItem(item) {
+    // Reset grid height to get the real height
+    item.style.gridRowEnd = '';
+    const rowHeight = 5;
+    const rowSpan = Math.ceil(item.getBoundingClientRect().height / rowHeight);
+
+    item.style.gridRowEnd = 'span ' + rowSpan;
+  }
+
+  /**
+   * Set the number of columns and each element's size
    */
   setColumnProperties() {
     const columnSpaceCount = this.optionList.getBoundingClientRect().width / optionMinWidth;
@@ -345,82 +354,8 @@ export default class MultiMediaChoiceContent {
 
     this.optionList.style.gridTemplateColumns = `repeat(${columns}, minmax(${optionMinWidth}px, 1fr))`;
 
-    // Index and height of every column. Starts as 0, updated when pictures are added to the column
-    let columnHeights = Array.from(Array(columns).keys()).map(i => [i, 0]);
-
-    // Height of every list item
-    let imageHeights = this.options.map(option => option.getDOM().getBoundingClientRect().height);
-
-    // Additive height of every row
-    let rowHeights = [];
-
-    /**
-     * Row and column positions of every list item.
-     * [0]: grid-column
-     * [1]: grid-row-start
-     * [2]: grid-row-end
-     */
-    let gridPositions = [];
-
-    // List of images that do not have grid-row-end values assigned in gridPositions
-    let unpositionedImages = [];
-
-    // Add images to columns, update column and row heights, calculate grid positions
-    for (let i = 0; i < this.options.length; i++) {
-      let index = 0;
-      let minHeight = 10000;
-      for (let j = 0; j < columnHeights.length; j++) {
-        if (columnHeights[j][1] < minHeight) {
-          minHeight = columnHeights[j][1];
-          index = j;
-        }
-      }
-      gridPositions.push([index + 1]);
-
-      if (minHeight !== 0
-        && (rowHeights.length === 0 || rowHeights[rowHeights.length - 1] !== minHeight)
-      ) {
-        rowHeights.push(minHeight);
-      }
-      gridPositions[i].push(rowHeights.length + 1);
-
-      if (unpositionedImages[index]) {
-        gridPositions[unpositionedImages[index][0] - 1].push(gridPositions[i][1]);
-      }
-      unpositionedImages[index] = [i + 1, rowHeights.length + 1];
-      columnHeights[index][1] += imageHeights[i];
-    }
-
-    columnHeights.sort((a, b) => a[1] - b[1]);
-
-    // Calculate grid-row-end positions for the remaining images
-    const nextRow = gridPositions[gridPositions.length - 1][1] + 1;
-    for (let i = 0; i < unpositionedImages.length; i++) {
-      const shortestRow = columnHeights[i][0];
-      const imageIndex = unpositionedImages[shortestRow][0];
-      gridPositions[imageIndex - 1].push(nextRow + i);
-    }
-
-    // Calculate the remaining row heights
-    for (let i = 0; i < columnHeights.length; i++) {
-      if (rowHeights[rowHeights.length - 1] !== columnHeights[i][1]) {
-        rowHeights.push(columnHeights[i][1]);
-      }
-    }
-
-    // Convert row heights to string
-    let rowHeightText = rowHeights[0] + 'px ';
-    for (let i = 1; i < rowHeights.length; i++) {
-      rowHeightText += rowHeights[i] - rowHeights[i - 1] + 'px ';
-    }
-
-    // Set row heights on element
-    this.optionList.style.gridTemplateRows = rowHeightText;
-
-    // Set grid area for list items
-    for (let i = 0; i < this.options.length; i++) {
-      const gridText = gridPositions[i][1] + ' / ' + gridPositions[i][0] + ' / ' + gridPositions[i][2] + ' / span 1';
-      this.options[i].getDOM().style.gridArea = gridText;
+    for (let x = 0; x < this.options.length; x++) {
+      this.resizeGridItem(this.options[x].getDOM());
     }
   }
 }
