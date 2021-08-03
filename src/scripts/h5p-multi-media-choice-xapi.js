@@ -51,13 +51,13 @@ export function getAnsweredXAPIEvent(app, question, options, score, maxScore, su
 function addQuestionToXAPI(xAPIEvent, options, question) {
   const definition = xAPIEvent.getVerifiedStatementValue(['object', 'definition']);
   definition.description = {
-    'en-US': question
+    'en-US': htmlDecode(question)
   };
   definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
   definition.interactionType = 'choice';
 
   definition.choices = getChoices(options);
-  definition.correctResponsePattern = getCorrectOptions(options);
+  definition.correctResponsePattern = [getCorrectOptions(options)];
 }
 
 /**
@@ -88,7 +88,7 @@ function getChoices(options) {
   return options.map((option, index) => ({
     id: index.toString(),
     description: {
-      'en-US': option.getDescription()
+      'en-US': htmlDecode(option.getDescription())
     }
   }));
 }
@@ -110,3 +110,14 @@ function getCorrectOptions(options) {
     .toString()
     .replaceAll(',', '[,]'); // [,] is the deliminator used when multiple answers are corect
 }
+
+/**
+ * Get plain text
+ *
+ * @param {*} html
+ */
+const htmlDecode = (html) => {
+  const el = document.createElement('div');
+  el.innerHTML = html;
+  return el.textContent;
+};
