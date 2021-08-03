@@ -65,7 +65,7 @@ export default class MultiMediaChoice extends H5P.Question {
             this.triggerXAPI('interacted');
           }
         },
-        this.getLibraryFilePath('assets/')
+        this.getLibraryFilePath('assets')
       );
 
       this.setContent(this.content.getDOM()); // Register content with H5P.Question
