@@ -1,6 +1,8 @@
 import { MultiMediaChoiceOption } from './h5p-multi-media-choice-option';
+import * as Masonry from 'masonry-layout';
 
 const optionMinWidth = 210;
+const columnGap = 20;
 
 /** Class representing the content */
 export default class MultiMediaChoiceContent {
@@ -63,6 +65,12 @@ export default class MultiMediaChoiceContent {
     this.optionList = this.buildOptionList(this.options);
     this.content.appendChild(this.optionList);
     this.setTabIndexes();
+
+    // Use masonry library
+    this.masonry = new Masonry(this.optionList, {
+      gutter: columnGap,
+      itemSelector: '.h5p-multi-media-choice-list-item'
+    });
   }
 
   /**
@@ -329,33 +337,30 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Set row height for an element in grid
+   * Set elemnt width
    * @param  {HTMLElement} item
    */
-  resizeGridItem(item) {
-    // Reset grid height to get the real height
-    item.style.gridRowEnd = '';
-    const rowHeight = 5;
-    const rowSpan = Math.ceil(item.getBoundingClientRect().height / rowHeight);
-
-    item.style.gridRowEnd = 'span ' + rowSpan;
+  resizeGridItem(item, width) {
+    item.style.width = width + 'px';
   }
 
   /**
    * Set the number of columns and each element's size
    */
   setColumnProperties() {
-    const columnSpaceCount = this.optionList.getBoundingClientRect().width / optionMinWidth;
+    const columnSpaceCount = this.optionList.getBoundingClientRect().width / (optionMinWidth + 20);
 
     // Find the number of columns from whichever is smaller: space, max values and number of options
     const columns = Math.floor(
       Math.min(columnSpaceCount, this.maxAlternativesPerRow, this.options.length)
     );
-
-    this.optionList.style.gridTemplateColumns = `repeat(${columns}, minmax(${optionMinWidth}px, 1fr))`;
+    const elementWidth = (this.optionList.getBoundingClientRect().width / columns) - 20;
 
     for (let x = 0; x < this.options.length; x++) {
-      this.resizeGridItem(this.options[x].getDOM());
+      this.resizeGridItem(this.options[x].getDOM(), elementWidth);
     }
+
+    // Set layout again after resizing
+    this.masonry.layout();
   }
 }
