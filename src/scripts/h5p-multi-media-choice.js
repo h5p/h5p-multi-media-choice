@@ -240,7 +240,7 @@ export default class MultiMediaChoice extends H5P.Question {
    * @public
    */
   getCurrentState() {
-    return getCurrentState(this.content.selectedIndexes());
+    return getCurrentState(this.content.getSelectedIndexes());
   }
 
   /**

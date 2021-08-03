@@ -363,4 +363,19 @@ export default class MultiMediaChoiceContent {
     // Set layout again after resizing
     this.masonry.layout();
   }
+
+  /**
+   * Return a list with the selected indexes
+   * @return  {number[]} indexes
+   */
+  getSelectedIndexes() {
+    const indexes = [];
+    for (let i = 0; i < this.options.length; i++) {
+      const option = this.options[i];
+      if (option.isSelected()) {
+        indexes.push(i);
+      }
+    }
+    return indexes;
+  }
 }

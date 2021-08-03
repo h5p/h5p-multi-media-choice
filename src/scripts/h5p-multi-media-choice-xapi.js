@@ -4,7 +4,7 @@
  * @param {Number[]} selectedIndexes Array of indexes of selected options
  */
 export function getCurrentState(selectedIndexes) {
-  return { answers: selectedIndexes.toString() };
+  return { answers: selectedIndexes };
 }
 
 /**
