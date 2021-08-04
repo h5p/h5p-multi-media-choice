@@ -35,7 +35,7 @@
     outline: none;
 
     border-style: solid;
-    border-width: $border-thin-stroke-width;
+    border-width: $border-thick-stroke-width;
     border-radius: $border-radius;
     border-color: $color-option-background;
     padding: $option-padding-default;
@@ -88,9 +88,6 @@
         cursor: pointer;
         border-style: dotted;
         border-color: $color-border-interaction;
-        border-width: $border-thick-stroke-width;
-        // This ensures the option stays the same size (padding + border is constant)
-        padding: calc(#{$option-padding-default} - #{$border-stroke-width-difference});
 
         &:after {
           @include hover-overlay();
@@ -101,9 +98,6 @@
 
   .h5p-multi-media-choice-selected {
     border-color: $color-border-interaction;
-    border-width: $border-thick-stroke-width;
-    // This ensures the option stays the same size (padding + border is constant)
-    padding: calc(#{$option-padding-default} - #{$border-stroke-width-difference});
     position: relative; // Used for the overlay
 
     &:hover {
@@ -129,9 +123,6 @@
   .h5p-multi-media-choice-correct {
     background-color: $color-correct-light;
     border-color: $color-correct-dark;
-    border-width: $border-thick-stroke-width;
-    // This ensures the option stays the same size (padding + border is constant)
-    padding: calc(#{$option-padding-default} - #{$border-stroke-width-difference});
     position: relative;
 
     &:before {
@@ -141,9 +132,8 @@
 
   .h5p-multi-media-choice-show-correct {
     background-color: $color-show-correct-light;
-    border: $color-show-correct-dark dotted $border-thick-stroke-width;
-    // This ensures the option stays the same size (padding + border is constant)
-    padding: calc(#{$option-padding-default} - #{$border-stroke-width-difference});
+    border-color: $color-show-correct-dark;
+    border-style: dotted;
     position: relative;
 
     &:before {
@@ -154,9 +144,6 @@
   .h5p-multi-media-choice-wrong {
     background-color: $color-wrong-light;
     border-color: $color-wrong-dark;
-    border-width: $border-thick-stroke-width;
-    // This ensures the option stays the same size (padding + border is constant)
-    padding: calc(#{$option-padding-default} - #{$border-stroke-width-difference});
     position: relative;
 
     &:before {
