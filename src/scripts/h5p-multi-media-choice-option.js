@@ -73,7 +73,7 @@ export class MultiMediaChoiceOption {
   getDescription() {
     switch (this.media.metadata.contentType) {
       case 'Image':
-        return this.media.params.alt; // Alternative text
+        return this.media.params.alt || ''; // Alternative text
       default:
         return '';
     }

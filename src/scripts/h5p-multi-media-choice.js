@@ -140,7 +140,7 @@ export default class MultiMediaChoice extends H5P.Question {
       this.trigger(
         getAnsweredXAPIEvent(
           this,
-          this.question,
+          this.params.question,
           this.content.getOptions(),
           this.getScore(),
           this.getMaxScore(),
