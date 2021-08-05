@@ -57,7 +57,7 @@ function addQuestionToXAPI(xAPIEvent, options, question) {
   definition.interactionType = 'choice';
 
   definition.choices = getChoices(options);
-  definition.correctResponsePattern = [getCorrectOptions(options)];
+  definition.correctResponsesPattern = [getCorrectOptions(options)];
 }
 
 /**
