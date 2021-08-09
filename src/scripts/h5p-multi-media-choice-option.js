@@ -9,11 +9,12 @@ export class MultiMediaChoiceOption {
    * @param {boolean} assetsFilePath //TODO: what is this?
    * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(option, contentId, aspectRatio, singleAnswer, assetsFilePath, callbacks) {
+  constructor(option, contentId, aspectRatio, singleAnswer, assetsFilePath, missingAltText, callbacks) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.singleAnswer = singleAnswer;
     this.assetsFilePath = assetsFilePath;
+    this.missingAltText = missingAltText;
 
     this.media = option.media;
     this.correct = option.correct;
@@ -73,7 +74,7 @@ export class MultiMediaChoiceOption {
   getDescription() {
     switch (this.media.metadata.contentType) {
       case 'Image':
-        return this.media.params.alt; // Alternative text
+        return this.media.params.alt || this.missingAltText; // Alternative text
       default:
         return '';
     }

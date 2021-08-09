@@ -23,7 +23,7 @@
         "fields": [
           {
             "label": "Media",
-            "description": "Media to display as the choice."
+            "description": "<H3> Image to display as the choice. The alternative text is used by the report.</H3>"
           },
           {
             "label": "Correct"
@@ -48,6 +48,7 @@
               {
                 "label": "Score Range"
               },
+              {},
               {
                 "label": "Feedback for defined score range",
                 "placeholder": "Fill in the feedback"
@@ -62,12 +63,10 @@
       "description": "These options will let you control how the task behaves.",
       "fields": [
         {
-          "label": "Enable \"Retry\" button",
-          "default": "true"
+          "label": "Enable \"Retry\" button"
         },
         {
-          "label": "Enable \"Show Solution\" button",
-          "default": "true"
+          "label": "Enable \"Show Solution\" button"
         },
         {
           "label": "Show confirmation dialog on \"Check\""
@@ -221,6 +220,10 @@
               "default": "Retry"
             }
           ]
+        },
+        {
+          "label": "Text if alt text is missing for an image",
+          "default": "Alt text missing"
         }
       ]
     }

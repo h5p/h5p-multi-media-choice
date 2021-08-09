@@ -53,6 +53,7 @@ export default class MultiMediaChoiceContent {
             this.aspectRatio,
             this.isSingleAnswer,
             assetsFilePath,
+            this.params.l10n.missingAltText,
             {
               onClick: () => this.toggleSelected(index),
               onKeyboardSelect: () => this.toggleSelected(index),

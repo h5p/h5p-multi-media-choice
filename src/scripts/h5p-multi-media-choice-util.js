@@ -45,7 +45,8 @@ export class Util {
             body: 'Are you sure you wish to retry?',
             cancelLabel: 'Cancel',
             confirmLabel: 'Retry'
-          }
+          },
+          missingAltText: 'Alt text missing'
         }
       },
       params

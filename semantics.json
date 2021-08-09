@@ -10,7 +10,10 @@
         "type": "library",
         "label": "Type",
         "importance": "medium",
-        "options": ["H5P.Image 1.1", "H5P.Video 1.5"],
+        "options": [
+          "H5P.Image 1.1",
+          "H5P.Video 1.5"
+        ],
         "optional": true,
         "description": "Optional media to display above the question."
       },
@@ -40,7 +43,16 @@
     "widget": "html",
     "label": "Question",
     "enterMode": "p",
-    "tags": ["strong", "em", "sub", "sup", "h2", "h3", "pre", "code"]
+    "tags": [
+      "strong",
+      "em",
+      "sub",
+      "sup",
+      "h2",
+      "h3",
+      "pre",
+      "code"
+    ]
   },
   {
     "name": "options",
@@ -62,8 +74,10 @@
           "type": "library",
           "label": "Media",
           "optional": false,
-          "description": "Media to display as the choice.",
-          "options": ["H5P.Image 1.1"]
+          "description": "<H3> Image to display as the choice. The alternative text is used by the report.</H3>",
+          "options": [
+            "H5P.Image 1.1"
+          ]
         },
         {
           "name": "correct",
@@ -377,7 +391,13 @@
             "default": "Are you sure you want to finish?",
             "widget": "html",
             "enterMode": "p",
-            "tags": ["strong", "em", "del", "u", "code"]
+            "tags": [
+              "strong",
+              "em",
+              "del",
+              "u",
+              "code"
+            ]
           },
           {
             "label": "Cancel button label",
@@ -417,7 +437,13 @@
             "default": "Are you sure you wish to retry?",
             "widget": "html",
             "enterMode": "p",
-            "tags": ["strong", "em", "del", "u", "code"]
+            "tags": [
+              "strong",
+              "em",
+              "del",
+              "u",
+              "code"
+            ]
           },
           {
             "label": "Cancel button label",
@@ -434,6 +460,13 @@
             "default": "Retry"
           }
         ]
+      },
+      {
+        "label": "Text if alt text is missing for an image",
+        "importance": "low",
+        "name": "missingAltText",
+        "type": "text",
+        "default": "Alt text missing"
       }
     ]
   }
