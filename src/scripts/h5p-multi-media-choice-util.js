@@ -91,7 +91,7 @@ export class Util {
 /**
  * Get plain text
  *
- * @param {*} html
+ * @param {string} html
  */
 export const htmlDecode = (html) => {
   const el = document.createElement('div');
