@@ -1,3 +1,5 @@
+import { htmlDecode } from "./h5p-multi-media-choice-util";
+
 /** Class representing a multi media option */
 export class MultiMediaChoiceOption {
   /**
@@ -99,9 +101,9 @@ export class MultiMediaChoiceOption {
 
     const image = document.createElement('img');
     image.setAttribute('src', path);
-    this.content.setAttribute('aria-label', alt);
+    this.content.setAttribute('aria-label', htmlDecode(alt));
     image.addEventListener('load', this.callbacks.triggerResize);
-    this.content.setAttribute('title', title);
+    this.content.setAttribute('title', htmlDecode(title));
     image.classList.add('h5p-multi-media-choice-media');
 
     if (this.aspectRatio !== 'auto') {

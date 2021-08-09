@@ -85,4 +85,16 @@ export class Util {
 
     return out;
   }
+
 }
+
+/**
+ * Get plain text
+ *
+ * @param {*} html
+ */
+export const htmlDecode = (html) => {
+  const el = document.createElement('div');
+  el.innerHTML = html;
+  return el.textContent;
+};

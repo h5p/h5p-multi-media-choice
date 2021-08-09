@@ -1,3 +1,5 @@
+import { htmlDecode } from './h5p-multi-media-choice-util';
+
 /**
  * Packs the current state of the users interactivity into a serializable object.
  *
@@ -111,13 +113,3 @@ function getCorrectOptions(options) {
     .replaceAll(',', '[,]'); // [,] is the deliminator used when multiple answers are corect
 }
 
-/**
- * Get plain text
- *
- * @param {*} html
- */
-const htmlDecode = (html) => {
-  const el = document.createElement('div');
-  el.innerHTML = html;
-  return el.textContent;
-};
