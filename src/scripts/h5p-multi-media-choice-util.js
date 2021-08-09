@@ -10,7 +10,7 @@ export class Util {
   static extendParams(params) {
     return Util.deepExtend(
       {
-        question: null,
+        question: 'No question text provided',
         behaviour: {
           enableSolutionsButton: true,
           enableRetry: true,
