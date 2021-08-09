@@ -43,9 +43,34 @@ export default class MultiMediaChoiceContent {
       this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
     }
 
+    // Add default media so it is always two
+    if (!this.params.options || this.params.options.length < 2) {
+      const defaultMedia = {
+        media: {
+          params: {
+            contentName: "Image"
+          },
+          library: "H5P.Image",
+          subContentId: params.contentId,
+          metadata: {
+            contentType: "Image",
+            license: "U",
+            title: "Untitled Image"
+          }
+        },
+        correct: false
+      };
+      if (this.params.options && this.params.options.length === 1) {
+        this.params.options.push(defaultMedia);
+      }
+      else {
+        this.params.options = [{}, {}].fill(defaultMedia);
+      }
+    }
+
     // Build n options
-    this.options = params.options
-      ? params.options.map(
+    this.options = this.params.options
+      ? this.params.options.map(
         (option, index) =>
           new MultiMediaChoiceOption(
             option,

@@ -55,7 +55,7 @@ export default class MultiMediaChoice extends H5P.Question {
       }
 
       this.content = new MultiMediaChoiceContent(
-        params,
+        this.params,
         contentId,
         {
           triggerResize: () => {
