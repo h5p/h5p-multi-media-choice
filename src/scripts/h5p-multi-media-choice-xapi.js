@@ -112,4 +112,3 @@ function getCorrectOptions(options) {
     .toString()
     .replaceAll(',', '[,]'); // [,] is the deliminator used when multiple answers are corect
 }
-

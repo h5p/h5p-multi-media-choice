@@ -85,7 +85,6 @@ export class Util {
 
     return out;
   }
-
 }
 
 /**
@@ -93,7 +92,7 @@ export class Util {
  *
  * @param {*} html
  */
-export const htmlDecode = (html) => {
+export const htmlDecode = html => {
   const el = document.createElement('div');
   el.innerHTML = html;
   return el.textContent;
