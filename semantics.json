@@ -255,12 +255,28 @@
       },
       {
         "name": "maxAlternativesPerRow",
-        "type": "number",
+        "type": "select",
         "label": "Maximum alternatives per row",
         "description": "Set the maximum number of alternatives per row to ensure the questions look alright.",
-        "min": 1,
-        "default": 10,
-        "optional": true
+        "default": 4,
+        "options": [
+          {
+            "value": 1,
+            "label": "1"
+          },
+          {
+            "value": 2,
+            "label": "2"
+          },
+          {
+            "value": 3,
+            "label": "3"
+          },
+          {
+            "value": 4,
+            "label": "4"
+          }
+        ]
       },
       {
         "label": "Pass percentage",
