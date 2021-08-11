@@ -20,6 +20,7 @@ export default class MultiMediaChoiceContent {
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
     this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
     this.assetsFilePath = assetsFilePath;
+    this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
 
     this.numberOfCorrectOptions = params.options
       ? params.options.filter(option => option.correct).length
@@ -37,11 +38,6 @@ export default class MultiMediaChoiceContent {
     this.content = document.createElement('div');
     this.content.classList.add('h5p-multi-media-choice-content');
 
-    // If max alternatives is left empty in the editor we set it to the default value
-    this.maxAlternativesPerRow = 10;
-    if (this.params.behaviour.maxAlternativesPerRow) {
-      this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
-    }
 
     // Add default media so it is always two
     if (!this.params.options || this.params.options.length < 2) {
