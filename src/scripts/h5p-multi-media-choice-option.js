@@ -62,8 +62,8 @@ export class MultiMediaChoiceOption {
       mediaWrapper.classList.add('h5p-multi-media-choice-media-wrapper-specific-ratio');
       mediaWrapper.classList.add(`h5p-multi-media-choice-media-wrapper-${this.aspectRatio}`);
     }
-    switch (this.media.metadata.contentType) {
-      case 'Image':
+    switch (this.media.library.split(' ')[0]) {
+      case 'H5P.Image':
         mediaWrapper.appendChild(this.buildImage(this.option));
         return mediaWrapper;
     }
@@ -74,8 +74,8 @@ export class MultiMediaChoiceOption {
    * @returns {string} the description of the option
    */
   getDescription() {
-    switch (this.media.metadata.contentType) {
-      case 'Image':
+    switch (this.media.library.split(' ')[0]) {
+      case 'H5P.Image':
         return this.media.params.alt || this.missingAltText; // Alternative text
       default:
         return '';
