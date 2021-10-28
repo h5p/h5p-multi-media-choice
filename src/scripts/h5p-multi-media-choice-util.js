@@ -22,6 +22,7 @@ export class Util {
         },
         l10n: {
           checkAnswerButtonText: 'Check',
+          submitAnswerButtonText: 'Submit',
           checkAnswer:
             'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
           showSolutionButtonText: 'Show solution',
