@@ -149,6 +149,10 @@
           "default": "Comprobar"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "Descripción de tecnología asistiva para botón \"Comprobar\"",
           "default": "Comprobar las respuestas. Las respuestas serán marcadas como correcta, incorrecta, o sin contestar."
         },

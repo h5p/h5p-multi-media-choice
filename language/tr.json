@@ -149,6 +149,10 @@
           "default": "Kontrol Et"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "\"Kontrol Et\" düğmesi için yardımcı teknoloji açıklaması",
           "default": "Cevapları kontrol edin. Cevaplar doğru, yanlış veya cevapsız olarak işaretlenecektir."
         },

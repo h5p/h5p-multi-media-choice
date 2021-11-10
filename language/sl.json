@@ -149,6 +149,10 @@
           "default": "Preveri"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "Opis gumba \"Preveri\" za bralnike zaslona",
           "default": "Preveri pravilnost. Odgovori bodo označeni kot pravilni, napačni ali brez odgovorov."
         },
