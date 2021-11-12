@@ -97,8 +97,8 @@
           ]
         },
         {
-          "label": "Itxuraren ratioa",
-          "description": "Aukeratu ezazu ordezkoen itxuraren ratioa",
+          "label": "Itxura-proportzioa",
+          "description": "Aukeratu ezazu ordezkoen itxura-proportzioa",
           "options": [
             {
               "label": "Automatikoa"
