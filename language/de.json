@@ -37,7 +37,7 @@
         {
           "widgets": [
             {
-              "label": "Eingabemaske"
+              "label": "Voreinstellung"
             }
           ],
           "label": "Lege Rückmeldungen für einzelne Punktebereiche fest",
@@ -142,11 +142,11 @@
       ]
     },
     {
-      "label": "Bedienoberfläche",
+      "label": "Bezeichnungen und Beschriftungen",
       "fields": [
         {
           "label": "Beschriftung des \"Überprüfen\"-Buttons",
-          "default": "Überprüfen"
+          "default": "Prüfen"
         },
         {
           "label": "Beschreibung des \"Überprüfen\"-Buttons (für Hilfsmittel zur Barrierefreiheit)",
