@@ -5,7 +5,7 @@
       "fields": [
         {
           "label": "Mota",
-          "description": "Aukerazko multimedia galderaren aurretik erakusteko."
+          "description": "Galderaren gainean erakusteko aukerazko multimedia."
         },
         {
           "label": "Desgaitu irudien zooma"
@@ -63,16 +63,16 @@
       "description": "Aukera hauek lanaren portaera kontrolatzea ahalbidetzen dizute.",
       "fields": [
         {
-          "label": "Gaitu \"Berriz saiatu\" botoia"
+          "label": "Gaitu \"Saiatu berriro\" botoia"
         },
         {
-          "label": "Gaitu \"Erakutsi Erantzuna\" botoia"
+          "label": "Gaitu \"Erakutsi emaitza\" botoia"
         },
         {
           "label": "Erakutsi \"Egiaztatu\" botoirako baieztapen-mezua"
         },
         {
-          "label": "Erakutsi \"Berriz saiatu\" botoirako baieztapen-mezua"
+          "label": "Erakutsi \"Saiatu berriro\" botoirako baieztapen-mezua"
         },
         {
           "label": "Eman puntu bat galdera guztiarengatik",
@@ -153,12 +153,12 @@
           "default": "Egiaztatu erantzunak. Erantzunak zuzen, oker edo erantzun gabe gisa markatuko dira."
         },
         {
-          "label": "\"Erakutsi erantzuna\" botoiaren testua",
-          "default": "Erakutsi erantzuna"
+          "label": "\"Erakutsi emaitza\" botoiaren testua",
+          "default": "Erakutsi emaitza"
         },
         {
-          "label": "\"Erakutsi Erantzuna\" botoiaren laguntza-teknologientzako etiketa",
-          "default": "Erakutsi erantzuna. Aukera zuzenak markatuko dira."
+          "label": "\"Erakutsi emaitza\" botoiaren laguntza-teknologientzako etiketa",
+          "default": "Erakutsi emaitza. Aukera zuzenak markatuko dira."
         },
         {
           "label": "Erantzun zuzena (erakutsi gabe)",
@@ -182,10 +182,10 @@
         },
         {
           "label": "\"Saiatu berriro\" botoiarentzako testua",
-          "default": "Berriz saiatu"
+          "default": "Saiatu berriro"
         },
         {
-          "label": "\"Berriz saiatu\" botoiaren laguntza-teknologientzako etiketa",
+          "label": "\"Saiatu berriro\" botoiaren laguntza-teknologientzako etiketa",
           "default": "Zeregina berriz egiten saiatu. Berrabiarazi erantzun guztiak eta hasi zeregina berriz."
         },
         {
@@ -219,7 +219,7 @@
           "fields": [
             {
               "label": "Goiburuko testua",
-              "default": "Berriz saiatu?"
+              "default": "Saiatu berriro?"
             },
             {
               "label": "Gorputzaren testua",
@@ -231,7 +231,7 @@
             },
             {
               "label": "Berretsi botoiaren etiketa",
-              "default": "Berriz saiatu"
+              "default": "Saiatu berriro"
             }
           ]
         },

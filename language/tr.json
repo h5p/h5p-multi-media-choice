@@ -82,7 +82,7 @@
           "label": "Çözümü göstermeden önce yanıt iste"
         },
         {
-          "label": "Question Type",
+          "label": "Soru Tipi",
           "description": "Sorunun görünümünü ve davranışını seçin.",
           "options": [
             {
@@ -136,7 +136,7 @@
           ]
         },
         {
-          "label": "Geçme puanı (%)",
+          "label": "Geçme notu (%)",
           "description": "Bu ayarın çoğu zaman herhangi bir etkisi olmaz. Tüm görev için bir puan etkinleştirildiğinde 1 puan almak ve eğitim yönetim sisteminde (Ör: EBA) sonucun başarılı olması için gereken toplam puanın yüzdesidir."
         }
       ]

@@ -1,0 +1,245 @@
+{
+  "semantics": [
+    {
+      "label": "",
+      "fields": [
+        {
+          "label": "",
+          "description": ""
+        },
+        {
+          "label": ""
+        }
+      ]
+    },
+    {
+      "label": ""
+    },
+    {
+      "label": "",
+      "entity": "",
+      "field": {
+        "label": "",
+        "fields": [
+          {
+            "label": "",
+            "description": ""
+          },
+          {
+            "label": ""
+          }
+        ]
+      }
+    },
+    {
+      "label": "",
+      "fields": [
+        {
+          "widgets": [
+            {
+              "label": ""
+            }
+          ],
+          "label": "",
+          "description": "Klikk på \"Legg til poengområde\"-knappen for å leggje til dei områda du behøver. Døme: 0–49 % Låg poengsum, 50–79 % Middels poengsum, 80–100 % Høg poengsum!",
+          "entity": "",
+          "field": {
+            "fields": [
+              {
+                "label": ""
+              },
+              {},
+              {
+                "label": "",
+                "placeholder": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "",
+      "description": "",
+      "fields": [
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "",
+          "description": ""
+        },
+        {
+          "label": ""
+        },
+        {
+          "label": "",
+          "description": "",
+          "options": [
+            {
+              "label": ""
+            },
+            {
+              "label": ""
+            },
+            {
+              "label": ""
+            }
+          ]
+        },
+        {
+          "label": "",
+          "description": "",
+          "options": [
+            {
+              "label": ""
+            },
+            {
+              "label": ""
+            },
+            {
+              "label": ""
+            },
+            {
+              "label": ""
+            },
+            {
+              "label": ""
+            }
+          ]
+        },
+        {
+          "label": "",
+          "description": "",
+          "options": [
+            {
+              "label": ""
+            },
+            {
+              "label": ""
+            },
+            {
+              "label": ""
+            },
+            {
+              "label": ""
+            }
+          ]
+        },
+        {
+          "label": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "label": "",
+      "fields": [
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "description": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "fields": [
+            {
+              "label": "",
+              "default": ""
+            },
+            {
+              "label": "",
+              "default": ""
+            },
+            {
+              "label": "",
+              "default": ""
+            },
+            {
+              "label": "",
+              "default": ""
+            }
+          ]
+        },
+        {
+          "label": "",
+          "fields": [
+            {
+              "label": "",
+              "default": ""
+            },
+            {
+              "label": "",
+              "default": ""
+            },
+            {
+              "label": "",
+              "default": ""
+            },
+            {
+              "label": "",
+              "default": ""
+            }
+          ]
+        },
+        {
+          "label": "",
+          "default": ""
+        }
+      ]
+    }
+  ]
+}
