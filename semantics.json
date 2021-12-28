@@ -305,6 +305,13 @@
         "default": "Check"
       },
       {
+        "name": "submitAnswerButtonText",
+        "type": "text",
+        "label": "Text for \"Submit\" button",
+        "importance": "low",
+        "default": "Submit"
+      },
+      {
         "name": "checkAnswer",
         "type": "text",
         "label": "Assistive technology description for \"Check\" button",
