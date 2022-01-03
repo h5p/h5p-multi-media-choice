@@ -1,0 +1,52 @@
+{
+  "semantics": [
+    {
+      "label": "Multivide",
+      "fields": [
+        {
+          "label": "Tips",
+          "description": "Papildu multivide, kuru atspoguļot virs jautājuma."
+        },
+        {
+          "label": "Atspējot attēla tālummaiņu"
+        }
+      ]
+    },
+    {},
+    {},
+    {
+      "label": "Kopējā atgriezeniskā saite",
+      "fields": [
+        {
+          "widgets": [
+            {
+              "label": "Pēc noklusējuma"
+            }
+          ],
+          "label": "Iestatiet pielāgotu atgriezenisko saiti katram rezultātu diapazonam",
+          "entity": "diapazons",
+          "field": {
+            "fields": [
+              {
+                "label": "Rezultātu diapazons"
+              },
+              {},
+              {
+                "label": "Norādītā diapazona atgriezeniskā saite",
+                "placeholder": "Aizpildiet atgriezenisko saiti"
+              }
+            ]
+          },
+          "description": "Klikšķiniet pogu \"Pievienot diapazonu\", lai pievienotu tik diapazonus cik vēlaties. Piemēram, 0-20% Slikts rezultāts, 21-91% Viduvējs rezultāts, 91-100% Lielisks rezultāts!"
+        }
+      ]
+    },
+    {
+      "label": "Uzvedības iestatījumi",
+      "description": "Šie iestatījumi ļaus jums kontrolēt uzdevuma uzvedību."
+    },
+    {
+      "label": "Lietotāja saskarne"
+    }
+  ]
+}
