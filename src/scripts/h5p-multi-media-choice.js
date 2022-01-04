@@ -208,7 +208,9 @@ export default class MultiMediaChoice extends H5P.Question {
           enable: this.params.behaviour.confirmCheckDialog,
           l10n: this.params.l10n.confirmCheck,
           instance: this
-        }
+        },
+        contentData: this.extras,
+        textIfSubmitting: this.params.l10n.submitAnswerButtonText,
       }
     );
     this.addButton(

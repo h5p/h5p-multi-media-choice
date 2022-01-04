@@ -149,6 +149,10 @@
           "default": "정답 확인"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "\"Check\" (정답 확인) 버튼에 대한 보조 기술 레이블",
           "default": "정답을 확인하세요. 답변은 정답, 오답, 미답변으로 표기가 됩니다."
         },

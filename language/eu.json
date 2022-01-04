@@ -149,6 +149,10 @@
           "default": "Egiaztatu"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "\"Egiaztatu\" botoiaren laguntza-teknologientzako etiketa",
           "default": "Egiaztatu erantzunak. Erantzunak zuzen, oker edo erantzun gabe gisa markatuko dira."
         },

@@ -148,6 +148,10 @@
           "label": "Beschriftung des \"Überprüfen\"-Buttons",
           "default": "Prüfen"
         },
+         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
         {
           "label": "Beschreibung des \"Überprüfen\"-Buttons (für Hilfsmittel zur Barrierefreiheit)",
           "default": "Die Antworten überprüfen. Die Eingaben werden als richtig, falsch oder unbeantwortet markiert."
