@@ -42,6 +42,12 @@ export default class MultiMediaChoice extends H5P.Question {
             this.setVideo(media);
           }
         }
+        else if (media.library.includes('H5P.Audio')) {
+          if (media.params.files) {
+            // Register task audio
+            this.setAudio(media);
+          }
+        }
       }
 
       // Register task introduction text
