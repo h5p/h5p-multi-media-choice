@@ -98,6 +98,7 @@
         },
         {
           "label": "Proporción de aspecto",
+          "description": "Seleccionar la proporción de aspecto de las alternativas",
           "options": [
             {
               "label": "Automático"
@@ -114,10 +115,11 @@
             {
               "label": "1:1"
             }
-          ],
-          "description": "Seleccionar la proporción de aspecto de las alternativas"
+          ]
         },
         {
+          "label": "Alternativas máximas por fila",
+          "description": "Configurar el número máximo de alternativas por fila para asegurar que la pregunta se vea bien.",
           "options": [
             {
               "label": "1"
@@ -131,9 +133,7 @@
             {
               "label": "4"
             }
-          ],
-          "label": "Alternativas máximas por fila",
-          "description": "Configurar el número máximo de alternativas por fila para asegurar que la pregunta se vea bien."
+          ]
         },
         {
           "label": "Porcentaje aprobatorio",
@@ -147,6 +147,10 @@
         {
           "label": "Texto para botón \"Comprobar\"",
           "default": "Comprobar"
+        },
+        {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
         },
         {
           "label": "Descripción de tecnología asistiva para botón \"Comprobar\"",

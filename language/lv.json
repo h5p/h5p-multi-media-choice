@@ -149,6 +149,10 @@
           "default": "Pārbaudīt"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "Pogas \"Pārbaudīt\" apraksts priekš asistējošajām tehnoloģijām",
           "default": "Pārbaudīt atbildes. Sniegtās atbildes tiks atzīmētas kā pareizas, nepareizas, vai neatbildētas."
         },
