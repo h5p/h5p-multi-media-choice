@@ -149,8 +149,8 @@
           "default": "정답 확인"
         },
         {
-          "label": "Text for \"Submit\" button",
-          "default": "Submit"
+          "label": "\"제출하기\" 버튼 텍스트",
+          "default": "제출하기"
         },
         {
           "label": "\"Check\" (정답 확인) 버튼에 대한 보조 기술 레이블",
