@@ -149,7 +149,7 @@
           "default": "Comprobar"
         },
         {
-          "label": "Text for \"Submit\" button",
+          "label": "Texto para botón \"Enviar\"",
           "default": "Submit"
         },
         {
