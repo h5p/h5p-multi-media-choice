@@ -59,8 +59,8 @@
       ]
     },
     {
-      "label": "Gedragsinstellingen",
-      "description": "Met deze opties kun je bepalen hoe de opgave zich gedraagt.",
+      "label": "Gedragsinstelllingen",
+      "description": "Met deze opties kun je bepalen hoe de taak zich gedraagt.",
       "fields": [
         {
           "label": "Schakel \"Opnieuw\"-knop in"
@@ -149,6 +149,10 @@
           "default": "Controleer"
         },
         {
+          "label": "Tekst voor \"Verzend\"-knop",
+          "default": "Verzend"
+        },
+        {
           "label": "Ondersteunende technologie beschrijving voor \"Controleer\"-knop",
           "default": "Controleer de antwoorden. De antwoorden worden gemarkeerd als juist, onjuist, of niet-beantwoord."
         },
@@ -161,7 +165,7 @@
           "default": "Toon de oplossing. De juiste opties worden gemarkeerd."
         },
         {
-          "label": "Juist antwoord (niet getoond)",
+          "label": "Juist antwoord (niet weergegeven)",
           "default": "Juist antwoord"
         },
         {
@@ -170,15 +174,15 @@
         },
         {
           "label": "Optie zou gekozen moeten zijn",
-          "default": "Zou gekozen moeten zijn"
+          "default": "Zou niet gekozen mogen zijn"
         },
         {
           "label": "Optie zou niet gekozen moeten zijn",
           "default": "Zou niet gekozen mogen zijn"
         },
         {
-          "label": "Tekst voor \"Antwoord vereist\"-bericht",
-          "default": "Geef eerst antwoord voor je de oplossing bekijkt"
+          "label": "Tekst van \"Antwoord vereist\"-bericht",
+          "default": "Beantwoord voor je de oplossing bekijkt"
         },
         {
           "label": "Tekst voor \"Opnieuw\"-knop",
@@ -186,15 +190,11 @@
         },
         {
           "label": "Ondersteunende technologie beschrijving voor \"Opnieuw\"-knop",
+          "description": ":num en :total zijn variabelen en worden vervangen door hun respectievelijke waarden.",
           "default": "Probeer de taak opnieuw. Reset alle antwoorden en start de taak opnieuw."
         },
         {
           "label": "Je resultaat",
-          "description": ":num en :total zijn variabelen en worden vervangen door hun respectievelijke waarden.",
-          "default": "Je hebt :num van de :total punten"
-        },
-        {
-          "label": "Bevestigingsdialoog voor Controleer",
           "fields": [
             {
               "label": "Koptekst",
@@ -212,10 +212,34 @@
               "label": "Label van \"Bevestig\"-knop",
               "default": "Stoppen"
             }
+          ],
+          "description": ":num en :total zijn variabelen en worden vervangen door de betreffende waardes.",
+          "default": "Je hebt :num van de :total punten"
+        },
+        {
+          "label": "Bevestigingsdialoog voor Controleer",
+          "fields": [
+            {
+              "label": "Koptekst",
+              "default": "Klaar?"
+            },
+            {
+              "label": "Hoofdtekst",
+              "default": "Weet je zeker dat je wilt stoppen?"
+            },
+            {
+              "label": "Label van \"Annuleer\"-knop",
+              "default": "Annuleer"
+            },
+            {
+              "label": "Label van \"Bevestig\"-knop",
+              "default": "Stoppen"
+            }
           ]
         },
         {
           "label": "Bevestigingsdialoog voor \"Opnieuw\"",
+          "default": "Alt text ontbreekt",
           "fields": [
             {
               "label": "Koptekst",
@@ -236,8 +260,8 @@
           ]
         },
         {
-          "label": "Tekst voor wanneer alt text ontbreekt bij afbeelding",
-          "default": "Alt text ontbreekt"
+          "label": "Tekst als alternatieve tekst voor afbeelding ontbreekt",
+          "default": "Alternatieve tekst ontbreekt"
         }
       ]
     }

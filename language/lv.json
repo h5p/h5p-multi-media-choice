@@ -5,7 +5,7 @@
       "fields": [
         {
           "label": "Tips",
-          "description": "Papildu multivide, kuru atspoguļot virs jautājuma."
+          "description": "Papildu multimedijs, kuru atspoguļot virs jautājuma."
         },
         {
           "label": "Atspējot attēla tālummaiņu"
@@ -59,7 +59,7 @@
       ]
     },
     {
-      "label": "Uzvedības iestatījumi",
+      "label": "Uzvedības iestatītījumi",
       "description": "Šie iestatījumi ļaus jums kontrolēt uzdevuma uzvedību.",
       "fields": [
         {
@@ -149,16 +149,20 @@
           "default": "Pārbaudīt"
         },
         {
-          "label": "Pogas \"Pārbaudīt\" apraksts priekš asistējošajām tehnoloģijām",
-          "default": "Pārbaudīt atbildes. Sniegtās atbildes tiks atzīmētas kā pareizas, nepareizas, vai neatbildētas."
+          "label": "Pogas \"Iesniegt\" teksts",
+          "default": "Iesniegt"
         },
         {
-          "label": "Pogas \"Parādīt risinājumu\" teksts",
-          "default": "Parādīt risinājumu"
+          "label": "Pogas \"Pārbaudīt\" apraksts asistīvajām tehnoloģijām",
+          "default": "Pārbaudīt atbildes. Atbildes tiks atzīmētas kā pareizas, nepareizas, vai neatbildētas."
         },
         {
-          "default": "Rādīt risinājumu. Tiks atzīmētas pareizās izvēles.",
-          "label": "Asistīvo tehnoloģiju apraksts pogai \"Rādīt risinājumu\""
+          "default": "Rādīt risinājumu",
+          "label": "Pogas \"Parādīt risinājumu\" teksts"
+        },
+        {
+          "label": "Asistīvo tehnoloģiju apraksts pogai \"Rādīt risinājumu\"",
+          "default": "Rādīt risinājumu. Tiks atzīmētas pareizās izvēles."
         },
         {
           "label": "Pareiza atbilde (netiek rādīts)",
@@ -181,17 +185,13 @@
           "default": "Lūdzu, atbildiet pirms risinājuma skatīšanas"
         },
         {
-          "label": "Pogas \"Mēģināt vēlreiz\" teksts",
-          "default": "Mēģināt vēlreiz"
+          "default": "Atkārtot",
+          "label": "Pogas \"Mēģināt vēlreiz\" teksts"
         },
         {
-          "default": "Mēģiniet uzdevumu vēlreiz. Dzēst visas iesniegtās atbildes un sākt uzdevumu no sākuma.",
-          "label": "Pogas \"Mēģināt vēlreiz\" apraksts priekš asistīvajām tehnoloģijām"
-        },
-        {
-          "label": "Tavs rezultāts",
+          "label": "Pogas \"Mēģināt vēlreiz\" apraksts priekš asistējošās tehnoloģijas",
           "description": "@score un @total ir mainīgie, un tie tiks aizstāti ar to attiecīgajām vērtībām.",
-          "default": "Tu saņēmi :num no :total punktiem"
+          "default": "Mēģināt uzdevumu vēlreiz. Dzēst visas sniegtās atbildes un sākts uzdevumu vēlreiz."
         },
         {
           "fields": [
@@ -212,9 +212,34 @@
               "default": "Beigt"
             }
           ],
+          "label": "Tavs rezultāts",
+          "description": ":num un :total ir mainīgie, un tie tiks aizstāti ar to attiecīgajām vērtībām.",
+          "default": "Jūs saņēmāt :num no :total punktiem"
+        },
+        {
+          "fields": [
+            {
+              "label": "Galvenes teksts",
+              "default": "Beigt?"
+            },
+            {
+              "label": "Pamatteksts",
+              "default": "Vai esat pārliecināts, ka vēlaties beigt?"
+            },
+            {
+              "label": "Atcelšanas pogas etiķete",
+              "default": "Atcelt"
+            },
+            {
+              "label": "Apstiprinājuma pogas etiķete",
+              "default": "Beigt"
+            }
+          ],
           "label": "Pārbaudīšanas apstiprinājuma dialogs"
         },
         {
+          "default": "Trūkst alternatīvā teksta",
+          "label": "Atkārtota mēģinājuma apstiprināšanas dialogs",
           "fields": [
             {
               "label": "Galvenes teksts",
@@ -229,11 +254,10 @@
               "default": "Atcelt"
             },
             {
-              "label": "Apstiprinājuma pogas etiķete",
+              "label": "Apstiprināšanas pogas etiķete",
               "default": "Mēģināt vēlreiz"
             }
-          ],
-          "label": "Atkārtota mēģinājuma apstiprināšanas dialogs"
+          ]
         },
         {
           "default": "Trūkst alternatīvā teksta",
