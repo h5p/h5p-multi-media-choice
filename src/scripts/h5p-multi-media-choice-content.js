@@ -12,8 +12,9 @@ export default class MultiMediaChoiceContent {
    * @param {number} contentId Content's id.
    * @param {object} [callbacks = {}] Callbacks.
    * @param {string} assetsFilePath File path to the assets folder
+   * @param {object} previousState Previous state.
    */
-  constructor(params = {}, contentId, callbacks = {}, assetsFilePath) {
+  constructor(params = {}, contentId, callbacks = {}, assetsFilePath, previousState) {
     this.params = params;
     this.contentId = contentId;
     this.callbacks = callbacks;
@@ -84,6 +85,12 @@ export default class MultiMediaChoiceContent {
           )
       )
       : [];
+
+    // Restore previous state
+    (previousState.answers || []).forEach(previouslySelectedIndex => {
+      this.toggleSelected(previouslySelectedIndex);
+    });
+
     this.optionList = this.buildOptionList(this.options);
     this.content.appendChild(this.optionList);
     this.setTabIndexes();
