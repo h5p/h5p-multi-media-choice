@@ -134,6 +134,9 @@ export default class MultiMediaChoice extends H5P.Question {
       if (this.params.behaviour.enableSolutionsButton && score !== maxScore) {
         this.showButton('show-solution');
       }
+      else {
+        this.content.showOptionFeedback();
+      }
 
       if (this.params.behaviour.enableRetry && score !== maxScore) {
         this.showButton('try-again');
@@ -171,6 +174,7 @@ export default class MultiMediaChoice extends H5P.Question {
       else {
         this.content.showUnselectedSolutions();
         this.content.focusUnselectedSolution();
+        this.content.showOptionFeedback();
       }
 
       this.trigger('resize');
