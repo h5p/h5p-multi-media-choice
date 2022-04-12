@@ -152,6 +152,10 @@
           "default": "Έλεγχος"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "Περιγραφή υποστηρικτικής τεχνολογίας για το κουμπί \" Έλεγχος\"",
           "default": "Ελέγξτε τις απαντήσεις. Οι απαντήσεις θα επισημαίνονται ως σωστές, λανθασμένες ή απαντημένες."
         },
@@ -215,9 +219,7 @@
               "label": "Ετικέτα κουμπιού επιβεβαίωσης",
               "default": "Εντάξει"
             }
-          ],
-          "description": ":num and :total are variables and will be replaced by their respective values.",
-          "default": "You got :num out of :total points"
+          ]
         },
         {
           "label": "Διάλογος επιβεβαίωσης επανάληψης",
@@ -237,28 +239,6 @@
             {
               "label": "Ετικέτα κουμπιού επανάληψης",
               "default": "Επανάληψη"
-            }
-          ]
-        },
-        {
-          "label": "Κείμενο που εμφανίζεται σε περίπτωση που λείπει το alt κείμενο για μια εικόνα",
-          "default": "Λείπει το κείμενο Alt",
-          "fields": [
-            {
-              "label": "Header text",
-              "default": "Retry?"
-            },
-            {
-              "label": "Body text",
-              "default": "Are you sure you wish to retry?"
-            },
-            {
-              "label": "Cancel button label",
-              "default": "Cancel"
-            },
-            {
-              "label": "Confirm button label",
-              "default": "Retry"
             }
           ]
         },

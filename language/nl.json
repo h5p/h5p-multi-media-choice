@@ -192,32 +192,13 @@
           "default": "Opnieuw"
         },
         {
-          "label": "Ondersteunende technologie beschrijving voor \"Opnieuw\"-knop",
-          "description": ":num en :total zijn variabelen en worden vervangen door hun respectievelijke waarden.",
-          "default": "Probeer de taak opnieuw. Reset alle antwoorden en start de taak opnieuw."
+          "label": "Assistive technology description for \"Retry\" button",
+          "default": "Retry the task. Reset all responses and start the task over again."
         },
         {
-          "label": "Je resultaat",
-          "fields": [
-            {
-              "label": "Koptekst",
-              "default": "Stoppen?"
-            },
-            {
-              "label": "Hoofdtekst",
-              "default": "Weet je zeker dat je wilt stoppen?"
-            },
-            {
-              "label": "Label van \"Annuleer\"-knop",
-              "default": "Annuleer"
-            },
-            {
-              "label": "Label van \"Bevestig\"-knop",
-              "default": "Stoppen"
-            }
-          ],
-          "description": ":num en :total zijn variabelen en worden vervangen door de betreffende waardes.",
-          "default": "Je hebt :num van de :total punten"
+          "label": "Your result",
+          "description": ":num and :total are variables and will be replaced by their respective values.",
+          "default": "You got :num out of :total points"
         },
         {
           "label": "Bevestigingsdialoog voor Controleer",
@@ -241,8 +222,7 @@
           ]
         },
         {
-          "label": "Bevestigingsdialoog voor \"Opnieuw\"",
-          "default": "Alt text ontbreekt",
+          "label": "Bevestigingsdialoog voor \"Opnieuw\"",          
           "fields": [
             {
               "label": "Koptekst",

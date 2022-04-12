@@ -101,6 +101,7 @@
         },
         {
           "label": "Proporción de aspecto",
+          "description": "Seleccionar la proporción de aspecto de las alternativas",
           "options": [
             {
               "label": "Automático"
@@ -117,10 +118,11 @@
             {
               "label": "1:1"
             }
-          ],
-          "description": "Seleccionar la proporción de aspecto de las alternativas"
+          ]
         },
         {
+          "label": "Alternativas máximas por fila",
+          "description": "Configurar el número máximo de alternativas por fila para asegurar que la pregunta se vea bien.",
           "options": [
             {
               "label": "1"
@@ -134,9 +136,7 @@
             {
               "label": "4"
             }
-          ],
-          "label": "Alternativas máximas por fila",
-          "description": "Configurar el número máximo de alternativas por fila para asegurar que la pregunta se vea bien."
+          ]
         },
         {
           "label": "Porcentaje aprobatorio",
@@ -193,11 +193,15 @@
         },
         {
           "label": "Descripción de tecnología asistiva para botón \"Reintentar\"",
-          "description": ":num y :total son variables y serán remplazadas por sus respectivos valores.",
           "default": "Reintentar el trabajo. Reiniciar todas las respuestas e iniciar el trabajo de nuevo."
         },
         {
           "label": "Su resultado",
+          "description": ":num y :total son variables y serán remplazadas por sus respectivos valores.",
+          "default": "You got :num out of :total points"
+        },
+        {
+          "label": "Check confirmation dialog",
           "fields": [
             {
               "label": "Texto del encabezado",
@@ -215,9 +219,7 @@
               "label": "Etiqueta del botón Confirmar",
               "default": "Terminar"
             }
-          ],
-          "default": "Obtuvo :num de un total de :total puntos",
-          "description": ":num y :total son variables y serán remplazadas por sus respectivos valores."
+          ]
         },
         {
           "label": "Diálogo de confirmación para Comprobar",
@@ -237,28 +239,6 @@
             {
               "label": "Etiqueta del botón Confirmar",
               "default": "Terminar"
-            }
-          ]
-        },
-        {
-          "label": "Diálogo de confirmación Reintentar",
-          "default": "Falta el texto alterno",
-          "fields": [
-            {
-              "label": "Texto del encabezado",
-              "default": "¿Reintentar?"
-            },
-            {
-              "label": "Texto del cuerpo",
-              "default": "¿Seguro que desea reintentar?"
-            },
-            {
-              "label": "Etiqueta botón Cancelar",
-              "default": "Cancelar"
-            },
-            {
-              "default": "Reintentar",
-              "label": "Etiqueta del botón Confirmar"
             }
           ]
         },
