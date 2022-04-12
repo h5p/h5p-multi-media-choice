@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cross-env NODE_ENV=production ./node_modules/.bin/webpack",
-    "watch": "./node_modules/.bin/webpack --watch"
+    "watch": "cross-env NODE_ENV=production ./node_modules/.bin/webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -43,6 +43,7 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
+    "@panzoom/panzoom": "^4.4.4",
     "masonry-layout": "^4.2.2"
   }
 }
