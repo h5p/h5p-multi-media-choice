@@ -267,6 +267,7 @@ export class MultiMediaChoiceOption {
 
   addFeedbackText(html) {
     this.feedbackText = document.createElement('div');
+    this.feedbackText.classList.add('h5p-multi-media-choice-option-feedback');
     this.feedbackText.innerHTML = html;
     this.content.appendChild(this.feedbackText);
   }
