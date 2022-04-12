@@ -27,6 +27,19 @@
           },
           {
             "label": "Correct"
+          },
+          {
+            "label": "Tilbakemelding",
+            "fields": [
+              {
+                "label": "Melding som visast hvis svaret er valgt",
+                "description": "Melding som visast under svaret på \"check\" om svaret er valt."
+              },
+              {
+                "label": "Melding som visast hvis svaret ikkje er valgt",
+                "description": "Melding som visast under svaret på \"check\" om andre svar er valt."
+              }
+            ]
           }
         ]
       }

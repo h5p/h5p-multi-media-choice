@@ -27,6 +27,19 @@
           },
           {
             "label": "Pravilen odgovor"
+          },
+          {
+            "label": "Povratna informacija",
+            "fields": [
+              {
+                "label": "Sporočilo, ko je bil odgovor izbran",
+                "description": "Povratna informacija udeležencu ob izbiri odgovora. Informacija se prikaže po potrdivi z gumbom \"Preveri\"."
+              },
+              {
+                "label": "Sporočilo, ko odgovor ni bil izbran",
+                "description": "Povratna informacija udeležencu, ko odgovor ni izbran. Informacija se prikaže po potrdivi z gumbom \"Preveri\"."
+              }
+            ]
           }
         ]
       }

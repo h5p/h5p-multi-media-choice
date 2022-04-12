@@ -27,6 +27,19 @@
           },
           {
             "label": "Doğru"
+          },
+          {
+            "label": "Geri bildirim",
+            "fields": [
+              {
+                "label": "Cevap seçilirse görüntülenecek ileti",
+                "description": "Bu cevap seçilirse \"kontrol et\" üzerindeki cevabın altında ileti görünecek."
+              },
+              {
+                "label": "Cevap seçilmezse görüntülenecek ileti",
+                "description": "Bu cevap seçilmezse \"kontrol et\" üzerindeki cevabın altında ileti görünecek."
+              }
+            ]
           }
         ]
       }

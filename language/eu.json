@@ -27,6 +27,19 @@
           },
           {
             "label": "Zuzena"
+          },
+          {
+            "label": "Feedbacka",
+            "fields": [
+              {
+                "label": "Erantzuna aukeratuta badago bistaratzen den mezua",
+                "description": "Mezua erantzunaren azpiko \"egiaztatu\" botoian agertuko da erantzun hau aukeratuta badago."
+              },
+              {
+                "label": "Erantzuna aukeratuta ez badago bistaratzen den mezua",
+                "description": "Mezua erantzunaren azpiko \"egiaztatu\" botoian agertuko da erantzun hau aukeratuta ez badago.."
+              }
+            ]
           }
         ]
       }

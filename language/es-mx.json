@@ -27,6 +27,19 @@
           },
           {
             "label": "Correcto"
+          },
+          {
+            "label": "Retroalimentación",
+            "fields": [
+              {
+                "label": "Mensaje que se muestra si se selecciona una respuesta",
+                "description": "El mensaje aparecerá debajo de la respuesta al \"comprobar\" si esta respuesta es seleccionada."
+              },
+              {
+                "label": "Mensaje mostrado si la respuesta no es seleccionada",
+                "description": "El mensaje aparecerá debajo de la respuesta al \"comprobar\" si esta respuesta no está seleccionada."
+              }
+            ]
           }
         ]
       }

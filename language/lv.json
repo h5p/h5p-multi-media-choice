@@ -27,6 +27,19 @@
           },
           {
             "label": "Pareizi"
+          },
+          {
+            "label": "Atgriezeniskā saite",
+            "fields": [
+              {
+                "label": "Ziņa, kas tiek parādīta ja atbilde izvēlēta",
+                "description": "Ziņa, kas tiks parādīta zem atbildes pie \"Pārbaudīt\", ja šī atbilde ir izvēlēta."
+              },
+              {
+                "label": "Ziņa, kas tiek parādīta ja atbilde nav izvēlēta",
+                "description": "Ziņa, kas tiks parādīta zem atbildes pie \"Pārbaudīt\", ja šī atbilde nav izvēlēta."
+              }
+            ]
           }
         ]
       }

@@ -27,6 +27,19 @@
           },
           {
             "label": "Juist"
+          },
+          {
+            "label": "Feedback",
+            "fields": [
+              {
+                "label": "Getoond bericht als het antwoord is geselecteerd",
+                "description": "Bericht zal onder het antwoord verschijnen bij \"Controleer\" als dit antwoord is geselecteerd."
+              },
+              {
+                "label": "Getoond bericht als het antwoord niet is geselecteerd",
+                "description": "Bericht zal onder het antwoord verschijnen bij \"Controleer\" als dit antwoord niet is geselecteerd."
+              }
+            ]
           }
         ]
       }
