@@ -85,6 +85,23 @@
           "type": "boolean",
           "label": "Correct",
           "importance": "low"
+        },
+        {
+          "name": "disableImageZooming",
+          "type": "boolean",
+          "label": "Disable image zooming",
+          "importance": "low",
+          "default": false,
+          "optional": true,
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "media",
+                "equals": "H5P.Image 1.1"
+              }
+            ]
+          }
         }
       ]
     }
