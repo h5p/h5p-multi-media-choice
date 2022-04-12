@@ -1,6 +1,7 @@
 @use './colors' as *;
 @use './mixins' as *;
 @use './sizes' as *;
+@use './icons' as *;
 @use 'sass:math';
 
 .h5p-multi-media-choice {
@@ -16,7 +17,7 @@
   }
 
   .h5p-multi-media-choice-list-item {
-    padding: 0.75em 0 0.25em 0;
+    padding: $list-item-padding-top 0 0.25em 0;
     &:focus {
       outline: none;
 
@@ -149,6 +150,39 @@
 
     &:before {
       @include solution-button('\e5c9', $color-wrong-dark);
+    }
+  }
+
+  .h5p-enable-fullscreen {
+    width: 1em;
+    position: absolute;
+    top: calc(#{$list-item-padding-top} + #{$border-thick-stroke-width});
+    right: $border-thick-stroke-width;
+    font-size: 1.5em;
+    line-height: 1em;
+    text-indent: 0;
+  }
+  .h5p-enable-fullscreen::before {
+    font-family: "Material Icons";
+    content: $icon-zoom-out-map;
+  }
+
+  .h5p-multi-media-choice-fullscreen {
+    padding: 0;
+
+    .h5p-multi-media-choice-enabled,
+    .h5p-multi-media-choice-selected {
+      border: none;
+      &:hover {
+        border: none;
+        &::after {
+          opacity: 0;
+        }
+      }
+    }
+
+    .h5p-enable-fullscreen {
+      display: none;
     }
   }
 

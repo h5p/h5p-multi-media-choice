@@ -19,6 +19,7 @@ export default class MultiMediaChoiceContent {
     this.callbacks = callbacks;
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
     this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
+    this.callbacks.triggerFullScreen = this.callbacks.triggerFullScreen || (() => {});
     this.assetsFilePath = assetsFilePath;
     this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
 
@@ -79,7 +80,8 @@ export default class MultiMediaChoiceContent {
               onClick: () => this.toggleSelected(index),
               onKeyboardSelect: () => this.toggleSelected(index),
               onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
-              triggerResize: this.callbacks.triggerResize
+              triggerResize: this.callbacks.triggerResize,
+              triggerFullScreen: this.callbacks.triggerFullScreen
             }
           )
       )

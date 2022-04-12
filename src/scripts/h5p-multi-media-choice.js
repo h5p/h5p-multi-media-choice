@@ -1,3 +1,5 @@
+import Panzoom from "@panzoom/panzoom";
+
 import MultiMediaChoiceContent from './h5p-multi-media-choice-content';
 
 import { Util } from './h5p-multi-media-choice-util';
@@ -69,6 +71,20 @@ export default class MultiMediaChoice extends H5P.Question {
           },
           triggerInteracted: () => {
             this.triggerXAPI('interacted');
+          },
+          triggerFullScreen: element => {
+            if (document.fullscreenElement || H5P.canHasFullScreen === false) {
+              return;
+            }
+            this.fullScreenElement = element;
+            if (H5P.fullScreenBrowserPrefix === '') {
+              this.fullScreenElement.requestFullscreen();
+            }
+            else {
+              const method = (H5P.fullScreenBrowserPrefix === 'ms' ? 'msRequestFullscreen' : H5P.fullScreenBrowserPrefix + 'RequestFullScreen');
+              const params = (H5P.fullScreenBrowserPrefix === 'webkit' && H5P.safariBrowser === 0 ? Element.ALLOW_KEYBOARD_INPUT : undefined);
+              this.fullScreenElement[method](params);
+            }
           }
         },
         this.getLibraryFilePath('assets')
@@ -78,6 +94,9 @@ export default class MultiMediaChoice extends H5P.Question {
       this.addButtons();
 
       this.on('resize', () => this.content.setColumnProperties());
+
+      const eventName = (H5P.fullScreenBrowserPrefix === 'ms' ? 'MSFullscreenChange' : H5P.fullScreenBrowserPrefix + 'fullscreenchange');
+      document.addEventListener(eventName, () => this.handleFullScreenChange());
     };
 
     /**
@@ -189,6 +208,61 @@ export default class MultiMediaChoice extends H5P.Question {
       this.content.hideSolutions();
       this.removeFeedback();
     };
+  }
+
+  handleFullScreenChange() {
+    if (!this.fullScreenElement) {
+      return;
+    }
+    if (document.fullscreenElement) {
+      this.initPanzoom();
+      this.fullScreenElement.classList.add('h5p-multi-media-choice-fullscreen');
+    }
+    else {
+      this.resetPanzoom();
+      this.fullScreenElement.classList.remove('h5p-multi-media-choice-fullscreen');
+      delete this.fullScreenElement;
+    }
+  }
+
+  /**
+   * Initialize the fullscreen element as panzoom object and add scroll listener
+   */
+  initPanzoom() {
+    if (!this.panzoom) {
+      this.panzoom = Panzoom(this.fullScreenElement.firstElementChild, { maxScale: 5});
+      this.panzoomFitToScreen();
+      this.fullScreenElement.addEventListener('wheel', this.panzoom.zoomWithWheel);
+    }
+  }
+
+  /**
+   * Center the current panzoom object and zoom it to fit the window
+   */
+  panzoomFitToScreen() {
+    if (!this.panzoom) {
+      return;
+    }
+    const {innerWidth: parentWidth, innerHeight: parentHeight} = window;
+    const {width: imageWidth, height: imageHeight} = this.fullScreenElement.firstElementChild.getBoundingClientRect();
+    const parentAspect = parentWidth / parentHeight;
+    const imageAspect = imageWidth / imageHeight;
+    const zoom = imageAspect > parentAspect ? parentWidth / imageWidth : parentHeight / imageHeight;
+    this.panzoom.zoom(zoom, {animate: true});
+    setTimeout(() => this.panzoom.pan((parentWidth - imageWidth) / 2 / zoom, (parentHeight - imageHeight) / 2 / zoom, { animate: true }));
+  }
+
+  /**
+   * Reset the panzoom object and remove it and any related listeners
+   */
+  resetPanzoom() {
+    if (!this.panzoom) {
+      return;
+    }
+    this.fullScreenElement.removeEventListener('wheel', this.panzoom.zoomWithWheel);
+    this.panzoom.reset({ animate: false });
+    this.panzoom.resetStyle();
+    delete this.panzoom;
   }
 
   /**
