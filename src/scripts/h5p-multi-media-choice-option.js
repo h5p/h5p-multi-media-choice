@@ -257,6 +257,7 @@ export class MultiMediaChoiceOption {
     if (!this.feedback) {
       return;
     }
+
     if (this.isSelected() && this.feedback.chosenFeedback) {
       this.addFeedbackText(this.feedback.chosenFeedback);
     }
