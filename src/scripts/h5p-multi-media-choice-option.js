@@ -279,15 +279,11 @@ export class MultiMediaChoiceOption {
     this.wrapper.classList.remove('h5p-multi-media-choice-correct');
     this.wrapper.classList.remove('h5p-multi-media-choice-show-correct');
     this.wrapper.classList.remove('h5p-multi-media-choice-wrong');
-    if (this.accessibilitySolutionText) {
-      if (this.accessibilitySolutionText.parentNode) {
-        this.accessibilitySolutionText.parentNode.removeChild(this.accessibilitySolutionText);
-      }
+    if (this.accessibilitySolutionText?.parentNode) {
+      this.accessibilitySolutionText.parentNode.removeChild(this.accessibilitySolutionText);
     }
-    if (this.feedbackText) {
-      if (this.feedbackText.parentNode) {
-        this.feedbackText.parentNode.removeChild(this.feedbackText);
-      }
+    if (this.feedbackText?.parentNode) {
+      this.feedbackText.parentNode.removeChild(this.feedbackText);
     }
   }
 
