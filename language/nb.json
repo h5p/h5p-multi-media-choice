@@ -1,16 +1,16 @@
 {
   "semantics": [
     {
+      "label": "Medieelement",
       "fields": [
         {
-          "description": "Valgfritt medieelement. Elementet vil bli plassert over spørsmålet.",
-          "label": "Type"
+          "label": "Type",
+          "description": "Valgfritt medieelement. Elementet vil bli plassert over spørsmålet."
         },
         {
           "label": "Deaktiver zoomingfunksjon."
         }
-      ],
-      "label": "Medieelement"
+      ]
     },
     {
       "label": "Spørsmål"
@@ -33,11 +33,11 @@
             "fields": [
               {
                 "label": "Melding som vises hvis alternativet er valgt",
-                "description": "Melding som vises under svaret på \"check\" hvis svaret er valgt."
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is selected."
               },
               {
                 "label": "Melding som vises hvis alternativet ikke er valgt",
-                "description": "Melding som vises under svaret på \"check\" hvis andre svar er valgt."
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is not selected."
               }
             ]
           }
@@ -45,8 +45,15 @@
       }
     },
     {
+      "label": "Tilbakemelding på hele oppgava",
       "fields": [
         {
+          "widgets": [
+            {
+              "label": "Forhandsinnstilling"
+            }
+          ],
+          "label": "Opprett poengområder og legg inn tilbakemeldinger.",
           "description": "Klikk på knappen \"Legg til poengområde\" og legg til så mange poengområder du trenger. Eksempel: 0–40 % Svakt resultat, 41–80 % Gjennomsnittlig resultat, 81–100 % Flott resultat!",
           "entity": "Område",
           "field": {
@@ -60,16 +67,9 @@
                 "placeholder": "Skriv inn tilbakemelding."
               }
             ]
-          },
-          "widgets": [
-            {
-              "label": "Forhandsinnstilling"
-            }
-          ],
-          "label": "Opprett poengområder og legg inn tilbakemeldinger."
+          }
         }
-      ],
-      "label": "Tilbakemelding på hele oppgava"
+      ]
     },
     {
       "label": "Oppgaveinnstillinger",
@@ -211,10 +211,11 @@
           "default": "You got :num out of :total points"
         },
         {
+          "label": "Check confirmation dialog",
           "fields": [
             {
-              "default": "Finish?",
-              "label": "Header text"
+              "label": "Header text",
+              "default": "Finish?"
             },
             {
               "label": "Body text",
@@ -228,8 +229,7 @@
               "label": "Confirm button label",
               "default": "Finish"
             }
-          ],
-          "label": "Check confirmation dialog"
+          ]
         },
         {
           "label": "Retry confirmation dialog",

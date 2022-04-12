@@ -33,11 +33,11 @@
             "fields": [
               {
                 "label": "Sporočilo, ko je bil odgovor izbran",
-                "description": "Povratna informacija udeležencu ob izbiri odgovora. Informacija se prikaže po potrdivi z gumbom \"Preveri\"."
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is selected."
               },
               {
                 "label": "Sporočilo, ko odgovor ni bil izbran",
-                "description": "Povratna informacija udeležencu, ko odgovor ni izbran. Informacija se prikaže po potrdivi z gumbom \"Preveri\"."
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is not selected."
               }
             ]
           }

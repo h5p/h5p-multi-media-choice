@@ -33,11 +33,11 @@
             "fields": [
               {
                 "label": "답변을 선택한 경우 표시되는 메시지",
-                "description": "이 답변을 선택하면 \"check\"의 답변 아래에 메시지가 나타난다"
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is selected."
               },
               {
                 "label": "응답이 선택되지 않은 경우 표시되는 메시지",
-                "description": "이 답변이 선택되지 않은 경우 \"check\"의 답변 아래에 메시지가 나타난다."
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is not selected."
               }
             ]
           }

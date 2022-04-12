@@ -33,11 +33,11 @@
             "fields": [
               {
                 "label": "Порука се приказује ако је одабран одговор",
-                "description": "Порука ће се појавити испод одговора на \"провери\" ако је одабран овај одговор."
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is selected."
               },
               {
                 "label": "Порука се приказује ако одговор није изабран",
-                "description": "Порука ће се појавити испод одговора на \"провери\" ако овај одговор није изабран."
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is not selected."
               }
             ]
           }
