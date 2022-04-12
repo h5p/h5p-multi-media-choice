@@ -198,8 +198,12 @@
           "default": "Lūdzu, atbildiet pirms risinājuma skatīšanas"
         },
         {
-          "default": "Atkārtot",
-          "label": "Pogas \"Mēģināt vēlreiz\" teksts"
+          "label": "Pogas \"Mēģināt vēlreiz\" teksts",
+          "default": "Atkārtot"
+        },
+        {
+          "label": "Assistive technology description for \"Retry\" button",
+          "default": "Retry the task. Reset all responses and start the task over again."
         },
         {
           "label": "Pogas \"Mēģināt vēlreiz\" apraksts priekš asistējošās tehnoloģijas",
@@ -207,6 +211,7 @@
           "default": "Mēģināt uzdevumu vēlreiz. Dzēst visas sniegtās atbildes un sākts uzdevumu vēlreiz."
         },
         {
+          "label": "Check confirmation dialog",
           "fields": [
             {
               "label": "Galvenes teksts",
@@ -224,12 +229,10 @@
               "label": "Apstiprinājuma pogas etiķete",
               "default": "Beigt"
             }
-          ],
-          "label": "Tavs rezultāts",
-          "description": ":num un :total ir mainīgie, un tie tiks aizstāti ar to attiecīgajām vērtībām.",
-          "default": "Jūs saņēmāt :num no :total punktiem"
+          ]
         },
         {
+          "label": "Pārbaudīšanas apstiprinājuma dialogs",
           "fields": [
             {
               "label": "Galvenes teksts",
@@ -246,29 +249,6 @@
             {
               "label": "Apstiprinājuma pogas etiķete",
               "default": "Beigt"
-            }
-          ],
-          "label": "Pārbaudīšanas apstiprinājuma dialogs"
-        },
-        {
-          "default": "Trūkst alternatīvā teksta",
-          "label": "Atkārtota mēģinājuma apstiprināšanas dialogs",
-          "fields": [
-            {
-              "label": "Galvenes teksts",
-              "default": "Mēģināt vēlreiz?"
-            },
-            {
-              "label": "Pamatteksts",
-              "default": "Vai esat pārliecināts, ka vēlaties mēģināt atkārtoti?"
-            },
-            {
-              "label": "Atcelšanas pogas etiķete",
-              "default": "Atcelt"
-            },
-            {
-              "label": "Apstiprināšanas pogas etiķete",
-              "default": "Mēģināt vēlreiz"
             }
           ]
         },
