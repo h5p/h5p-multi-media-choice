@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cross-env NODE_ENV=production ./node_modules/.bin/webpack",
-    "watch": "cross-env NODE_ENV=production ./node_modules/.bin/webpack --watch"
+    "watch": "./node_modules/.bin/webpack --watch"
   },
   "repository": {
     "type": "git",
