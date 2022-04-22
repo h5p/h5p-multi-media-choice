@@ -189,16 +189,16 @@
           "default": "Atkārtot"
         },
         {
-          "label": "Assistive technology description for \"Retry\" button",
-          "default": "Retry the task. Reset all responses and start the task over again."
+          "label": "Asistīvo tehnoloģiju apraksts pogai \"Mēģināt vēlreiz\"",
+          "default": "Mēģināt uzdevumu vēlreiz. Atiestatīt visas sniegtās atbildes un sākt uzdevumu vēlreiz."
         },
         {
-          "label": "Pogas \"Mēģināt vēlreiz\" apraksts priekš asistējošās tehnoloģijas",
+          "label": "Tavs rezultāts",
           "description": "@score un @total ir mainīgie, un tie tiks aizstāti ar to attiecīgajām vērtībām.",
-          "default": "Mēģināt uzdevumu vēlreiz. Dzēst visas sniegtās atbildes un sākts uzdevumu vēlreiz."
+          "default": "Tu saņēmi :num no :total punktiem"
         },
         {
-          "label": "Check confirmation dialog",
+          "label": "Pārbaudīšanas apstiprinājuma dialogs",
           "fields": [
             {
               "label": "Galvenes teksts",
@@ -227,7 +227,7 @@
             },
             {
               "label": "Pamatteksts",
-              "default": "Vai esat pārliecināts, ka vēlaties beigt?"
+              "default": "Vai esat pārliecināts, ka vēlaties mēģināt vēlreiz?"
             },
             {
               "label": "Atcelšanas pogas etiķete",
