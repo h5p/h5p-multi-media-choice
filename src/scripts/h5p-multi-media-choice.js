@@ -32,7 +32,7 @@ export default class MultiMediaChoice extends H5P.Question {
         if (media.library.includes('H5P.Image')) {
           if (media.params.file) {
             this.setImage(media.params.file.path, {
-              disableImageZooming: params.media.disableImageZooming || false,
+              enableImageZooming: params.media.enableImageZooming || false,
               alt: media.params.alt,
               title: media.params.title
             });

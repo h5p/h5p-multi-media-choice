@@ -47,7 +47,7 @@ export class MultiMediaChoiceOption {
     const mediaContent = this.createMediaContent();
     this.wrapper.appendChild(mediaContent);
 
-    if (!option.disableImageZooming) {
+    if (option.enableImageZooming) {
       this.addFullScreenButton();
     }
     this.addKeyboardHandlers();

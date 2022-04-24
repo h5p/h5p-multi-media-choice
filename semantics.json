@@ -87,9 +87,9 @@
           "importance": "low"
         },
         {
-          "name": "disableImageZooming",
+          "name": "enableImageZooming",
           "type": "boolean",
-          "label": "Disable image zooming",
+          "label": "Enable image zooming and panning",
           "importance": "low",
           "default": false,
           "optional": true,
