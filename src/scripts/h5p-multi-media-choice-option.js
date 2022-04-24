@@ -26,6 +26,7 @@ export class MultiMediaChoiceOption {
     this.callbacks.onKeyboardSelect = this.callbacks.onKeyboardSelect || (() => {});
     this.callbacks.onKeyboardArrowKey = this.callbacks.onKeyboardArrowKey || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
+    this.callbacks.triggerFullScreen = this.callbacks.triggerFullScreen || (() => {});
 
     this.content = document.createElement('li');
     this.content.classList.add('h5p-multi-media-choice-list-item');
@@ -46,6 +47,9 @@ export class MultiMediaChoiceOption {
     const mediaContent = this.createMediaContent();
     this.wrapper.appendChild(mediaContent);
 
+    if (option.enableImageZooming) {
+      this.addFullScreenButton();
+    }
     this.addKeyboardHandlers();
   }
 
@@ -305,5 +309,21 @@ export class MultiMediaChoiceOption {
           break;
       }
     });
+  }
+
+  /**
+   * Add fullscreen button to trigger fullscreen mode of option
+   */
+  addFullScreenButton() {
+    const btn = document.createElement('div');
+    btn.role = 'button';
+    btn.tabIndex = 0;
+    btn.classList.add('h5p-enable-fullscreen');
+    btn.title = H5P.t('fullscreen');
+    btn.addEventListener('click', event => {
+      this.callbacks.triggerFullScreen(this.content);
+      event.stopPropagation();
+    });
+    this.content.appendChild(btn);
   }
 }

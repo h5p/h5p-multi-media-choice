@@ -43,6 +43,7 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
+    "@panzoom/panzoom": "^4.4.4",
     "masonry-layout": "^4.2.2"
   }
 }

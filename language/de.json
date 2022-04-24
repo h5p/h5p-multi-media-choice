@@ -27,6 +27,9 @@
           },
           {
             "label": "Richtig"
+          },
+          {
+            "label": "Zoomen und Verschieben des Bildes ermöglichen"
           }
         ]
       }

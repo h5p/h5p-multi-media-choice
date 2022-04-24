@@ -85,6 +85,23 @@
           "type": "boolean",
           "label": "Correct",
           "importance": "low"
+        },
+        {
+          "name": "enableImageZooming",
+          "type": "boolean",
+          "label": "Enable image zooming and panning",
+          "importance": "low",
+          "default": false,
+          "optional": true,
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "media",
+                "equals": "H5P.Image 1.1"
+              }
+            ]
+          }
         }
       ]
     }

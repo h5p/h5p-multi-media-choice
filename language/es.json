@@ -1,6 +1,7 @@
 {
   "semantics": [
     {
+      "label": "Medio",
       "fields": [
         {
           "label": "Tipo",
@@ -9,8 +10,7 @@
         {
           "label": "Deshabilitar acercamiento de imagen"
         }
-      ],
-      "label": "Medio"
+      ]
     },
     {
       "label": "Pregunta"
@@ -27,6 +27,9 @@
           },
           {
             "label": "Correcto"
+          },
+          {
+            "label": "Enable image zooming and panning"
           }
         ]
       }
@@ -41,6 +44,7 @@
             }
           ],
           "label": "Definir retroalimentación personalizada para cualquier rango de puntaje",
+          "description": "Haga clic en el botón \"Añadir rango\" para añadir cuantos rangos necesite. Ejemplo: 0-20% Mal puntaje, 21-91% Puntaje Promedio, 91-100% ¡Magnífico Puntaje!",
           "entity": "rango",
           "field": {
             "fields": [
@@ -53,8 +57,7 @@
                 "placeholder": "Complete la retroalimentación"
               }
             ]
-          },
-          "description": "Haga clic en el botón \"Añadir rango\" para añadir cuantos rangos necesite. Ejemplo: 0-20% Mal puntaje, 21-91% Puntaje Promedio, 91-100% ¡Magnífico Puntaje!"
+          }
         }
       ]
     },
@@ -165,8 +168,8 @@
           "default": "Mostrar la solución. Las opciones correctas serán marcadas."
         },
         {
-          "default": "Respuesta correcta",
-          "label": "Respuesta Correcta (no se muestra)"
+          "label": "Respuesta Correcta (no se muestra)",
+          "default": "Respuesta correcta"
         },
         {
           "label": "Respuesta Incorrecta (no mostrada)",
@@ -177,8 +180,8 @@
           "default": "Debería de haberse seleccionado"
         },
         {
-          "default": "No debería haber sido seleccionada",
-          "label": "La opción no debería de haberse seleccionado"
+          "label": "La opción no debería de haberse seleccionado",
+          "default": "No debería haber sido seleccionada"
         },
         {
           "label": "Texto para mensaje \"Requiere respuesta\"",
@@ -205,8 +208,8 @@
               "default": "¿Terminado?"
             },
             {
-              "default": "¿Está seguro de querer termina?",
-              "label": "Texto del cuerpo"
+              "label": "Texto del cuerpo",
+              "default": "¿Está seguro de querer termina?"
             },
             {
               "label": "Etiqueta botón Cancelar",
@@ -222,8 +225,8 @@
           "label": "Diálogo de confirmación para Comprobar",
           "fields": [
             {
-              "default": "¿Terminado?",
-              "label": "Texto del encabezado"
+              "label": "Texto del encabezado",
+              "default": "¿Terminado?"
             },
             {
               "label": "Texto del cuerpo",

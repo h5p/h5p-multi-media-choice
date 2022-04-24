@@ -27,6 +27,9 @@
           },
           {
             "label": "Pareizi"
+          },
+          {
+            "label": "Enable image zooming and panning"
           }
         ]
       }
@@ -41,6 +44,7 @@
             }
           ],
           "label": "Iestatiet pielāgotu atgriezenisko saiti katram rezultātu diapazonam",
+          "description": "Klikšķiniet pogu \"Pievienot diapazonu\", lai pievienotu tik diapazonus cik vēlaties. Piemēram, 0-20% Slikts rezultāts, 21-91% Viduvējs rezultāts, 91-100% Lielisks rezultāts!",
           "entity": "diapazons",
           "field": {
             "fields": [
@@ -53,8 +57,7 @@
                 "placeholder": "Aizpildiet atgriezenisko saiti"
               }
             ]
-          },
-          "description": "Klikšķiniet pogu \"Pievienot diapazonu\", lai pievienotu tik diapazonus cik vēlaties. Piemēram, 0-20% Slikts rezultāts, 21-91% Viduvējs rezultāts, 91-100% Lielisks rezultāts!"
+          }
         }
       ]
     },
@@ -75,8 +78,8 @@
           "label": "Rādīt apstiprinājuma dialogu pēc \"Mēģināt vēlreiz\""
         },
         {
-          "description": "Piešķir vienu punktu jautājumam, ja rezultātu procents ir lielāks par nokārtošanas procentu",
-          "label": "Piešķirt vienu punktu par visu jautājumu"
+          "label": "Piešķirt vienu punktu par visu jautājumu",
+          "description": "Piešķir vienu punktu jautājumam, ja rezultātu procents ir lielāks par nokārtošanas procentu"
         },
         {
           "label": "Pieprasīt atbildi pirms atļauts skatīt risinājumu"
@@ -98,6 +101,7 @@
         },
         {
           "label": "Malu attiecība",
+          "description": "Izvēlieties malu attiecību atbilžu variantiem",
           "options": [
             {
               "label": "Automātiski"
@@ -114,8 +118,7 @@
             {
               "label": "1:1"
             }
-          ],
-          "description": "Izvēlieties malu attiecību atbilžu variantiem"
+          ]
         },
         {
           "label": "Maksimālais izvēļu skaits rindā",
@@ -157,8 +160,8 @@
           "default": "Pārbaudīt atbildes. Atbildes tiks atzīmētas kā pareizas, nepareizas, vai neatbildētas."
         },
         {
-          "default": "Rādīt risinājumu",
-          "label": "Pogas \"Parādīt risinājumu\" teksts"
+          "label": "Pogas \"Parādīt risinājumu\" teksts",
+          "default": "Rādīt risinājumu"
         },
         {
           "label": "Asistīvo tehnoloģiju apraksts pogai \"Rādīt risinājumu\"",
@@ -240,8 +243,8 @@
           ]
         },
         {
-          "default": "Trūkst alternatīvā teksta",
-          "label": "Teksts, ja attēlam trūkst alternatīvā teksta"
+          "label": "Teksts, ja attēlam trūkst alternatīvā teksta",
+          "default": "Trūkst alternatīvā teksta"
         }
       ]
     }

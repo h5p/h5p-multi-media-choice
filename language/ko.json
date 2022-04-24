@@ -27,6 +27,9 @@
           },
           {
             "label": "정답"
+          },
+          {
+            "label": "Enable image zooming and panning"
           }
         ]
       }
