@@ -259,14 +259,17 @@ export class MultiMediaChoiceOption {
     }
 
     if (this.isSelected() && this.feedback.chosenFeedback) {
-      this.addFeedbackText(this.feedback.chosenFeedback);
+      this.setFeedbackText(this.feedback.chosenFeedback);
     }
     else if (!this.isSelected() && this.feedback.notChosenFeedback) {
-      this.addFeedbackText(this.feedback.notChosenFeedback);
+      this.setFeedbackText(this.feedback.notChosenFeedback);
     }
   }
 
-  addFeedbackText(html) {
+  setFeedbackText(html) {
+    if (this.feedbackText?.parentNode) {
+      this.feedbackText.parentNode.removeChild(this.feedbackText);
+    }
     this.feedbackText = document.createElement('div');
     this.feedbackText.classList.add('h5p-multi-media-choice-option-feedback');
     this.feedbackText.innerHTML = html;
