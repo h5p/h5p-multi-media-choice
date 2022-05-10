@@ -27,6 +27,19 @@
           },
           {
             "label": "Correcto"
+          },
+          {
+            "label": "Retroalimentación",
+            "fields": [
+              {
+                "label": "Mensaje que se muestra si se selecciona una respuesta",
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is selected."
+              },
+              {
+                "label": "Mensaje mostrado si la respuesta no es seleccionada",
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is not selected."
+              }
+            ]
           }
         ]
       }

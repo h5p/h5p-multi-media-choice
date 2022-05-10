@@ -4,8 +4,8 @@
       "label": "Medieelement",
       "fields": [
         {
-          "description": "Valfritt medieelement. Elementet vil bli plassert over spørsmålet.",
-          "label": "Type"
+          "label": "Type",
+          "description": "Valfritt medieelement. Elementet vil bli plassert over spørsmålet."
         },
         {
           "label": "Deaktiver zoomingfunksjon."
@@ -27,14 +27,35 @@
           },
           {
             "label": "Correct"
+          },
+          {
+            "label": "Tilbakemelding",
+            "fields": [
+              {
+                "label": "Melding som visast hvis svaret er valgt",
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is selected."
+              },
+              {
+                "label": "Melding som visast hvis svaret ikkje er valgt",
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is not selected."
+              }
+            ]
           }
         ]
       }
     },
     {
+      "label": "Tilbakemelding på heile oppgåva",
       "fields": [
         {
+          "widgets": [
+            {
+              "label": "Førehandsinnstilling"
+            }
+          ],
+          "label": "Opprett poengområde og legg inn tilbakemeldingar.",
           "description": "Klikk på knappen \"Legg til poengområde\" og legg til så mange poengområde du treng. Døme: 0–40 % Svakt resultat, 41–80 % Gjennomsnittleg resultat, 81–100 % Flott resultat!",
+          "entity": "Område",
           "field": {
             "fields": [
               {
@@ -46,17 +67,9 @@
                 "placeholder": "Skriv inn tilbakemelding."
               }
             ]
-          },
-          "widgets": [
-            {
-              "label": "Førehandsinnstilling"
-            }
-          ],
-          "label": "Opprett poengområde og legg inn tilbakemeldingar.",
-          "entity": "Område"
+          }
         }
-      ],
-      "label": "Tilbakemelding på heile oppgåva"
+      ]
     },
     {
       "label": "Oppgåveinnstillingar",
@@ -75,8 +88,8 @@
           "label": "Show confirmation dialog on \"Retry\""
         },
         {
-          "description": "Awards one point to the question if the percentage score is higher than the pass percentage",
-          "label": "Give one point for the whole question"
+          "label": "Give one point for the whole question",
+          "description": "Awards one point to the question if the percentage score is higher than the pass percentage"
         },
         {
           "label": "Require answer before the solution can be viewed"
@@ -136,8 +149,8 @@
           ]
         },
         {
-          "description": "This setting often won't have any effect. It is the percentage of the total score required for getting 1 point when one point for the entire task is enabled, and for getting result.success in xAPI statements.",
-          "label": "Pass percentage"
+          "label": "Pass percentage",
+          "description": "This setting often won't have any effect. It is the percentage of the total score required for getting 1 point when one point for the entire task is enabled, and for getting result.success in xAPI statements."
         }
       ]
     },
@@ -161,8 +174,8 @@
           "default": "Vis svar"
         },
         {
-          "default": "Show the solution. The correct options will be marked.",
-          "label": "Assistive technology description for \"Show Solution\" button"
+          "label": "Assistive technology description for \"Show Solution\" button",
+          "default": "Show the solution. The correct options will be marked."
         },
         {
           "label": "Correct Answer (not displayed)",
@@ -177,8 +190,8 @@
           "default": "Should have been checked"
         },
         {
-          "default": "Should not have been checked",
-          "label": "Option should not have been checked"
+          "label": "Option should not have been checked",
+          "default": "Should not have been checked"
         },
         {
           "label": "Text for \"Requires answer\" message",

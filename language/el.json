@@ -27,6 +27,19 @@
           },
           {
             "label": "Σωστό"
+          },
+          {
+            "label": "Ανατροφοδότηση",
+            "fields": [
+              {
+                "label": "Μήνυμα σε επιλεγμένη απάντηση",
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is selected."
+              },
+              {
+                "label": "Μήνυμα σε μη επιλεγμένη απάντηση",
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is not selected."
+              }
+            ]
           }
         ]
       }

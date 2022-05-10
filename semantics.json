@@ -85,6 +85,49 @@
           "type": "boolean",
           "label": "Correct",
           "importance": "low"
+        },
+        {
+          "name": "feedback",
+          "type": "group",
+          "label": "Feedback",
+          "importance": "low",
+          "optional": true,
+          "fields": [
+            {
+              "name": "chosenFeedback",
+              "type": "text",
+              "widget": "html",
+              "label": "Message displayed if answer is selected",
+              "importance": "low",
+              "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is selected.",
+              "optional": true,
+              "tags": [
+                "strong",
+                "em",
+                "sub",
+                "sup",
+                "a",
+                "code"
+              ]
+            },
+            {
+              "name": "notChosenFeedback",
+              "type": "text",
+              "widget": "html",
+              "label": "Message displayed if answer is not selected",
+              "importance": "low",
+              "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is not selected.",
+              "optional": true,
+              "tags": [
+                "strong",
+                "em",
+                "sub",
+                "sup",
+                "a",
+                "code"
+              ]
+            }
+          ]
         }
       ]
     }

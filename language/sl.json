@@ -27,6 +27,19 @@
           },
           {
             "label": "Pravilen odgovor"
+          },
+          {
+            "label": "Povratna informacija",
+            "fields": [
+              {
+                "label": "Sporočilo, ko je bil odgovor izbran",
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is selected."
+              },
+              {
+                "label": "Sporočilo, ko odgovor ni bil izbran",
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is not selected."
+              }
+            ]
           }
         ]
       }

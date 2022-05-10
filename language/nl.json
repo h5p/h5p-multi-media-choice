@@ -27,6 +27,19 @@
           },
           {
             "label": "Juist"
+          },
+          {
+            "label": "Feedback",
+            "fields": [
+              {
+                "label": "Getoond bericht als het antwoord is geselecteerd",
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is selected."
+              },
+              {
+                "label": "Getoond bericht als het antwoord niet is geselecteerd",
+                "description": "Message will appear below the answer on \"Check\" (or \"Show solution\" if enabled) if this answer is not selected."
+              }
+            ]
           }
         ]
       }
@@ -219,7 +232,7 @@
           ]
         },
         {
-          "label": "Bevestigingsdialoog voor \"Opnieuw\"",          
+          "label": "Bevestigingsdialoog voor \"Opnieuw\"",
           "fields": [
             {
               "label": "Koptekst",

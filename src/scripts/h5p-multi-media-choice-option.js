@@ -20,6 +20,7 @@ export class MultiMediaChoiceOption {
 
     this.media = option.media;
     this.correct = option.correct;
+    this.feedback = option.feedback || {};
 
     this.callbacks = callbacks || {};
     this.callbacks.onClick = this.callbacks.onClick || (() => {});
@@ -250,16 +251,43 @@ export class MultiMediaChoiceOption {
   }
 
   /**
+   * Shows feedback below answer (if any is available)
+   */
+  showFeedback() {
+    if (!this.feedback) {
+      return;
+    }
+
+    if (this.isSelected() && this.feedback.chosenFeedback) {
+      this.setFeedbackText(this.feedback.chosenFeedback);
+    }
+    else if (!this.isSelected() && this.feedback.notChosenFeedback) {
+      this.setFeedbackText(this.feedback.notChosenFeedback);
+    }
+  }
+
+  setFeedbackText(html) {
+    if (this.feedbackText?.parentNode) {
+      this.feedbackText.parentNode.removeChild(this.feedbackText);
+    }
+    this.feedbackText = document.createElement('div');
+    this.feedbackText.classList.add('h5p-multi-media-choice-option-feedback');
+    this.feedbackText.innerHTML = html;
+    this.content.appendChild(this.feedbackText);
+  }
+
+  /**
    * Hides any information about solution in the UI and screen reader
    */
   hideSolution() {
     this.wrapper.classList.remove('h5p-multi-media-choice-correct');
     this.wrapper.classList.remove('h5p-multi-media-choice-show-correct');
     this.wrapper.classList.remove('h5p-multi-media-choice-wrong');
-    if (this.accessibilitySolutionText) {
-      if (this.accessibilitySolutionText.parentNode) {
-        this.accessibilitySolutionText.parentNode.removeChild(this.accessibilitySolutionText);
-      }
+    if (this.accessibilitySolutionText?.parentNode) {
+      this.accessibilitySolutionText.parentNode.removeChild(this.accessibilitySolutionText);
+    }
+    if (this.feedbackText?.parentNode) {
+      this.feedbackText.parentNode.removeChild(this.feedbackText);
     }
   }
 
