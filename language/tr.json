@@ -59,14 +59,14 @@
       ]
     },
     {
-      "label": "Etkinlik Ayarları",
-      "description": "Bu seçenekler, etkinliğin nasıl davranacağını kontrol etmenizi sağlar.",
+      "label": "Davranış yarları",
+      "description": "Bu seçenekler görevin nasıl davranması gerektiğini kontrol etmenizi sağlar.",
       "fields": [
         {
-          "label": "\"Yeniden dene\"yi etkinleştir"
+          "label": "\"Yeniden dene\" düğmesini devreye al"
         },
         {
-          "label": "\"Çözüm göster\" düğmesini etkinleştirin"
+          "label": "\"Çözüm göster\" düğmesini devreye al"
         },
         {
           "label": "\"Kontrol Et\" onay iletişim kutusunu göster"
@@ -79,11 +79,11 @@
           "description": "Yüzde puanı, geçme yüzdesinden yüksekse soruya bir puan verir"
         },
         {
-          "label": "Çözümü göstermeden önce yanıt iste"
+          "label": "Çözümü görüntülenmesi için cevap verilmesini zorunlu tut"
         },
         {
-          "label": "Soru Tipi",
-          "description": "Sorunun görünümünü ve davranışını seçin.",
+          "label": "Soru Türü",
+          "description": "Sorunun görünüş ve davranışını seçin.",
           "options": [
             {
               "label": "Otomatik"
@@ -118,8 +118,8 @@
           ]
         },
         {
-          "label": "Satır başına maksimum alternatif",
-          "description": "Soruların iyi görünmesini sağlamak için satır başına maksimum alternatif sayısını ayarlayın.",
+          "label": "Satır başına maksimum seçenek",
+          "description": "Soruların iyi görünmesini sağlamak için satır başına maksimum seçenek sayısını ayarlayın.",
           "options": [
             {
               "label": "1"
