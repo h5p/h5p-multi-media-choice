@@ -12,8 +12,9 @@ export default class MultiMediaChoiceContent {
    * @param {number} contentId Content's id.
    * @param {object} [callbacks = {}] Callbacks.
    * @param {string} assetsFilePath File path to the assets folder
+   * @param {number[]} answerState Previous answers given (when resuming)
    */
-  constructor(params = {}, contentId, callbacks = {}, assetsFilePath) {
+  constructor(params = {}, contentId, callbacks = {}, assetsFilePath, answerState) {
     this.params = params;
     this.contentId = contentId;
     this.callbacks = callbacks;
@@ -93,6 +94,9 @@ export default class MultiMediaChoiceContent {
       gutter: columnGap,
       itemSelector: '.h5p-multi-media-choice-list-item'
     });
+
+    // Toggle selected
+    answerState.forEach(index => this.toggleSelected(index, false));
   }
 
   /**
@@ -272,8 +276,9 @@ export default class MultiMediaChoiceContent {
    * Toggles the given option. If the options are radio buttons
    * the previously checked one is unchecked
    * @param {number} optionIndex Which option is being selected
+   * @param {bool} triggerInteracted Trigger xAPI or not.
    */
-  toggleSelected(optionIndex) {
+  toggleSelected(optionIndex, triggerInteracted = true) {
     const option = this.options[optionIndex];
     if (option.isDisabled()) {
       return;
@@ -291,7 +296,9 @@ export default class MultiMediaChoiceContent {
     }
     option.toggle();
 
-    this.callbacks.triggerInteracted();
+    if (triggerInteracted) {
+      this.callbacks.triggerInteracted();
+    }
   }
 
   /**
