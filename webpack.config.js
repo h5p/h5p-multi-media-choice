@@ -4,9 +4,15 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProd = (nodeEnv === 'production');
+const libraryName = process.env.npm_package_name;
 
 module.exports = {
   mode: nodeEnv,
+  context: path.resolve(__dirname, 'src'),
+  entry: {
+    dist: './entries/h5p-multi-media-choice.js'
+  },
+  devtool: !isProd ? 'eval-source-map' : undefined,
   optimization: {
     minimize: isProd,
     minimizer: [
@@ -19,16 +25,8 @@ module.exports = {
       }),
     ],
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'h5p-multi-media-choice.css'
-    })
-  ],
-  entry: {
-    dist: './src/entries/h5p-multi-media-choice.js'
-  },
   output: {
-    filename: 'h5p-multi-media-choice.js',
+    filename: `${libraryName}.js`,
     path: path.resolve(__dirname, 'dist')
   },
   target: ['web', 'es6'],
@@ -67,8 +65,12 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: `${libraryName}.css`
+    })
+  ],
   stats: {
     colors: true
   },
-  devtool: (isProd) ? undefined : 'eval-cheap-module-source-map'
 };
