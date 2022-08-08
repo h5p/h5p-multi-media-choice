@@ -18,6 +18,7 @@ export default class MultiMediaChoice extends H5P.Question {
 
     this.contentId = contentId;
     this.extras = extras;
+    this.answerState = extras.previousState && extras.previousState.answers ? extras.previousState.answers : [];
 
     // Default values are extended
     this.params = Util.extendParams(params);
@@ -71,7 +72,8 @@ export default class MultiMediaChoice extends H5P.Question {
             this.triggerXAPI('interacted');
           }
         },
-        this.getLibraryFilePath('assets')
+        this.getLibraryFilePath('assets'),
+        this.answerState
       );
 
       this.setContent(this.content.getDOM()); // Register content with H5P.Question
