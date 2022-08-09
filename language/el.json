@@ -149,8 +149,8 @@
           "default": "Έλεγχος"
         },
         {
-          "label": "Text for \"Submit\" button",
-          "default": "Submit"
+          "label": "Κείμενο για το κουμπί \"Υποβολή\"",
+          "default": "Υποβολή"
         },
         {
           "label": "Περιγραφή υποστηρικτικής τεχνολογίας για το κουμπί \" Έλεγχος\"",
@@ -240,8 +240,8 @@
           ]
         },
         {
-          "label": "Text if alt text is missing for an image",
-          "default": "Alt text missing"
+          "label": "Κείμενο εάν λείπει το εναλλακτικό κείμενο για μια εικόνα",
+          "default": "Λείπει το εναλλακτικό κείμενο"
         }
       ]
     }
