@@ -4,13 +4,13 @@
       "fields": [
         {
           "label": "Tipo",
-          "description": "Medio opcional a mostrar arriba de la pregunta."
+          "description": "Medios opcionales mostrados encima de la pregunta."
         },
         {
           "label": "Deshabilitar acercamiento de imagen"
         }
       ],
-      "label": "Medio"
+      "label": "Medios"
     },
     {
       "label": "Pregunta"
@@ -22,8 +22,8 @@
         "label": "Opción",
         "fields": [
           {
-            "label": "Medio",
-            "description": "<h3> Imagen a mostrar como la opción. El texto alternativo es usado por el reporte.</h3>"
+            "label": "Medios",
+            "description": "<h3> Imagen a mostrar como opción. El texto alternativo se usa para el informe.</h3>"
           },
           {
             "label": "Correcto"
@@ -37,53 +37,53 @@
         {
           "widgets": [
             {
-              "label": "Predeterminado"
+              "label": "Por defecto"
             }
           ],
-          "label": "Definir retroalimentación personalizada para cualquier rango de puntaje",
+          "label": "Definir retroalimentación personalizada para cualquier rango de puntuación",
           "entity": "rango",
           "field": {
             "fields": [
               {
-                "label": "Rango del Puntaje"
+                "label": "Rango de puntuación"
               },
               {},
               {
-                "label": "Retroalimentación para rango de puntaje definido",
-                "placeholder": "Complete la retroalimentación"
+                "label": "Realimentación para rango de puntuación definido",
+                "placeholder": "Escribe tu retroalimentación"
               }
             ]
           },
-          "description": "Haga clic en el botón \"Añadir rango\" para añadir cuantos rangos necesite. Ejemplo: 0-20% Mal puntaje, 21-91% Puntaje Promedio, 91-100% ¡Magnífico Puntaje!"
+          "description": "Haz clic en el botón \"Añadir rango\" para añadir los rangos que necesites. Ejemplo: 0-20% Mala puntuación, 21-91% Puntuación Media, 91-100% ¡Puntuación Estupenda!"
         }
       ]
     },
     {
-      "label": "Configuraciones del comportamiento",
-      "description": "Estas opciones le permitirán controlar como se comporta el trabajo.",
+      "label": "Configuración del comportamiento",
+      "description": "Estas opciones te permitirán controlar como se comporta la tarea.",
       "fields": [
         {
-          "label": "Habilitar botón \"Reintentar\""
+          "label": "Habilitar botón \"Intentar de nuevo\""
         },
         {
           "label": "Habilitar botón \"Mostrar Solución\""
         },
         {
-          "label": "Mostrar diálogo de confirmación en \"Comprobar\""
+          "label": "Mostrar diálogo de confirmación para \"Comprobar\""
         },
         {
-          "label": "Mostrar el diálogo de confirmación en \"Reintentar\""
+          "label": "Mostrar diálogo de confirmación para \"Intentar de nuevo\""
         },
         {
-          "label": "Dar un punto para la pregunta completa",
-          "description": "Otorga un punto a la pregunta si el puntaje en porcentaje es mayor que el porcentaje aprobatorio"
+          "label": "Dar un punto a la pregunta completa",
+          "description": "Da un punto a la pregunta si el porcentaje de la puntuación es mayor que el porcentaje para aprobar"
         },
         {
           "label": "Requerir respuesta antes de que se pueda ver la solución"
         },
         {
           "label": "Tipo de Pregunta",
-          "description": "Seleccione el aspecto y comportamiento de la pregunta.",
+          "description": "Selecciona el aspecto y comportamiento de la pregunta.",
           "options": [
             {
               "label": "Automático"
@@ -98,7 +98,7 @@
         },
         {
           "label": "Proporción de aspecto",
-          "description": "Seleccionar la proporción de aspecto de las alternativas",
+          "description": "Selecciona la proporción de aspecto de las alternativas",
           "options": [
             {
               "label": "Automático"
@@ -136,13 +136,13 @@
           ]
         },
         {
-          "label": "Porcentaje aprobatorio",
-          "description": "Esta configuración a menudo no tendrá ningún efecto. Es el porcentaje del puntaje total requerido para obtener 1 punto cuando se habilita un punto para todo el trabajo, y para obtener un result.success en declaraciones xAPI."
+          "label": "Porcentaje para aprobar",
+          "description": "Esta configuración probablemente no tendrá ningún efecto. Es el porcentaje de la puntuación total requerida para obtener 1 punto cuando se habilita la opción de dar un punto a toda la tarea, y para obtener un result.success en declaraciones xAPI."
         }
       ]
     },
     {
-      "label": "Interfaz del usuario",
+      "label": "Interfaz de usuario",
       "fields": [
         {
           "label": "Texto para botón \"Comprobar\"",
@@ -153,16 +153,16 @@
           "default": "Enviar"
         },
         {
-          "label": "Descripción de tecnología asistiva para botón \"Comprobar\"",
-          "default": "Comprobar las respuestas. Las respuestas serán marcadas como correcta, incorrecta, o sin contestar."
+          "label": "Descripción para las tecnologías de asistencia del botón \"Comprobar\"",
+          "default": "Revisa tus respuestas. Las respuestas se marcarán como correcta, incorrecta o sin contestar."
         },
         {
           "label": "Texto para botón \"Mostrar solución\"",
           "default": "Mostrar solución"
         },
         {
-          "label": "Descripción de tecnología asistiva para botón \"Mostrar Solución\"",
-          "default": "Mostrar la solución. Las opciones correctas serán marcadas."
+          "label": "Descripción para las tecnologías de asistencia del botón \"Mostrar solución\"",
+          "default": "Mostrar la solución. Se marcarán las opciones correctas."
         },
         {
           "default": "Respuesta correcta",
@@ -173,39 +173,39 @@
           "default": "Respuesta incorrecta"
         },
         {
-          "label": "La opción debería de haberse seleccionado",
-          "default": "Debería de haberse seleccionado"
+          "label": "Deberías haber marcado la opción",
+          "default": "Debería haberse marcado"
         },
         {
-          "default": "No debería haber sido seleccionada",
-          "label": "La opción no debería de haberse seleccionado"
+          "default": "No debería haber sido marcada",
+          "label": "La opción no debería haberse marcado"
         },
         {
           "label": "Texto para mensaje \"Requiere respuesta\"",
-          "default": "Por favor responda antes de ver la solución"
+          "default": "Por favor, responde antes de poder ver la solución"
         },
         {
-          "label": "Texto para botón \"Reintentar\"",
-          "default": "Reintentar"
+          "label": "Texto para el botón \"Intentar de nuevo\"",
+          "default": "Intentar de nuevo"
         },
         {
-          "label": "Descripción de tecnología asistiva para botón \"Reintentar\"",
-          "default": "Reintentar el trabajo. Reiniciar todas las respuestas e iniciar el trabajo de nuevo."
+          "label": "Descripción para las tecnologías de asistencia del botón \"Intentar de nuevo\"",
+          "default": "Vuelve a intentar la tarea. Borra todas tus respuestas y empieza de nuevo."
         },
         {
-          "label": "Su resultado",
+          "label": "Tu resultado",
           "description": ":num y :total son variables y serán remplazadas por sus respectivos valores.",
-          "default": "You got :num out of :total points"
+          "default": "Has conseguido :num de un total de :total puntos"
         },
         {
-          "label": "Check confirmation dialog",
+          "label": "Diálogo de confirmación para Comprobar",
           "fields": [
             {
               "label": "Texto del encabezado",
-              "default": "¿Terminado?"
+              "default": "¿Has terminado?"
             },
             {
-              "default": "¿Está seguro de querer termina?",
+              "default": "¿Seguro que quieres termina?",
               "label": "Texto del cuerpo"
             },
             {
@@ -219,15 +219,15 @@
           ]
         },
         {
-          "label": "Diálogo de confirmación para Comprobar",
+          "label": "Diálogo de confirmación para Intentar de nuevo",
           "fields": [
             {
-              "default": "¿Terminado?",
+              "default": "¿Intentar de nuevo?",
               "label": "Texto del encabezado"
             },
             {
               "label": "Texto del cuerpo",
-              "default": "¿Está seguro de querer termina?"
+              "default": "¿Seguro que quieres volver a intentarlo?"
             },
             {
               "label": "Etiqueta botón Cancelar",
@@ -235,13 +235,13 @@
             },
             {
               "label": "Etiqueta del botón Confirmar",
-              "default": "Terminar"
+              "default": "Intentar de nuevo"
             }
           ]
         },
         {
-          "label": "Texto si faltara el texto alterno para una imagen",
-          "default": "Falta el texto alterno"
+          "label": "Texto si falta el texto alternativo para una imagen",
+          "default": "Falta el texto alternativo"
         }
       ]
     }
