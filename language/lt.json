@@ -1,10 +1,10 @@
 {
   "semantics": [
     {
-      "label": "Media",
+      "label": "Medija",
       "fields": [
         {
-          "label": "Type",
+          "label": "Tipas",
           "description": "Pasirenkama medija, rodoma virš klausimo."
         },
         {
@@ -13,16 +13,16 @@
       ]
     },
     {
-      "label": "Question"
+      "label": "Klausimas"
     },
     {
       "label": "Galimos parinktys",
-      "entity": "option",
+      "entity": "parinktis",
       "field": {
-        "label": "Option",
+        "label": "Parinktis",
         "fields": [
           {
-            "label": "Media",
+            "label": "Medija",
             "description": "<h3> Image to display as the choice. The alternative text is used by the report.</h3>"
           },
           {
