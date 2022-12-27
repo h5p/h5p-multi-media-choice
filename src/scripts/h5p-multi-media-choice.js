@@ -16,12 +16,27 @@ export default class MultiMediaChoice extends H5P.Question {
   constructor(params, contentId, extras = {}) {
     super('multi-media-choice');
 
+    H5P.EventDispatcher.call(this);
     this.contentId = contentId;
     this.extras = extras;
     this.answerState = extras.previousState && extras.previousState.answers ? extras.previousState.answers : [];
 
     // Default values are extended
     this.params = Util.extendParams(params);
+
+    this.content = new MultiMediaChoiceContent(
+      this.params,
+      contentId,
+      {
+        triggerResize: () => {
+          this.trigger('resize');
+        },
+        triggerInteracted: () => {
+          this.triggerXAPI('interacted');
+        }
+      },
+      this.answerState
+    );
 
     this.registerDomElements = () => {
       // Register task media
@@ -61,21 +76,7 @@ export default class MultiMediaChoice extends H5P.Question {
         this.setIntroduction(this.introduction);
       }
 
-      this.content = new MultiMediaChoiceContent(
-        this.params,
-        contentId,
-        {
-          triggerResize: () => {
-            this.trigger('resize');
-          },
-          triggerInteracted: () => {
-            this.triggerXAPI('interacted');
-          }
-        },
-        this.getLibraryFilePath('assets'),
-        this.answerState
-      );
-
+      this.content.setMultiMediaOptionsPlaceholder(this.getLibraryFilePath('assets'));
       this.setContent(this.content.getDOM()); // Register content with H5P.Question
       this.addButtons();
 
@@ -190,6 +191,17 @@ export default class MultiMediaChoice extends H5P.Question {
       this.hideButton('show-solution');
       this.content.hideSolutions();
       this.removeFeedback();
+    };
+
+    /**
+     * Get answer given
+     * Contract.
+     *
+     * @return {boolean} True, if all answers have been given.
+     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
+     */
+    this.getAnswerGiven = () => {
+      return this.content.getAnswerGiven();
     };
   }
 
