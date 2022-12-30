@@ -14,13 +14,12 @@ export default class MultiMediaChoiceContent {
    * @param {string} assetsFilePath File path to the assets folder
    * @param {number[]} answerState Previous answers given (when resuming)
    */
-  constructor(params = {}, contentId, callbacks = {}, assetsFilePath, answerState) {
+  constructor(params = {}, contentId, callbacks = {}, answerState) {
     this.params = params;
     this.contentId = contentId;
     this.callbacks = callbacks;
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
     this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
-    this.assetsFilePath = assetsFilePath;
     this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
 
     this.numberOfCorrectOptions = params.options
@@ -74,7 +73,6 @@ export default class MultiMediaChoiceContent {
             contentId,
             this.aspectRatio,
             this.isSingleAnswer,
-            assetsFilePath,
             this.params.l10n.missingAltText,
             {
               onClick: () => this.toggleSelected(index),
@@ -406,5 +404,32 @@ export default class MultiMediaChoiceContent {
       }
     }
     return indexes;
+  }
+
+  /**
+   * Set options default images
+   * @param {string} assetsFilePath
+   */
+  setMultiMediaOptionsPlaceholder(assetsFilePath) {
+    let path = '';
+    this.options.forEach(option => {
+      if (!option.media.params.file) {
+        const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
+        path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`;
+        option.wrapper.querySelector('img').src = path;
+      }
+    });
+  }
+
+  /**
+   * Get Answer given
+   * @return {boolean} true if answers have been given, else false
+   */
+  getAnswerGiven() {
+    if (!this.isAnyAnswerSelected()) {
+      return false;
+    }
+    return true;
+
   }
 }
