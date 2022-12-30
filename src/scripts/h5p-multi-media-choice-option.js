@@ -11,11 +11,10 @@ export class MultiMediaChoiceOption {
    * @param {boolean} assetsFilePath //TODO: what is this?
    * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(option, contentId, aspectRatio, singleAnswer, assetsFilePath, missingAltText, callbacks) {
+  constructor(option, contentId, aspectRatio, singleAnswer, missingAltText, callbacks) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.singleAnswer = singleAnswer;
-    this.assetsFilePath = assetsFilePath;
     this.missingAltText = missingAltText;
 
     this.media = option.media;
@@ -91,11 +90,7 @@ export class MultiMediaChoiceOption {
     const title = this.media.params.title ? this.media.params.title : '';
 
     let path = '';
-    if (!this.media.params.file) {
-      const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
-      path = `${this.assetsFilePath}/placeholder${placeholderAspectRatio}.svg`;
-    }
-    else {
+    if (this.media.params.file) { 
       path = H5P.getPath(this.media.params.file.path, this.contentId);
     }
 
