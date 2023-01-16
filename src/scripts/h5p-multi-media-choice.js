@@ -172,6 +172,7 @@ export default class MultiMediaChoice extends H5P.Question {
         this.handleRead(this.params.l10n.noAnswer);
       }
       else {
+        this.content.showSelectedSolutions();
         this.content.showUnselectedSolutions();
         this.content.focusUnselectedSolution();
       }
