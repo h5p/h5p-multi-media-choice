@@ -160,9 +160,10 @@ export default class MultiMediaChoice extends H5P.Question {
 
     /**
      * Show solutions.
+     * @param {boolean} shouldRespectRequireInputFlag Determine from where this function being called
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
      */
-    this.showSolutions = () => {
+    this.showSolutions = (shouldRespectRequireInputFlag = false) => {
       this.hideButton('check-answer');
       this.hideButton('show-solution');
 
@@ -170,7 +171,7 @@ export default class MultiMediaChoice extends H5P.Question {
       // from compound content type
       if (this.params.behaviour.showSolutionsRequiresInput
         && !this.content.isAnyAnswerSelected() 
-        && !this.parent) {
+        && shouldRespectRequireInputFlag) {
         // Require answer before solution can be viewed
         this.updateFeedbackContent(this.params.l10n.noAnswer);
         this.handleRead(this.params.l10n.noAnswer);
@@ -236,7 +237,7 @@ export default class MultiMediaChoice extends H5P.Question {
       'show-solution',
       this.params.l10n.showSolutionButtonText,
       () => {
-        this.showSolutions();
+        this.showSolutions(true);
       },
       false,
       { 'aria-label': this.params.l10n.showSolution },
