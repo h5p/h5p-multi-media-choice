@@ -166,7 +166,11 @@ export default class MultiMediaChoice extends H5P.Question {
       this.hideButton('check-answer');
       this.hideButton('show-solution');
 
-      if (this.params.behaviour.showSolutionsRequiresInput && !this.content.isAnyAnswerSelected()) {
+      // require input for solution behavior is not valid if the request is originated
+      // from compound content type
+      if (this.params.behaviour.showSolutionsRequiresInput
+        && !this.content.isAnyAnswerSelected() 
+        && !this.parent) {
         // Require answer before solution can be viewed
         this.updateFeedbackContent(this.params.l10n.noAnswer);
         this.handleRead(this.params.l10n.noAnswer);
