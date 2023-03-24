@@ -285,4 +285,11 @@ export default class MultiMediaChoice extends H5P.Question {
       this.content.isPassed()
     );
   }
+
+  /**
+   * Retrieve title of the content type
+   */
+  getTitle() {
+    return H5P.createTitle((this.extras && this.extras.metadata && this.extras.metadata.title) ? this.extras.metadata.title : 'Image Choice');
+  }
 }
