@@ -426,10 +426,6 @@ export default class MultiMediaChoiceContent {
    * @return {boolean} true if answers have been given, else false
    */
   getAnswerGiven() {
-    if (!this.isAnyAnswerSelected()) {
-      return false;
-    }
-    return true;
-
+    return this.isAnyAnswerSelected() || this.isBlankCorrect();
   }
 }
