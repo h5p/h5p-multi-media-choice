@@ -84,15 +84,6 @@ export default class MultiMediaChoice extends H5P.Question {
     };
 
     /**
-     * Check if result has been submitted or input has been given.
-     * @return {boolean} True if answer was given
-     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
-     */
-    this.getAnswersGiven = () => {
-      return this.content.isAnyAnswerSelected() || this.content.isBlankCorrect();
-    };
-
-    /**
      * Get latest score
      * @return {number} latest score
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
@@ -170,7 +161,7 @@ export default class MultiMediaChoice extends H5P.Question {
       // require input for solution behavior is not valid if the request is originated
       // from compound content type
       if (this.params.behaviour.showSolutionsRequiresInput
-        && !this.content.isAnyAnswerSelected() 
+        && !this.content.isAnyAnswerSelected()
         && shouldRespectRequireInputFlag) {
         // Require answer before solution can be viewed
         this.updateFeedbackContent(this.params.l10n.noAnswer);
