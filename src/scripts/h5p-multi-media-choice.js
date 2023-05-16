@@ -206,24 +206,26 @@ export default class MultiMediaChoice extends H5P.Question {
    * Add the buttons that are passed to H5P.Question
    */
   addButtons() {
-    this.addButton(
-      'check-answer',
-      this.params.l10n.checkAnswerButtonText,
-      () => {
-        this.checkAnswer();
-      },
-      true,
-      { 'aria-label': this.params.l10n.checkAnswer },
-      {
-        confirmationDialog: {
-          enable: this.params.behaviour.confirmCheckDialog,
-          l10n: this.params.l10n.confirmCheck,
-          instance: this
+    if (this.params.behaviour.enableCheckButton == undefined || this.params.behaviour.enableCheckButton) {
+      this.addButton(
+        'check-answer',
+        this.params.l10n.checkAnswerButtonText,
+        () => {
+          this.checkAnswer();
         },
-        contentData: this.extras,
-        textIfSubmitting: this.params.l10n.submitAnswerButtonText,
-      }
-    );
+        true,
+        { 'aria-label': this.params.l10n.checkAnswer },
+        {
+          confirmationDialog: {
+            enable: this.params.behaviour.confirmCheckDialog,
+            l10n: this.params.l10n.confirmCheck,
+            instance: this
+          },
+          contentData: this.extras,
+          textIfSubmitting: this.params.l10n.submitAnswerButtonText,
+        }
+      );
+    }
     this.addButton(
       'show-solution',
       this.params.l10n.showSolutionButtonText,
