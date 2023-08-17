@@ -37,12 +37,12 @@
         {
           "widgets": [
             {
-              "label": "Default"
+              "label": "Numatytasis"
             }
           ],
           "label": "Define custom feedback for any score range",
-          "description": "Click the \"Add range\" button to add as many ranges as you need. Example: 0-20% Bad score, 21-91% Average Score, 91-100% Great Score!",
-          "entity": "range",
+          "description": "Spustelėkite mygtuką „Pridėti diapazoną“, kad pridėtumėte tiek diapazonų, kiek jums reikia. Pavyzdys: 0–20 % blogas balas, 21–91 % vidutinis balas, 91–100 % puikus rezultatas!",
+          "entity": "diapazonas",
           "field": {
             "fields": [
               {
@@ -50,8 +50,8 @@
               },
               {},
               {
-                "label": "Feedback for defined score range",
-                "placeholder": "Fill in the feedback"
+                "label": "Atsiliepimas apibrėžtam balų diapazonui",
+                "placeholder": "Užpildykite atsiliepimą"
               }
             ]
           }
@@ -63,10 +63,10 @@
       "description": "Šios parinktys leis jums valdyti, kaip veikia užduotis.",
       "fields": [
         {
-          "label": "Įjungti \"Bandyti dar kartą\" mygtuką"
+          "label": "Įjungti mygtuką „Bandyti dar kartą“"
         },
         {
-          "label": "Įjungti mygtuką „Rodyti sprendimą“."
+          "label": "Įjungti mygtuką „Rodyti sprendimą“"
         },
         {
           "label": "Show confirmation dialog on \"Check\""
@@ -82,7 +82,7 @@
           "label": "Require answer before the solution can be viewed"
         },
         {
-          "label": "Question Type",
+          "label": "Klausimo tipas",
           "description": "Pasirinkite klausimo išvaizdą ir veikimą.",
           "options": [
             {
@@ -92,7 +92,7 @@
               "label": "Keli pasirinkimai (žymimieji langeliai)"
             },
             {
-              "label": "Single Choice (Radio Buttons)"
+              "label": "Vienas pasirinkimas (apvalūs mygtukai)"
             }
           ]
         },
@@ -149,10 +149,10 @@
         },
         {
           "label": "Tekstas mygtukui „Pateikti“",
-          "default": "Submit"
+          "default": "Pateikti"
         },
         {
-          "label": "Assistive technology description for \"Check\" button",
+          "label": "Mygtuko „Tikrinti“ pagalbinės technologijos aprašymas",
           "default": "Tikrinti atsakymus. Atsakymai bus pažymėti kaip teisingi, neteisingi arba neatsakyti."
         },
         {
@@ -160,7 +160,7 @@
           "default": "Rodyti sprendimą"
         },
         {
-          "label": "Assistive technology description for \"Show Solution\" button",
+          "label": "Mygtuko „Rodyti sprendimą“ pagalbinės technologijos aprašymas",
           "default": "Show the solution. The correct options will be marked."
         },
         {
@@ -234,7 +234,7 @@
             },
             {
               "label": "Confirm button label",
-              "default": "Retry"
+              "default": "Bandyti dar kartą"
             }
           ]
         },

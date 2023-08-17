@@ -194,15 +194,52 @@
         },
         {
           "label": "ข้อความสำหรับปุ่ม \"ยกเลิก\"",
-          "default": "ยกเลิก"
+          "default": "ยกเลิก",
+          "description": ":num and :total are variables and will be replaced by their respective values."
         },
         {
           "label": "ข้อความสำหรับข้อความ \"ต้องการช่วยเหลือ\"",
-          "default": "ต้องการช่วยเหลือ?"
+          "default": "ต้องการช่วยเหลือ?",
+          "fields": [
+            {
+              "label": "Header text",
+              "default": "Finish?"
+            },
+            {
+              "label": "Body text",
+              "default": "Are you sure you want to finish?"
+            },
+            {
+              "label": "Cancel button label",
+              "default": "Cancel"
+            },
+            {
+              "label": "Confirm button label",
+              "default": "Finish"
+            }
+          ]
         },
         {
           "label": "ข้อความสำหรับปุ่ม \"ช่วยเหลือ\"",
-          "default": "ช่วยเหลือ"
+          "default": "ช่วยเหลือ",
+          "fields": [
+            {
+              "label": "Header text",
+              "default": "Retry?"
+            },
+            {
+              "default": "Are you sure you wish to retry?",
+              "label": "Body text"
+            },
+            {
+              "default": "Cancel",
+              "label": "Cancel button label"
+            },
+            {
+              "label": "Confirm button label",
+              "default": "Retry"
+            }
+          ]
         },
         {
           "label": "ข้อความสำหรับข้อความ \"ปิด\"",
