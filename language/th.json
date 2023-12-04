@@ -194,12 +194,11 @@
         },
         {
           "label": "ข้อความสำหรับปุ่ม \"ยกเลิก\"",
-          "default": "ยกเลิก",
-          "description": ":num and :total are variables and will be replaced by their respective values."
+          "description": ":num and :total are variables and will be replaced by their respective values.",
+          "default": "You got :num out of :total points"
         },
         {
-          "label": "ข้อความสำหรับข้อความ \"ต้องการช่วยเหลือ\"",
-          "default": "ต้องการช่วยเหลือ?",
+          "label": "Check confirmation dialog",
           "fields": [
             {
               "label": "Header text",
@@ -220,8 +219,7 @@
           ]
         },
         {
-          "label": "ข้อความสำหรับปุ่ม \"ช่วยเหลือ\"",
-          "default": "ช่วยเหลือ",
+          "label": "Retry confirmation dialog",
           "fields": [
             {
               "label": "Header text",
@@ -242,12 +240,8 @@
           ]
         },
         {
-          "label": "ข้อความสำหรับข้อความ \"ปิด\"",
-          "default": "ปิด"
-        },
-        {
-          "label": "ข้อความสำหรับปุ่ม \"เพิ่มช่วง\"",
-          "default": "เพิ่มช่วง"
+          "label": "Text if alt text is missing for an image",
+          "default": "Alt text missing"
         }
       ]
     }
