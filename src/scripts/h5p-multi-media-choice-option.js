@@ -100,6 +100,7 @@ export class MultiMediaChoiceOption {
     image.addEventListener('load', this.callbacks.triggerResize);
     this.content.setAttribute('title', htmlDecode(title));
     image.classList.add('h5p-multi-media-choice-media');
+    image.setAttribute('alt', htmlDecode(alt));
 
     if (this.aspectRatio !== 'auto') {
       image.classList.add('h5p-multi-media-choice-media-specific-ratio');
