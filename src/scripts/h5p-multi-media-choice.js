@@ -114,8 +114,10 @@ export default class MultiMediaChoice extends H5P.Question {
 
     /**
      * Check answer.
+     * @param {object} params Parameters.
+     * @param {boolean} [params.skipXAPI] If true, do not send xAPI event.
      */
-    this.checkAnswer = () => {
+    this.checkAnswer = (params = {}) => {
       this.content.disableSelectables();
 
       const score = this.getScore();
@@ -139,16 +141,18 @@ export default class MultiMediaChoice extends H5P.Question {
 
       this.content.showSelectedSolutions();
 
-      this.trigger(
-        getAnsweredXAPIEvent(
-          this,
-          this.params.question,
-          this.content.getOptions(),
-          this.getScore(),
-          this.getMaxScore(),
-          this.content.isPassed()
-        )
-      );
+      if (!params.skipXAPI) {
+        this.trigger(
+          getAnsweredXAPIEvent(
+            this,
+            this.params.question,
+            this.content.getOptions(),
+            this.getScore(),
+            this.getMaxScore(),
+            this.content.isPassed()
+          )
+        );
+      }
     };
 
     /**
@@ -160,19 +164,32 @@ export default class MultiMediaChoice extends H5P.Question {
       this.hideButton('check-answer');
       this.hideButton('show-solution');
 
-      // require input for solution behavior is not valid if the request is originated
-      // from compound content type
-      if (this.params.behaviour.showSolutionsRequiresInput
-        && !this.content.isAnyAnswerSelected()
-        && shouldRespectRequireInputFlag) {
-        // Require answer before solution can be viewed
-        this.updateFeedbackContent(this.params.l10n.noAnswer);
-        this.handleRead(this.params.l10n.noAnswer);
-      }
-      else {
+      const showSolutions = () => {
         this.content.showSelectedSolutions();
         this.content.showUnselectedSolutions();
         this.content.focusUnselectedSolution();
+      }
+
+      // require input for solution behavior is not valid if the request is originated
+      // from compound content type
+      if (shouldRespectRequireInputFlag) {
+        if (this.params.behaviour.showSolutionsRequiresInput
+          && !this.content.isAnyAnswerSelected()) {
+          // Require answer before solution can be viewed
+          this.updateFeedbackContent(this.params.l10n.noAnswer);
+          this.handleRead(this.params.l10n.noAnswer);
+        }
+        else {
+          showSolutions();
+        }
+      }
+      else {
+        // Call from outside (from compound content type)
+        this.checkAnswer({ skipXAPI: true });
+        this.hideButton('show-solution');
+        this.hideButton('try-again');
+
+        showSolutions();
       }
 
       this.trigger('resize');
