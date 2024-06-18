@@ -69,6 +69,7 @@ export default class MultiMediaChoiceContent {
       ? this.params.options.map(
         (option, index) =>
           new MultiMediaChoiceOption(
+            this.content,
             option,
             contentId,
             this.aspectRatio,
@@ -413,10 +414,36 @@ export default class MultiMediaChoiceContent {
   setMultiMediaOptionsPlaceholder(assetsFilePath) {
     let path = '';
     this.options.forEach(option => {
-      if (!option.media.params.file) {
-        const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
-        path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`;
-        option.wrapper.querySelector('img').src = path;
+      switch(option?.media?.library?.split(' ')[0]){
+        case 'H5P.Image':
+          if (!option.media.params.file) {
+          const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
+          path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`;
+          option.wrapper.querySelector('img').src = path;
+         }
+         break;
+        case 'H5P.Video':
+          if (!option.media.params.visuals.poster) {
+            const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
+            path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`; // TO DO: change this to default video img
+            option.wrapper.querySelector('img').src = path;
+           }
+           else{
+            path = H5P.getPath(option.media.params.visuals.poster.path, this.contentId);
+            option.wrapper.querySelector('img').src = path;
+           }
+          break;
+        case 'H5P.Audio': // TO DO: Why does not option.poster exist?
+          /*if (!option.poster) { 
+            const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
+            path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`; // TO DO: change this to default Audio img
+            option.wrapper.querySelector('img').src = path;
+           }
+           else{
+            path = H5P.getPath(option.poster.path, this.contentId);
+            option.wrapper.querySelector('img').src = path;
+           }*/
+          break;
       }
     });
   }
