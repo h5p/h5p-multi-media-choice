@@ -428,21 +428,13 @@ export default class MultiMediaChoiceContent {
             path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`; // TO DO: change this to default video img
             option.wrapper.querySelector('img').src = path;
            }
-           else{
-            path = H5P.getPath(option.media.params.visuals.poster.path, this.contentId);
-            option.wrapper.querySelector('img').src = path;
-           }
           break;
-        case 'H5P.Audio': // TO DO: Why does not option.poster exist?
-          /*if (!option.poster) { 
+        case 'H5P.Audio':
+          if (!option.option.poster) { 
             const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
             path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`; // TO DO: change this to default Audio img
             option.wrapper.querySelector('img').src = path;
            }
-           else{
-            path = H5P.getPath(option.poster.path, this.contentId);
-            option.wrapper.querySelector('img').src = path;
-           }*/
           break;
       }
     });

@@ -22,6 +22,8 @@ export class MultiMediaChoiceOption {
     this.media = option.media;
     this.correct = option.correct;
 
+    this.self = this
+
     this.callbacks = callbacks || {};
     this.callbacks.onClick = this.callbacks.onClick || (() => {});
     this.callbacks.onKeyboardSelect = this.callbacks.onKeyboardSelect || (() => {});
@@ -66,15 +68,15 @@ export class MultiMediaChoiceOption {
     switch (this.media?.library?.split(' ')[0]) {
       case 'H5P.Image':
         mediaWrapper.appendChild(this.buildImage(this.option));
-        
+        break;
       case 'H5P.Video':
         mediaWrapper.appendChild(this.buildImage(this.option));
         mediaWrapper.appendChild(this.buildVideo(this.option));
-        
+        break;
       case 'H5P.Audio':
         mediaWrapper.appendChild(this.buildImage(this.option));
-        mediaWrapper.appendChild(this.buildAudio(this.option));
-        
+        this.buildAudio()
+        break;
     }
     return mediaWrapper;
   }
@@ -97,52 +99,29 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} div containing a video player button
    */
   buildVideo(){
-    const videoButton = document.createElement('div');
+    const videoButton = document.createElement('button');
     const videoIcon = document.createElement('i'); 
     if(this.media.params.sources){
       videoButton.classList.add('h5p-multi-media-content-media-button');
       videoButton.classList.add('h5p-multi-media-content-media-button-video');
       videoIcon.classList.add('fa-play');
       videoButton.appendChild(videoIcon);
-      let src = H5P.getPath(this.media.params.sources[0].path, this.contentId);
-      //const modal = this.createVideoPlayer(src);
-      //this.frame.appendChild(modal);
-      this.testVideo();
-      videoButton.onclick = function(event){
-        
-        //modal.style.display = 'flex';
-        //video.instance = H5P.newRunnable(this.media, this.contentId, this.frame, true);
-        event.stopPropagation();
+      videoButton.setAttribute('tabindex', '0');
+
+      videoButton.onclick = function (e){
+        e.stopPropagation();
       }
+      videoButton.addEventListener('click', (event) => {
+        const lastFocus = document.activeElement;
+        const modal = this.createVideoPlayer(lastFocus);
+        this.frame.appendChild(modal);
+        modal.style.display = 'flex';
+        modal.setAttribute('tabindex', '0');
+        modal.focus()
+        event.stopPropagation()
+      });
     }
     return videoButton;
-  }
-
-  testVideo(){
-
-    // Never fit to wrapper
-    const $window = H5P.jQuery.window;
-    if (!this.media.params.visuals) {
-    this.media.params.visuals = {};
-    }
-    this.media.params.visuals.fit = false;
-    const instance = H5P.newRunnable(this.media, this.contentId, $window, true);
-
-    
-    instance.on('loaded', function(event){
-      instance.play();
-    });
-    
-
-    //this.frame.appendChild($attachTo)
-    var fromVideo = false; // Hack to avoid never ending loop
-    instance.on('resize', function () {
-      fromVideo = true;
-      this.trigger('resize');
-      fromVideo = false;
-    });
-  
-
   }
 
   /**
@@ -150,60 +129,13 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} div containing an audio player button
    */
   buildAudio(){
-    const audioButton = document.createElement('div');
-    const audioIcon = document.createElement('i');
+    let newDiv = H5P.jQuery('<div>', {
+      class:'h5p-multi-media-content-audio-wrapper'
+    });
+    H5P.jQuery(this.wrapper).append(newDiv);
+    const instance = H5P.newRunnable(this.media, this.contentId, newDiv, false);
 
-    
-
-    const $attachTo = H5P.jQuery('#h5p-audio-container'); 
-    
-    const $window = H5P.jQuery.window;
-    if (!this.media.params.visuals) {
-    this.media.params.visuals = {};
-    }
-    this.media.params.visuals.fit = false;
-    const instance = H5P.newRunnable(this.media, this.contentId, $window, false);
-
-    
-
-   /* this.frame = {
-      $element: $('</div>', {
-        'class': 'h5p-multi-media-choice-audio',
-      })
-    };
-    */
-   
-/*
-    if(this.media.params.files){
-      audioIcon.classList.add('fa-volume-off');
-      audioButton.appendChild(audioIcon);
-      audioButton.classList.add('h5p-multi-media-content-media-button');
-      instance.on('loaded', function(event){
-        instance.attatch($attachTo);
-
-        instance.play();
-      })
-      audioButton.classList.add('h5p-multi-media-content-media-button-audio'); 
-      
-      const audio = this.createAudioPlayer(this.media.params.files, this.contentId)
-      audioButton.appendChild(audio);
-      audioButton.onclick = function(event){
-        
-
-        if(audio.classList.contains('h5p-multi-media-content-media-audio-playing')){
-          audioIcon.classList.toggle('fa-volume-up');
-          audio.pause();
-          audio.currentTime = 0;
-        }
-        else{
-          //audio.play();
-          
-          audioIcon.classList.toggle('fa-volume-up');
-        }
-        event.stopPropagation();
-      }
-    }*/
-    return audioButton;
+    console.log(instance)
   }
 
 
@@ -233,10 +165,7 @@ export class MultiMediaChoiceOption {
           path = H5P.getPath(this.option.poster.path, this.contentId);
         }
         break;
-        
     }
-    
-
     const image = document.createElement('img');
     image.setAttribute('src', path);
     this.content.setAttribute('aria-label', htmlDecode(alt));
@@ -252,101 +181,87 @@ export class MultiMediaChoiceOption {
   }
 
   /**
-   *  Creates an audio player 
-   *  @returns {HTMLElement} Audio tag.
-   */
-  createAudioPlayer(audio, contentId){
-    if(audio){
-      const audioPlayer = document.createElement('audio');
-    if (audioPlayer.canPlayType !== undefined){
-      // Add supported source files.
-      for (var i = 0; i < audio.length; i++) {
-        if (audioPlayer.canPlayType(audio[i].mime)) {
-          var source = document.createElement('source');
-          source.src = H5P.getPath(audio[i].path, contentId);
-          source.type = audio[i].mime;
-          audioPlayer.appendChild(source);
-        }
-      }
-    }
-    if (!audioPlayer.children.length) {
-      audioPlayer = null; // Not supported
-    }
-    else {
-      audioPlayer.controls = false;
-      audioPlayer.preload = 'auto';
-      audioPlayer.loop = true;
-
-      var handlePlaying = function () {
-        audioPlayer.classList.add('h5p-multi-media-content-media-audio-playing');
-        audioPlayer.play();
-      };
-      var handleStopping = function () {
-        audioPlayer.classList.remove('h5p-multi-media-content-media-audio-playing');
-        audioPlayer.pause();
-      };
-      audioPlayer.addEventListener('play', handlePlaying);
-      audioPlayer.addEventListener('ended', handleStopping);
-      audioPlayer.addEventListener('pause', handleStopping);
-    }
-    return audioPlayer;
-    }
-  }
-
-  /**
    *  Creates a modal containing a video player 
    *  
    */
-  createVideoPlayer(source){
+  createVideoPlayer(lastFocus){
     const modal = document.createElement('div');
+    const modalContainer = document.createElement('div');
     const modalContent = document.createElement('div');
-    const videoContainer= document.createElement('div');
-    const closeButton = document.createElement('span');
-    const video = document.createElement('video');
+    const closeButton = document.createElement('button');
+    const cross = document.createElement('span');
 
     modal.classList.add('h5p-multi-media-content-media-video-modal');
+    modalContainer.classList.add('h5p-multi-media-content-media-video-modal-container');
     modalContent.classList.add('h5p-multi-media-content-media-video-modal-content')
     closeButton.classList.add('h5p-multi-media-content-media-video-close');
-    video.classList.add('h5p-multi-media-content-media-video-player');
+    cross.classList.add('icon-cross');
+    cross.textContent = 'X';
+    closeButton.id = 'test';
+    modal.appendChild(modalContainer);
+    modalContainer.appendChild(modalContent);
+    modalContent.appendChild(closeButton);
+    closeButton.appendChild(cross);
 
-    video.src = source;
-    video.autoplay = true;
-    video.muted = true;
-    modal.appendChild(video);
+    // Never fit to wrapper 
+    if (!this.media.params.visuals) {
+      this.media.params.visuals = {};
+    }
+    this.media.params.visuals.fit = false;
+    let newDiv = H5P.jQuery('<div></div>');
+    H5P.jQuery(modalContent).append(newDiv);
+
+      
+    const instance = H5P.newRunnable(this.media, this.contentId, newDiv, false);   
     modal.style.display = 'none';
 
-    
-    closeButton.onClick = function(){
-      modal.style.display = 'none';
-      handleStopping();
+    /*instance.on('loaded', function(){
+      instance.trigger('resize');
+    })*/
+
+    let closeModal = function(){
+      modal.remove();
+      window.onkeydown = null;
+      window.onclick = null;
+      lastFocus.focus();
     }
+
+    const focusableElements = modal.querySelectorAll('video:not([disabled]), button:not([disabled])')
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
+
+    window.onkeydown = function(event){
+      console.log(event.key)
+      if(event.key === 'Escape'){
+        closeModal();
+      }
+      if(event.key === 'm'){
+        if(instance.isMuted()){
+          instance.unMute();
+        }else{
+          instance.mute()
+        }
+      }
+      if (event.key === 'Tab' || event.keyCode === 9){ // 9 == TAB 
+        if ( event.shiftKey ) /* shift + tab */ {
+          if (document.activeElement === firstFocusable) {
+            lastFocusable.focus();
+            event.preventDefault();
+          }
+        } else /* tab */ {
+          if (document.activeElement === lastFocusable) {
+            firstFocusable.focus();
+            event.preventDefault();
+          }
+        }
+      }
+    }
+
     window.onclick = function(event){
-      if(event.target == modal){
-        modal.style.display = 'none';
-        handleStopping();
-      }
+      if(event.target == modal || event.target == closeButton || event.target == modalContainer || event.target == cross ){
+        closeModal();
+      } 
     }
-    var handlePlaying = function(){
-      video.play()
-      video.classList.add('h5p-multi-media-content-media-video-playing')
-    }
-    var handleStopping = function(){
-      video.pause()
-      video.currentTime = 0;
-      video.classList.remove('h5p-multi-media-content-media-video-playing')
-    }
-    video.onclick = function(){
-      if(video.classList.contains('h5p-multi-media-content-media-video-playing')){
-        video.pause();
-      }else{
-        video.play();
-      }
-    }
-
-    video.addEventListener('play', handlePlaying);
-    video.addEventListener('ended', handleStopping);
-    video.addEventListener('pause', handleStopping);
-
     return modal;
   }
 
@@ -507,14 +422,18 @@ export class MultiMediaChoiceOption {
   addKeyboardHandlers() {
     this.content.addEventListener('keydown', event => {
       switch (event.key) {
-        case 'Enter':
+        case 'Enter': 
         case ' ': // The space key
           if (this.isDisabled()) {
             return;
           }
+          
+          if(!(document.activeElement.tagName === 'BUTTON')){
+            event.preventDefault(); // Disable scrolling
+            this.callbacks.onKeyboardSelect(this);
+          }
 
-          event.preventDefault(); // Disable scrolling
-          this.callbacks.onKeyboardSelect(this);
+          
           break;
 
         case 'ArrowLeft':
