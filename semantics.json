@@ -508,6 +508,13 @@
         "name": "missingAltText",
         "type": "text",
         "default": "Alt text missing"
+      },
+      {
+        "label": "Close modal button label",
+        "importance": "low",
+        "name": "closeModalText",
+        "type": "text",
+        "default": "Close modal"
       }
     ]
   }
