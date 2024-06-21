@@ -167,18 +167,18 @@
     position: absolute;
     background-color: crimson;
     z-index: 3;
-    top: 0;
+    bottom: 0;
     right: 0;
-    width: 2.7em;
-    height: 2.7em;
-    line-height: 2;
+    margin: 0.5em;
+    width: 3em;
+    height: 3em;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     cursor: pointer;
     color: #ffffff;
-    border: none;
+    border: 1px solid white;
     border-radius: 1.5em;
   }
 
@@ -219,7 +219,7 @@
   background-color: white;
   padding: 1em;
   border: white;
-  width: auto;
+  width: 80%;
   display: block;
   max-width: 80%;
   border-radius: 1%;
@@ -246,8 +246,9 @@
 }
 .h5p-multi-media-content-audio-wrapper {
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
+  margin: 0.5em;
   z-index: 3;
 }
 
@@ -265,7 +266,6 @@ button.h5p-multi-media-content-media-video-close{
   top: -0.8em;
   right: -0.8em;
   cursor: pointer;
-  /*color: #ffffff;*/
   border: none;
   padding: 5px;
   font-size: 31px;
