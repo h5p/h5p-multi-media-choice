@@ -21,7 +21,6 @@ export default class MultiMediaChoiceContent {
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
     this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
     this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
-
     this.numberOfCorrectOptions = params.options
       ? params.options.filter(option => option.correct).length
       : 0;
@@ -75,11 +74,13 @@ export default class MultiMediaChoiceContent {
             this.aspectRatio,
             this.isSingleAnswer,
             this.params.l10n.missingAltText,
+            this.params.l10n.closeModalText,
             {
               onClick: () => this.toggleSelected(index),
               onKeyboardSelect: () => this.toggleSelected(index),
               onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
-              triggerResize: this.callbacks.triggerResize
+              triggerResize: this.callbacks.triggerResize,
+              pauseAllMedia: () => this.pauseAllMedia(index),
             }
           )
       )
@@ -427,6 +428,7 @@ export default class MultiMediaChoiceContent {
             const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
             path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`; // TO DO: change this to default video img
             option.wrapper.querySelector('img').src = path;
+            option.wrapper.querySelector('img').classList.add('h5p-multi-media-choice-no-image');
            }
           break;
         case 'H5P.Audio':
@@ -434,6 +436,7 @@ export default class MultiMediaChoiceContent {
             const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
             path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`; // TO DO: change this to default Audio img
             option.wrapper.querySelector('img').src = path;
+            option.wrapper.querySelector('img').classList.add('h5p-multi-media-choice-no-image');
            }
           break;
       }
@@ -446,5 +449,19 @@ export default class MultiMediaChoiceContent {
    */
   getAnswerGiven() {
     return this.isAnyAnswerSelected() || this.isBlankCorrect();
+  }
+
+  /**
+   * Stop all other media to ensure only 1 is playing
+   * @param {int} mediaToPlay index of media to play
+   */
+  pauseAllMedia(mediaToPlay){
+    if(this.options){
+      this.options.forEach((option, index) => {
+        if(index != mediaToPlay){
+          option.pauseMedia();
+        }
+      });
+    }
   }
 }
