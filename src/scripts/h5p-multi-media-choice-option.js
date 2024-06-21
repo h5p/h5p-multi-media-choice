@@ -1,5 +1,4 @@
 import { htmlDecode } from "./h5p-multi-media-choice-util";
-const $ = H5P.jQuery;
 
 /** Class representing a multi media option */
 export class MultiMediaChoiceOption {
@@ -12,23 +11,22 @@ export class MultiMediaChoiceOption {
    * @param {boolean} assetsFilePath //TODO: what is this?
    * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(frame, option, contentId, aspectRatio, singleAnswer, missingAltText, callbacks) {
+  constructor(frame, option, contentId, aspectRatio, singleAnswer, missingAltText, closeModalText, callbacks) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.singleAnswer = singleAnswer;
     this.missingAltText = missingAltText;
+    this.closeModalText = closeModalText;
     this.frame = frame;
     this.option = option;
     this.media = option.media;
     this.correct = option.correct;
-
-    this.self = this
-
     this.callbacks = callbacks || {};
     this.callbacks.onClick = this.callbacks.onClick || (() => {});
     this.callbacks.onKeyboardSelect = this.callbacks.onKeyboardSelect || (() => {});
     this.callbacks.onKeyboardArrowKey = this.callbacks.onKeyboardArrowKey || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
+    this.callbacks.pauseAllMedia = this.callbacks.pauseAllMedia || (() => {});
 
     this.content = document.createElement('li');
     this.content.classList.add('h5p-multi-media-choice-list-item');
@@ -114,8 +112,7 @@ export class MultiMediaChoiceOption {
       videoButton.addEventListener('click', (event) => {
         const lastFocus = document.activeElement;
         const modal = this.createVideoPlayer(lastFocus);
-        this.frame.appendChild(modal);
-        modal.style.display = 'flex';
+
         modal.setAttribute('tabindex', '0');
         modal.focus()
         event.stopPropagation()
@@ -125,17 +122,20 @@ export class MultiMediaChoiceOption {
   }
 
   /**
-   * Builds a audio player button
-   * @returns {HTMLElement} div containing an audio player button
+   * Builds an option for audio
+   * @returns {HTMLElement} image with an audio button on top
    */
   buildAudio(){
     let newDiv = H5P.jQuery('<div>', {
       class:'h5p-multi-media-content-audio-wrapper'
     });
     H5P.jQuery(this.wrapper).append(newDiv);
-    const instance = H5P.newRunnable(this.media, this.contentId, newDiv, false);
 
-    console.log(instance)
+    //Only allow minimalistic playerMode
+    this.media.params.playerMode = "minimalistic";
+    this.instance = H5P.newRunnable(this.media, this.contentId, newDiv, false);
+    this.instance.disableButtonClickEventPropagation();
+    console.log(this.instance)
   }
 
 
@@ -166,6 +166,7 @@ export class MultiMediaChoiceOption {
         }
         break;
     }
+
     const image = document.createElement('img');
     image.setAttribute('src', path);
     this.content.setAttribute('aria-label', htmlDecode(alt));
@@ -197,38 +198,42 @@ export class MultiMediaChoiceOption {
     closeButton.classList.add('h5p-multi-media-content-media-video-close');
     cross.classList.add('icon-cross');
     cross.textContent = 'X';
-    closeButton.id = 'test';
+    modal.setAttribute('aria-modal', 'true');
+    closeButton.setAttribute('aria-label', this.closeModalText);
+
     modal.appendChild(modalContainer);
     modalContainer.appendChild(modalContent);
     modalContent.appendChild(closeButton);
     closeButton.appendChild(cross);
+    this.frame.appendChild(modal);
+    modal.style.display = 'flex';
 
-    // Never fit to wrapper 
-    if (!this.media.params.visuals) {
-      this.media.params.visuals = {};
-    }
-    this.media.params.visuals.fit = false;
+    this.media.params.visuals.poster = null;
     let newDiv = H5P.jQuery('<div></div>');
     H5P.jQuery(modalContent).append(newDiv);
 
-      
-    const instance = H5P.newRunnable(this.media, this.contentId, newDiv, false);   
-    modal.style.display = 'none';
-
-    /*instance.on('loaded', function(){
-      instance.trigger('resize');
-    })*/
-
+    if(!this.instance){
+      this.instance = H5P.newRunnable(this.media, this.contentId, newDiv, false);   
+    }
+    else{
+      this.instance.attach(newDiv)
+    }
+    
+    this.instance.trigger('resize')
+    this.callbacks.pauseAllMedia();
+  
     let closeModal = function(){
       modal.remove();
       window.onkeydown = null;
       window.onclick = null;
       lastFocus.focus();
-    }
+    };
 
-    const focusableElements = modal.querySelectorAll('video:not([disabled]), button:not([disabled])')
+    //Add elements that should be tabbable is in this list
+    const focusableElements = modal.querySelectorAll('.h5p-video,  button:not([disabled])');
     const firstFocusable = focusableElements[0];
     const lastFocusable = focusableElements[focusableElements.length - 1];
+    const instance = this.instance;
 
     window.onkeydown = function(event){
       console.log(event.key)
@@ -236,13 +241,19 @@ export class MultiMediaChoiceOption {
         closeModal();
       }
       if(event.key === 'm'){
+        console.log(instance)
+
         if(instance.isMuted()){
           instance.unMute();
         }else{
-          instance.mute()
+          instance.mute();
         }
       }
       if (event.key === 'Tab' || event.keyCode === 9){ // 9 == TAB 
+        // make choice options unavailable from tabs
+        if(document.activeElement != firstFocusable && document.activeElement != lastFocusable){
+          firstFocusable.focus()
+        }
         if ( event.shiftKey ) /* shift + tab */ {
           if (document.activeElement === firstFocusable) {
             lastFocusable.focus();
@@ -258,7 +269,7 @@ export class MultiMediaChoiceOption {
     }
 
     window.onclick = function(event){
-      if(event.target == modal || event.target == closeButton || event.target == modalContainer || event.target == cross ){
+      if(event.target == modal || event.target == closeButton || event.target == modalContainer || event.target == cross){
         closeModal();
       } 
     }
@@ -432,6 +443,10 @@ export class MultiMediaChoiceOption {
             event.preventDefault(); // Disable scrolling
             this.callbacks.onKeyboardSelect(this);
           }
+          else{
+            
+            
+          }
 
           
           break;
@@ -461,5 +476,10 @@ export class MultiMediaChoiceOption {
           break;
       }
     });
+  }
+  pauseMedia(){
+    if(this.instance){
+      this.instance.pause();
+    }
   }
 }
