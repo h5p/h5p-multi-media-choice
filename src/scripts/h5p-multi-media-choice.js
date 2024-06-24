@@ -168,7 +168,7 @@ export default class MultiMediaChoice extends H5P.Question {
         this.content.showSelectedSolutions();
         this.content.showUnselectedSolutions();
         this.content.focusUnselectedSolution();
-      }
+      };
 
       // require input for solution behavior is not valid if the request is originated
       // from compound content type

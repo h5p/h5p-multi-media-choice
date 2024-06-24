@@ -26,7 +26,7 @@ export class MultiMediaChoiceOption {
     this.callbacks.onKeyboardSelect = this.callbacks.onKeyboardSelect || (() => {});
     this.callbacks.onKeyboardArrowKey = this.callbacks.onKeyboardArrowKey || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
-    this.callbacks.pauseAllMedia = this.callbacks.pauseAllMedia || (() => {});
+    this.callbacks.pauseAllOtherMedia = this.callbacks.pauseAllOtherMedia || (() => {});
 
     this.content = document.createElement('li');
     this.content.classList.add('h5p-multi-media-choice-list-item');
@@ -73,7 +73,7 @@ export class MultiMediaChoiceOption {
         break;
       case 'H5P.Audio':
         mediaWrapper.appendChild(this.buildImage(this.option));
-        this.buildAudio()
+        this.buildAudio();
         break;
     }
     return mediaWrapper;
@@ -96,26 +96,29 @@ export class MultiMediaChoiceOption {
    * Builds a video player button
    * @returns {HTMLElement} div containing a video player button
    */
-  buildVideo(){
+  buildVideo() {
     const videoButton = document.createElement('button');
     const videoIcon = document.createElement('i'); 
-    if(this.media.params.sources){
-      videoButton.classList.add('h5p-multi-media-content-media-button');
+    if (this.media.params.sources) {
       videoButton.classList.add('h5p-multi-media-content-media-button-video');
       videoIcon.classList.add('fa-play');
       videoButton.appendChild(videoIcon);
       videoButton.setAttribute('tabindex', '0');
 
-      videoButton.onclick = function (e){
-        e.stopPropagation();
+      if (!this.media?.params?.visuals?.poster?.path) {
+        videoButton.classList.add('h5p-multi-media-content-media-button-video-centered');
       }
+
+      videoButton.onclick = function (e) {
+        e.stopPropagation();
+      };
       videoButton.addEventListener('click', (event) => {
         const lastFocus = document.activeElement;
         const modal = this.createVideoPlayer(lastFocus);
 
         modal.setAttribute('tabindex', '0');
-        modal.focus()
-        event.stopPropagation()
+        modal.focus();
+        event.stopPropagation();
       });
     }
     return videoButton;
@@ -125,17 +128,20 @@ export class MultiMediaChoiceOption {
    * Builds an option for audio
    * @returns {HTMLElement} image with an audio button on top
    */
-  buildAudio(){
+  buildAudio() {
     let newDiv = H5P.jQuery('<div>', {
       class:'h5p-multi-media-content-audio-wrapper'
     });
     H5P.jQuery(this.wrapper).append(newDiv);
+    
+    if (!this.option.poster) {
+      newDiv.addClass('h5p-multi-media-content-media-button-audio-centered');
+    }
 
     //Only allow minimalistic playerMode
     this.media.params.playerMode = "minimalistic";
     this.instance = H5P.newRunnable(this.media, this.contentId, newDiv, false);
     this.instance.disableButtonClickEventPropagation();
-    console.log(this.instance)
   }
 
 
@@ -149,7 +155,7 @@ export class MultiMediaChoiceOption {
     const title = this.media.params.title ? this.media.params.title : '';
 
     let path = '';
-    switch(this.media?.library?.split(' ')[0]){
+    switch (this.media?.library?.split(' ')[0]) {
       case 'H5P.Image':
         if (this.media.params.file) { 
           path = H5P.getPath(this.media.params.file.path, this.contentId);
@@ -185,7 +191,7 @@ export class MultiMediaChoiceOption {
    *  Creates a modal containing a video player 
    *  
    */
-  createVideoPlayer(lastFocus){
+  createVideoPlayer(lastFocus) {
     const modal = document.createElement('div');
     const modalContainer = document.createElement('div');
     const modalContent = document.createElement('div');
@@ -194,7 +200,7 @@ export class MultiMediaChoiceOption {
 
     modal.classList.add('h5p-multi-media-content-media-video-modal');
     modalContainer.classList.add('h5p-multi-media-content-media-video-modal-container');
-    modalContent.classList.add('h5p-multi-media-content-media-video-modal-content')
+    modalContent.classList.add('h5p-multi-media-content-media-video-modal-content');
     closeButton.classList.add('h5p-multi-media-content-media-video-close');
     cross.classList.add('icon-cross');
     cross.textContent = 'X';
@@ -212,20 +218,26 @@ export class MultiMediaChoiceOption {
     let newDiv = H5P.jQuery('<div></div>');
     H5P.jQuery(modalContent).append(newDiv);
 
-    if(!this.instance){
-      this.instance = H5P.newRunnable(this.media, this.contentId, newDiv, false);   
+    if (!this.instance) {
+      this.instance = H5P.newRunnable(this.media, this.contentId, newDiv, true);   
     }
-    else{
-      this.instance.attach(newDiv)
+    else {
+      this.instance.attach(newDiv);
     }
-    
-    this.instance.trigger('resize')
-    this.callbacks.pauseAllMedia();
+    const instance = this.instance;
+    this.instance.trigger('resize');
+
+    window.onresize = function () {
+      instance.trigger('resize');
+    };
+
+    this.callbacks.pauseAllOtherMedia();
   
-    let closeModal = function(){
+    let closeModal = function () {
       modal.remove();
       window.onkeydown = null;
       window.onclick = null;
+      window.onresize = null;
       lastFocus.focus();
     };
 
@@ -233,46 +245,44 @@ export class MultiMediaChoiceOption {
     const focusableElements = modal.querySelectorAll('.h5p-video,  button:not([disabled])');
     const firstFocusable = focusableElements[0];
     const lastFocusable = focusableElements[focusableElements.length - 1];
-    const instance = this.instance;
 
-    window.onkeydown = function(event){
-      console.log(event.key)
-      if(event.key === 'Escape'){
+    window.onkeydown = function (event) {
+      if (event.key === 'Escape') {
         closeModal();
       }
-      if(event.key === 'm'){
-        console.log(instance)
-
-        if(instance.isMuted()){
+      if (event.key === 'm') {
+        if (instance.isMuted()) {
           instance.unMute();
-        }else{
+        }
+        else {
           instance.mute();
         }
       }
-      if (event.key === 'Tab' || event.keyCode === 9){ // 9 == TAB 
+      if (event.key === 'Tab' || event.keyCode === 9) { // 9 == TAB 
         // make choice options unavailable from tabs
-        if(document.activeElement != firstFocusable && document.activeElement != lastFocusable){
-          firstFocusable.focus()
+        if (document.activeElement != firstFocusable && document.activeElement != lastFocusable) {
+          firstFocusable.focus();
         }
         if ( event.shiftKey ) /* shift + tab */ {
           if (document.activeElement === firstFocusable) {
             lastFocusable.focus();
             event.preventDefault();
           }
-        } else /* tab */ {
+        }
+        else /* tab */ {
           if (document.activeElement === lastFocusable) {
             firstFocusable.focus();
             event.preventDefault();
           }
         }
       }
-    }
+    };
 
-    window.onclick = function(event){
-      if(event.target == modal || event.target == closeButton || event.target == modalContainer || event.target == cross){
+    window.onclick = function (event) {
+      if (event.target == modal || event.target == closeButton || event.target == modalContainer || event.target == cross) {
         closeModal();
       } 
-    }
+    };
     return modal;
   }
 
@@ -438,17 +448,11 @@ export class MultiMediaChoiceOption {
           if (this.isDisabled()) {
             return;
           }
-          
-          if(!(document.activeElement.tagName === 'BUTTON')){
+          //If enter/space is used on anything other than a button element
+          if (!(document.activeElement.tagName === 'BUTTON')) {
             event.preventDefault(); // Disable scrolling
             this.callbacks.onKeyboardSelect(this);
           }
-          else{
-            
-            
-          }
-
-          
           break;
 
         case 'ArrowLeft':
@@ -477,8 +481,11 @@ export class MultiMediaChoiceOption {
       }
     });
   }
-  pauseMedia(){
-    if(this.instance){
+  /**
+   * Pauses the audio/video
+   */
+  pauseMedia()  {
+    if  (this.instance) {
       this.instance.pause();
     }
   }

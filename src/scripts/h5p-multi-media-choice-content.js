@@ -80,7 +80,7 @@ export default class MultiMediaChoiceContent {
               onKeyboardSelect: () => this.toggleSelected(index),
               onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
               triggerResize: this.callbacks.triggerResize,
-              pauseAllMedia: () => this.pauseAllMedia(index),
+              pauseAllOtherMedia: () => this.pauseAllOtherMedia(index),
             }
           )
       )
@@ -415,21 +415,21 @@ export default class MultiMediaChoiceContent {
   setMultiMediaOptionsPlaceholder(assetsFilePath) {
     let path = '';
     this.options.forEach(option => {
-      switch(option?.media?.library?.split(' ')[0]){
+      switch (option?.media?.library?.split(' ')[0]) {
         case 'H5P.Image':
           if (!option.media.params.file) {
-          const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
-          path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`;
-          option.wrapper.querySelector('img').src = path;
-         }
-         break;
+            const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
+            path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`;
+            option.wrapper.querySelector('img').src = path;
+          }
+          break;
         case 'H5P.Video':
           if (!option.media.params.visuals.poster) {
             const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
             path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`; // TO DO: change this to default video img
             option.wrapper.querySelector('img').src = path;
             option.wrapper.querySelector('img').classList.add('h5p-multi-media-choice-no-image');
-           }
+          }
           break;
         case 'H5P.Audio':
           if (!option.option.poster) { 
@@ -437,7 +437,7 @@ export default class MultiMediaChoiceContent {
             path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`; // TO DO: change this to default Audio img
             option.wrapper.querySelector('img').src = path;
             option.wrapper.querySelector('img').classList.add('h5p-multi-media-choice-no-image');
-           }
+          }
           break;
       }
     });
@@ -455,10 +455,10 @@ export default class MultiMediaChoiceContent {
    * Stop all other media to ensure only 1 is playing
    * @param {int} mediaToPlay index of media to play
    */
-  pauseAllMedia(mediaToPlay){
-    if(this.options){
+  pauseAllOtherMedia(mediaToPlay) {
+    if (this.options) {
       this.options.forEach((option, index) => {
-        if(index != mediaToPlay){
+        if  (index != mediaToPlay)  {
           option.pauseMedia();
         }
       });

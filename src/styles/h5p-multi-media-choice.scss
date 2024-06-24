@@ -182,99 +182,110 @@
     border-radius: 1.5em;
   }
 
+  /* Modal for video player */
+  .h5p-multi-media-content-media-video-modal {
+    position: absolute;
+    background-color:  rgba(0,0,0,0.8);
+    top:0;
+    left: 0;
+    padding: 0;
+    border: 1px solid #888;
+    z-index: 50;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
 
-/* Modal for video player */
-.h5p-multi-media-content-media-video-modal {
-  position: absolute;
-  background-color:  rgba(0,0,0,0.8);
-  top:0;
-  left: 0;
-  padding: 0;
-  border: 1px solid #888;
-  z-index: 50;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-  animation-name: animatetop;
-  animation-duration: 0.4s;
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
+  .h5p-multi-media-content-media-video-modal-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    
+  }
 
-.h5p-multi-media-content-media-video-modal-container {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 100%;
-  
-}
+  .h5p-multi-media-content-media-video-modal-content {
+    position: relative;
+    background-color: white;
+    padding: 1em;
+    border: white;
+    width: 80%;
+    display: block;
+    max-width: 80%;
+    border-radius: 1%;
+    box-shadow: none;
+  }
 
+  .h5p-multi-media-choice-content {
+    position: relative;
+  }
 
-.h5p-multi-media-content-media-video-modal-content {
-  position: relative;
-  background-color: white;
-  padding: 1em;
-  border: white;
-  width: 80%;
-  display: block;
-  max-width: 80%;
-  border-radius: 1%;
-  box-shadow: none;
-}
+    /* modal Animation */
+  @keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+  }
 
-.h5p-multi-media-choice-content {
-  position: relative;
-}
+  .h5p-multi-media-content-media-video-player {
+    width: 100%;
+  }
 
+  .h5p-video{
+    max-width: 100%;
+  }
+  .h5p-multi-media-content-audio-wrapper {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0.5em;
+    z-index: 3;
+  }
 
-  /* modal Animation */
-@keyframes animatetop {
-  from {top: -300px; opacity: 0}
-  to {top: 0; opacity: 1}
-}
+  .h5p-multi-media-content-audio-wrapper .h5p-audio-minimal-button{
+    width: 3.2em;
+    height: 3.2em;
+  }
 
-.h5p-multi-media-content-media-video-player {
-  width: 100%;
-}
+  .h5p-audio-wrapper:hover {
+    cursor: pointer;
+  }
 
-.h5p-video{
-  max-width: 100%;
-}
-.h5p-multi-media-content-audio-wrapper {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 0.5em;
-  z-index: 3;
-}
+  button.h5p-multi-media-content-media-video-close{
+    background-color: #ffffff;
+    position: absolute;
+    top: -0.8em;
+    right: -0.8em;
+    cursor: pointer;
+    border: none;
+    padding: 5px;
+    font-size: 31px;
+    height: 1.8em;
+    width: 1.8em;
+    box-shadow: 0 2px 4px darkslategray;
+    z-index: 7;
+    border-radius: 50%;
+  }
 
-.h5p-multi-media-content-audio-wrapper .h5p-audio-minimal-button{
-  width: 3em;
-  height: 3em;
-}
+  .h5p-multi-media-content-media-button-video-centered{
+    top: 50%;
+    right: 50%;
+    margin-top: -1.5em;
+    margin-right: -1.5em;
+  }
 
-.h5p-audio-wrapper:hover {
-  cursor: pointer;
-}
-button.h5p-multi-media-content-media-video-close{
-  background-color: #ffffff;
-  position: absolute;
-  top: -0.8em;
-  right: -0.8em;
-  cursor: pointer;
-  border: none;
-  padding: 5px;
-  font-size: 31px;
-  height: 1.8em;
-  width: 1.8em;
-  box-shadow: 0 2px 4px darkslategray;
-  z-index: 7;
-  border-radius: 50%;
-}
-
+  .h5p-multi-media-content-media-button-audio-centered{
+    top: 50%;
+    right: 50%;
+    margin-top: -1.3em;
+    margin-right: -1.3em;
+  }
 }
 
