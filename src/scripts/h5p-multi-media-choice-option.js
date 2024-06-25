@@ -451,6 +451,7 @@ export class MultiMediaChoiceOption {
           if (this.isDisabled()) {
             return;
           }
+
           //If enter/space is used on anything other than a button element
           if (!(document.activeElement.tagName === 'BUTTON')) {
             event.preventDefault(); // Disable scrolling
