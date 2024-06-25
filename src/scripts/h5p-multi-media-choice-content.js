@@ -413,34 +413,42 @@ export default class MultiMediaChoiceContent {
    * @param {string} assetsFilePath
    */
   setMultiMediaOptionsPlaceholder(assetsFilePath) {
-    let path = '';
     this.options.forEach(option => {
       switch (option?.media?.library?.split(' ')[0]) {
         case 'H5P.Image':
           if (!option.media.params.file) {
-            const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
-            path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`;
-            option.wrapper.querySelector('img').src = path;
+            this.setPlaceholderImage(assetsFilePath, 'Image', option);
           }
           break;
         case 'H5P.Video':
           if (!option.media.params.visuals.poster) {
-            const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
-            path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`; // TO DO: change this to default video img
-            option.wrapper.querySelector('img').src = path;
-            option.wrapper.querySelector('img').classList.add('h5p-multi-media-choice-no-image');
+            this.setPlaceholderImage(assetsFilePath, 'Video', option);
           }
           break;
         case 'H5P.Audio':
           if (!option.option.poster) { 
-            const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
-            path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`; // TO DO: change this to default Audio img
-            option.wrapper.querySelector('img').src = path;
-            option.wrapper.querySelector('img').classList.add('h5p-multi-media-choice-no-image');
+            this.setPlaceholderImage(assetsFilePath, 'Audio', option);
           }
           break;
       }
     });
+  }
+
+  /**
+   * Set options default images
+   * @param {string} assetsFilePath 
+   * @param {string} mediaType 
+   * @param {object} option 
+   */
+  setPlaceholderImage(assetsFilePath, mediaType, option) {
+    const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
+    //const subPath =  ((mediaType === 'Image') ? '' : ((mediaType === 'Video') ? 'Video' : 'Audio'));
+    const subPath = ''; //uncomment line above when default images for audio/video is available
+    let path = `${assetsFilePath}/placeholder${subPath}${placeholderAspectRatio}.svg`; 
+    option.wrapper.querySelector('img').src = path;
+    if (mediaType === 'Video' || mediaType === 'Audio') {
+      option.wrapper.querySelector('img').classList.add('h5p-multi-media-choice-no-image');
+    }
   }
 
   /**
