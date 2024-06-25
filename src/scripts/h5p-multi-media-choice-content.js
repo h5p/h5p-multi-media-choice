@@ -21,6 +21,7 @@ export default class MultiMediaChoiceContent {
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
     this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
     this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
+
     this.numberOfCorrectOptions = params.options
       ? params.options.filter(option => option.correct).length
       : 0;

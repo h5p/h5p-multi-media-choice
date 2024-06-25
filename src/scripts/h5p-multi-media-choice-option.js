@@ -17,10 +17,12 @@ export class MultiMediaChoiceOption {
     this.singleAnswer = singleAnswer;
     this.missingAltText = missingAltText;
     this.closeModalText = closeModalText;
+
     this.frame = frame;
     this.option = option;
     this.media = option.media;
     this.correct = option.correct;
+
     this.callbacks = callbacks || {};
     this.callbacks.onClick = this.callbacks.onClick || (() => {});
     this.callbacks.onKeyboardSelect = this.callbacks.onKeyboardSelect || (() => {});
@@ -46,7 +48,7 @@ export class MultiMediaChoiceOption {
 
     const mediaContent = this.createMediaContent();
     this.wrapper.appendChild(mediaContent);
-    
+
     this.addKeyboardHandlers();
   }
 
@@ -184,6 +186,7 @@ export class MultiMediaChoiceOption {
     if (this.aspectRatio !== 'auto') {
       image.classList.add('h5p-multi-media-choice-media-specific-ratio');
     }
+
     return image;
   }
 
@@ -443,7 +446,7 @@ export class MultiMediaChoiceOption {
   addKeyboardHandlers() {
     this.content.addEventListener('keydown', event => {
       switch (event.key) {
-        case 'Enter': 
+        case 'Enter':
         case ' ': // The space key
           if (this.isDisabled()) {
             return;
