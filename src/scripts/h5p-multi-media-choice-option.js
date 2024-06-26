@@ -100,10 +100,10 @@ export class MultiMediaChoiceOption {
    */
   buildVideo() {
     const videoButton = document.createElement('button');
-    const videoIcon = document.createElement('i'); 
+    const videoIcon = document.createElement('div'); 
     if (this.media.params.sources) {
-      videoButton.classList.add('h5p-multi-media-content-media-button-video');
-      videoIcon.classList.add('fa-play');
+      videoButton.classList.add('h5p-multi-media-video-button');
+      videoIcon.classList.add('play-icon');
       videoButton.appendChild(videoIcon);
       videoButton.setAttribute('tabindex', '0');
 

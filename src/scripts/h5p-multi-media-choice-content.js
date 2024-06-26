@@ -443,13 +443,9 @@ export default class MultiMediaChoiceContent {
    */
   setPlaceholderImage(assetsFilePath, mediaType, option) {
     const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
-    //const subPath =  ((mediaType === 'Image') ? '' : ((mediaType === 'Video') ? 'Video' : 'Audio'));
-    const subPath = ''; //uncomment line above when default images for audio/video is available
+    const subPath = '';
     let path = `${assetsFilePath}/placeholder${subPath}${placeholderAspectRatio}.svg`; 
     option.wrapper.querySelector('img').src = path;
-    if (mediaType === 'Video' || mediaType === 'Audio') {
-      option.wrapper.querySelector('img').classList.add('h5p-multi-media-choice-no-image');
-    }
   }
 
   /**
