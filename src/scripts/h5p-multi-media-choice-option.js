@@ -71,7 +71,7 @@ export class MultiMediaChoiceOption {
         break;
       case 'H5P.Video':
         mediaWrapper.appendChild(this.buildImage(this.option));
-        mediaWrapper.appendChild(this.buildVideo(this.option));
+        this.wrapper.appendChild(this.buildVideo(this.option));
         break;
       case 'H5P.Audio':
         mediaWrapper.appendChild(this.buildImage(this.option));
@@ -108,7 +108,7 @@ export class MultiMediaChoiceOption {
       videoButton.setAttribute('tabindex', '0');
 
       if (!this.media?.params?.visuals?.poster?.path) {
-        videoButton.classList.add('h5p-multi-media-content-media-button-video-centered');
+        videoButton.classList.add('h5p-multi-media-content-media-button-centered');
       }
 
       videoButton.onclick = function (e) {
@@ -137,7 +137,7 @@ export class MultiMediaChoiceOption {
     H5P.jQuery(this.wrapper).append(newDiv);
     
     if (!this.option.poster) {
-      newDiv.addClass('h5p-multi-media-content-media-button-audio-centered');
+      newDiv.addClass('h5p-multi-media-content-media-button-centered');
     }
 
     //Only allow minimalistic playerMode
@@ -191,22 +191,21 @@ export class MultiMediaChoiceOption {
   }
 
   /**
-   *  Creates a modal containing a video player 
-   *  
+   *  Creates a modal containing a video player
+   *  @param {HTMLElement} lastFocus element that had focus before modal opened
    */
   createVideoPlayer(lastFocus) {
     const modal = document.createElement('div');
     const modalContainer = document.createElement('div');
     const modalContent = document.createElement('div');
     const closeButton = document.createElement('button');
-    const cross = document.createElement('span');
+    const cross = document.createElement('div');
 
-    modal.classList.add('h5p-multi-media-content-media-video-modal');
-    modalContainer.classList.add('h5p-multi-media-content-media-video-modal-container');
-    modalContent.classList.add('h5p-multi-media-content-media-video-modal-content');
-    closeButton.classList.add('h5p-multi-media-content-media-video-close');
+    modal.classList.add('h5p-multi-media-modal');
+    modalContainer.classList.add('modal-container');
+    modalContent.classList.add('modal-content');
+    closeButton.classList.add('modal-close-button');
     cross.classList.add('icon-cross');
-    cross.textContent = 'X';
     modal.setAttribute('aria-modal', 'true');
     closeButton.setAttribute('aria-label', this.closeModalText);
 
@@ -215,7 +214,6 @@ export class MultiMediaChoiceOption {
     modalContent.appendChild(closeButton);
     closeButton.appendChild(cross);
     this.frame.appendChild(modal);
-    modal.style.display = 'flex';
 
     this.media.params.visuals.poster = null;
     let newDiv = H5P.jQuery('<div></div>');
@@ -243,8 +241,13 @@ export class MultiMediaChoiceOption {
       window.onresize = null;
       lastFocus.focus();
     };
+    
+    let state = '';
+    instance.on('stateChange', function (event) {
+      state = event.data;
+    });
 
-    //Add elements that should be tabbable is in this list
+    // Add elements that should be tabbable is in this list
     const focusableElements = modal.querySelectorAll('.h5p-video,  button:not([disabled])');
     const firstFocusable = focusableElements[0];
     const lastFocusable = focusableElements[focusableElements.length - 1];
@@ -259,6 +262,14 @@ export class MultiMediaChoiceOption {
         }
         else {
           instance.mute();
+        }
+      }
+      if (event.key === 'k') {
+        if (state === H5P.Video.PLAYING) {
+          instance.pause();
+        }
+        else {
+          instance.play();
         }
       }
       if (event.key === 'Tab' || event.keyCode === 9) { // 9 == TAB 
@@ -452,7 +463,6 @@ export class MultiMediaChoiceOption {
             return;
           }
 
-          //If enter/space is used on anything other than a button element
           if (!(document.activeElement.tagName === 'BUTTON')) {
             event.preventDefault(); // Disable scrolling
             this.callbacks.onKeyboardSelect(this);
@@ -485,6 +495,7 @@ export class MultiMediaChoiceOption {
       }
     });
   }
+
   /**
    * Pauses the audio/video
    */
