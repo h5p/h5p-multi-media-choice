@@ -77,8 +77,25 @@
           "optional": false,
           "description": "<h3> Image to display as the choice. The alternative text is used by the report.</h3>",
           "options": [
-            "H5P.Image 1.1"
+            "H5P.Image 1.1",
+            "H5P.Video 1.6",
+            "H5P.Audio 1.5"
           ]
+        },
+        {
+          "name": "poster",
+          "type": "image",
+          "label": "Poster image",
+          "importance": "low",
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "media",
+                "equals": "H5P.Audio 1.5"
+              }
+            ]
+          }
         },
         {
           "name": "correct",
@@ -491,6 +508,13 @@
         "name": "missingAltText",
         "type": "text",
         "default": "Alt text missing"
+      },
+      {
+        "label": "Close modal button label",
+        "importance": "low",
+        "name": "closeModalText",
+        "type": "text",
+        "default": "Close modal"
       }
     ]
   }
