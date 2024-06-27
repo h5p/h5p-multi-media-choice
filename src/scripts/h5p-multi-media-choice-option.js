@@ -226,14 +226,17 @@ export class MultiMediaChoiceOption {
       this.instance.attach(newDiv);
     }
     const instance = this.instance;
-    this.instance.trigger('resize');
 
     window.onresize = function () {
       instance.trigger('resize');
     };
 
+    instance.on('ready', function () {
+      instance.trigger('resize');
+    });
+
     this.callbacks.pauseAllOtherMedia();
-  
+
     let closeModal = function () {
       modal.remove();
       window.onkeydown = null;
@@ -241,11 +244,6 @@ export class MultiMediaChoiceOption {
       window.onresize = null;
       lastFocus.focus();
     };
-    
-    let state = '';
-    instance.on('stateChange', function (event) {
-      state = event.data;
-    });
 
     // Add elements that should be tabbable is in this list
     const focusableElements = modal.querySelectorAll('.h5p-video,  button:not([disabled])');
@@ -256,22 +254,7 @@ export class MultiMediaChoiceOption {
       if (event.key === 'Escape') {
         closeModal();
       }
-      if (event.key === 'm') {
-        if (instance.isMuted()) {
-          instance.unMute();
-        }
-        else {
-          instance.mute();
-        }
-      }
-      if (event.key === 'k') {
-        if (state === H5P.Video.PLAYING) {
-          instance.pause();
-        }
-        else {
-          instance.play();
-        }
-      }
+
       if (event.key === 'Tab' || event.keyCode === 9) { // 9 == TAB 
         // make choice options unavailable from tabs
         if (document.activeElement != firstFocusable && document.activeElement != lastFocusable) {
