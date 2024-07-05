@@ -423,12 +423,14 @@ export default class MultiMediaChoiceContent {
           break;
         case 'H5P.Video':
           if (!option.media.params.visuals.poster) {
-            this.setPlaceholderImage(assetsFilePath, 'Video', option);
+            const mediaType = (option.media.params.sources ? 'Other': 'Video');
+            this.setPlaceholderImage(assetsFilePath, mediaType, option);
           }
           break;
         case 'H5P.Audio':
           if (!option.option.poster) { 
-            this.setPlaceholderImage(assetsFilePath, 'Audio', option);
+            const mediaType = (option.media.params.files ? 'Other': 'Audio');
+            this.setPlaceholderImage(assetsFilePath, mediaType, option);
           }
           break;
       }
@@ -443,7 +445,7 @@ export default class MultiMediaChoiceContent {
    */
   setPlaceholderImage(assetsFilePath, mediaType, option) {
     const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
-    const subPath = '';
+    const subPath = mediaType == 'Image' ? '' : mediaType;
     let path = `${assetsFilePath}/placeholder${subPath}${placeholderAspectRatio}.svg`; 
     option.wrapper.querySelector('img').src = path;
   }

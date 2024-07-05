@@ -99,9 +99,10 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} div containing a video player button
    */
   buildVideo() {
-    const videoButton = document.createElement('button');
-    const videoIcon = document.createElement('div'); 
     if (this.media.params.sources) {
+      const videoButton = document.createElement('button');
+      const videoIcon = document.createElement('div'); 
+    
       videoButton.classList.add('h5p-multi-media-video-button');
       videoIcon.classList.add('play-icon');
       videoButton.appendChild(videoIcon);
@@ -122,8 +123,10 @@ export class MultiMediaChoiceOption {
         modal.focus();
         event.stopPropagation();
       });
+      
+      return videoButton;
     }
-    return videoButton;
+    return document.createElement('div');
   }
 
   /**
@@ -131,19 +134,21 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} image with an audio button on top
    */
   buildAudio() {
-    let newDiv = H5P.jQuery('<div>', {
-      class:'h5p-multi-media-content-audio-wrapper'
-    });
-    H5P.jQuery(this.wrapper).append(newDiv);
-    
-    if (!this.option.poster) {
-      newDiv.addClass('h5p-multi-media-content-media-button-centered');
-    }
+    if (this.media.params.files) {
+      let newDiv = H5P.jQuery('<div>', {
+        class:'h5p-multi-media-content-audio-wrapper'
+      });
+      H5P.jQuery(this.wrapper).append(newDiv);
+      
+      if (!this.option.poster) {
+        newDiv.addClass('h5p-multi-media-content-media-button-centered');
+      }
 
-    //Only allow minimalistic playerMode
-    this.media.params.playerMode = "minimalistic";
-    this.instance = H5P.newRunnable(this.media, this.contentId, newDiv, false);
-    this.instance.disableButtonClickEventPropagation();
+      //Only allow minimalistic playerMode
+      this.media.params.playerMode = "minimalistic";
+      this.instance = H5P.newRunnable(this.media, this.contentId, newDiv, false);
+      this.instance.disableButtonClickEventPropagation();
+    }
   }
 
 
