@@ -236,10 +236,11 @@ export class MultiMediaChoiceOption {
     }
     const instance = this.instance;
     let frame = this.frame;
-    let frameHeight = frame.offsetHeight;
-
+    // Resize frame if content of modal grows bigger than frame
+    let resizeFrame = (modalContent) => this.resizeWindow(modalContent);
     window.onresize = function () {
       instance.trigger('resize');
+      resizeFrame(modalContent);
     };
 
     instance.on('ready', function () {
@@ -247,7 +248,7 @@ export class MultiMediaChoiceOption {
     });
 
     this.callbacks.pauseAllOtherMedia();
-    this.callbacks.triggerResize();
+    let resize = () => this.callbacks.triggerResize();
 
     let closeModal = function () {
       modal.remove();
@@ -255,7 +256,8 @@ export class MultiMediaChoiceOption {
       window.onclick = null;
       window.onresize = null;
       lastFocus.focus();
-      frame.style.height = frameHeight + 'px';
+      frame.style.minHeight = '0';
+      resize();
     };
 
     // Add elements that should be tabbable is in this list
@@ -293,6 +295,7 @@ export class MultiMediaChoiceOption {
         closeModal();
       } 
     };
+    resize();
     this.resizeWindow(modalContent);
     return modal;
   }
@@ -301,8 +304,8 @@ export class MultiMediaChoiceOption {
    * Resizes window if it is too small for modal
    */
   resizeWindow(modalContent) {
-    if (this.frame.offsetHeight < modalContent.offsetHeight) {
-      this.frame.style.height = modalContent.offsetHeight + 150 + 'px';
+    if (this.frame.offsetHeight - 50 < modalContent.offsetHeight) {
+      this.frame.style.minHeight = modalContent.offsetHeight + 150 + 'px';
     }
   }
 
