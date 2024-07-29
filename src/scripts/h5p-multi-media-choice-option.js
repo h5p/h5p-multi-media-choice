@@ -4,10 +4,13 @@ import { htmlDecode } from "./h5p-multi-media-choice-util";
 export class MultiMediaChoiceOption {
   /**
    * @constructor
+   * @param {HTMLElement} frame Frame where video modal will spawn
    * @param {object} option Option object from the editor
    * @param {number} contentId Content's id
    * @param {string} aspectRatio Aspect ratio used if all options should conform to the same size
    * @param {boolean} singleAnswer true for radio buttons, false for checkboxes
+   * @param {string} missingAltText translatable string for missing alt text
+   * @param {string} closeModalText translatable string for closing modal text
    * @param {boolean} assetsFilePath //TODO: what is this?
    * @param {object} [callbacks = {}] Callbacks.
    */
@@ -229,8 +232,11 @@ export class MultiMediaChoiceOption {
     }
     else {
       this.instance.attach(newDiv);
+      this.instance.trigger('resize');
     }
     const instance = this.instance;
+    let frame = this.frame;
+    let frameHeight = frame.offsetHeight;
 
     window.onresize = function () {
       instance.trigger('resize');
@@ -241,6 +247,7 @@ export class MultiMediaChoiceOption {
     });
 
     this.callbacks.pauseAllOtherMedia();
+    this.callbacks.triggerResize();
 
     let closeModal = function () {
       modal.remove();
@@ -248,6 +255,7 @@ export class MultiMediaChoiceOption {
       window.onclick = null;
       window.onresize = null;
       lastFocus.focus();
+      frame.style.height = frameHeight + 'px';
     };
 
     // Add elements that should be tabbable is in this list
@@ -285,7 +293,17 @@ export class MultiMediaChoiceOption {
         closeModal();
       } 
     };
+    this.resizeWindow(modalContent);
     return modal;
+  }
+
+  /**
+   * Resizes window if it is too small for modal
+   */
+  resizeWindow(modalContent) {
+    if (this.frame.offsetHeight < modalContent.offsetHeight) {
+      this.frame.style.height = modalContent.offsetHeight + 150 + 'px';
+    }
   }
 
   /**
