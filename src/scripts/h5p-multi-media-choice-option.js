@@ -4,19 +4,25 @@ import { htmlDecode } from "./h5p-multi-media-choice-util";
 export class MultiMediaChoiceOption {
   /**
    * @constructor
+   * @param {HTMLElement} frame Frame where video modal will spawn
    * @param {object} option Option object from the editor
    * @param {number} contentId Content's id
    * @param {string} aspectRatio Aspect ratio used if all options should conform to the same size
    * @param {boolean} singleAnswer true for radio buttons, false for checkboxes
+   * @param {string} missingAltText translatable string for missing alt text
+   * @param {string} closeModalText translatable string for closing modal text
    * @param {boolean} assetsFilePath //TODO: what is this?
    * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(option, contentId, aspectRatio, singleAnswer, missingAltText, callbacks) {
+  constructor(frame, option, contentId, aspectRatio, singleAnswer, missingAltText, closeModalText, callbacks) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.singleAnswer = singleAnswer;
     this.missingAltText = missingAltText;
+    this.closeModalText = closeModalText;
 
+    this.frame = frame;
+    this.option = option;
     this.media = option.media;
     this.correct = option.correct;
 
@@ -25,6 +31,7 @@ export class MultiMediaChoiceOption {
     this.callbacks.onKeyboardSelect = this.callbacks.onKeyboardSelect || (() => {});
     this.callbacks.onKeyboardArrowKey = this.callbacks.onKeyboardArrowKey || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
+    this.callbacks.pauseAllOtherMedia = this.callbacks.pauseAllOtherMedia || (() => {});
 
     this.content = document.createElement('li');
     this.content.classList.add('h5p-multi-media-choice-list-item');
@@ -61,11 +68,20 @@ export class MultiMediaChoiceOption {
       mediaWrapper.classList.add('h5p-multi-media-choice-media-wrapper-specific-ratio');
       mediaWrapper.classList.add(`h5p-multi-media-choice-media-wrapper-${this.aspectRatio}`);
     }
-    switch (this.media.library.split(' ')[0]) {
+    switch (this.media?.library?.split(' ')[0]) {
       case 'H5P.Image':
         mediaWrapper.appendChild(this.buildImage(this.option));
-        return mediaWrapper;
+        break;
+      case 'H5P.Video':
+        mediaWrapper.appendChild(this.buildImage(this.option));
+        this.wrapper.appendChild(this.buildVideo(this.option));
+        break;
+      case 'H5P.Audio':
+        mediaWrapper.appendChild(this.buildImage(this.option));
+        this.buildAudio();
+        break;
     }
+    return mediaWrapper;
   }
 
   /**
@@ -82,6 +98,65 @@ export class MultiMediaChoiceOption {
   }
 
   /**
+   * Builds a video player button
+   * @returns {HTMLElement} div containing a video player button
+   */
+  buildVideo() {
+    if (this.media.params.sources) {
+      const videoButton = document.createElement('button');
+      const videoIcon = document.createElement('div'); 
+    
+      videoButton.classList.add('h5p-multi-media-video-button');
+      videoIcon.classList.add('play-icon');
+      videoButton.appendChild(videoIcon);
+      videoButton.setAttribute('tabindex', '0');
+
+      if (!this.media?.params?.visuals?.poster?.path) {
+        videoButton.classList.add('h5p-multi-media-content-media-button-centered');
+      }
+
+      videoButton.onclick = function (e) {
+        e.stopPropagation();
+      };
+      videoButton.addEventListener('click', (event) => {
+        const lastFocus = document.activeElement;
+        const modal = this.createVideoPlayer(lastFocus);
+
+        modal.setAttribute('tabindex', '0');
+        modal.focus();
+        event.stopPropagation();
+      });
+      
+      return videoButton;
+    }
+    return document.createElement('div');
+  }
+
+  /**
+   * Builds an option for audio
+   * @returns {HTMLElement} image with an audio button on top
+   */
+  buildAudio() {
+    if (this.media.params.files) {
+      let newDiv = H5P.jQuery('<div>', {
+        class:'h5p-multi-media-content-audio-wrapper'
+      });
+      H5P.jQuery(this.wrapper).append(newDiv);
+      
+      if (!this.option.poster) {
+        newDiv.addClass('h5p-multi-media-content-media-button-centered');
+      }
+
+      //Only allow minimalistic playerMode
+      this.media.params.playerMode = "minimalistic";
+      this.instance = H5P.newRunnable(this.media, this.contentId, newDiv, false);
+      this.instance.disableButtonClickEventPropagation();
+    }
+  }
+
+
+
+  /**
    * Builds an image from from media
    * @returns {HTMLElement} Image tag.
    */
@@ -90,8 +165,22 @@ export class MultiMediaChoiceOption {
     const title = this.media.params.title ? this.media.params.title : '';
 
     let path = '';
-    if (this.media.params.file) { 
-      path = H5P.getPath(this.media.params.file.path, this.contentId);
+    switch (this.media?.library?.split(' ')[0]) {
+      case 'H5P.Image':
+        if (this.media.params.file) { 
+          path = H5P.getPath(this.media.params.file.path, this.contentId);
+        }
+        break;
+      case 'H5P.Video':
+        if (this.media.params.visuals.poster) { 
+          path = H5P.getPath(this.media.params.visuals.poster.path, this.contentId);
+        }
+        break;
+      case 'H5P.Audio':
+        if (this.option.poster) {
+          path = H5P.getPath(this.option.poster.path, this.contentId);
+        }
+        break;
     }
 
     const image = document.createElement('img');
@@ -107,6 +196,117 @@ export class MultiMediaChoiceOption {
     }
 
     return image;
+  }
+
+  /**
+   *  Creates a modal containing a video player
+   *  @param {HTMLElement} lastFocus element that had focus before modal opened
+   */
+  createVideoPlayer(lastFocus) {
+    const modal = document.createElement('div');
+    const modalContainer = document.createElement('div');
+    const modalContent = document.createElement('div');
+    const closeButton = document.createElement('button');
+    const cross = document.createElement('div');
+
+    modal.classList.add('h5p-multi-media-modal');
+    modalContainer.classList.add('modal-container');
+    modalContent.classList.add('modal-content');
+    closeButton.classList.add('modal-close-button');
+    cross.classList.add('icon-cross');
+    modal.setAttribute('aria-modal', 'true');
+    closeButton.setAttribute('aria-label', this.closeModalText);
+
+    modal.appendChild(modalContainer);
+    modalContainer.appendChild(modalContent);
+    modalContent.appendChild(closeButton);
+    closeButton.appendChild(cross);
+    this.frame.appendChild(modal);
+
+    this.media.params.visuals.poster = null;
+    let newDiv = H5P.jQuery('<div></div>');
+    H5P.jQuery(modalContent).append(newDiv);
+
+    if (!this.instance) {
+      this.instance = H5P.newRunnable(this.media, this.contentId, newDiv, true);   
+    }
+    else {
+      this.instance.attach(newDiv);
+      this.instance.trigger('resize');
+    }
+    const instance = this.instance;
+    let frame = this.frame;
+    // Resize frame if content of modal grows bigger than frame
+    let resizeFrame = (modalContent) => this.resizeWindow(modalContent);
+    window.onresize = function () {
+      instance.trigger('resize');
+      resizeFrame(modalContent);
+    };
+
+    instance.on('ready', function () {
+      instance.trigger('resize');
+    });
+
+    this.callbacks.pauseAllOtherMedia();
+    let resize = () => this.callbacks.triggerResize();
+
+    let closeModal = function () {
+      modal.remove();
+      window.onkeydown = null;
+      window.onclick = null;
+      window.onresize = null;
+      lastFocus.focus();
+      frame.style.minHeight = '0';
+      resize();
+    };
+
+    // Add elements that should be tabbable is in this list
+    const focusableElements = modal.querySelectorAll('.h5p-video,  button:not([disabled])');
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
+
+    window.onkeydown = function (event) {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+
+      if (event.key === 'Tab' || event.keyCode === 9) { // 9 == TAB 
+        // make choice options unavailable from tabs
+        if (document.activeElement != firstFocusable && document.activeElement != lastFocusable) {
+          firstFocusable.focus();
+        }
+        if ( event.shiftKey ) /* shift + tab */ {
+          if (document.activeElement === firstFocusable) {
+            lastFocusable.focus();
+            event.preventDefault();
+          }
+        }
+        else /* tab */ {
+          if (document.activeElement === lastFocusable) {
+            firstFocusable.focus();
+            event.preventDefault();
+          }
+        }
+      }
+    };
+
+    window.onclick = function (event) {
+      if (event.target == modal || event.target == closeButton || event.target == modalContainer || event.target == cross) {
+        closeModal();
+      } 
+    };
+    resize();
+    this.resizeWindow(modalContent);
+    return modal;
+  }
+
+  /**
+   * Resizes window if it is too small for modal
+   */
+  resizeWindow(modalContent) {
+    if (this.frame.offsetHeight - 50 < modalContent.offsetHeight) {
+      this.frame.style.minHeight = modalContent.offsetHeight + 150 + 'px';
+    }
   }
 
   /**
@@ -272,8 +472,10 @@ export class MultiMediaChoiceOption {
             return;
           }
 
-          event.preventDefault(); // Disable scrolling
-          this.callbacks.onKeyboardSelect(this);
+          if (!(document.activeElement.tagName === 'BUTTON')) {
+            event.preventDefault(); // Disable scrolling
+            this.callbacks.onKeyboardSelect(this);
+          }
           break;
 
         case 'ArrowLeft':
@@ -301,5 +503,14 @@ export class MultiMediaChoiceOption {
           break;
       }
     });
+  }
+
+  /**
+   * Pauses the audio/video
+   */
+  pauseMedia()  {
+    if  (this.instance) {
+      this.instance.pause();
+    }
   }
 }

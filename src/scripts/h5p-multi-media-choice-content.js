@@ -69,16 +69,19 @@ export default class MultiMediaChoiceContent {
       ? this.params.options.map(
         (option, index) =>
           new MultiMediaChoiceOption(
+            this.content,
             option,
             contentId,
             this.aspectRatio,
             this.isSingleAnswer,
             this.params.l10n.missingAltText,
+            this.params.l10n.closeModalText,
             {
               onClick: () => this.toggleSelected(index),
               onKeyboardSelect: () => this.toggleSelected(index),
               onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
-              triggerResize: this.callbacks.triggerResize
+              triggerResize: this.callbacks.triggerResize,
+              pauseAllOtherMedia: () => this.pauseAllOtherMedia(index),
             }
           )
       )
@@ -411,14 +414,40 @@ export default class MultiMediaChoiceContent {
    * @param {string} assetsFilePath
    */
   setMultiMediaOptionsPlaceholder(assetsFilePath) {
-    let path = '';
     this.options.forEach(option => {
-      if (!option.media.params.file) {
-        const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
-        path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`;
-        option.wrapper.querySelector('img').src = path;
+      switch (option?.media?.library?.split(' ')[0]) {
+        case 'H5P.Image':
+          if (!option.media.params.file) {
+            this.setPlaceholderImage(assetsFilePath, 'Image', option);
+          }
+          break;
+        case 'H5P.Video':
+          if (!option.media.params.visuals.poster) {
+            const mediaType = (option.media.params.sources ? 'Other': 'Video');
+            this.setPlaceholderImage(assetsFilePath, mediaType, option);
+          }
+          break;
+        case 'H5P.Audio':
+          if (!option.option.poster) { 
+            const mediaType = (option.media.params.files ? 'Other': 'Audio');
+            this.setPlaceholderImage(assetsFilePath, mediaType, option);
+          }
+          break;
       }
     });
+  }
+
+  /**
+   * Set options default images
+   * @param {string} assetsFilePath 
+   * @param {string} mediaType 
+   * @param {object} option 
+   */
+  setPlaceholderImage(assetsFilePath, mediaType, option) {
+    const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
+    const subPath = mediaType == 'Image' ? '' : mediaType;
+    let path = `${assetsFilePath}/placeholder${subPath}${placeholderAspectRatio}.svg`; 
+    option.wrapper.querySelector('img').src = path;
   }
 
   /**
@@ -427,5 +456,19 @@ export default class MultiMediaChoiceContent {
    */
   getAnswerGiven() {
     return this.isAnyAnswerSelected() || this.isBlankCorrect();
+  }
+
+  /**
+   * Stop all other media to ensure only 1 is playing
+   * @param {int} mediaToPlay index of media to play
+   */
+  pauseAllOtherMedia(mediaToPlay) {
+    if (this.options) {
+      this.options.forEach((option, index) => {
+        if  (index != mediaToPlay)  {
+          option.pauseMedia();
+        }
+      });
+    }
   }
 }
