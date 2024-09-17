@@ -8,6 +8,10 @@
   "author": "Joubel AS",
   "license": "MIT",
   "machineName": "H5P.MultiMediaChoice",
+  "coreApi": {
+    "majorVersion": 1,
+    "minorVersion": 27
+  },
   "embedTypes": [
     "iframe"
   ],
