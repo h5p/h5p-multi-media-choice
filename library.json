@@ -3,11 +3,15 @@
   "description": "Create an Image Choice",
   "majorVersion": 0,
   "minorVersion": 3,
-  "patchVersion": 17,
+  "patchVersion": 20,
   "runnable": 1,
   "author": "H5P Group AS",
   "license": "MIT",
   "machineName": "H5P.MultiMediaChoice",
+  "coreApi": {
+    "majorVersion": 1,
+    "minorVersion": 27
+  },
   "embedTypes": [
     "iframe"
   ],
