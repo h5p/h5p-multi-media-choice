@@ -159,7 +159,7 @@
         "label": "Enable \"Retry\" button",
         "type": "boolean",
         "importance": "low",
-        "default": "true",
+        "default": true,
         "optional": true
       },
       {
@@ -167,8 +167,8 @@
         "label": "Enable \"Show Solution\" button",
         "type": "boolean",
         "importance": "low",
-        "default": "true",
-        "optional": "true"
+        "default": true,
+        "optional": true
       },
       {
         "name": "confirmCheckDialog",
@@ -398,7 +398,7 @@
         "importance": "low",
         "name": "confirmCheck",
         "type": "group",
-        "common": "true",
+        "common": true,
         "fields": [
           {
             "label": "Header text",
