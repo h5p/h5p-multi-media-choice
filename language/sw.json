@@ -23,7 +23,7 @@
         "fields": [
           {
             "label": "Vyombo vya habari",
-            "description": "<h3> Picha ya kuonyesha kama ndiyo chaguo. Maandishi mbadala hutumiwa na ripoti.</h3>"
+            "description": "Media to display as a choice."
           },
           {
             "label": "Poster image"

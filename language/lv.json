@@ -23,7 +23,7 @@
         "fields": [
           {
             "label": "Multivide",
-            "description": "<h3> Attēls, kas jāparāda kā izvēle. Pārskatā tiek izmantots alternatīvais teksts.</h3>"
+            "description": "Media to display as a choice."
           },
           {
             "label": "Poster image"

@@ -23,7 +23,7 @@
         "fields": [
           {
             "label": "Medija",
-            "description": "<h3> Image to display as the choice. The alternative text is used by the report.</h3>"
+            "description": "Media to display as a choice."
           },
           {
             "label": "Poster image"

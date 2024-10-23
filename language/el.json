@@ -23,7 +23,7 @@
         "fields": [
           {
             "label": "Μέσα",
-            "description": "<h3> Εικόνα που θα εμφανίζεται ως επιλογή. Το εναλλακτικό κείμενο χρησιμοποιείται από την αναφορά.</h3>"
+            "description": "Media to display as a choice."
           },
           {
             "label": "Poster image"

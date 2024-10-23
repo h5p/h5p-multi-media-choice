@@ -23,7 +23,7 @@
         "fields": [
           {
             "label": "Медиа",
-            "description": "<h3> Сонголт болгон харуулах зураг. Альтернатив текстийг тайланд ашигладаг.</h3>"
+            "description": "Media to display as a choice."
           },
           {
             "label": "Poster image"

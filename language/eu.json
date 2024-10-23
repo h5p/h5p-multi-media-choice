@@ -23,7 +23,7 @@
         "fields": [
           {
             "label": "Multimedia",
-            "description": "<h3> Aukera gisa erakusteko irudia. Ordezko testua txostenerako erabiltzen da.</h3>"
+            "description": "Media to display as a choice."
           },
           {
             "label": "Poster image"
