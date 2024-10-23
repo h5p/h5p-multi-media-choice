@@ -26,6 +26,9 @@
             "description": "<h3>Slika za prikaz kot izbira možnega odgovora. Nadomestno besedilo se vključi v poročilo.</h3>"
           },
           {
+            "label": "Poster image"
+          },
+          {
             "label": "Pravilen odgovor"
           }
         ]
@@ -242,6 +245,10 @@
         {
           "label": "Besedilo, če za sliko manjka nadomestno besedilo",
           "default": "Nadomestno besedilo manjka"
+        },
+        {
+          "label": "Close modal button label",
+          "default": "Close modal"
         }
       ]
     }

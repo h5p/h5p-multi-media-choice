@@ -26,6 +26,9 @@
             "description": "<h3> 선택하도록 표시할 이미지. 대체 텍스트는 보고서에서 사용됩니다.</h3>"
           },
           {
+            "label": "Poster image"
+          },
+          {
             "label": "정답"
           }
         ]
@@ -242,6 +245,10 @@
         {
           "label": "이미지에 대한 대체 텍스트가 누락된 경우의 텍스트",
           "default": "대체 텍스트가 누락되었습니다."
+        },
+        {
+          "label": "Close modal button label",
+          "default": "Close modal"
         }
       ]
     }

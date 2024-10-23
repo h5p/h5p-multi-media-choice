@@ -1,6 +1,7 @@
 {
   "semantics": [
     {
+      "label": "Medios",
       "fields": [
         {
           "label": "Tipo",
@@ -9,8 +10,7 @@
         {
           "label": "Deshabilitar acercamiento de imagen"
         }
-      ],
-      "label": "Medios"
+      ]
     },
     {
       "label": "Pregunta"
@@ -24,6 +24,9 @@
           {
             "label": "Medios",
             "description": "<h3> Imagen a mostrar como opción. El texto alternativo se usa para el informe.</h3>"
+          },
+          {
+            "label": "Poster image"
           },
           {
             "label": "Correcto"
@@ -41,6 +44,7 @@
             }
           ],
           "label": "Definir retroalimentación personalizada para cualquier rango de puntuación",
+          "description": "Haz clic en el botón \"Añadir rango\" para añadir los rangos que necesites. Ejemplo: 0-20% Mala puntuación, 21-91% Puntuación Media, 91-100% ¡Puntuación Estupenda!",
           "entity": "rango",
           "field": {
             "fields": [
@@ -53,8 +57,7 @@
                 "placeholder": "Escribe tu retroalimentación"
               }
             ]
-          },
-          "description": "Haz clic en el botón \"Añadir rango\" para añadir los rangos que necesites. Ejemplo: 0-20% Mala puntuación, 21-91% Puntuación Media, 91-100% ¡Puntuación Estupenda!"
+          }
         }
       ]
     },
@@ -165,8 +168,8 @@
           "default": "Mostrar la solución. Se marcarán las opciones correctas."
         },
         {
-          "default": "Respuesta correcta",
-          "label": "Respuesta Correcta (no se muestra)"
+          "label": "Respuesta Correcta (no se muestra)",
+          "default": "Respuesta correcta"
         },
         {
           "label": "Respuesta Incorrecta (no mostrada)",
@@ -177,8 +180,8 @@
           "default": "Debería haberse marcado"
         },
         {
-          "default": "No debería haber sido marcada",
-          "label": "La opción no debería haberse marcado"
+          "label": "La opción no debería haberse marcado",
+          "default": "No debería haber sido marcada"
         },
         {
           "label": "Texto para mensaje \"Requiere respuesta\"",
@@ -205,8 +208,8 @@
               "default": "¿Has terminado?"
             },
             {
-              "default": "¿Seguro que quieres termina?",
-              "label": "Texto del cuerpo"
+              "label": "Texto del cuerpo",
+              "default": "¿Seguro que quieres termina?"
             },
             {
               "label": "Etiqueta botón Cancelar",
@@ -222,8 +225,8 @@
           "label": "Diálogo de confirmación para Intentar de nuevo",
           "fields": [
             {
-              "default": "¿Intentar de nuevo?",
-              "label": "Texto del encabezado"
+              "label": "Texto del encabezado",
+              "default": "¿Intentar de nuevo?"
             },
             {
               "label": "Texto del cuerpo",
@@ -242,6 +245,10 @@
         {
           "label": "Texto si falta el texto alternativo para una imagen",
           "default": "Falta el texto alternativo"
+        },
+        {
+          "label": "Close modal button label",
+          "default": "Close modal"
         }
       ]
     }

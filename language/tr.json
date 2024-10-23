@@ -26,6 +26,9 @@
             "description": "<h3> Seçim olarak görüntülenecek resim. Alternatif metin, rapor tarafından kullanılır.</h3>"
           },
           {
+            "label": "Poster image"
+          },
+          {
             "label": "Doğru"
           }
         ]
@@ -242,6 +245,10 @@
         {
           "label": "Bir resim için alternatif metin eksikse metin",
           "default": "Alternatif metin eksik"
+        },
+        {
+          "label": "Close modal button label",
+          "default": "Close modal"
         }
       ]
     }

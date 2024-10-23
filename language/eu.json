@@ -26,6 +26,9 @@
             "description": "<h3> Aukera gisa erakusteko irudia. Ordezko testua txostenerako erabiltzen da.</h3>"
           },
           {
+            "label": "Poster image"
+          },
+          {
             "label": "Zuzena"
           }
         ]
@@ -242,6 +245,10 @@
         {
           "label": "Testua irudiaren ordezko testua falta bada",
           "default": "Ordezko testua falta da"
+        },
+        {
+          "label": "Close modal button label",
+          "default": "Close modal"
         }
       ]
     }

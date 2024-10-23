@@ -26,6 +26,9 @@
             "description": "<h3>รูปภาพที่จะแสดงเป็นตัวเลือก ข้อความสำรองทางเลือกใช้ในรายงาน</h3>"
           },
           {
+            "label": "Poster image"
+          },
+          {
             "label": "ถูกต้อง"
           }
         ]
@@ -226,12 +229,12 @@
               "default": "Retry?"
             },
             {
-              "default": "Are you sure you wish to retry?",
-              "label": "Body text"
+              "label": "Body text",
+              "default": "Are you sure you wish to retry?"
             },
             {
-              "default": "Cancel",
-              "label": "Cancel button label"
+              "label": "Cancel button label",
+              "default": "Cancel"
             },
             {
               "label": "Confirm button label",
@@ -242,6 +245,10 @@
         {
           "label": "Text if alt text is missing for an image",
           "default": "Alt text missing"
+        },
+        {
+          "label": "Close modal button label",
+          "default": "Close modal"
         }
       ]
     }

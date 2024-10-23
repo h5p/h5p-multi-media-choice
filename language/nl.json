@@ -26,6 +26,9 @@
             "description": "<h3> Afbeelding dat getoond wordt als de keuze. De alternatieve tekst wordt gebruikt voor rapportage.</h3>"
           },
           {
+            "label": "Poster image"
+          },
+          {
             "label": "Juist"
           }
         ]
@@ -219,7 +222,7 @@
           ]
         },
         {
-          "label": "Bevestigingsdialoog voor \"Opnieuw\"",          
+          "label": "Bevestigingsdialoog voor \"Opnieuw\"",
           "fields": [
             {
               "label": "Koptekst",
@@ -242,6 +245,10 @@
         {
           "label": "Tekst als alternatieve tekst voor afbeelding ontbreekt",
           "default": "Alternatieve tekst ontbreekt"
+        },
+        {
+          "label": "Close modal button label",
+          "default": "Close modal"
         }
       ]
     }

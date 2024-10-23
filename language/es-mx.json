@@ -26,6 +26,9 @@
             "description": "<h3> Imagen a mostrar como la opción. El texto alternativo es usado por el reporte.</h3>"
           },
           {
+            "label": "Poster image"
+          },
+          {
             "label": "Correcto"
           }
         ]
@@ -242,6 +245,10 @@
         {
           "label": "Texto si faltara el texto alterno para una imagen",
           "default": "Falta el texto alterno"
+        },
+        {
+          "label": "Close modal button label",
+          "default": "Close modal"
         }
       ]
     }

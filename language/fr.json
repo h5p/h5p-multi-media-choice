@@ -26,6 +26,9 @@
             "description": "<h3> Image à afficher comme choix. Le texte alternatif est utilisé par le rapport.</h3>"
           },
           {
+            "label": "Poster image"
+          },
+          {
             "label": "Correcte"
           }
         ]
@@ -242,6 +245,10 @@
         {
           "label": "Texte si le texte alternatif est manquant pour une image",
           "default": "Texte Alt manquant"
+        },
+        {
+          "label": "Close modal button label",
+          "default": "Close modal"
         }
       ]
     }

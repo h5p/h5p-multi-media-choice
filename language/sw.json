@@ -26,6 +26,9 @@
             "description": "<h3> Picha ya kuonyesha kama ndiyo chaguo. Maandishi mbadala hutumiwa na ripoti.</h3>"
           },
           {
+            "label": "Poster image"
+          },
+          {
             "label": "Sahihi"
           }
         ]
@@ -242,6 +245,10 @@
         {
           "label": "Maandishi ikiwa maandishi mbadala hayapo kwa picha",
           "default": "Maandishi mbadala hayapo"
+        },
+        {
+          "label": "Close modal button label",
+          "default": "Close modal"
         }
       ]
     }

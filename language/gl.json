@@ -26,6 +26,9 @@
             "description": "<h3> Imaxe para mostrar como opción. O texto alternativo é usado polo informe.</h3>"
           },
           {
+            "label": "Poster image"
+          },
+          {
             "label": "Correcto"
           }
         ]
@@ -59,6 +62,8 @@
       ]
     },
     {
+      "label": "Configuración de comportamento",
+      "description": "Estas opcións permitiranche controlar o comportamento da tarefa.",
       "fields": [
         {
           "label": "Activar o botón \"Tentar de novo\""
@@ -116,6 +121,7 @@
           ]
         },
         {
+          "label": "Máximo de alternativas por fila",
           "description": "Establece o número máximo de alternativas por fila para garantir que as preguntas teñan a aparencia axeitada.",
           "options": [
             {
@@ -130,18 +136,16 @@
             {
               "label": "4"
             }
-          ],
-          "label": "Máximo de alternativas por fila"
+          ]
         },
         {
           "label": "Porcentaxe para aprobar",
           "description": "Esta opción non ten efecto a miúdo. É a porcentaxe da puntuación total requirida para obter 1 punto cando se activa a opción de obter 1 punto pola tarefa completa, e para obter result.success en sentenzas xAPI."
         }
-      ],
-      "label": "Configuración de comportamento",
-      "description": "Estas opcións permitiranche controlar o comportamento da tarefa."
+      ]
     },
     {
+      "label": "Interface de usuario",
       "fields": [
         {
           "label": "Texto para o botón \"Comprobar\"",
@@ -218,10 +222,11 @@
           ]
         },
         {
+          "label": "Diálogo de confirmación para tentar de novo",
           "fields": [
             {
-              "default": "Tentar de novo?",
-              "label": "Texto de cabeceira"
+              "label": "Texto de cabeceira",
+              "default": "Tentar de novo?"
             },
             {
               "label": "Texto do corpo",
@@ -235,15 +240,17 @@
               "label": "Etiqueta para o botón confirmar",
               "default": "Tentar de novo"
             }
-          ],
-          "label": "Diálogo de confirmación para tentar de novo"
+          ]
         },
         {
           "label": "Texto se falta o texto alternativo para unha imaxe",
           "default": "Falta o texto alternativo"
+        },
+        {
+          "label": "Close modal button label",
+          "default": "Close modal"
         }
-      ],
-      "label": "Interface de usuario"
+      ]
     }
   ]
 }

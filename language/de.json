@@ -26,6 +26,9 @@
             "description": "<h3> Bild, das zum Auswählen angezeigt wird. Der Alternativtext wird im Ergebnisbericht benutzt.</h3>"
           },
           {
+            "label": "Poster image"
+          },
+          {
             "label": "Richtig"
           }
         ]
@@ -242,6 +245,10 @@
         {
           "label": "Text, der benutzt wird, falls kein Alternativtext für ein Bild angegeben wird",
           "default": "Kein Alternativtext angegeben"
+        },
+        {
+          "label": "Close modal button label",
+          "default": "Close modal"
         }
       ]
     }

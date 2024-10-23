@@ -26,6 +26,9 @@
             "description": "<h3> Imagem a ser exibida como escolha. O texto alternativo é usado pelo relatório.</h3>"
           },
           {
+            "label": "Poster image"
+          },
+          {
             "label": "Correto"
           }
         ]
@@ -59,6 +62,8 @@
       ]
     },
     {
+      "label": "Configurações comportamentais",
+      "description": "Estas opções lhe permitirão controlar como a tarefa se comporta.",
       "fields": [
         {
           "label": "Ativar o botão \"Tentar Novamente\""
@@ -116,6 +121,8 @@
           ]
         },
         {
+          "label": "Alternativas máximas por linha",
+          "description": "Defina o número máximo de alternativas por linha para garantir que as questões pareçam corretas.",
           "options": [
             {
               "label": "1"
@@ -129,19 +136,16 @@
             {
               "label": "4"
             }
-          ],
-          "label": "Alternativas máximas por linha",
-          "description": "Defina o número máximo de alternativas por linha para garantir que as questões pareçam corretas."
+          ]
         },
         {
           "label": "Porcentagem para aprovação",
           "description": "Este cenário muitas vezes não terá qualquer efeito. Isto é a porcentagem da pontuação total necessária para obter 1 ponto quando um ponto para toda a tarefa é habilitado, e para obter resultado.sucesso nas declarações xAPI."
         }
-      ],
-      "label": "Configurações comportamentais",
-      "description": "Estas opções lhe permitirão controlar como a tarefa se comporta."
+      ]
     },
     {
+      "label": "Interface de usuário",
       "fields": [
         {
           "label": "Texto do botão \"Verificar\"",
@@ -156,8 +160,8 @@
           "default": "Verifique as respostas. As respostas serão marcadas como corretas, incorretas, ou sem resposta."
         },
         {
-          "default": "Mostrar solução",
-          "label": "Texto do botão \"Mostrar solução\""
+          "label": "Texto do botão \"Mostrar solução\"",
+          "default": "Mostrar solução"
         },
         {
           "label": "Descrição da tecnologia de assistência para o botão \"Mostrar solução\"",
@@ -188,8 +192,8 @@
           "default": "Tentar Novamente"
         },
         {
-          "default": "Tente realizar a tarefa novamente. Reinicialize todas as respostas e recomece.",
-          "label": "Descrição da tecnologia de assistência para o botão \"Tentar Novamente\""
+          "label": "Descrição da tecnologia de assistência para o botão \"Tentar Novamente\"",
+          "default": "Tente realizar a tarefa novamente. Reinicialize todas as respostas e recomece."
         },
         {
           "label": "Seu resultado",
@@ -197,6 +201,7 @@
           "default": "Você conseguiu :num de :pontos totais possíveis"
         },
         {
+          "label": "Verificar diálogo de confirmação",
           "fields": [
             {
               "label": "Texto do cabeçalho",
@@ -214,8 +219,7 @@
               "label": "Rótulo do botão Confirmar",
               "default": "Finalizar"
             }
-          ],
-          "label": "Verificar diálogo de confirmação"
+          ]
         },
         {
           "label": "Diálogo de confirmação de nova tentativa",
@@ -241,9 +245,12 @@
         {
           "label": "Texto utilizado se faltar texto alternativo para uma imagem",
           "default": "Texto alternativo ausente"
+        },
+        {
+          "label": "Close modal button label",
+          "default": "Close modal"
         }
-      ],
-      "label": "Interface de usuário"
+      ]
     }
   ]
 }
