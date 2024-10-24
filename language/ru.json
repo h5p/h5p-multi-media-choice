@@ -23,7 +23,7 @@
         "fields": [
           {
             "label": "Медиа",
-            "description": "<h3> Изображение для отображения в качестве выбора. Альтернативный текст используется в отчете.</h3>"
+            "description": "Media to display as a choice."
           },
           {
             "label": "Poster image"

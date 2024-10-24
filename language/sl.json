@@ -23,7 +23,7 @@
         "fields": [
           {
             "label": "Medij",
-            "description": "<h3>Slika za prikaz kot izbira možnega odgovora. Nadomestno besedilo se vključi v poročilo.</h3>"
+            "description": "Media to display as a choice."
           },
           {
             "label": "Poster image"

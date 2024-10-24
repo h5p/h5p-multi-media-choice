@@ -93,7 +93,7 @@ export class MultiMediaChoiceOption {
       case 'H5P.Image':
         return this.media.params.alt || this.missingAltText; // Alternative text
       default:
-        return '';
+        return this.media?.metadata?.title;
     }
   }
 

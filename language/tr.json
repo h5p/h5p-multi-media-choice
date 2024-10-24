@@ -23,7 +23,7 @@
         "fields": [
           {
             "label": "Medya",
-            "description": "<h3> Seçim olarak görüntülenecek resim. Alternatif metin, rapor tarafından kullanılır.</h3>"
+            "description": "Media to display as a choice."
           },
           {
             "label": "Poster image"

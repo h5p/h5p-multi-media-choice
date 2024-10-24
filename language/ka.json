@@ -23,7 +23,7 @@
         "fields": [
           {
             "label": "მედია",
-            "description": "<h3> გამოსახულების ჩვენება, როგორც არჩევანი. ალტერნატიული ტექსტი გამოიყენება მოხსენებაში.</h3>"
+            "description": "Media to display as a choice."
           },
           {
             "label": "Poster image"

@@ -23,7 +23,7 @@
         "fields": [
           {
             "label": "Media",
-            "description": "<h3> Afbeelding dat getoond wordt als de keuze. De alternatieve tekst wordt gebruikt voor rapportage.</h3>"
+            "description": "Media to display as a choice."
           },
           {
             "label": "Poster image"

@@ -23,7 +23,7 @@
         "fields": [
           {
             "label": "Медија",
-            "description": "<h3> Слика за приказ по избору. Извештај користи алтернативни текст.</h3>"
+            "description": "Media to display as a choice."
           },
           {
             "label": "Poster image"
