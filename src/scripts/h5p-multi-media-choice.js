@@ -16,7 +16,6 @@ export default class MultiMediaChoice extends H5P.Question {
   constructor(params, contentId, extras = {}) {
     super('multi-media-choice');
 
-    H5P.EventDispatcher.call(this);
     this.contentId = contentId;
     this.extras = extras;
     this.answerState = extras.previousState && extras.previousState.answers ? extras.previousState.answers : [];
