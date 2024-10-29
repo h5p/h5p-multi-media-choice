@@ -247,8 +247,8 @@
           "default": "Falta el texto alternativo"
         },
         {
-          "label": "Close modal button label",
-          "default": "Close modal"
+          "label": "Etiqueta de cierre de botón modal",
+          "default": "Cerrar botón modal"
         }
       ]
     }
