@@ -204,11 +204,11 @@
           "label": "Check confirmation dialog",
           "fields": [
             {
-              "label": "Header text",
-              "default": "Finish?"
+              "label": "Antraštės tekstas",
+              "default": "Baigti?"
             },
             {
-              "label": "Body text",
+              "label": "Turinio tekstas",
               "default": "Are you sure you want to finish?"
             },
             {
@@ -217,24 +217,24 @@
             },
             {
               "label": "Confirm button label",
-              "default": "Finish"
+              "default": "Baigti"
             }
           ]
         },
         {
-          "label": "Retry confirmation dialog",
+          "label": "„Bandyti dar kartą“ patvirtinimo dialogo langas",
           "fields": [
             {
-              "label": "Header text",
-              "default": "Retry?"
+              "label": "Antraštės tekstas",
+              "default": "Bandyti dar kartą?"
             },
             {
-              "label": "Body text",
-              "default": "Are you sure you wish to retry?"
+              "label": "Turinio tekstas",
+              "default": "Ar tikrai norite bandyti dar kartą?"
             },
             {
-              "label": "Cancel button label",
-              "default": "Cancel"
+              "label": "Atšaukimo mygtuko pavadinimas",
+              "default": "Atšaukti"
             },
             {
               "label": "Confirm button label",
