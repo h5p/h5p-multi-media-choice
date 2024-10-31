@@ -145,6 +145,7 @@ export class MultiMediaChoiceOption {
       //Only allow minimalistic playerMode
       this.media.params.playerMode = "minimalistic";
       this.media.params.propagateButtonClickEvents = false;
+      this.media.params.autoplay = false;
       this.instance = H5P.newRunnable(this.media, this.contentId, $audioWrapper, false);
 
       this.instance.audio.addEventListener('play', () => {
