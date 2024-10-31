@@ -98,3 +98,22 @@ export const htmlDecode = html => {
   el.innerHTML = html;
   return el.textContent;
 };
+
+/**
+ * Helper for creating a dom element
+ */
+export const createElement = ({type, classList = [], attributes = {}}) => {
+  const element = document.createElement(type);
+
+  // Add class names
+  classList.forEach(className => {
+    element.classList.add(className);
+  });
+
+  // Add attributes
+  for (const [key, value] of Object.entries(attributes)) {
+    element.setAttribute(key, value);
+  }
+
+  return element;
+}

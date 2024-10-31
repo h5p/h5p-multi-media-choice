@@ -1,6 +1,6 @@
 import MultiMediaChoiceContent from './h5p-multi-media-choice-content';
 
-import { Util } from './h5p-multi-media-choice-util';
+import { createElement, Util } from './h5p-multi-media-choice-util';
 import { getCurrentState, getXAPIData, getAnsweredXAPIEvent } from './h5p-multi-media-choice-xapi';
 
 /**
@@ -69,9 +69,8 @@ export default class MultiMediaChoice extends H5P.Question {
 
       // Register task introduction text
       if (this.params.question) {
-        this.introduction = document.createElement('div');
+        this.introduction = createElement({type: 'div', attributes: {id: `h5p-media-choice${contentId}`}});
         this.introduction.innerHTML = this.params.question;
-        this.introduction.setAttribute('id', `h5p-media-choice${contentId}`);
         const div = document.createElement('img');
         div.src = this.getLibraryFilePath('assets/placeholder1to1.svg');
         this.setIntroduction(this.introduction);

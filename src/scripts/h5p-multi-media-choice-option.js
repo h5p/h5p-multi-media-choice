@@ -1,4 +1,4 @@
-import { htmlDecode } from "./h5p-multi-media-choice-util";
+import { createElement, htmlDecode } from "./h5p-multi-media-choice-util";
 
 /** Class representing a multi media option */
 export class MultiMediaChoiceOption {
@@ -33,13 +33,17 @@ export class MultiMediaChoiceOption {
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
     this.callbacks.pauseAllOtherMedia = this.callbacks.pauseAllOtherMedia || (() => {});
 
-    this.content = document.createElement('li');
-    this.content.classList.add('h5p-multi-media-choice-list-item');
-    this.wrapper = document.createElement('div');
-    this.wrapper.classList.add('h5p-multi-media-choice-option');
+    this.wrapper = createElement({type: 'div', classList: ['h5p-multi-media-choice-option']});
+    this.content = createElement({
+      type: 'li',
+      classList: ['h5p-multi-media-choice-list-item'],
+      attributes: {
+        role: singleAnswer ? 'radio' : 'checkbox',
+        'aria-checked': 'false'
+      }
+    });
+
     this.content.appendChild(this.wrapper);
-    this.content.setAttribute('role', singleAnswer ? 'radio' : 'checkbox');
-    this.content.setAttribute('aria-checked', 'false');
     this.enable();
     this.content.addEventListener('click', this.callbacks.onClick);
 
@@ -56,8 +60,7 @@ export class MultiMediaChoiceOption {
    * @returns {undefined} Undefined if the content type cannot be created
    */
   createMediaContent() {
-    const mediaWrapper = document.createElement('div');
-    mediaWrapper.classList.add('h5p-multi-media-choice-media-wrapper');
+    const mediaWrapper = createElement({type: 'div', classList: ['h5p-multi-media-choice-media-wrapper']});
     if (this.aspectRatio !== 'auto') {
       mediaWrapper.classList.add('h5p-multi-media-choice-media-wrapper-specific-ratio');
       mediaWrapper.classList.add(`h5p-multi-media-choice-media-wrapper-${this.aspectRatio}`);
@@ -97,13 +100,15 @@ export class MultiMediaChoiceOption {
    */
   buildVideo() {
     if (this.media.params.sources) {
-      const videoButton = document.createElement('button');
-      const videoIcon = document.createElement('div'); 
-    
-      videoButton.classList.add('h5p-multi-media-video-button');
-      videoIcon.classList.add('play-icon');
+      const videoButton = createElement({
+        type: 'button',
+        classList: ['h5p-multi-media-video-button'],
+        attributes: {
+          tabindex: '0'
+        }
+      });
+      const videoIcon = createElement({type: 'div', classList: ['play-icon']});
       videoButton.appendChild(videoIcon);
-      videoButton.setAttribute('tabindex', '0');
 
       if (!this.media?.params?.visuals?.poster?.path) {
         videoButton.classList.add('h5p-multi-media-content-media-button-centered');
@@ -175,17 +180,24 @@ export class MultiMediaChoiceOption {
         break;
     }
 
-    const image = document.createElement('img');
-    image.setAttribute('src', path);
-    this.content.setAttribute('aria-label', htmlDecode(alt));
-    image.addEventListener('load', this.callbacks.triggerResize);
-    this.content.setAttribute('title', htmlDecode(title));
-    image.classList.add('h5p-multi-media-choice-media');
-    image.setAttribute('alt', htmlDecode(alt));
+    const htmlDecodedAlt = htmlDecode(alt);
+    const image = createElement({
+      type: 'img',
+      classList: ['h5p-multi-media-choice-media'],
+      attributes: {
+        src: path,
+        alt: htmlDecodedAlt
+      }
+    });
 
     if (this.aspectRatio !== 'auto') {
       image.classList.add('h5p-multi-media-choice-media-specific-ratio');
     }
+
+    image.addEventListener('load', this.callbacks.triggerResize);
+
+    this.content.setAttribute('aria-label', htmlDecodedAlt);
+    this.content.setAttribute('title', htmlDecode(title));
 
     return image;
   }
@@ -195,19 +207,11 @@ export class MultiMediaChoiceOption {
    *  @param {HTMLElement} lastFocus element that had focus before modal opened
    */
   createVideoPlayer(lastFocus) {
-    const modal = document.createElement('div');
-    const modalContainer = document.createElement('div');
-    const modalContent = document.createElement('div');
-    const closeButton = document.createElement('button');
-    const cross = document.createElement('div');
-
-    modal.classList.add('h5p-multi-media-modal');
-    modalContainer.classList.add('modal-container');
-    modalContent.classList.add('modal-content');
-    closeButton.classList.add('modal-close-button');
-    cross.classList.add('icon-cross');
-    modal.setAttribute('aria-modal', 'true');
-    closeButton.setAttribute('aria-label', this.closeModalText);
+    const modal = createElement({type: 'div', classList: ['h5p-multi-media-modal'], attributes: {'aria-modal': 'true'}});
+    const modalContainer = createElement({type: 'div', classList: ['modal-container']});
+    const modalContent = createElement({type: 'div', classList: ['modal-content']});
+    const closeButton = createElement({type: 'button', classList: ['modal-close-button'], attributes: {'aria-label': this.closeModalText}});
+    const cross = createElement({type: 'div', classList: ['icon-cross']});
 
     modal.appendChild(modalContainer);
     modalContainer.appendChild(modalContent);
@@ -435,8 +439,7 @@ export class MultiMediaChoiceOption {
    * Adds solution feedback for screen reader
    */
   addAccessibilitySolutionText(solutionText) {
-    this.accessibilitySolutionText = document.createElement('span');
-    this.accessibilitySolutionText.classList.add('hidden-accessibility-solution-text');
+    this.accessibilitySolutionText = createElement({type: 'span', classList: ['hidden-accessibility-solution-text']});
     this.accessibilitySolutionText.innerText = `${solutionText}.`;
     this.wrapper.appendChild(this.accessibilitySolutionText);
   }

@@ -1,5 +1,6 @@
 import { MultiMediaChoiceOption } from './h5p-multi-media-choice-option';
 import * as Masonry from 'masonry-layout';
+import { createElement } from './h5p-multi-media-choice-util';
 
 const optionMinWidth = 210;
 const columnGap = 20;
@@ -35,9 +36,7 @@ export default class MultiMediaChoiceContent {
 
     this.lastSelectedRadioButtonOption = null;
 
-    this.content = document.createElement('div');
-    this.content.classList.add('h5p-multi-media-choice-content');
-
+    this.content = createElement({type: 'div', classList: ['h5p-multi-media-choice-content']});
 
     // Add default media so it is always two
     if (!this.params.options || this.params.options.length < 2) {
@@ -106,10 +105,14 @@ export default class MultiMediaChoiceContent {
    * @return {HTMLElement} List view of options.
    */
   buildOptionList() {
-    const optionList = document.createElement('ul');
-    optionList.setAttribute('role', this.isSingleAnswer ? 'radiogroup' : 'group');
-    optionList.setAttribute('aria-labelledby', `h5p-media-choice${this.contentId}`);
-    optionList.classList.add('h5p-multi-media-choice-option-list');
+    const optionList = createElement({
+      type: 'ul',
+      classList: ['h5p-multi-media-choice-option-list'],
+      attributes: {
+        role: this.isSingleAnswer ? 'radiogroup' : 'group',
+        'aria-labelledby': `h5p-media-choice${this.contentId}`
+      }
+    });
 
     this.options.forEach(option => {
       optionList.appendChild(option.getDOM());
