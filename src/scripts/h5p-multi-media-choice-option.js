@@ -151,6 +151,10 @@ export class MultiMediaChoiceOption {
       this.media.params.playerMode = "minimalistic";
       this.instance = H5P.newRunnable(this.media, this.contentId, newDiv, false);
       this.instance.disableButtonClickEventPropagation();
+
+      this.instance.audio.addEventListener('play', () => {
+        this.callbacks.pauseAllOtherMedia();
+      });
     }
   }
 
@@ -509,7 +513,7 @@ export class MultiMediaChoiceOption {
    * Pauses the audio/video
    */
   pauseMedia()  {
-    if  (this.instance) {
+    if (this.instance) {
       this.instance.pause();
     }
   }

@@ -465,7 +465,7 @@ export default class MultiMediaChoiceContent {
   pauseAllOtherMedia(mediaToPlay) {
     if (this.options) {
       this.options.forEach((option, index) => {
-        if  (index != mediaToPlay)  {
+        if (index != mediaToPlay)  {
           option.pauseMedia();
         }
       });
