@@ -38,13 +38,7 @@ export class MultiMediaChoiceOption {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('h5p-multi-media-choice-option');
     this.content.appendChild(this.wrapper);
-
-    if (singleAnswer) {
-      this.content.setAttribute('role', 'radio');
-    }
-    else {
-      this.content.setAttribute('role', 'checkbox');
-    }
+    this.content.setAttribute('role', singleAnswer ? 'radio' : 'checkbox');
     this.content.setAttribute('aria-checked', 'false');
     this.enable();
     this.content.addEventListener('click', this.callbacks.onClick);
@@ -138,27 +132,21 @@ export class MultiMediaChoiceOption {
    */
   buildAudio() {
     if (this.media.params.files) {
-      let newDiv = H5P.jQuery('<div>', {
-        class:'h5p-multi-media-content-audio-wrapper'
+      const $audioWrapper = H5P.jQuery('<div>', {
+        class:'h5p-multi-media-content-audio-wrapper' + (this.option.poster ? '' : ' h5p-multi-media-content-media-button-centered')
       });
-      H5P.jQuery(this.wrapper).append(newDiv);
+      H5P.jQuery(this.wrapper).append($audioWrapper);
       
-      if (!this.option.poster) {
-        newDiv.addClass('h5p-multi-media-content-media-button-centered');
-      }
-
       //Only allow minimalistic playerMode
       this.media.params.playerMode = "minimalistic";
-      this.instance = H5P.newRunnable(this.media, this.contentId, newDiv, false);
-      this.instance.disableButtonClickEventPropagation();
+      this.media.params.propagateButtonClickEvents = false;
+      this.instance = H5P.newRunnable(this.media, this.contentId, $audioWrapper, false);
 
       this.instance.audio.addEventListener('play', () => {
         this.callbacks.pauseAllOtherMedia();
       });
     }
   }
-
-
 
   /**
    * Builds an image from from media
