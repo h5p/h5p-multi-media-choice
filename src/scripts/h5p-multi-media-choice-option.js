@@ -231,8 +231,11 @@ export class MultiMediaChoiceOption {
     let newDiv = H5P.jQuery('<div></div>');
     H5P.jQuery(modalContent).append(newDiv);
 
+    // Disable fit to wrapper
+    this.media.params.visuals.fit = false;
+
     if (!this.instance) {
-      this.instance = H5P.newRunnable(this.media, this.contentId, newDiv, true);   
+      this.instance = H5P.newRunnable(this.media, this.contentId, newDiv, true);
     }
     else {
       this.instance.attach(newDiv);
@@ -247,12 +250,13 @@ export class MultiMediaChoiceOption {
       resizeFrame(modalContent);
     };
 
-    instance.on('ready', function () {
-      instance.trigger('resize');
-    });
-
     this.callbacks.pauseAllOtherMedia();
     let resize = () => this.callbacks.triggerResize();
+
+    instance.on(this.media.params?.sources[0]?.mime === 'video/Panopto' ? 'containerLoaded' : 'loaded', (e) => {
+      resize();
+      resizeFrame(modalContent);
+    });
 
     let closeModal = function () {
       modal.remove();
