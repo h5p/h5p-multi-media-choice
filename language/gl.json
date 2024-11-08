@@ -247,8 +247,8 @@
           "default": "Falta o texto alternativo"
         },
         {
-          "label": "Close modal button label",
-          "default": "Close modal"
+          "label": "Etiqueta para pechar botón modal",
+          "default": "Pechar botón modal"
         }
       ]
     }
