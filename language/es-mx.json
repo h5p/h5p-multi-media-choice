@@ -23,10 +23,10 @@
         "fields": [
           {
             "label": "Medio",
-            "description": "Media to display as a choice."
+            "description": "Medio a mostrar como una opción."
           },
           {
-            "label": "Poster image"
+            "label": "Imagen del poster"
           },
           {
             "label": "Correcto"
@@ -247,8 +247,8 @@
           "default": "Falta el texto alterno"
         },
         {
-          "label": "Close modal button label",
-          "default": "Close modal"
+          "label": "Etiqueta de cierre de botón modal",
+          "default": "Cerrar modal"
         }
       ]
     }
