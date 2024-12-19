@@ -23,10 +23,10 @@
         "fields": [
           {
             "label": "Medios",
-            "description": "Media to display as a choice."
+            "description": "Medio a mostrar como una opción."
           },
           {
-            "label": "Poster image"
+            "label": "Imagen del poster"
           },
           {
             "label": "Correcto"
