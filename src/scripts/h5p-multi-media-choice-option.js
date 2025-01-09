@@ -220,7 +220,7 @@ export class MultiMediaChoiceOption {
     closeButton.appendChild(cross);
     this.frame.appendChild(modal);
 
-    this.media.params.visuals.poster = null;
+    this.media.params.visuals.poster = undefined;
     let newDiv = H5P.jQuery('<div></div>');
     H5P.jQuery(modalContent).append(newDiv);
 
