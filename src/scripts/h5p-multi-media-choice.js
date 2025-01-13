@@ -14,7 +14,7 @@ export default class MultiMediaChoice extends H5P.Question {
    * @param {object} [extras] Saved state, metadata, etc.
    */
   constructor(params, contentId, extras = {}) {
-    super('multi-media-choice');
+    super('multi-media-choice', true);
 
     this.contentId = contentId;
     this.extras = extras;
@@ -238,6 +238,7 @@ export default class MultiMediaChoice extends H5P.Question {
           },
           contentData: this.extras,
           textIfSubmitting: this.params.l10n.submitAnswerButtonText,
+          classes: 'h5p-theme-primary-cta h5p-theme-check',
         }
       );
     }
@@ -249,7 +250,9 @@ export default class MultiMediaChoice extends H5P.Question {
       },
       false,
       { 'aria-label': this.params.l10n.showSolution },
-      {}
+      {
+        classes: 'h5p-theme-secondary-cta h5p-theme-show-results',        
+      }
     );
 
     this.addButton(
@@ -265,7 +268,8 @@ export default class MultiMediaChoice extends H5P.Question {
           enable: this.params.behaviour.confirmRetryDialog,
           l10n: this.params.l10n.confirmRetry,
           instance: this
-        }
+        },
+        classes: 'h5p-theme-secondary-cta h5p-theme-retry',
       }
     );
   }
