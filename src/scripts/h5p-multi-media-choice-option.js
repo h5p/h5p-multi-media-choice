@@ -125,7 +125,7 @@ export class MultiMediaChoiceOption {
         modal.focus();
         event.stopPropagation();
       });
-      
+
       return videoButton;
     }
     return document.createElement('div');
@@ -141,7 +141,7 @@ export class MultiMediaChoiceOption {
         class:'h5p-multi-media-content-audio-wrapper' + (this.option.poster ? '' : ' h5p-multi-media-content-media-button-centered')
       });
       H5P.jQuery(this.wrapper).append($audioWrapper);
-      
+
       //Only allow minimalistic playerMode
       this.media.params.playerMode = "minimalistic";
       this.media.params.propagateButtonClickEvents = false;
@@ -165,12 +165,12 @@ export class MultiMediaChoiceOption {
     let path = '';
     switch (this.media?.library?.split(' ')[0]) {
       case 'H5P.Image':
-        if (this.media.params.file) { 
+        if (this.media.params.file) {
           path = H5P.getPath(this.media.params.file.path, this.contentId);
         }
         break;
       case 'H5P.Video':
-        if (this.media.params.visuals.poster) { 
+        if (this.media.params.visuals.poster) {
           path = H5P.getPath(this.media.params.visuals.poster.path, this.contentId);
         }
         break;
@@ -238,10 +238,13 @@ export class MultiMediaChoiceOption {
     let frame = this.frame;
     // Resize frame if content of modal grows bigger than frame
     let resizeFrame = (modalContent) => this.resizeWindow(modalContent);
-    window.onresize = function () {
+
+    const handleResize = function () {
       instance.trigger('resize');
       resizeFrame(modalContent);
     };
+
+    window.addEventListener('resize', handleResize);
 
     this.callbacks.pauseAllOtherMedia();
     let resize = () => this.callbacks.triggerResize();
@@ -253,25 +256,27 @@ export class MultiMediaChoiceOption {
 
     let closeModal = function () {
       modal.remove();
-      window.onkeydown = null;
-      window.onclick = null;
-      window.onresize = null;
+      window.removeEventListener('keydown', handleKeyDown);
+      frame.removeEventListener('click', handleClick);
+      window.removeEventListener('resize', handleResize);
       lastFocus.focus();
       frame.style.minHeight = '0';
       resize();
     };
+
+    closeButton.addEventListener('click', closeModal);
 
     // Add elements that should be tabbable is in this list
     const focusableElements = modal.querySelectorAll('.h5p-video,  button:not([disabled])');
     const firstFocusable = focusableElements[0];
     const lastFocusable = focusableElements[focusableElements.length - 1];
 
-    window.onkeydown = function (event) {
+    const handleKeyDown = function (event) {
       if (event.key === 'Escape') {
         closeModal();
       }
 
-      if (event.key === 'Tab' || event.keyCode === 9) { // 9 == TAB 
+      if (event.key === 'Tab' || event.keyCode === 9) { // 9 == TAB
         // make choice options unavailable from tabs
         if (document.activeElement != firstFocusable && document.activeElement != lastFocusable) {
           firstFocusable.focus();
@@ -291,11 +296,16 @@ export class MultiMediaChoiceOption {
       }
     };
 
-    window.onclick = function (event) {
-      if (event.target == modal || event.target == closeButton || event.target == modalContainer || event.target == cross) {
+    window.addEventListener('keydown', handleKeyDown);
+
+    const handleClick = function (event) {
+      if (event.target == modal || event.target == modalContainer) {
         closeModal();
-      } 
+      }
     };
+
+    frame.addEventListener('click', handleClick);
+
     resize();
     this.resizeWindow(modalContent);
     return modal;
