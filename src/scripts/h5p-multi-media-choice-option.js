@@ -123,6 +123,7 @@ export class MultiMediaChoiceOption {
 
         modal.setAttribute('tabindex', '0');
         modal.focus();
+        modal.scrollIntoView({ behavior: 'smooth', block: 'center' });
         event.stopPropagation();
       });
 
