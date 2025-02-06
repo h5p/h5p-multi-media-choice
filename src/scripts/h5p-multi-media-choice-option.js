@@ -123,6 +123,7 @@ export class MultiMediaChoiceOption {
 
         modal.setAttribute('tabindex', '0');
         modal.focus();
+        modal.scrollIntoView({ behavior: 'smooth', block: 'center' });
         event.stopPropagation();
       });
 
@@ -209,8 +210,8 @@ export class MultiMediaChoiceOption {
    */
   createVideoPlayer(lastFocus) {
     const modal = createElement({type: 'div', classList: ['h5p-multi-media-modal'], attributes: {'aria-modal': 'true'}});
-    const modalContainer = createElement({type: 'div', classList: ['modal-container']});
-    const modalContent = createElement({type: 'div', classList: ['modal-content']});
+    const modalContainer = createElement({type: 'div', classList: ['h5p-multi-media-choice-modal-container']});
+    const modalContent = createElement({type: 'div', classList: ['h5p-multi-media-choice-modal-content']});
     const closeButton = createElement({type: 'button', classList: ['modal-close-button'], attributes: {'aria-label': this.closeModalText}});
     const cross = createElement({type: 'div', classList: ['icon-cross']});
 

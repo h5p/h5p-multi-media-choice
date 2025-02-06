@@ -208,7 +208,7 @@
     align-items: center;
     justify-content: center;
 
-    .modal-container {
+    .h5p-multi-media-choice-modal-container {
       position: relative;
       width: 100%;
       display: flex;
@@ -216,8 +216,10 @@
       align-items: center;
       max-width: 100%;
       max-height: 100%;
+      container-name: h5p-mmc-modal-container;
+      container-type: inline-size;
 
-      .modal-content {
+      .h5p-multi-media-choice-modal-content {
         position: relative;
         background-color: white;
         padding: 1.2rem;
@@ -228,6 +230,12 @@
         border-radius: 1%;
         box-shadow: none;
         max-height: 100%;
+
+        @container h5p-mmc-modal-container (width < 480px) {
+          padding: 3px;
+          width: 100%;
+          max-width: 100%;
+        }
 
         .modal-close-button {
           background-color: #ffffff;
@@ -245,13 +253,25 @@
           justify-content: center;
           align-items: center;
 
+          @container h5p-mmc-modal-container (width < 480px) {
+            right: 0;
+            height: $button-size-small;
+            width: $button-size-small;
+          }
+
           .icon-cross {
-            width: 4rem;
-            height: 4rem;
+            width: $button-size;
+            height: $button-size;
             background-size: 3.5rem;
             background-image: url(../../assets/x-close.svg);
             background-repeat: no-repeat;
-            background-position: -0.1rem 0.2rem;
+            background-position: center;
+
+            @container h5p-mmc-modal-container (width < 480px) {
+              height: $button-size-small;
+              width: $button-size-small;
+              background-size: 2rem;
+            }
           }
         }
       }
@@ -282,7 +302,7 @@
     right: 0;
     margin: 0.5em;
     z-index: 1;
-    
+
     .h5p-audio-minimal-button {
       width: $button-size;
       height: $button-size;
@@ -297,6 +317,13 @@
 
     .h5p-audio-minimal-button::before {
       font-size: math.div($button-size, 2);
+    }
+
+    /* Make H5P.Audio's play button icon match our video play button's icon */
+    .h5p-audio-minimal-play-paused::before {
+      position: relative;
+      left: 3px;
+      font-size: 2.125rem;
     }
   }
 
