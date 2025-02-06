@@ -232,7 +232,7 @@
         max-height: 100%;
 
         @container h5p-mmc-modal-container (width < 480px) {
-          padding: 0;
+          padding: 3px;
           width: 100%;
           max-width: 100%;
         }
