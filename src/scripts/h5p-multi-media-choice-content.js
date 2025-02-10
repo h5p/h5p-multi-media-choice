@@ -384,7 +384,7 @@ export default class MultiMediaChoiceContent {
     const columnSpaceCount = this.optionList.getBoundingClientRect().width / (optionMinWidth + columnGap);
 
     // Find the number of columns from whichever is smaller: space, max values and number of options
-    const columns = Math.floor(
+    const columns = Math.ceil(
       Math.min(columnSpaceCount, this.maxAlternativesPerRow, this.options.length)
     );
     const elementWidth = (this.optionList.getBoundingClientRect().width / columns) - columnGap;
