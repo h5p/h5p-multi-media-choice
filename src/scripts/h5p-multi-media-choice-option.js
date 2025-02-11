@@ -283,14 +283,15 @@ export class MultiMediaChoiceOption {
           firstFocusable.focus();
           event.preventDefault();
         }
-        else if ( event.shiftKey ) /* shift + tab */ {
+        else if (event.shiftKey) /* shift + tab */ {
           if (document.activeElement === firstFocusable) {
             lastFocusable.focus();
             event.preventDefault();
           }
         }
         else /* tab */ {
-          if (document.activeElement === lastFocusable) {
+          // Uploaded videos have their own tab handling
+          if (document.activeElement === lastFocusable && lastFocusable.nodeName !== 'VIDEO') {
             firstFocusable.focus();
             event.preventDefault();
           }
