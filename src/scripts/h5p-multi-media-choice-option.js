@@ -268,7 +268,7 @@ export class MultiMediaChoiceOption {
     closeButton.addEventListener('click', closeModal);
 
     // Add elements that should be tabbable is in this list
-    const focusableElements = modal.querySelectorAll('.h5p-video,  button:not([disabled])');
+    const focusableElements = modal.querySelectorAll('.h5p-video, button:not([disabled])');
     const firstFocusable = focusableElements[0];
     const lastFocusable = focusableElements[focusableElements.length - 1];
 
@@ -281,8 +281,9 @@ export class MultiMediaChoiceOption {
         // make choice options unavailable from tabs
         if (document.activeElement != firstFocusable && document.activeElement != lastFocusable) {
           firstFocusable.focus();
+          event.preventDefault();
         }
-        if ( event.shiftKey ) /* shift + tab */ {
+        else if ( event.shiftKey ) /* shift + tab */ {
           if (document.activeElement === firstFocusable) {
             lastFocusable.focus();
             event.preventDefault();
