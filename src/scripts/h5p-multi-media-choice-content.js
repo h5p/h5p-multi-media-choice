@@ -387,7 +387,7 @@ export default class MultiMediaChoiceContent {
     const columns = Math.ceil(
       Math.min(columnSpaceCount, this.maxAlternativesPerRow, this.options.length)
     );
-    const elementWidth = (this.optionList.getBoundingClientRect().width / columns) - columnGap;
+    const elementWidth = (this.optionList.getBoundingClientRect().width / columns) - (columns > 1 ? columnGap : 0);
 
     for (let x = 0; x < this.options.length; x++) {
       this.resizeGridItem(this.options[x].getDOM(), elementWidth);
