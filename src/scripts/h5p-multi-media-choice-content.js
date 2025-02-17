@@ -92,7 +92,8 @@ export default class MultiMediaChoiceContent {
     // Use masonry library
     this.masonry = new Masonry(this.optionList, {
       gutter: columnGap,
-      itemSelector: '.h5p-multi-media-choice-list-item'
+      itemSelector: '.h5p-multi-media-choice-list-item',
+      horizontalOrder: true
     });
 
     // Toggle selected
@@ -384,13 +385,13 @@ export default class MultiMediaChoiceContent {
     const columnSpaceCount = this.optionList.getBoundingClientRect().width / (optionMinWidth + columnGap);
 
     // Find the number of columns from whichever is smaller: space, max values and number of options
-    const columns = Math.floor(
+    const columns = Math.ceil(
       Math.min(columnSpaceCount, this.maxAlternativesPerRow, this.options.length)
     );
     const elementWidth = (this.optionList.getBoundingClientRect().width / columns) - columnGap;
 
     for (let x = 0; x < this.options.length; x++) {
-      this.resizeGridItem(this.options[x].getDOM(), elementWidth);
+      this.resizeGridItem(this.options[x].getDOM(), elementWidth + ((x + 1) % columns === 0 ? columnGap : 0));
     }
 
     // Set layout again after resizing
