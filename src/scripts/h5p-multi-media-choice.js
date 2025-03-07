@@ -19,7 +19,7 @@ export default class MultiMediaChoice extends H5P.Question {
     this.contentId = contentId;
     this.extras = extras;
     this.answerState = extras.previousState && extras.previousState.answers ? extras.previousState.answers : [];
-    this.introId = Date.now();
+    this.introId = H5P.createUUID();
 
     // Default values are extended
     this.params = Util.extendParams(params);
