@@ -226,11 +226,7 @@ export default class MultiMediaChoice extends H5P.Question {
     this.getAnswerGiven = () => {
       return this.content.getAnswerGiven();
     };
-
-    H5P.MultiMediaChoice.counter = (H5P.MultiMediaChoice.counter === undefined ? 0 : H5P.MultiMediaChoice.counter + 1);
-    this.params.labelId = 'h5p-mmcq' + H5P.MultiMediaChoice.counter;
   }
-
 
   /**
    * Add the buttons that are passed to H5P.Question
