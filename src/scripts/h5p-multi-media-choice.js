@@ -19,6 +19,7 @@ export default class MultiMediaChoice extends H5P.Question {
     this.contentId = contentId;
     this.extras = extras;
     this.answerState = extras.previousState && extras.previousState.answers ? extras.previousState.answers : [];
+    this.introId = Date.now();
 
     // Default values are extended
     this.params = Util.extendParams(params);
@@ -43,7 +44,8 @@ export default class MultiMediaChoice extends H5P.Question {
           this.triggerXAPI('interacted');
         }
       },
-      this.answerState
+      this.answerState,
+      this.introId
     );
 
     this.registerDomElements = () => {
@@ -78,7 +80,7 @@ export default class MultiMediaChoice extends H5P.Question {
 
       // Register task introduction text
       if (this.params.question) {
-        this.introduction = createElement({type: 'div', attributes: {id: `h5p-media-choice${contentId}`}});
+        this.introduction = createElement({type: 'div', attributes: {id: `h5p-media-choice-${this.introId}`}});
         this.introduction.innerHTML = this.params.question;
         this.setIntroduction(this.introduction);
       }
@@ -224,7 +226,11 @@ export default class MultiMediaChoice extends H5P.Question {
     this.getAnswerGiven = () => {
       return this.content.getAnswerGiven();
     };
+
+    H5P.MultiMediaChoice.counter = (H5P.MultiMediaChoice.counter === undefined ? 0 : H5P.MultiMediaChoice.counter + 1);
+    this.params.labelId = 'h5p-mmcq' + H5P.MultiMediaChoice.counter;
   }
+
 
   /**
    * Add the buttons that are passed to H5P.Question
