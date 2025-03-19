@@ -28,6 +28,7 @@
   }
 
   .h5p-multi-media-choice-option {
+    container-type: inline-size;
     position: relative;
 
     // Removes space below images
@@ -190,6 +191,22 @@
       background-size: 1.8rem;
       background-position: 0.5rem;
     }
+    
+    @container (max-width: 68px) {
+      .play-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        background-size: 1rem;
+        background-position: 0.2rem;
+      }
+    }
+  }
+  
+  @container (max-width: 68px) {
+    .h5p-multi-media-video-button {
+      width: 2.188rem;
+      height: 2.188rem;
+    }
   }
 
   .h5p-multi-media-modal {
@@ -327,6 +344,17 @@
       left: 3px;
       font-size: 2.125rem;
     }
+    
+    @container (max-width: 68px) {
+      .h5p-audio-minimal-button {
+        width: 2.188rem;
+        height: 2.188rem;
+      }
+      .h5p-audio-minimal-button::before, .h5p-audio-minimal-play-paused::before {
+        font-size: 1.2rem;
+        left: 2px;
+      }
+    }
   }
 
   .h5p-multi-media-content-media-button-centered {
@@ -334,5 +362,12 @@
     right: 50%;
     margin-top: math.div($button-size, -2);
     margin-right: math.div($button-size, -2);
+  }
+  
+  @container (max-width: 68px) {
+    .h5p-multi-media-content-media-button-centered {
+      margin-top: -1.05rem;
+      margin-right: -1.1rem;
+    }
   }
 }
