@@ -1,0 +1,51 @@
+/*
+Error: Invalid CSS after "...er-radius: math": expected ";", was ".div($button-si..."
+        on line 185 of C:\Work\New theme CLI\my_first_h5p_environment\libraries\H5P.MultiMediaChoice-0.3\src\styles\h5p-multi-media-choice.scss
+
+180:     align-items: center;
+181:     justify-content: center;
+182:     cursor: pointer;
+183:     color: #ffffff;
+184:     border: 2px solid var(--h5p-theme-ui-base);
+185:     border-radius: math.div($button-size, 2);
+186: 
+187:     &:hover {
+188:       background-color: var(--h5p-theme-main-cta-light);
+189:     }
+190: 
+
+Backtrace:
+C:\Work\New theme CLI\my_first_h5p_environment\libraries\H5P.MultiMediaChoice-0.3\src\styles\h5p-multi-media-choice.scss:185
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:1308:in `expected'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:1238:in `expected'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:1233:in `tok!'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:815:in `block in try_declaration'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:1284:in `rethrow'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:820:in `try_declaration'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:743:in `declaration_or_ruleset'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:708:in `block_child'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:700:in `block_contents'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:689:in `block'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:758:in `declaration_or_ruleset'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:708:in `block_child'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:700:in `block_contents'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:689:in `block'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:681:in `ruleset'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:707:in `block_child'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:700:in `block_contents'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:137:in `stylesheet'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:41:in `parse'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/engine.rb:414:in `_to_tree'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/engine.rb:290:in `render'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/exec/sass_scss.rb:396:in `run'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/exec/sass_scss.rb:63:in `process_result'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/exec/base.rb:50:in `parse'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/lib/sass/exec/base.rb:18:in `parse!'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/lib/ruby/gems/3.0.0/gems/sass-3.7.4/bin/sass:13:in `<top (required)>'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/bin/sass:23:in `load'
+C:/Program Files/Adobe/Adobe Dreamweaver 2021/ruby/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"...er-radius: math\": expected \";\", was \".div($button-si...\"\A         on line 185 of C:\Work\New theme CLI\my_first_h5p_environment\libraries\H5P.MultiMediaChoice-0.3\src\styles\h5p-multi-media-choice.scss\A \A 180:     align-items: center;\A 181:     justify-content: center;\A 182:     cursor: pointer;\A 183:     color: #ffffff;\A 184:     border: 2px solid var(--h5p-theme-ui-base);\A 185:     border-radius: math.div($button-size, 2);\A 186: \A 187:     &:hover {\A 188:       background-color: var(--h5p-theme-main-cta-light);\A 189:     }\A 190: "; }

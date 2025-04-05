@@ -9,14 +9,18 @@
     display: inline-block;
 
     // Removes <ul> default indentation
-    padding-left: 0;
+    padding: var(--h5p-theme-spacing-m);
     list-style-type: none;
     width: 100%;
+    background-color: var(--h5p-theme-background);
+   
 
   }
 
   .h5p-multi-media-choice-list-item {
-    padding: 0.75em 0 0.25em 0;
+    padding: var(--h5p-theme-spacing-xs) 0 var(--h5p-theme-spacing-xxs) 0;
+    
+    
     &:focus {
       outline: none;
 
@@ -34,13 +38,15 @@
     line-height: 0;
 
     box-sizing: border-box;
-    background-color: #ffffff;
+    background-color: var(--h5p-theme-ui-base);
     outline: none;
-
+    
     border-style: solid;
-    border-width: $border-thick-stroke-width;
-    border-radius: $border-radius;
-    border-color: $color-option-background;
+    border-width: 2px;
+    border-color: var(--h5p-theme-stroke-1);
+    
+    border-radius: var(--h5p-theme-border-radius-medium);
+    box-shadow: 0px 8px 19.9px 0px rgba(0, 0, 0, 0.05);
     padding: $option-padding-default;
   }
 
@@ -75,6 +81,7 @@
     object-fit: contain;
     width: 100%;
     height: 100%;
+    border-radius: var(--h5p-theme-border-radius-small);
 
     &.h5p-multi-media-choice-media-specific-ratio {
       position: absolute;
@@ -126,7 +133,7 @@
     border-color: $color-correct-dark;
 
     &:before {
-      @include solution-button('\e86c', $color-correct-dark);
+      @include solution-button('\e933', $color-correct-dark);
     }
   }
 
@@ -136,7 +143,7 @@
     border-style: dotted;
 
     &:before {
-      @include solution-button('\e86c', $color-show-correct-dark);
+      @include solution-button('\e933', $color-show-correct-dark);
     }
   }
 
@@ -145,7 +152,7 @@
     border-color: $color-wrong-dark;
 
     &:before {
-      @include solution-button('\e5c9', $color-wrong-dark);
+      @include solution-button('\e932', $color-wrong-dark);
     }
   }
 
@@ -162,7 +169,7 @@
   .h5p-multi-media-video-button {
     font-family: 'H5PFontAwesome4';
     position: absolute;
-    background-color: #E23232;
+    background-color: var(--h5p-theme-main-cta-base);
     z-index: 1;
     bottom: 0;
     right: 0;
@@ -174,11 +181,11 @@
     justify-content: center;
     cursor: pointer;
     color: #ffffff;
-    border: 2px solid white;
+    border: 2px solid var(--h5p-theme-ui-base);
     border-radius: math.div($button-size, 2);
 
     &:hover {
-      background-color: #C51D1D;
+      background-color: var(--h5p-theme-main-cta-light);
     }
 
     .play-icon {
@@ -274,6 +281,13 @@
   .h5p-video {
     max-width: 100%;
   }
+  
+  .h5p-multi-media-content-audio-wrapper .h5p-audio-inner{
+    background-color: unset;
+  }
+  .h5p-multi-media-content-audio-wrapper .h5p-audio-inner .h5p-audio-minimal-button{
+    color: var(--h5p-theme-contrast-cta);
+  }
 
   .h5p-multi-media-content-audio-wrapper {
     position: absolute;
@@ -286,10 +300,10 @@
       width: $button-size;
       height: $button-size;
       border: 2px solid white;
-      background: #3239E2;
+      background: var(--h5p-theme-main-cta-base);
 
       &:hover {
-        background: #1B21AD;
+        background: var(--h5p-theme-main-cta-light);
         cursor: pointer;
       }
     }
