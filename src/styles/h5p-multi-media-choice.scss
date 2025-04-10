@@ -4,7 +4,8 @@
 @use 'sass:math';
 
 .h5p-multi-media-choice {
-  padding-bottom: 1em;
+  padding-bottom: var(--h5p-theme-spacing-s);
+
   .h5p-multi-media-choice-option-list {
     display: inline-block;
 
@@ -12,7 +13,7 @@
     padding-left: 0;
     list-style-type: none;
     width: 100%;
-
+    margin: 0px;
   }
 
   .h5p-multi-media-choice-list-item {
@@ -26,7 +27,25 @@
       }
     }
   }
-
+  
+  .h5p-question-content, 
+  .h5p-question-introduction {
+    padding: 0;
+    margin: 0;
+  }
+  .h5p-question-introduction {
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--h5p-theme-stroke-1);
+    padding: var(--h5p-theme-spacing-m);
+    background-color: var(--h5p-theme-ui-base);
+    text-align: left;
+  }
+  .h5p-question-introduction p{
+    margin: 0px;
+    padding: var(--h5p-theme-spacing-xs) 0;
+  }
   .h5p-multi-media-choice-option {
     position: relative;
 
@@ -34,13 +53,10 @@
     line-height: 0;
 
     box-sizing: border-box;
-    background-color: #ffffff;
+    background-color: var(--h5p-theme-ui-base);
     outline: none;
 
     border-style: solid;
-    border-width: $border-thick-stroke-width;
-    border-radius: $border-radius;
-    border-color: $color-option-background;
     padding: $option-padding-default;
   }
 
@@ -70,7 +86,7 @@
   }
 
   .h5p-multi-media-choice-media {
-    background-color: $color-option-background;
+    background-color: var(--h5p-theme-alternative-base);
     display: inline-block;
     object-fit: contain;
     width: 100%;
@@ -120,13 +136,23 @@
       transform: translate(-50%);
     }
   }
+  
+  .h5p-multi-media-choice-correct:before,
+  .h5p-multi-media-choice-wrong:before,
+  .h5p-multi-media-choice-show-correct:before
+  {
+    padding: var(--h5p-theme-spacing-xs);
+    font-size: var(--h5p-theme-font-size-s);
+  }
 
   .h5p-multi-media-choice-correct {
-    background-color: $color-correct-light;
-    border-color: $color-correct-dark;
+    background-color: var(--h5p-theme-feedback-correct-secondary);
+    border-color: var(--h5p-theme-feedback-correct-third);
 
     &:before {
-      @include solution-button('\e86c', $color-correct-dark);
+      @include solution-button('\e903', var(--h5p-theme-feedback-correct-main));
+      background-color: var(--h5p-theme-feedback-correct-secondary);
+      border-color: var(--h5p-theme-feedback-correct-third);
     }
   }
 
@@ -136,16 +162,20 @@
     border-style: dotted;
 
     &:before {
-      @include solution-button('\e86c', $color-show-correct-dark);
+      @include solution-button('\e903', $color-show-correct-dark);
+      background-color: $color-show-correct-light;
+      border-color: $color-show-correct-dark; 
     }
   }
 
   .h5p-multi-media-choice-wrong {
-    background-color: $color-wrong-light;
-    border-color: $color-wrong-dark;
+    background-color: var(--h5p-theme-feedback-incorrect-secondary);
+    border-color: var(--h5p-theme-feedback-incorrect-third);
 
     &:before {
-      @include solution-button('\e5c9', $color-wrong-dark);
+      @include solution-button('\e902', var(--h5p-theme-feedback-incorrect-main));
+      background-color: var(--h5p-theme-feedback-incorrect-secondary);
+      border-color: var(--h5p-theme-feedback-incorrect-third);
     }
   }
 
@@ -162,7 +192,7 @@
   .h5p-multi-media-video-button {
     font-family: 'H5PFontAwesome4';
     position: absolute;
-    background-color: #E23232;
+    background-color: var(--h5p-theme-main-cta-base);
     z-index: 1;
     bottom: 0;
     right: 0;
@@ -173,21 +203,21 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #ffffff;
-    border: 2px solid white;
+    color: var(--h5p-theme-contrast-cta);
+    border: 2px solid var(--h5p-theme-ui-base);
     border-radius: math.div($button-size, 2);
 
     &:hover {
-      background-color: #C51D1D;
+      background-color: var(--h5p-theme-main-cta-light);
     }
-
-    .play-icon {
-      width: 2.5rem;
-      height: 2.5rem;
-      background-image: url(../../assets/play.svg);
-      background-repeat: no-repeat;
-      background-size: 1.8rem;
-      background-position: 0.5rem;
+    
+    &:active {
+      background-color: var(--h5p-theme-main-cta-dark);
+    }
+    
+    &:before {
+      font-family: "h5p-theme";
+      content: "\e91f";
     }
   }
 
@@ -264,6 +294,8 @@
 
   .h5p-multi-media-choice-content {
     position: relative;
+    background-color: var(--h5p-theme-background);
+    padding: var(--h5p-theme-spacing-m);
   }
 
   @keyframes animateModal {
@@ -273,6 +305,13 @@
 
   .h5p-video {
     max-width: 100%;
+  }
+  
+  .h5p-multi-media-content-audio-wrapper .h5p-audio-inner{
+    background-color: unset;
+  }
+  .h5p-multi-media-content-audio-wrapper .h5p-audio-inner .h5p-audio-minimal-button{
+    color: var(--h5p-theme-contrast-cta);
   }
 
   .h5p-multi-media-content-audio-wrapper {
@@ -285,17 +324,20 @@
     .h5p-audio-minimal-button {
       width: $button-size;
       height: $button-size;
-      border: 2px solid white;
-      background: #3239E2;
+      border: 2px solid var(--h5p-theme-ui-base);
+      background: var(--h5p-theme-main-cta-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &:hover {
-        background: #1B21AD;
+        background: var(--h5p-theme-main-cta-light);
         cursor: pointer;
       }
     }
 
     .h5p-audio-minimal-button::before {
-      font-size: math.div($button-size, 2);
+      /*font-size: math.div($button-size, 2);*/
     }
   }
 
