@@ -41,6 +41,8 @@
     padding: var(--h5p-theme-spacing-m);
     background-color: var(--h5p-theme-ui-base);
     text-align: left;
+    position: relative;
+    z-index: 1;
   }
   .h5p-question-introduction p{
     margin: 0px;
@@ -197,8 +199,8 @@
     bottom: 0;
     right: 0;
     margin: 0.5em;
-    width: $button-size;
-    height: $button-size;
+    /*width: $button-size;
+    height: $button-size;*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -206,6 +208,7 @@
     color: var(--h5p-theme-contrast-cta);
     border: 2px solid var(--h5p-theme-ui-base);
     border-radius: math.div($button-size, 2);
+    padding: var(--h5p-theme-spacing-s);
 
     &:hover {
       background-color: var(--h5p-theme-main-cta-light);
@@ -223,7 +226,7 @@
 
   .h5p-multi-media-modal {
     position: absolute;
-    background: #000000B2;
+    background: rgba(0,0,0,0.85);
     top: 0;
     left: 0;
     padding: 0;
@@ -249,40 +252,48 @@
 
       .modal-content {
         position: relative;
-        background-color: white;
-        padding: 1.2rem;
+        background: var(--h5p-theme-ui-base);
+        padding: var(--h5p-theme-spacing-l);
+        border-radius: var(--h5p-theme-border-radius-large);
         border: white;
         width: 80%;
         display: block;
         max-width: 80%;
-        border-radius: 1%;
         box-shadow: none;
         max-height: 100%;
 
         .modal-close-button {
-          background-color: #ffffff;
+          background-color: var(--h5p-theme-ui-base);
           position: absolute;
           top: math.div($button-size, -3);
           right: math.div($button-size, -3);
           cursor: pointer;
           border: none;
-          height: $button-size;
-          width: $button-size;
+          height: 4rem;
+          width: 4rem;
           z-index: 1;
           border-radius: 50%;
           box-shadow: 0px 4px 4px 0px #00000040;
           display: flex;
           justify-content: center;
           align-items: center;
-
-          .icon-cross {
-            width: 4rem;
-            height: 4rem;
-            background-size: 3.5rem;
-            background-image: url(../../assets/x-close.svg);
-            background-repeat: no-repeat;
-            background-position: -0.1rem 0.2rem;
+          
+          &:hover{
+              color: var(--h5p-theme-text-primary);
+              background-color: var(--h5p-theme-alternative-base);
           }
+
+          .icon-cross:before {
+              color: var(--h5p-theme-text-primary);
+              display: inline-block;
+              font-family: "h5p-theme";
+              content: "\e910";
+              padding: var(--h5p-theme-spacing-s);
+              border-radius: 50%;
+              font-size: var(--h5p-theme-font-size-xl);
+          }
+          
+
         }
       }
     }
@@ -322,8 +333,9 @@
     z-index: 1;
     
     .h5p-audio-minimal-button {
-      width: $button-size;
-      height: $button-size;
+      /*width: $button-size;
+      height: $button-size;*/
+      padding: var(--h5p-theme-spacing-s);
       border: 2px solid var(--h5p-theme-ui-base);
       background: var(--h5p-theme-main-cta-base);
       display: flex;
@@ -342,9 +354,10 @@
   }
 
   .h5p-multi-media-content-media-button-centered {
-    top: 50%;
+    /*top: 50%;
     right: 50%;
     margin-top: math.div($button-size, -2);
     margin-right: math.div($button-size, -2);
+    removing the option to center the button */
   }
 }
