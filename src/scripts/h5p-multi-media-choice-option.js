@@ -86,9 +86,9 @@ export class MultiMediaChoiceOption {
    * @returns {string} the description of the option
    */
   getDescription() {
-    switch (this.media.library.split(' ')[0]) {
+    switch (this.media?.library?.split(' ')[0]) {
       case 'H5P.Image':
-        return this.media.params.alt || this.missingAltText; // Alternative text
+        return this.media.params?.alt || this.missingAltText; // Alternative text
       default:
         return this.media?.metadata?.title;
     }
