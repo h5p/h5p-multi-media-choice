@@ -3,7 +3,7 @@
 
 @mixin solution-button($icon, $color) {
   position: absolute;
-  top: -0.35em;
+  top: -0.75em;
   animation: slide-right-fade 0.25s forwards ease-out;
 
   font-family: 'h5p-theme';
@@ -12,12 +12,9 @@
   color: $color;
 
   // Creates the white background and border
-  background-color: var(--h5p-theme-feedback-correct-secondary);
   border-radius: 50%;
   line-height: 1em;
-  border: solid 4px var(--h5p-theme-feedback-correct-secondary);
-
-  box-shadow: 11px 11px 9px #00000065;
+  border: solid 2px;
 
   z-index: 1;
 }
