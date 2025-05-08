@@ -23,6 +23,15 @@ export default class MultiMediaChoice extends H5P.Question {
     // Default values are extended
     this.params = Util.extendParams(params);
 
+    // Override subcontent params
+    if (Array.isArray(this.params?.options)) {
+      for (const option of this.params.options) {
+        if (option.media?.library?.includes('H5P.Audio')) {
+          option.media.params.fitToWrapper = false; // VA-523: prevent warped button
+        }
+      }
+    }
+
     this.content = new MultiMediaChoiceContent(
       this.params,
       contentId,
