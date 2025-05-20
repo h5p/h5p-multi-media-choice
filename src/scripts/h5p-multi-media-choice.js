@@ -14,7 +14,7 @@ export default class MultiMediaChoice extends H5P.Question {
    * @param {object} [extras] Saved state, metadata, etc.
    */
   constructor(params, contentId, extras = {}) {
-    super('multi-media-choice', true);
+    super('multi-media-choice', { theme: true });
 
     this.contentId = contentId;
     this.extras = extras;
