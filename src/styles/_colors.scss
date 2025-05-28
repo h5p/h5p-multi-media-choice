@@ -1,9 +1,9 @@
 $color-option-background: #dbe2e8;
-$color-border-interaction: #1a73d9;
+$color-border-interaction: var(--h5p-theme-main-cta-base);
 
-$color-correct-light: #edfff0;
-$color-correct-dark: #6ea776;
-$color-wrong-light: #ffe6e3;
-$color-wrong-dark: #d33120;
-$color-show-correct-dark: $color-border-interaction;
-$color-show-correct-light: #e4edf7;
+$color-correct-light: var(--h5p-theme-feedback-correct-secondary);
+$color-correct-dark: var(--h5p-theme-feedback-correct-main);
+$color-wrong-light: var(--h5p-theme-feedback-incorrect-secondary);
+$color-wrong-dark: var(--h5p-theme-feedback-incorrect-main);
+$color-show-correct-dark: var(--h5p-theme-main-cta-base);
+$color-show-correct-light: var(--h5p-theme-contrast-cta);
