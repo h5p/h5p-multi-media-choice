@@ -247,7 +247,7 @@ export default class MultiMediaChoice extends H5P.Question {
           },
           contentData: this.extras,
           textIfSubmitting: this.params.l10n.submitAnswerButtonText,
-          classes: 'h5p-theme-primary-cta h5p-theme-check',
+          icon: 'check',
         }
       );
     }
@@ -260,7 +260,8 @@ export default class MultiMediaChoice extends H5P.Question {
       false,
       { 'aria-label': this.params.l10n.showSolution },
       {
-        classes: 'h5p-theme-secondary-cta h5p-theme-show-results',        
+        styleType: 'secondary',
+        icon: 'show-results'        
       }
     );
 
@@ -278,7 +279,8 @@ export default class MultiMediaChoice extends H5P.Question {
           l10n: this.params.l10n.confirmRetry,
           instance: this
         },
-        classes: 'h5p-theme-secondary-cta h5p-theme-retry',
+        icon: 'retry',
+        styleType: 'secondary'
       }
     );
   }
