@@ -3,20 +3,18 @@
 
 @mixin solution-button($icon, $color) {
   position: absolute;
-  top: -0.35em;
+  top: -0.75em;
   animation: slide-right-fade 0.25s forwards ease-out;
 
-  font-family: 'Material Icons';
+  font-family: 'h5p-theme';
   font-size: sizes.$option-icon;
   content: $icon;
   color: $color;
 
   // Creates the white background and border
-  background-color: #fff;
   border-radius: 50%;
   line-height: 1em;
-
-  box-shadow: 7px 7px 5px #00000065;
+  border: solid 2px;
 
   z-index: 2;
 }

@@ -4,19 +4,21 @@
 @use 'sass:math';
 
 .h5p-multi-media-choice {
-  padding-bottom: 1em;
+  padding-bottom: var(--h5p-theme-spacing-s);
+
   .h5p-multi-media-choice-option-list {
     display: inline-block;
 
     // Removes <ul> default indentation
-    padding-left: 0;
+    padding: var(--h5p-theme-spacing-m);
     list-style-type: none;
     width: 100%;
-
+    margin: 0px;
   }
 
   .h5p-multi-media-choice-list-item {
-    padding: 0.75em 0 0.25em 0;
+    padding: var(--h5p-theme-spacing-xs) 0 var(--h5p-theme-spacing-xxs) 0;
+
     &:focus {
       outline: none;
 
@@ -27,6 +29,29 @@
     }
   }
 
+  .h5p-question-content, 
+  .h5p-question-introduction {
+    padding: 0;
+    margin: 0;
+  }
+
+  .h5p-question-introduction {
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--h5p-theme-stroke-1);
+    padding: var(--h5p-theme-spacing-m);
+    background-color: var(--h5p-theme-ui-base);
+    text-align: left;
+    position: relative;
+    z-index: 1;
+  }
+
+  .h5p-question-introduction p {
+    margin: 0px;
+    padding: var(--h5p-theme-spacing-xs) 0;
+  }
+
   .h5p-multi-media-choice-option {
     position: relative;
 
@@ -34,13 +59,10 @@
     line-height: 0;
 
     box-sizing: border-box;
-    background-color: #ffffff;
+    background-color: var(--h5p-theme-ui-base);
     outline: none;
 
     border-style: solid;
-    border-width: $border-thick-stroke-width;
-    border-radius: $border-radius;
-    border-color: $color-option-background;
     padding: $option-padding-default;
   }
 
@@ -70,11 +92,12 @@
   }
 
   .h5p-multi-media-choice-media {
-    background-color: $color-option-background;
+    background-color: var(--h5p-theme-alternative-base);
     display: inline-block;
     object-fit: contain;
     width: 100%;
     height: 100%;
+    border-radius: var(--h5p-theme-border-radius-small);
 
     &.h5p-multi-media-choice-media-specific-ratio {
       position: absolute;
@@ -114,6 +137,7 @@
       left: 0%;
       transform: translate(0%);
     }
+
     to {
       opacity: 1;
       left: 50%;
@@ -121,12 +145,21 @@
     }
   }
 
+  .h5p-multi-media-choice-correct:before,
+  .h5p-multi-media-choice-wrong:before,
+  .h5p-multi-media-choice-show-correct:before {
+    padding: var(--h5p-theme-spacing-xs);
+    font-size: var(--h5p-theme-font-size-s);
+  }
+
   .h5p-multi-media-choice-correct {
-    background-color: $color-correct-light;
-    border-color: $color-correct-dark;
+    background-color: var(--h5p-theme-feedback-correct-secondary);
+    border-color: var(--h5p-theme-feedback-correct-third);
 
     &:before {
-      @include solution-button('\e86c', $color-correct-dark);
+      @include solution-button('\e903', var(--h5p-theme-feedback-correct-main));
+      background-color: var(--h5p-theme-feedback-correct-secondary);
+      border-color: var(--h5p-theme-feedback-correct-third);
     }
   }
 
@@ -136,16 +169,20 @@
     border-style: dotted;
 
     &:before {
-      @include solution-button('\e86c', $color-show-correct-dark);
+      @include solution-button('\e903', $color-show-correct-dark);
+      background-color: $color-show-correct-light;
+      border-color: $color-show-correct-dark; 
     }
   }
 
   .h5p-multi-media-choice-wrong {
-    background-color: $color-wrong-light;
-    border-color: $color-wrong-dark;
+    background-color: var(--h5p-theme-feedback-incorrect-secondary);
+    border-color: var(--h5p-theme-feedback-incorrect-third);
 
     &:before {
-      @include solution-button('\e5c9', $color-wrong-dark);
+      @include solution-button('\e902', var(--h5p-theme-feedback-incorrect-main));
+      background-color: var(--h5p-theme-feedback-incorrect-secondary);
+      border-color: var(--h5p-theme-feedback-incorrect-third);
     }
   }
 
@@ -162,7 +199,7 @@
   .h5p-multi-media-video-button {
     font-family: 'H5PFontAwesome4';
     position: absolute;
-    background-color: #E23232;
+    background-color: var(--h5p-theme-main-cta-base);
     z-index: 1;
     bottom: 0;
     right: 0;
@@ -174,27 +211,28 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #ffffff;
-    border: 2px solid white;
+    color: var(--h5p-theme-contrast-cta);
+    border: 2px solid var(--h5p-theme-ui-base);
     border-radius: math.div($button-size, 2);
+    padding: var(--h5p-theme-spacing-s);
 
     &:hover {
-      background-color: #C51D1D;
+      background-color: var(--h5p-theme-main-cta-light);
     }
 
-    .play-icon {
-      width: 2.5rem;
-      height: 2.5rem;
-      background-image: url(../../assets/play.svg);
-      background-repeat: no-repeat;
-      background-size: 1.8rem;
-      background-position: 0.5rem;
+    &:active {
+      background-color: var(--h5p-theme-main-cta-dark);
+    }
+
+    &:before {
+      font-family: "h5p-theme";
+      content: "\e91f";
     }
   }
 
   .h5p-multi-media-modal {
     position: absolute;
-    background: #000000B2;
+    background: rgba(0,0,0,0.85);
     top: 0;
     left: 0;
     padding: 0;
@@ -222,13 +260,13 @@
 
       .h5p-multi-media-choice-modal-content {
         position: relative;
-        background-color: white;
-        padding: 1.2rem;
+        background: var(--h5p-theme-ui-base);
+        padding: var(--h5p-theme-spacing-l);
+        border-radius: var(--h5p-theme-border-radius-large);
         border: white;
         width: 80%;
         display: block;
         max-width: 80%;
-        border-radius: 1%;
         box-shadow: none;
         max-height: 100%;
 
@@ -239,14 +277,14 @@
         }
 
         .modal-close-button {
-          background-color: #ffffff;
+          background-color: var(--h5p-theme-ui-base);
           position: absolute;
           top: math.div($button-size, -3);
           right: math.div($button-size, -3);
           cursor: pointer;
           border: none;
-          height: $button-size;
-          width: $button-size;
+          height: 4rem;
+          width: 4rem;
           z-index: 1;
           border-radius: 50%;
           box-shadow: 0px 4px 4px 0px #00000040;
@@ -281,11 +319,13 @@
   }
 
   .h5p-multi-media-content-media-video-player {
-          max-width: 100%;
+    max-width: 100%;
   }
 
   .h5p-multi-media-choice-content {
     position: relative;
+    background-color: var(--h5p-theme-background);
+    padding: var(--h5p-theme-spacing-m);
   }
 
   @keyframes animateModal {
@@ -298,6 +338,14 @@
     margin: 0 auto;
   }
 
+  .h5p-multi-media-content-audio-wrapper .h5p-audio-inner {
+    background-color: unset;
+  }
+
+  .h5p-multi-media-content-audio-wrapper .h5p-audio-inner .h5p-audio-minimal-button {
+    color: var(--h5p-theme-contrast-cta);
+  }
+
   .h5p-multi-media-content-audio-wrapper {
     position: absolute;
     bottom: 0;
@@ -306,13 +354,15 @@
     z-index: 1;
 
     .h5p-audio-minimal-button {
-      width: $button-size;
-      height: $button-size;
-      border: 2px solid white;
-      background: #3239E2;
+      padding: var(--h5p-theme-spacing-s);
+      border: 2px solid var(--h5p-theme-ui-base);
+      background: var(--h5p-theme-main-cta-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &:hover {
-        background: #1B21AD;
+        background: var(--h5p-theme-main-cta-light);
         cursor: pointer;
       }
     }
@@ -327,12 +377,5 @@
       left: 3px;
       font-size: 2.125rem;
     }
-  }
-
-  .h5p-multi-media-content-media-button-centered {
-    top: 50%;
-    right: 50%;
-    margin-top: math.div($button-size, -2);
-    margin-right: math.div($button-size, -2);
   }
 }

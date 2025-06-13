@@ -3,9 +3,9 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 640 360" style="enable-background:new 0 0 640 360;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#DCE2E9;}
-	.st1{fill:#ADB3BA;}
-	.st2{fill:#B6BCC2;}
+	.st0{fill:#EEEFFA;} <!-- h5p-theme-alternative-base -->
+	.st1{fill:#DCDFFA;} <!-- h5p-theme-alternative-dark -->
+	.st2{fill:#ced1ee;} <!-- h5p-theme-alternative-darker -->
 </style>
 <rect x="0.1" class="st0" width="639.8" height="327.2"/>
 <polygon class="st1" points="374.1,360.1 374.1,271.2 258,199.7 32.9,360.1 "/>
