@@ -12,11 +12,9 @@
     // Removes <ul> default indentation
     padding: 0;
     list-style-type: none;
-    width: fill-available;
-    width: -webkit-fill-available;
-    width: -moz-available;
+    width: 100%;
     position: relative;
-    margin: 0 auto 0 15px; // the 15px compensate the gap
+    margin-left: 10px;
   }
 
   .h5p-multi-media-choice-list-item {
