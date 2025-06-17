@@ -120,7 +120,8 @@ export default class MultiMediaChoiceContent {
     // Use masonry library
     this.masonry = new Masonry(this.optionList, {
       gutter: columnGap,
-      itemSelector: '.h5p-multi-media-choice-list-item'
+      itemSelector: '.h5p-multi-media-choice-list-item',
+      horizontalOrder: true
     });
 
     // Toggle selected
