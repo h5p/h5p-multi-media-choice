@@ -400,13 +400,13 @@ export default class MultiMediaChoiceContent {
           break;
         case 'H5P.Video':
           if (!option.media.params.visuals.poster) {
-            const mediaType = (option.media.params.sources ? 'Other': 'Video');
+            const mediaType = (option.media.params.sources ? 'Image': 'Video');
             this.setPlaceholderImage(assetsFilePath, mediaType, option);
           }
           break;
         case 'H5P.Audio':
           if (!option.option.poster) { 
-            const mediaType = (option.media.params.files ? 'Other': 'Audio');
+            const mediaType = (option.media.params.files ? 'Image': 'Audio');
             this.setPlaceholderImage(assetsFilePath, mediaType, option);
           }
           break;
