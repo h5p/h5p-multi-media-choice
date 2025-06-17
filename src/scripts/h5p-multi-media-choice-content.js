@@ -1,9 +1,5 @@
 import { MultiMediaChoiceOption } from './h5p-multi-media-choice-option';
-import * as Masonry from 'masonry-layout';
 import { createElement } from './h5p-multi-media-choice-util';
-
-const optionMinWidth = 210;
-const columnGap = 20;
 
 /** Class representing the content */
 export default class MultiMediaChoiceContent {
@@ -89,11 +85,8 @@ export default class MultiMediaChoiceContent {
     this.content.appendChild(this.optionList);
     this.setTabIndexes();
 
-    // Use masonry library
-    this.masonry = new Masonry(this.optionList, {
-      gutter: columnGap,
-      itemSelector: '.h5p-multi-media-choice-list-item'
-    });
+    // Initialize grid layout
+    this.setColumnProperties();
 
     // Toggle selected
     answerState.forEach(index => this.toggleSelected(index, false));
@@ -370,31 +363,12 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Set elemnt width
-   * @param  {HTMLElement} item
-   */
-  resizeGridItem(item, width) {
-    item.style.width = width + 'px';
-  }
-
-  /**
    * Set the number of columns and each element's size
    */
   setColumnProperties() {
-    const columnSpaceCount = this.optionList.getBoundingClientRect().width / (optionMinWidth + columnGap);
+    const columns = Math.min(this.maxAlternativesPerRow, this.options.length);
+    this.optionList.style.setProperty('--max-columns', columns);
 
-    // Find the number of columns from whichever is smaller: space, max values and number of options
-    const columns = Math.floor(
-      Math.min(columnSpaceCount, this.maxAlternativesPerRow, this.options.length)
-    );
-    const elementWidth = (this.optionList.getBoundingClientRect().width / columns) - columnGap;
-
-    for (let x = 0; x < this.options.length; x++) {
-      this.resizeGridItem(this.options[x].getDOM(), elementWidth);
-    }
-
-    // Set layout again after resizing
-    this.masonry.layout();
   }
 
   /**

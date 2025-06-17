@@ -7,13 +7,13 @@
   padding-bottom: var(--h5p-theme-spacing-s);
 
   .h5p-multi-media-choice-option-list {
-    display: inline-block;
-
-    // Removes <ul> default indentation
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(max(210px, calc(100% / var(--max-columns))), 1fr)); // responsive with max columns limit
+    gap: var(--h5p-theme-spacing-m);
     padding: var(--h5p-theme-spacing-m);
     list-style-type: none;
+    margin: 0;
     width: 100%;
-    margin: 0px;
   }
 
   .h5p-multi-media-choice-list-item {
@@ -326,6 +326,7 @@
     position: relative;
     background-color: var(--h5p-theme-background);
     padding: var(--h5p-theme-spacing-m);
+    display: flex;
   }
 
   @keyframes animateModal {

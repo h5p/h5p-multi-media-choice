@@ -42,8 +42,5 @@
     "sass-loader": "^14.1.1",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
-  },
-  "dependencies": {
-    "masonry-layout": "^4.2.2"
   }
 }
