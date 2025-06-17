@@ -395,8 +395,7 @@ export default class MultiMediaChoiceContent {
    */
   setColumnProperties() {
     const columns = Math.min(this.maxAlternativesPerRow, this.options.length);
-    this.optionList.style.setProperty('--max-columns', columns);
-
+    this.optionList.style.setProperty('--max-columns', columns); // used in the css grid
   }
 
   /**
