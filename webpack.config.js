@@ -62,6 +62,11 @@ module.exports = {
         test: /\.woff$/,
         include: path.join(__dirname, 'src/fonts'),
         type: 'asset/resource'
+      },
+      {
+        test: /\.svg$/i,
+        use: 'raw-loader',
+        type: 'javascript/auto'
       }
     ]
   },
