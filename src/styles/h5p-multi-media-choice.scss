@@ -12,7 +12,9 @@
     // Removes <ul> default indentation
     padding: var(--h5p-theme-spacing-m);
     list-style-type: none;
-    width: 100%;
+    width: fill-available;
+    width: -webkit-fill-available;
+    width: -moz-available;
     margin: 0px;
     position: relative;
     margin: 0 auto;
