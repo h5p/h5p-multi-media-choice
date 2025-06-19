@@ -67,6 +67,10 @@
   }
 
   .h5p-multi-media-choice-media-wrapper {
+    svg {
+      width: 100%;
+      height: 100%;
+    }
     // Using the padding-top trick to have a specific ratio
     &.h5p-multi-media-choice-media-wrapper-specific-ratio {
       height: 0;
