@@ -73,7 +73,6 @@
     }
     // Using the padding-top trick to have a specific ratio
     &.h5p-multi-media-choice-media-wrapper-specific-ratio {
-      height: 0;
       overflow: hidden;
       position: relative;
     }
@@ -92,6 +91,10 @@
 
     &.h5p-multi-media-choice-media-wrapper-16to9 {
       padding-top: 56.25%;
+
+      &:has(svg) {
+        padding: 0;
+      }
     }
   }
 
