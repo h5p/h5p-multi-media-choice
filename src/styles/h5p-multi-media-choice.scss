@@ -10,10 +10,10 @@
     display: inline-block;
 
     // Removes <ul> default indentation
-    padding: var(--h5p-theme-spacing-m);
+    padding: 0;
     list-style-type: none;
     width: 100%;
-    margin: 0px;
+    margin-left: 10px; // Half gap of masonry
   }
 
   .h5p-multi-media-choice-list-item {
@@ -67,9 +67,12 @@
   }
 
   .h5p-multi-media-choice-media-wrapper {
+    svg {
+      width: 100%;
+      height: 100%;
+    }
     // Using the padding-top trick to have a specific ratio
     &.h5p-multi-media-choice-media-wrapper-specific-ratio {
-      height: 0;
       overflow: hidden;
       position: relative;
     }
@@ -88,6 +91,10 @@
 
     &.h5p-multi-media-choice-media-wrapper-16to9 {
       padding-top: 56.25%;
+
+      &:has(svg) {
+        padding: 0;
+      }
     }
   }
 

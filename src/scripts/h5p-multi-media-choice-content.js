@@ -2,6 +2,34 @@ import { MultiMediaChoiceOption } from './h5p-multi-media-choice-option';
 import * as Masonry from 'masonry-layout';
 import { createElement } from './h5p-multi-media-choice-util';
 
+import placeholder1to1 from '../../assets/placeholder1to1.svg?raw';
+import placeholder3to2 from '../../assets/placeholder3to2.svg?raw';
+import placeholder4to3 from '../../assets/placeholder4to3.svg?raw';
+import placeholder16to9 from '../../assets/placeholder16to9.svg?raw';
+import placeholderAudio1to1 from '../../assets/placeholderAudio1to1.svg?raw';
+import placeholderAudio3to2 from '../../assets/placeholderAudio3to2.svg?raw';
+import placeholderAudio4to3 from '../../assets/placeholderAudio4to3.svg?raw';
+import placeholderAudio16to9 from '../../assets/placeholderAudio16to9.svg?raw';
+import placeholderVideo1to1 from '../../assets/placeholderVideo1to1.svg?raw';
+import placeholderVideo3to2 from '../../assets/placeholderVideo3to2.svg?raw';
+import placeholderVideo4to3 from '../../assets/placeholderVideo4to3.svg?raw';
+import placeholderVideo16to9 from '../../assets/placeholderVideo16to9.svg?raw';
+
+const PLACEHOLDERS = {
+  '1to1': placeholder1to1,
+  '3to2': placeholder3to2,
+  '4to3': placeholder4to3,
+  '16to9': placeholder16to9,
+  'audio1to1': placeholderAudio1to1,
+  'audio3to2': placeholderAudio3to2,
+  'audio4to3': placeholderAudio4to3,
+  'audio16to9': placeholderAudio16to9,
+  'video1to1': placeholderVideo1to1,
+  'video3to2': placeholderVideo3to2,
+  'video4to3': placeholderVideo4to3,
+  'video16to9': placeholderVideo16to9,
+};
+
 const optionMinWidth = 210;
 const columnGap = 20;
 
@@ -92,7 +120,8 @@ export default class MultiMediaChoiceContent {
     // Use masonry library
     this.masonry = new Masonry(this.optionList, {
       gutter: columnGap,
-      itemSelector: '.h5p-multi-media-choice-list-item'
+      itemSelector: '.h5p-multi-media-choice-list-item',
+      horizontalOrder: true
     });
 
     // Toggle selected
@@ -416,41 +445,43 @@ export default class MultiMediaChoiceContent {
    * Set options default images
    * @param {string} assetsFilePath
    */
-  setMultiMediaOptionsPlaceholder(assetsFilePath) {
+  setMultiMediaOptionsPlaceholder() {
     this.options.forEach(option => {
-      switch (option?.media?.library?.split(' ')[0]) {
-        case 'H5P.Image':
-          if (!option.media.params.file) {
-            this.setPlaceholderImage(assetsFilePath, 'Image', option);
-          }
-          break;
-        case 'H5P.Video':
-          if (!option.media.params.visuals.poster) {
-            const mediaType = (option.media.params.sources ? 'Other': 'Video');
-            this.setPlaceholderImage(assetsFilePath, mediaType, option);
-          }
-          break;
-        case 'H5P.Audio':
-          if (!option.option.poster) { 
-            const mediaType = (option.media.params.files ? 'Other': 'Audio');
-            this.setPlaceholderImage(assetsFilePath, mediaType, option);
-          }
-          break;
+      const lib = option?.media?.library?.split(' ')[0];
+      let mediaType;
+  
+      if (lib === 'H5P.Image' && !option.media?.params?.file) {
+        mediaType = 'image';
+      }
+      else if (lib === 'H5P.Video' && !option.media?.params?.visuals?.poster) {
+        mediaType = 'video';
+      }
+      else if (lib === 'H5P.Audio' && !option.option?.poster) {
+        mediaType = 'audio';
+      }
+  
+      if (mediaType) {
+        this.setPlaceholderImage(mediaType, option);
       }
     });
   }
 
   /**
    * Set options default images
-   * @param {string} assetsFilePath 
    * @param {string} mediaType 
    * @param {object} option 
    */
-  setPlaceholderImage(assetsFilePath, mediaType, option) {
+  setPlaceholderImage(mediaType, option) {
     const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
-    const subPath = mediaType == 'Image' ? '' : mediaType;
-    let path = `${assetsFilePath}/placeholder${subPath}${placeholderAspectRatio}.svg`; 
-    option.wrapper.querySelector('img').src = path;
+    const key = `${mediaType.toLowerCase()}${placeholderAspectRatio}`;
+    const svgMarkup = PLACEHOLDERS[key] || PLACEHOLDERS['1to1'];
+  
+    const placeholderEl = H5P.Components.PlaceholderImg(svgMarkup);
+  
+    const img = option.wrapper.querySelector('img');
+    if (img && img.parentNode) {
+      img.parentNode.replaceChild(placeholderEl, img);
+    }
   }
 
   /**
