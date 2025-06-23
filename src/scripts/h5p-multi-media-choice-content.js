@@ -14,14 +14,16 @@ export default class MultiMediaChoiceContent {
    * @param {object} [callbacks = {}] Callbacks.
    * @param {string} assetsFilePath File path to the assets folder
    * @param {number[]} answerState Previous answers given (when resuming)
+   * @param {number} introId id for the title text
    */
-  constructor(params = {}, contentId, callbacks = {}, answerState) {
+  constructor(params = {}, contentId, callbacks = {}, answerState, introId) {
     this.params = params;
     this.contentId = contentId;
     this.callbacks = callbacks;
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
     this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
     this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
+    this.introId = introId;
 
     this.numberOfCorrectOptions = params.options
       ? params.options.filter(option => option.correct).length
@@ -110,7 +112,7 @@ export default class MultiMediaChoiceContent {
       classList: ['h5p-multi-media-choice-option-list'],
       attributes: {
         role: this.isSingleAnswer ? 'radiogroup' : 'group',
-        'aria-labelledby': `h5p-media-choice${this.contentId}`
+        'aria-labelledby': `h5p-media-choice-${this.introId}`
       }
     });
 
