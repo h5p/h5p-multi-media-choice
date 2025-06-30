@@ -475,8 +475,7 @@ export default class MultiMediaChoiceContent {
     const hasSource = option.media.params.files?.length > 0 || option.media.params.sources?.length > 0;
     const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
     const key = hasSource ? this.aspectRatio : `${mediaType.toLowerCase()}${placeholderAspectRatio}`;
-    const svgMarkup = PLACEHOLDERS[key] || PLACEHOLDERS['1to1'];
-    console.log(key);
+    const svgMarkup = PLACEHOLDERS[key] || PLACEHOLDERS[this.aspectRatio];
   
     const placeholderEl = H5P.Components.PlaceholderImg(svgMarkup);
   
