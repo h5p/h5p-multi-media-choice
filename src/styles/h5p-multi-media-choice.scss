@@ -91,10 +91,10 @@
 
     &.h5p-multi-media-choice-media-wrapper-16to9 {
       padding-top: 56.25%;
+    }
 
-      &:has(svg) {
-        padding: 0;
-      }
+    &.h5p-multi-media-choice-media-wrapper:has(.h5p-theme-placeholder-img) {
+      padding-top: 0;
     }
   }
 
