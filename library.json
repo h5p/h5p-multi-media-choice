@@ -3,7 +3,7 @@
   "description": "Create a Multimedia Choice",
   "majorVersion": 0,
   "minorVersion": 3,
-  "patchVersion": 50,
+  "patchVersion": 51,
   "runnable": 1,
   "author": "H5P Group AS",
   "license": "MIT",
@@ -21,11 +21,17 @@
     },
     {
       "path": "@legacy/dist/h5p-multi-media-choice.js"
+    },
+    {
+      "path": "@legacy/dist/h5p-multi-media-choice.js"
     }
   ],
   "preloadedCss": [
     {
       "path": "dist/h5p-multi-media-choice.css"
+    },
+    {
+      "path": "@legacy/dist/h5p-multi-media-choice.css"
     },
     {
       "path": "@legacy/dist/h5p-multi-media-choice.css"
