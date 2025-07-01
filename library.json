@@ -18,23 +18,11 @@
   "preloadedJs": [
     {
       "path": "dist/h5p-multi-media-choice.js"
-    },
-    {
-      "path": "@legacy/dist/h5p-multi-media-choice.js"
-    },
-    {
-      "path": "@legacy/dist/h5p-multi-media-choice.js"
     }
   ],
   "preloadedCss": [
     {
       "path": "dist/h5p-multi-media-choice.css"
-    },
-    {
-      "path": "@legacy/dist/h5p-multi-media-choice.css"
-    },
-    {
-      "path": "@legacy/dist/h5p-multi-media-choice.css"
     }
   ],
   "preloadedDependencies": [
