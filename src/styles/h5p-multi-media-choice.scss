@@ -306,18 +306,27 @@
             width: $button-size-small;
           }
 
-          .icon-cross {
-            width: $button-size;
-            height: $button-size;
-            background-size: 3.5rem;
-            background-image: url(../../assets/x-close.svg);
-            background-repeat: no-repeat;
-            background-position: center;
+          width: $button-size;
+          height: $button-size;
 
-            @container h5p-mmc-modal-container (width < 480px) {
-              height: $button-size-small;
-              width: $button-size-small;
-              background-size: 2rem;
+          .icon-cross::before {
+            color: var(--h5p-theme-text-primary);
+            content: "\e910";
+            font-family: "h5p-theme";
+            font-size: math.div($button-size, 2);
+            font-weight: bold;
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+          }
+
+          @container h5p-mmc-modal-container (width < 480px) {
+            height: $button-size-small;
+            width: $button-size-small;
+
+            .icon-cross::before {
+              font-size: math.div($button-size-small, 2);
             }
           }
         }
