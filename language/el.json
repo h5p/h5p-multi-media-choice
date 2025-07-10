@@ -23,10 +23,10 @@
         "fields": [
           {
             "label": "Μέσα",
-            "description": "Media to display as a choice."
+            "description": "Μέσα που θα εμφανίζονται ως επιλογή."
           },
           {
-            "label": "Poster image"
+            "label": "Εικόνα Poster"
           },
           {
             "label": "Σωστό"
@@ -247,8 +247,8 @@
           "default": "Λείπει το εναλλακτικό κείμενο"
         },
         {
-          "label": "Close modal button label",
-          "default": "Close modal"
+          "label": "Ετικέτα κουμπιού κλεισίματος παραθύρου",
+          "default": "Κλείσιμο παραθύρου"
         }
       ]
     }
