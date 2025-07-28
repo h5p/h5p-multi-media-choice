@@ -29,7 +29,7 @@
     }
   }
 
-  .h5p-question-content, 
+  .h5p-question-content,
   .h5p-question-introduction {
     padding: 0;
     margin: 0;
@@ -178,7 +178,7 @@
     &:before {
       @include solution-button('\e903', $color-show-correct-dark);
       background-color: $color-show-correct-light;
-      border-color: $color-show-correct-dark; 
+      border-color: $color-show-correct-dark;
     }
   }
 
@@ -222,9 +222,12 @@
     border: 2px solid var(--h5p-theme-ui-base);
     border-radius: math.div($button-size, 2);
     padding: var(--h5p-theme-spacing-s);
+    transition: all 0.1s linear 0s;
 
     &:hover {
       background-color: var(--h5p-theme-main-cta-light);
+      box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.1);
+      scale: 1.1;
     }
 
     &:active {
