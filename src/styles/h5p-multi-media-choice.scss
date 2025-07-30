@@ -212,8 +212,6 @@
     right: 0;
     margin: 0.5em;
     padding: 0;
-    width: $button-size;
-    height: $button-size;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -237,6 +235,10 @@
     &:before {
       font-family: "h5p-theme";
       content: "\e91f";
+      font-size: 1.25rem;
+      height: 2rem;
+      line-height: 2rem;
+      width: 2rem;
     }
   }
 
