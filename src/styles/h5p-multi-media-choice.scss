@@ -129,6 +129,7 @@
   }
 
   .h5p-multi-media-choice-selected {
+    outline: 2px solid white;
     border-color: $color-border-interaction;
 
     &:hover {
