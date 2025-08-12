@@ -394,15 +394,16 @@
       }
     }
 
+    // Make it similar to Video button
     .h5p-audio-minimal-button::before {
-      font-size: math.div($button-size, 2);
+      font-size: 1.25rem;
+      height: 2rem;
+      line-height: 2rem;
+      width: 2rem;
     }
 
-    /* Make H5P.Audio's play button icon match our video play button's icon */
-    .h5p-audio-minimal-play-paused::before {
-      position: relative;
-      left: 3px;
-      font-size: 2.125rem;
+    .h5p-audio-minimal-play::before {
+      font-weight: bold;
     }
   }
 }
