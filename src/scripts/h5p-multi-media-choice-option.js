@@ -377,11 +377,11 @@ export class MultiMediaChoiceOption {
   toggle() {
     if (this.isSelected()) {
       this.content.setAttribute('aria-checked', 'false');
-      this.wrapper.classList.remove('h5p-multi-media-choice-selected');
+      this.wrapper.classList.remove('selected');
     }
     else {
       this.content.setAttribute('aria-checked', 'true');
-      this.wrapper.classList.add('h5p-multi-media-choice-selected');
+      this.wrapper.classList.add('selected');
     }
   }
 
@@ -390,7 +390,7 @@ export class MultiMediaChoiceOption {
    */
   uncheck() {
     this.content.setAttribute('aria-checked', 'false');
-    this.wrapper.classList.remove('h5p-multi-media-choice-selected');
+    this.wrapper.classList.remove('selected');
   }
 
   /**
@@ -421,7 +421,7 @@ export class MultiMediaChoiceOption {
    * Shows if the answer selected is correct or wrong in the UI and screen reader if selected
    */
   showSelectedSolution({ correctAnswer, wrongAnswer }) {
-    this.wrapper.classList.remove('h5p-multi-media-choice-selected');
+    this.wrapper.classList.remove('selected');
     if (this.isSelected()) {
       if (this.correct) {
         this.wrapper.classList.add('h5p-multi-media-choice-correct');
