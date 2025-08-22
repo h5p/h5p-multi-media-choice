@@ -210,15 +210,14 @@
     z-index: 1;
     bottom: 0;
     right: 0;
-    margin: 0.5em;
-    padding: 0;
+    margin: 0.6em;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     color: var(--h5p-theme-contrast-cta);
     border: 2px solid var(--h5p-theme-ui-base);
-    border-radius: math.div($button-size, 2);
+    border-radius: 50%;
     padding: var(--h5p-theme-spacing-s);
     transition: all 0.1s linear 0s;
 
@@ -239,6 +238,8 @@
       height: 2rem;
       line-height: 2rem;
       width: 2rem;
+      box-sizing: border-box;
+      padding-left: 2px;
     }
 
     &:focus {
@@ -399,6 +400,11 @@
       height: 2rem;
       line-height: 2rem;
       width: 2rem;
+    }
+
+    .h5p-audio-minimal-play-paused:before {
+      box-sizing: border-box;
+      padding-left: 2px;
     }
 
     .h5p-audio-minimal-play::before {
