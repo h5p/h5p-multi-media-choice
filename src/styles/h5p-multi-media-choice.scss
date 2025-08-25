@@ -20,11 +20,6 @@
 
     &:focus {
       outline: none;
-
-      .h5p-multi-media-choice-enabled {
-        outline: none;
-        box-shadow: 0 0 $border-radius $border-thin-stroke-width $color-border-interaction;
-      }
     }
   }
 
@@ -115,10 +110,8 @@
   .h5p-multi-media-choice-enabled {
 
     &:hover {
-      &:not(.h5p-multi-media-choice-selected) {
+      &:not(.h5p-multi-media-choice-option.selected) {
         cursor: pointer;
-        border-style: dotted;
-        border-color: $color-border-interaction;
 
         &:after {
           @include hover-overlay();
@@ -127,10 +120,7 @@
     }
   }
 
-  .h5p-multi-media-choice-selected {
-    outline: 2px solid white;
-    border-color: $color-border-interaction;
-
+  .h5p-multi-media-choice-option.selected{
     &:hover {
       &:after {
         @include hover-overlay();

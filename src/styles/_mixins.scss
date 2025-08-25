@@ -28,5 +28,6 @@
   width: 100%;
   height: 100%;
   background-color: colors.$color-border-interaction;
+  border-radius: var(--h5p-theme-border-radius-small);
   opacity: 0.15;
 }
