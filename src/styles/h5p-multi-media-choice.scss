@@ -21,6 +21,13 @@
     &:focus {
       outline: none;
     }
+
+    &:focus-visible{
+      .h5p-multi-media-choice-enabled{
+        box-shadow: 0 0 $border-radius $border-thin-stroke-width $color-border-interaction;   
+      }
+    }
+
   }
 
   .h5p-question-content,
@@ -113,6 +120,15 @@
       &:not(.h5p-multi-media-choice-option.selected) {
         cursor: pointer;
 
+        &:after {
+          @include hover-overlay();
+        }
+      }
+    }
+    &:hover {
+      &.h5p-mmc-multiAnswer {
+        cursor: pointer;
+        
         &:after {
           @include hover-overlay();
         }
