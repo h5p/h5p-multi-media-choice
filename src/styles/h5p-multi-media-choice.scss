@@ -27,7 +27,6 @@
         box-shadow: 0 0 $border-radius $border-thin-stroke-width $color-border-interaction;   
       }
     }
-
   }
 
   .h5p-question-content,
@@ -209,22 +208,20 @@
     width: 1px;
   }
 
-  .h5p-multi-media-video-button {
-    font-family: 'H5PFontAwesome4';
+  .h5p-multi-media-video-button, .h5p-audio-minimal-button {
     position: absolute;
     background-color: var(--h5p-theme-main-cta-base);
     z-index: 1;
     bottom: 0;
     right: 0;
-    margin: 0.5em;
-    padding: 0;
+    margin: 0.6em;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     color: var(--h5p-theme-contrast-cta);
     border: 2px solid var(--h5p-theme-ui-base);
-    border-radius: math.div($button-size, 2);
+    border-radius: 50%;
     padding: var(--h5p-theme-spacing-s);
     transition: all 0.1s linear 0s;
 
@@ -239,18 +236,23 @@
     }
 
     &:before {
-      font-family: "h5p-theme";
-      content: "\e91f";
       font-size: 1.25rem;
       height: 2rem;
       line-height: 2rem;
       width: 2rem;
+      box-sizing: border-box;
+      padding-left: 2px;
     }
 
     &:focus {
       outline: 2px ridge var(--h5p-theme-main-cta-base);
       outline-offset: 2px;
     }
+  }
+
+  .h5p-multi-media-video-button::before {
+    font-family: "h5p-theme";
+    content: "\e91f";
   }
 
   .h5p-multi-media-modal {
@@ -376,13 +378,13 @@
 
   .h5p-multi-media-content-audio-wrapper .h5p-audio-inner .h5p-audio-minimal-button {
     color: var(--h5p-theme-contrast-cta);
+    font-size: revert; // Use the default CP font size
   }
 
   .h5p-multi-media-content-audio-wrapper {
     position: absolute;
     bottom: 0;
     right: 0;
-    margin: 0.5em;
     z-index: 1;
 
     .h5p-audio-minimal-button {
@@ -405,6 +407,11 @@
       height: 2rem;
       line-height: 2rem;
       width: 2rem;
+    }
+
+    .h5p-audio-minimal-play-paused:before {
+      box-sizing: border-box;
+      padding-left: 2px;
     }
 
     .h5p-audio-minimal-play::before {
