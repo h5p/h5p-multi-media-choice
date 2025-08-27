@@ -33,7 +33,7 @@ export class MultiMediaChoiceOption {
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
     this.callbacks.pauseAllOtherMedia = this.callbacks.pauseAllOtherMedia || (() => {});
 
-    this.wrapper = createElement({type: 'div', classList: ['h5p-multi-media-choice-option', 'h5p-cardholder']});
+    this.wrapper = createElement({type: 'div', classList: ['h5p-multi-media-choice-option', 'h5p-cardholder', (singleAnswer ? 'h5p-mmc-singleAnswer' : 'h5p-mmc-multiAnswer')]});
     this.content = createElement({
       type: 'li',
       classList: ['h5p-multi-media-choice-list-item'],
