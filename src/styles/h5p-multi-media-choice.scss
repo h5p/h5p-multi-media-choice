@@ -22,10 +22,13 @@
       outline: none;
     }
 
-    &:focus-visible{
-      .h5p-multi-media-choice-enabled{
-        box-shadow: 0 0 $border-radius $border-thin-stroke-width $color-border-interaction;   
+    &:focus-visible {
+      .h5p-multi-media-choice-enabled {
+        box-shadow: 0 0 $border-radius $border-thin-stroke-width $color-border-interaction;
       }
+      .h5p-multi-media-choice-enabled.selected {
+        box-shadow: 0 0 5px 7px $color-border-interaction;
+      } 
     }
   }
 
@@ -124,6 +127,7 @@
         }
       }
     }
+
     &:hover {
       &.h5p-mmc-multiAnswer {
         cursor: pointer;
