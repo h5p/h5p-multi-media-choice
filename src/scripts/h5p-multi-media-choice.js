@@ -261,7 +261,7 @@ export default class MultiMediaChoice extends H5P.Question {
       { 'aria-label': this.params.l10n.showSolution },
       {
         styleType: 'secondary',
-        icon: 'show-results'        
+        icon: 'show-solutions'        
       }
     );
 
