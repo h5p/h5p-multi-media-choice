@@ -254,7 +254,8 @@
 
   .h5p-multi-media-modal {
     position: absolute;
-    background: rgba(0,0,0,0.85);
+    background-color: rgba(0,0,0,0.85); /* Fallback color */
+    background-color: hsl(from var(--h5p-theme-main-cta-base) h calc(s * 0.3) 18% / 40%);
     top: 0;
     left: 0;
     padding: 0;
