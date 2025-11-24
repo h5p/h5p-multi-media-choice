@@ -1,6 +1,7 @@
+/* eslint-disable import/no-unresolved */
 import * as Masonry from 'masonry-layout';
-import { MultiMediaChoiceOption } from './h5p-multi-media-choice-option';
-import { createElement } from './h5p-multi-media-choice-util';
+import { MultiMediaChoiceOption } from './h5p-multi-media-choice-option.js';
+import { createElement } from './h5p-multi-media-choice-util.js';
 
 import placeholder1to1 from '../../assets/placeholder1to1.svg?raw';
 import placeholder3to2 from '../../assets/placeholder3to2.svg?raw';
@@ -494,7 +495,7 @@ export default class MultiMediaChoiceContent {
   pauseAllOtherMedia(mediaToPlay) {
     if (this.options) {
       this.options.forEach((option, index) => {
-        if (index != mediaToPlay) {
+        if (index !== mediaToPlay) {
           option.pauseMedia();
         }
       });

@@ -1,4 +1,4 @@
-import { createElement, htmlDecode } from './h5p-multi-media-choice-util';
+import { createElement, htmlDecode } from './h5p-multi-media-choice-util.js';
 
 /** Class representing a multi media option */
 export class MultiMediaChoiceOption {
@@ -76,6 +76,9 @@ export class MultiMediaChoiceOption {
       case 'H5P.Audio':
         mediaWrapper.appendChild(this.buildImage(this.option));
         this.buildAudio();
+        break;
+      default:
+        // Unsupported media type
         break;
     }
     return mediaWrapper;
@@ -180,6 +183,9 @@ export class MultiMediaChoiceOption {
           path = H5P.getPath(this.option.poster.path, this.contentId);
         }
         break;
+      default:
+        // Unsupported media type
+        break;
     }
 
     const htmlDecodedAlt = htmlDecode(alt);
@@ -238,7 +244,7 @@ export class MultiMediaChoiceOption {
     const { instance } = this;
     const { frame } = this;
     // Resize frame if content of modal grows bigger than frame
-    const resizeFrame = (modalContent) => this.resizeWindow(modalContent);
+    const resizeFrame = (content) => this.resizeWindow(content);
 
     const handleResize = function () {
       instance.trigger('resize');
@@ -279,7 +285,7 @@ export class MultiMediaChoiceOption {
 
       if (event.key === 'Tab' || event.keyCode === 9) { // 9 == TAB
         // make choice options unavailable from tabs
-        if (document.activeElement != firstFocusable && document.activeElement != lastFocusable) {
+        if (document.activeElement !== firstFocusable && document.activeElement !== lastFocusable) {
           firstFocusable.focus();
           event.preventDefault();
         }
@@ -289,12 +295,10 @@ export class MultiMediaChoiceOption {
             event.preventDefault();
           }
         }
-        else /* tab */ {
+        else if (document.activeElement === lastFocusable && lastFocusable.nodeName !== 'VIDEO') {
           // Uploaded videos have their own tab handling
-          if (document.activeElement === lastFocusable && lastFocusable.nodeName !== 'VIDEO') {
-            firstFocusable.focus();
-            event.preventDefault();
-          }
+          firstFocusable.focus();
+          event.preventDefault();
         }
       }
     };
@@ -302,7 +306,7 @@ export class MultiMediaChoiceOption {
     window.addEventListener('keydown', handleKeyDown);
 
     const handleClick = function (event) {
-      if (event.target == modal || event.target == modalContainer) {
+      if (event.target === modal || event.target === modalContainer) {
         closeModal();
       }
     };
@@ -513,6 +517,8 @@ export class MultiMediaChoiceOption {
             return;
           }
           this.callbacks.onKeyboardArrowKey(event.code.replace('Arrow', ''));
+          break;
+        default:
           break;
       }
     });

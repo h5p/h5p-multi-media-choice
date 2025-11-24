@@ -1,7 +1,6 @@
-import MultiMediaChoiceContent from './h5p-multi-media-choice-content';
-
-import { createElement, Util } from './h5p-multi-media-choice-util';
-import { getCurrentState, getXAPIData, getAnsweredXAPIEvent } from './h5p-multi-media-choice-xapi';
+import MultiMediaChoiceContent from './h5p-multi-media-choice-content.js';
+import { createElement, Util } from './h5p-multi-media-choice-util.js';
+import { getCurrentState, getXAPIData, getAnsweredXAPIEvent } from './h5p-multi-media-choice-xapi.js';
 
 /**
  * Class for H5P Multi Media Choice.
@@ -18,7 +17,7 @@ export default class MultiMediaChoice extends H5P.Question {
 
     this.contentId = contentId;
     this.extras = extras;
-    this.answerState = extras.previousState && extras.previousState.answers ? extras.previousState.answers : [];
+    this.answerState = extras.previousState?.answers ? extras.previousState.answers : [];
 
     // Default values are extended
     this.params = Util.extendParams(params);
@@ -158,7 +157,8 @@ export default class MultiMediaChoice extends H5P.Question {
 
     /**
      * Show solutions.
-     * @param {boolean} shouldRespectRequireInputFlag Determine from where this function being called
+     * @param {boolean} shouldRespectRequireInputFlag
+     * Determine from where this function being called
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
      */
     this.showSolutions = (shouldRespectRequireInputFlag = false) => {
