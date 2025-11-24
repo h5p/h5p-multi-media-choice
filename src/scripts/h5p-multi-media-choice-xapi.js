@@ -70,7 +70,7 @@ function addQuestionToXAPI(xAPIEvent, options, question) {
  */
 function addResponseToXAPI(xAPIEvent, options) {
   xAPIEvent.data.statement.result.response = options
-    .flatMap(function (option, index) {
+    .flatMap((option, index) => {
       if (option.isSelected()) {
         return index;
       }
@@ -90,8 +90,8 @@ function getChoices(options) {
   return options.map((option, index) => ({
     id: index.toString(),
     description: {
-      'en-US': htmlDecode(option.getDescription())
-    }
+      'en-US': htmlDecode(option.getDescription()),
+    },
   }));
 }
 
@@ -103,7 +103,7 @@ function getChoices(options) {
  */
 function getCorrectOptions(options) {
   return options
-    .flatMap(function (option, index) {
+    .flatMap((option, index) => {
       if (option.isCorrect()) {
         return index;
       }
