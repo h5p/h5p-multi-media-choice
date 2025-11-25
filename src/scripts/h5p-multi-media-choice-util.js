@@ -117,3 +117,12 @@ export const createElement = ({ type, classList = [], attributes = {} }) => {
 
   return element;
 };
+
+/**
+ * Set elemnt width
+ * @param  {HTMLElement} item
+ */
+export const resizeGridItem = (item, width) => {
+  // eslint-disable-next-line no-param-reassign
+  item.style.width = `${width}px`;
+};
