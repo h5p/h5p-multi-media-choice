@@ -1,4 +1,4 @@
-import { createElement, htmlDecode } from "./h5p-multi-media-choice-util";
+import { createElement, htmlDecode } from './h5p-multi-media-choice-util.js';
 
 /** Class representing a multi media option */
 export class MultiMediaChoiceOption {
@@ -33,14 +33,14 @@ export class MultiMediaChoiceOption {
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
     this.callbacks.pauseAllOtherMedia = this.callbacks.pauseAllOtherMedia || (() => {});
 
-    this.wrapper = createElement({type: 'div', classList: ['h5p-multi-media-choice-option', 'h5p-cardholder', (singleAnswer ? 'h5p-mmc-singleAnswer' : 'h5p-mmc-multiAnswer')]});
+    this.wrapper = createElement({ type: 'div', classList: ['h5p-multi-media-choice-option', 'h5p-cardholder', (singleAnswer ? 'h5p-mmc-singleAnswer' : 'h5p-mmc-multiAnswer')] });
     this.content = createElement({
       type: 'li',
       classList: ['h5p-multi-media-choice-list-item'],
       attributes: {
         role: singleAnswer ? 'radio' : 'checkbox',
-        'aria-checked': 'false'
-      }
+        'aria-checked': 'false',
+      },
     });
 
     this.content.appendChild(this.wrapper);
@@ -60,7 +60,7 @@ export class MultiMediaChoiceOption {
    * @returns {undefined} Undefined if the content type cannot be created
    */
   createMediaContent() {
-    const mediaWrapper = createElement({type: 'div', classList: ['h5p-multi-media-choice-media-wrapper']});
+    const mediaWrapper = createElement({ type: 'div', classList: ['h5p-multi-media-choice-media-wrapper'] });
     if (this.aspectRatio !== 'auto') {
       mediaWrapper.classList.add('h5p-multi-media-choice-media-wrapper-specific-ratio');
       mediaWrapper.classList.add(`h5p-multi-media-choice-media-wrapper-${this.aspectRatio}`);
@@ -76,6 +76,9 @@ export class MultiMediaChoiceOption {
       case 'H5P.Audio':
         mediaWrapper.appendChild(this.buildImage(this.option));
         this.buildAudio();
+        break;
+      default:
+        // Unsupported media type
         break;
     }
     return mediaWrapper;
@@ -104,10 +107,10 @@ export class MultiMediaChoiceOption {
         type: 'button',
         classList: ['h5p-multi-media-video-button'],
         attributes: {
-          tabindex: '0'
-        }
+          tabindex: '0',
+        },
       });
-      const videoIcon = createElement({type: 'div', classList: ['play-icon']});
+      const videoIcon = createElement({ type: 'div', classList: ['play-icon'] });
       videoButton.appendChild(videoIcon);
 
       if (!this.media?.params?.visuals?.poster?.path) {
@@ -139,12 +142,12 @@ export class MultiMediaChoiceOption {
   buildAudio() {
     if (this.media.params.files) {
       const $audioWrapper = H5P.jQuery('<div>', {
-        class:'h5p-multi-media-content-audio-wrapper' + (this.option.poster ? '' : ' h5p-multi-media-content-media-button-centered')
+        class: `h5p-multi-media-content-audio-wrapper${this.option.poster ? '' : ' h5p-multi-media-content-media-button-centered'}`,
       });
       H5P.jQuery(this.wrapper).append($audioWrapper);
 
-      //Only allow minimalistic playerMode
-      this.media.params.playerMode = "minimalistic";
+      // Only allow minimalistic playerMode
+      this.media.params.playerMode = 'minimalistic';
       this.media.params.propagateButtonClickEvents = false;
       this.media.params.autoplay = false;
       this.instance = H5P.newRunnable(this.media, this.contentId, $audioWrapper, false);
@@ -180,6 +183,9 @@ export class MultiMediaChoiceOption {
           path = H5P.getPath(this.option.poster.path, this.contentId);
         }
         break;
+      default:
+        // Unsupported media type
+        break;
     }
 
     const htmlDecodedAlt = htmlDecode(alt);
@@ -188,8 +194,8 @@ export class MultiMediaChoiceOption {
       classList: ['h5p-multi-media-choice-media'],
       attributes: {
         src: path,
-        alt: htmlDecodedAlt
-      }
+        alt: htmlDecodedAlt,
+      },
     });
 
     if (this.aspectRatio !== 'auto') {
@@ -209,11 +215,11 @@ export class MultiMediaChoiceOption {
    *  @param {HTMLElement} lastFocus element that had focus before modal opened
    */
   createVideoPlayer(lastFocus) {
-    const modal = createElement({type: 'div', classList: ['h5p-multi-media-modal'], attributes: {'aria-modal': 'true'}});
-    const modalContainer = createElement({type: 'div', classList: ['h5p-multi-media-choice-modal-container']});
-    const modalContent = createElement({type: 'div', classList: ['h5p-multi-media-choice-modal-content']});
-    const closeButton = createElement({type: 'button', classList: ['modal-close-button'], attributes: {'aria-label': this.closeModalText}});
-    const cross = createElement({type: 'div', classList: ['icon-cross']});
+    const modal = createElement({ type: 'div', classList: ['h5p-multi-media-modal'], attributes: { 'aria-modal': 'true' } });
+    const modalContainer = createElement({ type: 'div', classList: ['h5p-multi-media-choice-modal-container'] });
+    const modalContent = createElement({ type: 'div', classList: ['h5p-multi-media-choice-modal-content'] });
+    const closeButton = createElement({ type: 'button', classList: ['modal-close-button'], attributes: { 'aria-label': this.closeModalText } });
+    const cross = createElement({ type: 'div', classList: ['icon-cross'] });
 
     modal.appendChild(modalContainer);
     modalContainer.appendChild(modalContent);
@@ -222,7 +228,7 @@ export class MultiMediaChoiceOption {
     this.frame.appendChild(modal);
 
     this.media.params.visuals.poster = undefined;
-    let newDiv = H5P.jQuery('<div></div>');
+    const newDiv = H5P.jQuery('<div></div>');
     H5P.jQuery(modalContent).append(newDiv);
 
     // Disable fit to wrapper
@@ -235,10 +241,10 @@ export class MultiMediaChoiceOption {
       this.instance.attach(newDiv);
       this.instance.trigger('resize');
     }
-    const instance = this.instance;
-    let frame = this.frame;
+    const { instance } = this;
+    const { frame } = this;
     // Resize frame if content of modal grows bigger than frame
-    let resizeFrame = (modalContent) => this.resizeWindow(modalContent);
+    const resizeFrame = (content) => this.resizeWindow(content);
 
     const handleResize = function () {
       instance.trigger('resize');
@@ -248,14 +254,14 @@ export class MultiMediaChoiceOption {
     window.addEventListener('resize', handleResize);
 
     this.callbacks.pauseAllOtherMedia();
-    let resize = () => this.callbacks.triggerResize();
+    const resize = () => this.callbacks.triggerResize();
 
     instance.on(this.media.params?.sources[0]?.mime === 'video/Panopto' ? 'containerLoaded' : 'loaded', (e) => {
       resize();
       resizeFrame(modalContent);
     });
 
-    let closeModal = function () {
+    const closeModal = function () {
       modal.remove();
       window.removeEventListener('keydown', handleKeyDown);
       frame.removeEventListener('click', handleClick);
@@ -279,7 +285,7 @@ export class MultiMediaChoiceOption {
 
       if (event.key === 'Tab' || event.keyCode === 9) { // 9 == TAB
         // make choice options unavailable from tabs
-        if (document.activeElement != firstFocusable && document.activeElement != lastFocusable) {
+        if (document.activeElement !== firstFocusable && document.activeElement !== lastFocusable) {
           firstFocusable.focus();
           event.preventDefault();
         }
@@ -289,12 +295,10 @@ export class MultiMediaChoiceOption {
             event.preventDefault();
           }
         }
-        else /* tab */ {
+        else if (document.activeElement === lastFocusable && lastFocusable.nodeName !== 'VIDEO') {
           // Uploaded videos have their own tab handling
-          if (document.activeElement === lastFocusable && lastFocusable.nodeName !== 'VIDEO') {
-            firstFocusable.focus();
-            event.preventDefault();
-          }
+          firstFocusable.focus();
+          event.preventDefault();
         }
       }
     };
@@ -302,7 +306,7 @@ export class MultiMediaChoiceOption {
     window.addEventListener('keydown', handleKeyDown);
 
     const handleClick = function (event) {
-      if (event.target == modal || event.target == modalContainer) {
+      if (event.target === modal || event.target === modalContainer) {
         closeModal();
       }
     };
@@ -319,7 +323,7 @@ export class MultiMediaChoiceOption {
    */
   resizeWindow(modalContent) {
     if (this.frame.offsetHeight - 50 < modalContent.offsetHeight) {
-      this.frame.style.minHeight = modalContent.offsetHeight + 150 + 'px';
+      this.frame.style.minHeight = `${modalContent.offsetHeight + 150}px`;
     }
   }
 
@@ -453,7 +457,7 @@ export class MultiMediaChoiceOption {
    * Adds solution feedback for screen reader
    */
   addAccessibilitySolutionText(solutionText) {
-    this.accessibilitySolutionText = createElement({type: 'span', classList: ['hidden-accessibility-solution-text']});
+    this.accessibilitySolutionText = createElement({ type: 'span', classList: ['hidden-accessibility-solution-text'] });
     this.accessibilitySolutionText.innerText = `${solutionText}.`;
     this.wrapper.appendChild(this.accessibilitySolutionText);
   }
@@ -477,7 +481,7 @@ export class MultiMediaChoiceOption {
    * @param {HTMLElement} content Option HTML element
    */
   addKeyboardHandlers() {
-    this.content.addEventListener('keydown', event => {
+    this.content.addEventListener('keydown', (event) => {
       switch (event.key) {
         case 'Enter':
         case ' ': // The space key
@@ -514,6 +518,8 @@ export class MultiMediaChoiceOption {
           }
           this.callbacks.onKeyboardArrowKey(event.code.replace('Arrow', ''));
           break;
+        default:
+          break;
       }
     });
   }
@@ -521,7 +527,7 @@ export class MultiMediaChoiceOption {
   /**
    * Pauses the audio/video
    */
-  pauseMedia()  {
+  pauseMedia() {
     if (this.instance) {
       this.instance.pause();
     }

@@ -12,10 +12,12 @@
     padding: 0;
     list-style-type: none;
     width: 100%;
-    margin-left: 10px; // Half gap of masonry
+    margin-left: var(--masonry-margin-left);
   }
 
   .h5p-multi-media-choice-list-item {
+    container-type: inline-size;
+    width: var(--item-width);
     padding: var(--h5p-theme-spacing-s) 0 var(--h5p-theme-spacing-s) 0;
 
     &:focus {
@@ -60,7 +62,13 @@
     outline: none;
 
     border-style: solid;
-    padding: $option-padding-default;
+    padding: var(--h5p-theme-spacing-m);
+  }
+
+  @container (max-width: 100px) {
+    .h5p-multi-media-choice-option {
+        padding: var(--h5p-theme-spacing-xs);
+    }
   }
 
   .h5p-multi-media-choice-media-wrapper {

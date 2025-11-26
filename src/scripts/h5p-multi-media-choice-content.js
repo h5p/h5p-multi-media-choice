@@ -1,6 +1,7 @@
-import { MultiMediaChoiceOption } from './h5p-multi-media-choice-option';
+/* eslint-disable import/no-unresolved */
 import * as Masonry from 'masonry-layout';
-import { createElement } from './h5p-multi-media-choice-util';
+import { MultiMediaChoiceOption } from './h5p-multi-media-choice-option.js';
+import { createElement } from './h5p-multi-media-choice-util.js';
 
 import placeholder1to1 from '../../assets/placeholder1to1.svg?raw';
 import placeholder3to2 from '../../assets/placeholder3to2.svg?raw';
@@ -20,14 +21,14 @@ const PLACEHOLDERS = {
   '3to2': placeholder3to2,
   '4to3': placeholder4to3,
   '16to9': placeholder16to9,
-  'audio1to1': placeholderAudio1to1,
-  'audio3to2': placeholderAudio3to2,
-  'audio4to3': placeholderAudio4to3,
-  'audio16to9': placeholderAudio16to9,
-  'video1to1': placeholderVideo1to1,
-  'video3to2': placeholderVideo3to2,
-  'video4to3': placeholderVideo4to3,
-  'video16to9': placeholderVideo16to9,
+  audio1to1: placeholderAudio1to1,
+  audio3to2: placeholderAudio3to2,
+  audio4to3: placeholderAudio4to3,
+  audio16to9: placeholderAudio16to9,
+  video1to1: placeholderVideo1to1,
+  video3to2: placeholderVideo3to2,
+  video4to3: placeholderVideo4to3,
+  video16to9: placeholderVideo16to9,
 };
 
 const optionMinWidth = 210;
@@ -52,36 +53,35 @@ export default class MultiMediaChoiceContent {
     this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
 
     this.numberOfCorrectOptions = params.options
-      ? params.options.filter(option => option.correct).length
+      ? params.options.filter((option) => option.correct).length
       : 0;
 
-    this.isSingleAnswer =
-      this.params.behaviour.questionType === 'auto'
-        ? this.numberOfCorrectOptions === 1
-        : this.params.behaviour.questionType === 'single';
+    this.isSingleAnswer = this.params.behaviour.questionType === 'auto'
+      ? this.numberOfCorrectOptions === 1
+      : this.params.behaviour.questionType === 'single';
 
     this.aspectRatio = this.params.behaviour.aspectRatio;
 
     this.lastSelectedRadioButtonOption = null;
 
-    this.content = createElement({type: 'div', classList: ['h5p-multi-media-choice-content']});
+    this.content = createElement({ type: 'div', classList: ['h5p-multi-media-choice-content'] });
 
     // Add default media so it is always two
     if (!this.params.options || this.params.options.length < 2) {
       const defaultMedia = {
         media: {
           params: {
-            contentName: "Image"
+            contentName: 'Image',
           },
-          library: "H5P.Image",
+          library: 'H5P.Image',
           subContentId: params.contentId,
           metadata: {
-            contentType: "Image",
-            license: "U",
-            title: "Untitled Image"
-          }
+            contentType: 'Image',
+            license: 'U',
+            title: 'Untitled Image',
+          },
         },
-        correct: false
+        correct: false,
       };
       if (this.params.options && this.params.options.length === 1) {
         this.params.options.push(defaultMedia);
@@ -94,26 +94,25 @@ export default class MultiMediaChoiceContent {
     // Build n options
     this.options = this.params.options
       ? this.params.options.map(
-        (option, index) =>
-          new MultiMediaChoiceOption(
-            this.content,
-            option,
-            contentId,
-            this.aspectRatio,
-            this.isSingleAnswer,
-            this.params.l10n.missingAltText,
-            this.params.l10n.closeModalText,
-            {
-              onClick: () => this.toggleSelected(index),
-              onKeyboardSelect: () => this.toggleSelected(index),
-              onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
-              triggerResize: this.callbacks.triggerResize,
-              pauseAllOtherMedia: () => this.pauseAllOtherMedia(index),
-            }
-          )
+        (option, index) => new MultiMediaChoiceOption(
+          this.content,
+          option,
+          contentId,
+          this.aspectRatio,
+          this.isSingleAnswer,
+          this.params.l10n.missingAltText,
+          this.params.l10n.closeModalText,
+          {
+            onClick: () => this.toggleSelected(index),
+            onKeyboardSelect: () => this.toggleSelected(index),
+            onKeyboardArrowKey: (direction) => this.handleOptionArrowKey(index, direction),
+            triggerResize: this.callbacks.triggerResize,
+            pauseAllOtherMedia: () => this.pauseAllOtherMedia(index),
+          },
+        ),
       )
       : [];
-    this.optionList = this.buildOptionList(this.options);
+    this.optionList = this.buildOptionList();
     this.content.appendChild(this.optionList);
     this.setTabIndexes();
 
@@ -121,11 +120,11 @@ export default class MultiMediaChoiceContent {
     this.masonry = new Masonry(this.optionList, {
       gutter: columnGap,
       itemSelector: '.h5p-multi-media-choice-list-item',
-      horizontalOrder: true
+      horizontalOrder: true,
     });
 
     // Toggle selected
-    answerState.forEach(index => this.toggleSelected(index, false));
+    answerState.forEach((index) => this.toggleSelected(index, false));
   }
 
   /**
@@ -139,11 +138,11 @@ export default class MultiMediaChoiceContent {
       classList: ['h5p-multi-media-choice-option-list'],
       attributes: {
         role: this.isSingleAnswer ? 'radiogroup' : 'group',
-        'aria-labelledby': `h5p-media-choice${this.contentId}`
-      }
+        'aria-labelledby': `h5p-media-choice${this.contentId}`,
+      },
     });
 
-    this.options.forEach(option => {
+    this.options.forEach((option) => {
       optionList.appendChild(option.getDOM());
     });
     return optionList;
@@ -206,7 +205,7 @@ export default class MultiMediaChoiceContent {
 
     // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
     let score = 0;
-    this.options.forEach(option => {
+    this.options.forEach((option) => {
       if (option.isSelected()) {
         option.isCorrect() ? score++ : score--;
       }
@@ -232,7 +231,7 @@ export default class MultiMediaChoiceContent {
    * @returns {object[]} Array of selected options
    */
   getSelectedOptions() {
-    return this.options.filter(option => option.isSelected());
+    return this.options.filter((option) => option.isSelected());
   }
 
   /**
@@ -263,24 +262,20 @@ export default class MultiMediaChoiceContent {
    * Show which selected options are right and which are wrong
    */
   showSelectedSolutions() {
-    this.options.forEach(option =>
-      option.showSelectedSolution({
-        correctAnswer: this.params.l10n.correctAnswer,
-        wrongAnswer: this.params.l10n.wrongAnswer
-      })
-    );
+    this.options.forEach((option) => option.showSelectedSolution({
+      correctAnswer: this.params.l10n.correctAnswer,
+      wrongAnswer: this.params.l10n.wrongAnswer,
+    }));
   }
 
   /**
    * Show which unselected options were right
    */
   showUnselectedSolutions() {
-    this.options.forEach(option =>
-      option.showUnselectedSolution({
-        shouldCheck: this.params.l10n.shouldCheck,
-        shouldNotCheck: this.params.l10n.shouldNotCheck
-      })
-    );
+    this.options.forEach((option) => option.showUnselectedSolution({
+      shouldCheck: this.params.l10n.shouldCheck,
+      shouldNotCheck: this.params.l10n.shouldNotCheck,
+    }));
   }
 
   /**
@@ -289,7 +284,7 @@ export default class MultiMediaChoiceContent {
    */
   focusUnselectedSolution() {
     const unselectedSolution = document.getElementsByClassName(
-      'h5p-multi-media-choice-show-correct'
+      'h5p-multi-media-choice-show-correct',
     )[0];
     if (unselectedSolution) {
       if (unselectedSolution.parentNode) {
@@ -302,7 +297,7 @@ export default class MultiMediaChoiceContent {
    * Hide the solution(s) cues
    */
   hideSolutions() {
-    this.options.forEach(option => option.hideSolution());
+    this.options.forEach((option) => option.hideSolution());
   }
 
   /**
@@ -340,7 +335,7 @@ export default class MultiMediaChoiceContent {
   resetSelections() {
     this.lastSelectedRadioButtonOption = null;
     this.setTabIndexes();
-    this.options.forEach(option => {
+    this.options.forEach((option) => {
       option.uncheck();
       option.enable();
     });
@@ -350,7 +345,7 @@ export default class MultiMediaChoiceContent {
    * Disables all selectables (radio buttons / checkboxes)
    */
   disableSelectables() {
-    this.options.forEach(option => option.disable());
+    this.options.forEach((option) => option.disable());
     this.setTabIndexes(-1);
   }
 
@@ -363,11 +358,11 @@ export default class MultiMediaChoiceContent {
    */
   setTabIndexes(value = null) {
     if (this.isSingleAnswer) {
-      this.options.forEach(option => option.setTabIndex(value !== null ? value : -1));
+      this.options.forEach((option) => option.setTabIndex(value !== null ? value : -1));
       this.options[0].setTabIndex(value !== null ? value : 0);
     }
     else {
-      this.options.forEach(option => option.setTabIndex(value !== null ? value : 0));
+      this.options.forEach((option) => option.setTabIndex(value !== null ? value : 0));
     }
   }
 
@@ -386,7 +381,7 @@ export default class MultiMediaChoiceContent {
       Right: 1,
       Down: 1,
       Left: -1,
-      Up: -1
+      Up: -1,
     };
 
     const directionVector = directions[direction];
@@ -399,28 +394,26 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
-   * Set elemnt width
-   * @param  {HTMLElement} item
-   */
-  resizeGridItem(item, width) {
-    item.style.width = width + 'px';
-  }
-
-  /**
    * Set the number of columns and each element's size
    */
   setColumnProperties() {
-    const columnSpaceCount = this.optionList.getBoundingClientRect().width / (optionMinWidth + columnGap);
+    const containerWidth = this.optionList.getBoundingClientRect().width;
+    const itemCount = this.options.length;
+
+    // Ensure we always have at least 1 column, even in very narrow containers
+    const columnSpaceCount = Math.max(1, containerWidth / (optionMinWidth + columnGap));
 
     // Find the number of columns from whichever is smaller: space, max values and number of options
-    const columns = Math.floor(
-      Math.min(columnSpaceCount, this.maxAlternativesPerRow, this.options.length)
+    const columns = Math.round(
+      Math.min(columnSpaceCount, this.maxAlternativesPerRow, itemCount),
     );
-    const elementWidth = (this.optionList.getBoundingClientRect().width / columns) - columnGap;
 
-    for (let x = 0; x < this.options.length; x++) {
-      this.resizeGridItem(this.options[x].getDOM(), elementWidth);
-    }
+    const gap = columns > 1 ? columnGap : 0;
+    const marginLeft = gap / 2;
+    const elementWidth = (containerWidth / columns) - gap;
+
+    this.optionList.style.setProperty('--masonry-margin-left', `${marginLeft}px`);
+    this.optionList.style.setProperty('--item-width', `${elementWidth}px`);
 
     // Set layout again after resizing
     this.masonry.layout();
@@ -446,10 +439,10 @@ export default class MultiMediaChoiceContent {
    * @param {string} assetsFilePath
    */
   setMultiMediaOptionsPlaceholder() {
-    this.options.forEach(option => {
+    this.options.forEach((option) => {
       const lib = option?.media?.library?.split(' ')[0];
       let mediaType;
-  
+
       if (lib === 'H5P.Image' && !option.media?.params?.file) {
         mediaType = 'image';
       }
@@ -459,7 +452,7 @@ export default class MultiMediaChoiceContent {
       else if (lib === 'H5P.Audio' && !option.option?.poster) {
         mediaType = 'audio';
       }
-  
+
       if (mediaType) {
         this.setPlaceholderImage(mediaType, option);
       }
@@ -468,17 +461,17 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Set options default images
-   * @param {string} mediaType 
-   * @param {object} option 
+   * @param {string} mediaType
+   * @param {object} option
    */
   setPlaceholderImage(mediaType, option) {
     const hasSource = option.media.params.files?.length > 0 || option.media.params.sources?.length > 0;
     const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
     const key = hasSource ? this.aspectRatio : `${mediaType.toLowerCase()}${placeholderAspectRatio}`;
     const svgMarkup = PLACEHOLDERS[key] || PLACEHOLDERS[placeholderAspectRatio];
-  
+
     const placeholderEl = H5P.Components.PlaceholderImg(svgMarkup);
-  
+
     const img = option.wrapper.querySelector('img');
     if (img && img.parentNode) {
       img.parentNode.replaceChild(placeholderEl, img);
@@ -500,7 +493,7 @@ export default class MultiMediaChoiceContent {
   pauseAllOtherMedia(mediaToPlay) {
     if (this.options) {
       this.options.forEach((option, index) => {
-        if (index != mediaToPlay)  {
+        if (index !== mediaToPlay) {
           option.pauseMedia();
         }
       });
