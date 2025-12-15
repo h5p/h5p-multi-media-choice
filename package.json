@@ -45,5 +45,8 @@
   },
   "dependencies": {
     "masonry-layout": "^4.2.2"
+  },
+  "overrides": {
+    "glob": "^10.5.0"
   }
 }
