@@ -1,7 +1,7 @@
 <svg width="153" height="153" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style type="text/css">
-	.st0 {fill: var(--h5p-theme-alternative-base);}
-	.st2 {fill: var(--h5p-theme-alternative-darker);}
+	.st0 {fill: var(--h5p-theme-alternative-base, #DCE2E9);}
+	.st2 {fill: var(--h5p-theme-alternative-darker, #B6BCC2);}
 </style>
 <g clip-path="url(#clip0_226_1146)">
 <path class="st0" d="M153.123 0H-0.0305176V153H153.123V0Z" />
