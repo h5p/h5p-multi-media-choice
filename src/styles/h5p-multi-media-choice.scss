@@ -324,6 +324,10 @@
           align-items: center;
           padding: 0;
 
+          &:focus-visible {
+            outline: 2px solid var(--h5p-theme-contrast-cta-white);
+          }
+
           @container h5p-mmc-modal-container (width < 480px) {
             right: 0;
             height: $button-size-small;
@@ -376,6 +380,11 @@
   .h5p-video {
     max-width: 100%;
     margin: 0 auto;
+
+    &:focus-visible {
+      outline: 2px solid var(--h5p-theme-contrast-cta-white);
+      border-radius: var(--h5p-theme-border-radius-small, 4px);
+    }
   }
 
   .h5p-multi-media-content-audio-wrapper .h5p-audio-inner {
