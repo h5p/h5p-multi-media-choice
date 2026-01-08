@@ -325,7 +325,7 @@
           padding: 0;
 
           &:focus-visible {
-            outline: 2px solid var(--h5p-theme-contrast-cta-white);
+            outline: 2px ridge var(--h5p-theme-contrast-cta-white);
           }
 
           @container h5p-mmc-modal-container (width < 480px) {
@@ -382,7 +382,7 @@
     margin: 0 auto;
 
     &:focus-visible {
-      outline: 2px solid var(--h5p-theme-contrast-cta-white);
+      outline: 2px ridge var(--h5p-theme-contrast-cta-white);
       border-radius: var(--h5p-theme-border-radius-small, 4px);
     }
   }
