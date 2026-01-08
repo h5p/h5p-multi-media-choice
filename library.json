@@ -3,7 +3,11 @@
   "description": "Create a Multimedia Choice",
   "majorVersion": 0,
   "minorVersion": 3,
+<<<<<<< HEAD
   "patchVersion": 75,
+=======
+  "patchVersion": 45,
+>>>>>>> master
   "runnable": 1,
   "author": "H5P Group AS",
   "license": "MIT",
