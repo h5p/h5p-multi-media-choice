@@ -23,10 +23,10 @@
         "fields": [
           {
             "label": "Média",
-            "description": "Media to display as a choice."
+            "description": "Média à afficher comme choix."
           },
           {
-            "label": "Poster image"
+            "label": "Image d'affiche"
           },
           {
             "label": "Correcte"
@@ -247,8 +247,8 @@
           "default": "Texte Alt manquant"
         },
         {
-          "label": "Close modal button label",
-          "default": "Close modal"
+          "label": "Libellé du bouton fermer la modale",
+          "default": "Fermer la modale"
         }
       ]
     }
