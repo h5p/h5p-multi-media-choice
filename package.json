@@ -37,6 +37,7 @@
     "eslint": "^8.57.0",
     "mini-css-extract-plugin": "^2.8.1",
     "prettier-eslint-cli": "^8.0.1",
+    "raw-loader": "^4.0.2",
     "regenerator-runtime": "^0.14.1",
     "sass": "^1.72.0",
     "sass-loader": "^14.1.1",

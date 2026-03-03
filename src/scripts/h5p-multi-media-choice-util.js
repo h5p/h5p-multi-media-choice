@@ -18,7 +18,7 @@ export class Util {
           confirmCheckDialog: false,
           confirmRetryDialog: false,
           aspectRatio: 'auto',
-          maxAlternativesPerRow: 4
+          maxAlternativesPerRow: 4,
         },
         l10n: {
           checkAnswerButtonText: 'Check',
@@ -39,18 +39,18 @@ export class Util {
             header: 'Finish?',
             body: 'Are you sure you want to finish?',
             cancelLabel: 'Cancel',
-            confirmLabel: 'Finish'
+            confirmLabel: 'Finish',
           },
           confirmRetry: {
             header: 'Retry?',
             body: 'Are you sure you wish to retry?',
             cancelLabel: 'Cancel',
-            confirmLabel: 'Retry'
+            confirmLabel: 'Retry',
           },
-          missingAltText: 'Alt text missing'
-        }
+          missingAltText: 'Alt text missing',
+        },
       },
-      params
+      params,
     );
   }
 
@@ -93,7 +93,7 @@ export class Util {
  *
  * @param {string} html
  */
-export const htmlDecode = html => {
+export const htmlDecode = (html) => {
   const el = document.createElement('div');
   el.innerHTML = html;
   return el.textContent;
@@ -102,11 +102,11 @@ export const htmlDecode = html => {
 /**
  * Helper for creating a dom element
  */
-export const createElement = ({type, classList = [], attributes = {}}) => {
+export const createElement = ({ type, classList = [], attributes = {} }) => {
   const element = document.createElement(type);
 
   // Add class names
-  classList.forEach(className => {
+  classList.forEach((className) => {
     element.classList.add(className);
   });
 
@@ -116,4 +116,4 @@ export const createElement = ({type, classList = [], attributes = {}}) => {
   }
 
   return element;
-}
+};

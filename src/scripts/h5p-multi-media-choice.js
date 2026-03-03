@@ -1,7 +1,6 @@
-import MultiMediaChoiceContent from './h5p-multi-media-choice-content';
-
-import { createElement, Util } from './h5p-multi-media-choice-util';
-import { getCurrentState, getXAPIData, getAnsweredXAPIEvent } from './h5p-multi-media-choice-xapi';
+import MultiMediaChoiceContent from './h5p-multi-media-choice-content.js';
+import { createElement, Util } from './h5p-multi-media-choice-util.js';
+import { getCurrentState, getXAPIData, getAnsweredXAPIEvent } from './h5p-multi-media-choice-xapi.js';
 
 /**
  * Class for H5P Multi Media Choice.
@@ -18,7 +17,7 @@ export default class MultiMediaChoice extends H5P.Question {
 
     this.contentId = contentId;
     this.extras = extras;
-    this.answerState = extras.previousState && extras.previousState.answers ? extras.previousState.answers : [];
+    this.answerState = extras.previousState?.answers ? extras.previousState.answers : [];
     this.introId = H5P.createUUID();
 
     // Default values are extended
@@ -42,7 +41,7 @@ export default class MultiMediaChoice extends H5P.Question {
         },
         triggerInteracted: () => {
           this.triggerXAPI('interacted');
-        }
+        },
       },
       this.answerState,
       this.introId
@@ -60,7 +59,7 @@ export default class MultiMediaChoice extends H5P.Question {
               alt: media.params.alt,
               title: media.params.title,
               expandImage: media.params.expandImage,
-              minimizeImage: media.params.minimizeImage
+              minimizeImage: media.params.minimizeImage,
             });
           }
         }
@@ -85,7 +84,7 @@ export default class MultiMediaChoice extends H5P.Question {
         this.setIntroduction(this.introduction);
       }
 
-      this.content.setMultiMediaOptionsPlaceholder(this.getLibraryFilePath('assets'));
+      this.content.setMultiMediaOptionsPlaceholder();
       this.setContent(this.content.getDOM()); // Register content with H5P.Question
       this.addButtons();
 
@@ -97,9 +96,7 @@ export default class MultiMediaChoice extends H5P.Question {
      * @return {number} latest score
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
      */
-    this.getScore = () => {
-      return this.content.getScore();
-    };
+    this.getScore = () => this.content.getScore();
 
     /**
      * Get maximum possible score
@@ -107,15 +104,13 @@ export default class MultiMediaChoice extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
      */
 
-    this.getMaxScore = () => {
-      return this.content.getMaxScore();
-    };
+    this.getMaxScore = () => this.content.getMaxScore();
 
     /**
      * Let H5P.Question read the specified text
      * @param {string} text Text to read
      */
-    this.handleRead = text => {
+    this.handleRead = (text) => {
       this.read(text);
     };
 
@@ -131,7 +126,7 @@ export default class MultiMediaChoice extends H5P.Question {
       const maxScore = this.getMaxScore();
       const textScore = H5P.Question.determineOverallFeedback(
         this.params.overallFeedback,
-        score / maxScore
+        score / maxScore,
       );
 
       this.setFeedback(textScore, score, maxScore, this.params.l10n.result);
@@ -156,15 +151,16 @@ export default class MultiMediaChoice extends H5P.Question {
             this.content.getOptions(),
             this.getScore(),
             this.getMaxScore(),
-            this.content.isPassed()
-          )
+            this.content.isPassed(),
+          ),
         );
       }
     };
 
     /**
      * Show solutions.
-     * @param {boolean} shouldRespectRequireInputFlag Determine from where this function being called
+     * @param {boolean} shouldRespectRequireInputFlag
+     * Determine from where this function being called
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
      */
     this.showSolutions = (shouldRespectRequireInputFlag = false) => {
@@ -223,9 +219,7 @@ export default class MultiMediaChoice extends H5P.Question {
      * @return {boolean} True, if all answers have been given.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
      */
-    this.getAnswerGiven = () => {
-      return this.content.getAnswerGiven();
-    };
+    this.getAnswerGiven = () => this.content.getAnswerGiven();
   }
 
   /**
@@ -245,12 +239,12 @@ export default class MultiMediaChoice extends H5P.Question {
           confirmationDialog: {
             enable: this.params.behaviour.confirmCheckDialog,
             l10n: this.params.l10n.confirmCheck,
-            instance: this
+            instance: this,
           },
           contentData: this.extras,
           textIfSubmitting: this.params.l10n.submitAnswerButtonText,
           icon: 'check',
-        }
+        },
       );
     }
     this.addButton(
@@ -263,8 +257,8 @@ export default class MultiMediaChoice extends H5P.Question {
       { 'aria-label': this.params.l10n.showSolution },
       {
         styleType: 'secondary',
-        icon: 'show-results'        
-      }
+        icon: 'show-solutions',
+      },
     );
 
     this.addButton(
@@ -279,11 +273,11 @@ export default class MultiMediaChoice extends H5P.Question {
         confirmationDialog: {
           enable: this.params.behaviour.confirmRetryDialog,
           l10n: this.params.l10n.confirmRetry,
-          instance: this
+          instance: this,
         },
         icon: 'retry',
-        styleType: 'secondary'
-      }
+        styleType: 'secondary',
+      },
     );
   }
 
@@ -307,7 +301,7 @@ export default class MultiMediaChoice extends H5P.Question {
       this.content.getOptions(),
       this.getScore(),
       this.getMaxScore(),
-      this.content.isPassed()
+      this.content.isPassed(),
     );
   }
 
