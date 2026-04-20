@@ -48,6 +48,7 @@ export class Util {
             confirmLabel: 'Retry',
           },
           missingAltText: 'Alt text missing',
+          playVideo: 'Play video',
         },
       },
       params,

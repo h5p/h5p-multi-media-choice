@@ -249,6 +249,10 @@
         {
           "label": "Etiqueta de cierre de botón modal",
           "default": "Cerrar modal"
+        },
+        {
+          "label": "Assistive technology description for video play button",
+          "default": "Play video"
         }
       ]
     }

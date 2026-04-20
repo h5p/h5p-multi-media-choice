@@ -249,6 +249,10 @@
         {
           "label": "Ετικέτα κουμπιού κλεισίματος παραθύρου",
           "default": "Κλείσιμο παραθύρου"
+        },
+        {
+          "label": "Assistive technology description for video play button",
+          "default": "Play video"
         }
       ]
     }

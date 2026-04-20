@@ -249,6 +249,10 @@
         {
           "label": "Etiqueta para pechar botón modal",
           "default": "Pechar botón modal"
+        },
+        {
+          "label": "Assistive technology description for video play button",
+          "default": "Play video"
         }
       ]
     }

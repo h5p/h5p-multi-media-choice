@@ -102,6 +102,7 @@ export default class MultiMediaChoiceContent {
           this.isSingleAnswer,
           this.params.l10n.missingAltText,
           this.params.l10n.closeModalText,
+          this.params.l10n.playVideo,
           {
             onClick: () => this.toggleSelected(index),
             onKeyboardSelect: () => this.toggleSelected(index),

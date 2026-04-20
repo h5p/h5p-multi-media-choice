@@ -11,15 +11,17 @@ export class MultiMediaChoiceOption {
    * @param {boolean} singleAnswer true for radio buttons, false for checkboxes
    * @param {string} missingAltText translatable string for missing alt text
    * @param {string} closeModalText translatable string for closing modal text
+   * @param {string} playVideo translatable string for playing video text
    * @param {boolean} assetsFilePath //TODO: what is this?
    * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(frame, option, contentId, aspectRatio, singleAnswer, missingAltText, closeModalText, callbacks) {
+  constructor(frame, option, contentId, aspectRatio, singleAnswer, missingAltText, closeModalText, playVideo, callbacks) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.singleAnswer = singleAnswer;
     this.missingAltText = missingAltText;
     this.closeModalText = closeModalText;
+    this.playVideo = playVideo;
 
     this.frame = frame;
     this.option = option;
@@ -108,6 +110,7 @@ export class MultiMediaChoiceOption {
         classList: ['h5p-multi-media-video-button'],
         attributes: {
           tabindex: '0',
+          'aria-label': this.playVideo,
         },
       });
       const videoIcon = createElement({ type: 'div', classList: ['play-icon'] });
@@ -163,9 +166,6 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} Image tag.
    */
   buildImage() {
-    const alt = this.media.params.alt ? this.media.params.alt : '';
-    const title = this.media.params.title ? this.media.params.title : '';
-
     let path = '';
     switch (this.media?.library?.split(' ')[0]) {
       case 'H5P.Image':
@@ -188,7 +188,7 @@ export class MultiMediaChoiceOption {
         break;
     }
 
-    const htmlDecodedAlt = htmlDecode(alt);
+    const htmlDecodedAlt = htmlDecode(this.getDescription());
     const image = createElement({
       type: 'img',
       classList: ['h5p-multi-media-choice-media'],
@@ -205,7 +205,7 @@ export class MultiMediaChoiceOption {
     image.addEventListener('load', this.callbacks.triggerResize);
 
     this.content.setAttribute('aria-label', htmlDecodedAlt);
-    this.content.setAttribute('title', htmlDecode(title));
+    this.content.setAttribute('title', htmlDecodedAlt);
 
     return image;
   }

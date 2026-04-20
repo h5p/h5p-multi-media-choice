@@ -515,6 +515,13 @@
         "name": "closeModalText",
         "type": "text",
         "default": "Close modal"
+      },
+      {
+        "name": "playVideo",
+        "type": "text",
+        "label": "Assistive technology description for video play button",
+        "importance": "low",
+        "default": "Play video"
       }
     ]
   }

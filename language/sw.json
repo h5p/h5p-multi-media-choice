@@ -249,6 +249,10 @@
         {
           "label": "Close modal button label",
           "default": "Close modal"
+        },
+        {
+          "label": "Assistive technology description for video play button",
+          "default": "Play video"
         }
       ]
     }

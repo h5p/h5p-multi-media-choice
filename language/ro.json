@@ -249,6 +249,10 @@
         {
           "label": "Etichetă buton închidere fereastră modală",
           "default": "Închide fereastra modală"
+        },
+        {
+          "label": "Assistive technology description for video play button",
+          "default": "Play video"
         }
       ]
     }
