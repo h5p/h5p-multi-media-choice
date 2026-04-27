@@ -4,27 +4,51 @@
 @use 'sass:math';
 
 .h5p-multi-media-choice {
-  padding-bottom: 1em;
+
   .h5p-multi-media-choice-option-list {
     display: inline-block;
 
     // Removes <ul> default indentation
-    padding-left: 0;
+    padding: 0;
     list-style-type: none;
     width: 100%;
-
+    margin-left: var(--masonry-margin-left);
   }
 
   .h5p-multi-media-choice-list-item {
-    padding: 0.75em 0 0.25em 0;
+    container-type: inline-size;
+    width: var(--item-width);
+    padding: var(--h5p-theme-spacing-s) 0 var(--h5p-theme-spacing-s) 0;
+
     &:focus {
       outline: none;
+    }
 
+    &:focus-visible {
       .h5p-multi-media-choice-enabled {
-        outline: none;
         box-shadow: 0 0 $border-radius $border-thin-stroke-width $color-border-interaction;
       }
+      .h5p-multi-media-choice-enabled.selected {
+        box-shadow: 0 0 5px 7px $color-border-interaction;
+      } 
     }
+  }
+
+  .h5p-question-content,
+  .h5p-question-introduction {
+    padding: 0;
+    margin: 0;
+  }
+
+  .h5p-question-introduction {
+    margin: var(--h5p-theme-spacing-m);
+    font-size: var(--h5p-theme-font-size-xl);
+    color: var(--h5p-theme-text-primary);
+    font-weight: 600;
+  }
+
+  .h5p-question-introduction p {
+    margin: 0px;
   }
 
   .h5p-multi-media-choice-option {
@@ -34,20 +58,26 @@
     line-height: 0;
 
     box-sizing: border-box;
-    background-color: #ffffff;
+    background-color: var(--h5p-theme-ui-base);
     outline: none;
 
     border-style: solid;
-    border-width: $border-thick-stroke-width;
-    border-radius: $border-radius;
-    border-color: $color-option-background;
-    padding: $option-padding-default;
+    padding: var(--h5p-theme-spacing-m);
+  }
+
+  @container (max-width: 100px) {
+    .h5p-multi-media-choice-option {
+        padding: var(--h5p-theme-spacing-xs);
+    }
   }
 
   .h5p-multi-media-choice-media-wrapper {
+    svg {
+      width: 100%;
+      height: 100%;
+    }
     // Using the padding-top trick to have a specific ratio
     &.h5p-multi-media-choice-media-wrapper-specific-ratio {
-      height: 0;
       overflow: hidden;
       position: relative;
     }
@@ -67,14 +97,19 @@
     &.h5p-multi-media-choice-media-wrapper-16to9 {
       padding-top: 56.25%;
     }
+
+    &.h5p-multi-media-choice-media-wrapper:has(.h5p-theme-placeholder-img) {
+      padding-top: 0;
+    }
   }
 
   .h5p-multi-media-choice-media {
-    background-color: $color-option-background;
+    background-color: var(--h5p-theme-alternative-base);
     display: inline-block;
     object-fit: contain;
     width: 100%;
     height: 100%;
+    border-radius: var(--h5p-theme-border-radius-small);
 
     &.h5p-multi-media-choice-media-specific-ratio {
       position: absolute;
@@ -86,11 +121,19 @@
   .h5p-multi-media-choice-enabled {
 
     &:hover {
-      &:not(.h5p-multi-media-choice-selected) {
+      &:not(.h5p-multi-media-choice-option.selected) {
         cursor: pointer;
-        border-style: dotted;
-        border-color: $color-border-interaction;
 
+        &:after {
+          @include hover-overlay();
+        }
+      }
+    }
+
+    &:hover {
+      &.h5p-mmc-multiAnswer {
+        cursor: pointer;
+        
         &:after {
           @include hover-overlay();
         }
@@ -98,9 +141,7 @@
     }
   }
 
-  .h5p-multi-media-choice-selected {
-    border-color: $color-border-interaction;
-
+  .h5p-multi-media-choice-option.selected{
     &:hover {
       &:after {
         @include hover-overlay();
@@ -114,6 +155,7 @@
       left: 0%;
       transform: translate(0%);
     }
+
     to {
       opacity: 1;
       left: 50%;
@@ -121,12 +163,21 @@
     }
   }
 
+  .h5p-multi-media-choice-correct:before,
+  .h5p-multi-media-choice-wrong:before,
+  .h5p-multi-media-choice-show-correct:before {
+    padding: var(--h5p-theme-spacing-xs);
+    font-size: var(--h5p-theme-font-size-s);
+  }
+
   .h5p-multi-media-choice-correct {
-    background-color: $color-correct-light;
-    border-color: $color-correct-dark;
+    background-color: var(--h5p-theme-feedback-correct-secondary);
+    border-color: var(--h5p-theme-feedback-correct-third);
 
     &:before {
-      @include solution-button('\e86c', $color-correct-dark);
+      @include solution-button('\e903', var(--h5p-theme-feedback-correct-main));
+      background-color: var(--h5p-theme-feedback-correct-secondary);
+      border-color: var(--h5p-theme-feedback-correct-third);
     }
   }
 
@@ -136,16 +187,20 @@
     border-style: dotted;
 
     &:before {
-      @include solution-button('\e86c', $color-show-correct-dark);
+      @include solution-button('\e903', $color-show-correct-dark);
+      background-color: $color-show-correct-light;
+      border-color: $color-show-correct-dark;
     }
   }
 
   .h5p-multi-media-choice-wrong {
-    background-color: $color-wrong-light;
-    border-color: $color-wrong-dark;
+    background-color: var(--h5p-theme-feedback-incorrect-secondary);
+    border-color: var(--h5p-theme-feedback-incorrect-third);
 
     &:before {
-      @include solution-button('\e5c9', $color-wrong-dark);
+      @include solution-button('\e902', var(--h5p-theme-feedback-incorrect-main));
+      background-color: var(--h5p-theme-feedback-incorrect-secondary);
+      border-color: var(--h5p-theme-feedback-incorrect-third);
     }
   }
 
@@ -159,47 +214,61 @@
     width: 1px;
   }
 
-  .h5p-multi-media-video-button {
-    font-family: 'H5PFontAwesome4';
+  .h5p-multi-media-video-button, .h5p-audio-minimal-button {
     position: absolute;
-    background-color: #E23232;
+    background-color: var(--h5p-theme-main-cta-base);
     z-index: 1;
     bottom: 0;
     right: 0;
-    margin: 0.5em;
-    padding: 0;
-    width: $button-size;
-    height: $button-size;
+    margin: 0.6em;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #ffffff;
-    border: 2px solid white;
-    border-radius: math.div($button-size, 2);
+    color: var(--h5p-theme-contrast-cta);
+    border: 2px solid var(--h5p-theme-ui-base);
+    border-radius: 50%;
+    padding: var(--h5p-theme-spacing-s);
+    transition: all 0.1s linear 0s;
 
     &:hover {
-      background-color: #C51D1D;
+      background-color: var(--h5p-theme-main-cta-light);
+      box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.1);
     }
 
-    .play-icon {
-      width: 2.5rem;
-      height: 2.5rem;
-      background-image: url(../../assets/play.svg);
-      background-repeat: no-repeat;
-      background-size: 1.8rem;
-      background-position: 0.5rem;
+    &:active {
+      background-color: var(--h5p-theme-main-cta-dark);
     }
+
+    &:before {
+      font-size: 1.25rem;
+      height: 2rem;
+      line-height: 2rem;
+      width: 2rem;
+      box-sizing: border-box;
+      padding-left: 2px;
+    }
+
+    &:focus {
+      outline: 2px ridge var(--h5p-theme-main-cta-base);
+      outline-offset: 2px;
+    }
+  }
+
+  .h5p-multi-media-video-button::before {
+    font-family: "h5p-theme";
+    content: "\e91f";
   }
 
   .h5p-multi-media-modal {
     position: absolute;
-    background: #000000B2;
+    background-color: rgba(0,0,0,0.85); /* Fallback color */
+    background-color: hsl(from var(--h5p-theme-main-cta-base) h calc(s * 0.3) 18% / 40%);
     top: 0;
     left: 0;
     padding: 0;
     border: 1px solid #888;
-    z-index: 1;
+    z-index: 3; // z-index of ::before of .h5p-multi-media-choice-wrong/correct is 2
     overflow: hidden;
     width: 100%;
     height: 100%;
@@ -222,13 +291,13 @@
 
       .h5p-multi-media-choice-modal-content {
         position: relative;
-        background-color: white;
-        padding: 1.2rem;
+        background: var(--h5p-theme-ui-base);
+        padding: var(--h5p-theme-spacing-l);
+        border-radius: var(--h5p-theme-border-radius-large);
         border: white;
         width: 80%;
         display: block;
         max-width: 80%;
-        border-radius: 1%;
         box-shadow: none;
         max-height: 100%;
 
@@ -239,14 +308,14 @@
         }
 
         .modal-close-button {
-          background-color: #ffffff;
+          background-color: var(--h5p-theme-ui-base);
           position: absolute;
           top: math.div($button-size, -3);
           right: math.div($button-size, -3);
           cursor: pointer;
           border: none;
-          height: $button-size;
-          width: $button-size;
+          height: 4rem;
+          width: 4rem;
           z-index: 1;
           border-radius: 50%;
           box-shadow: 0px 4px 4px 0px #00000040;
@@ -255,24 +324,37 @@
           align-items: center;
           padding: 0;
 
+          &:focus-visible {
+            outline: 2px ridge var(--h5p-theme-contrast-cta-white);
+          }
+
           @container h5p-mmc-modal-container (width < 480px) {
             right: 0;
             height: $button-size-small;
             width: $button-size-small;
           }
 
-          .icon-cross {
-            width: $button-size;
-            height: $button-size;
-            background-size: 3.5rem;
-            background-image: url(../../assets/x-close.svg);
-            background-repeat: no-repeat;
-            background-position: center;
+          width: $button-size;
+          height: $button-size;
 
-            @container h5p-mmc-modal-container (width < 480px) {
-              height: $button-size-small;
-              width: $button-size-small;
-              background-size: 2rem;
+          .icon-cross::before {
+            color: var(--h5p-theme-text-primary);
+            content: "\e910";
+            font-family: "h5p-theme";
+            font-size: math.div($button-size, 2);
+            font-weight: bold;
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+          }
+
+          @container h5p-mmc-modal-container (width < 480px) {
+            height: $button-size-small;
+            width: $button-size-small;
+
+            .icon-cross::before {
+              font-size: math.div($button-size-small, 2);
             }
           }
         }
@@ -281,11 +363,13 @@
   }
 
   .h5p-multi-media-content-media-video-player {
-          max-width: 100%;
+    max-width: 100%;
   }
 
   .h5p-multi-media-choice-content {
     position: relative;
+    background-color: var(--h5p-theme-background);
+    padding: var(--h5p-theme-spacing-m);
   }
 
   @keyframes animateModal {
@@ -296,43 +380,57 @@
   .h5p-video {
     max-width: 100%;
     margin: 0 auto;
+
+    &:focus-visible {
+      outline: 2px ridge var(--h5p-theme-contrast-cta-white);
+      border-radius: var(--h5p-theme-border-radius-small, 4px);
+    }
+  }
+
+  .h5p-multi-media-content-audio-wrapper .h5p-audio-inner {
+    background-color: unset;
+  }
+
+  .h5p-multi-media-content-audio-wrapper .h5p-audio-inner .h5p-audio-minimal-button {
+    color: var(--h5p-theme-contrast-cta);
+    font-size: revert; // Use the default CP font size
   }
 
   .h5p-multi-media-content-audio-wrapper {
     position: absolute;
     bottom: 0;
     right: 0;
-    margin: 0.5em;
     z-index: 1;
 
     .h5p-audio-minimal-button {
-      width: $button-size;
-      height: $button-size;
-      border: 2px solid white;
-      background: #3239E2;
+      padding: var(--h5p-theme-spacing-s);
+      border: 2px solid var(--h5p-theme-ui-base);
+      background: var(--h5p-theme-main-cta-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &:hover {
-        background: #1B21AD;
+        background: var(--h5p-theme-main-cta-light);
         cursor: pointer;
       }
     }
 
+    // Make it similar to Video button
     .h5p-audio-minimal-button::before {
-      font-size: math.div($button-size, 2);
+      font-size: 1.25rem;
+      height: 2rem;
+      line-height: 2rem;
+      width: 2rem;
     }
 
-    /* Make H5P.Audio's play button icon match our video play button's icon */
-    .h5p-audio-minimal-play-paused::before {
-      position: relative;
-      left: 3px;
-      font-size: 2.125rem;
+    .h5p-audio-minimal-play-paused:before {
+      box-sizing: border-box;
+      padding-left: 2px;
     }
-  }
 
-  .h5p-multi-media-content-media-button-centered {
-    top: 50%;
-    right: 50%;
-    margin-top: math.div($button-size, -2);
-    margin-right: math.div($button-size, -2);
+    .h5p-audio-minimal-play::before {
+      font-weight: bold;
+    }
   }
 }
