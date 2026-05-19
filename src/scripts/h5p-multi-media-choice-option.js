@@ -91,12 +91,20 @@ export class MultiMediaChoiceOption {
    * @returns {string} the description of the option
    */
   getDescription() {
-    switch (this.media.library.split(' ')[0]) {
-      case 'H5P.Image':
-        return this.media.params.alt || this.missingAltText; // Alternative text
-      default:
-        return this.media?.metadata?.title;
+    const library = this.media?.library?.split(' ')[0];
+    const metadata = this.media?.metadata;
+    const contentType = metadata?.contentType || '';
+
+    if (library === 'H5P.Image') {
+      const altText = this.media?.params?.alt || '';
+      const alreadyContainsImage = /\b(image)\b/i.test(altText);
+
+      return alreadyContainsImage ? altText || this.missingAltText : `${altText} ${contentType}` || this.missingAltText;
     }
+
+    const title = metadata?.title || '';
+    const alreadyContainsType = /\b(image|audio|video)\b/i.test(title);
+    return alreadyContainsType ? title : `${title} ${contentType}`;
   }
 
   /**
