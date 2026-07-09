@@ -251,8 +251,20 @@
           "default": "Close modal"
         },
         {
-          "label": "Assistive technology description for video play button",
-          "default": "Play video"
+          "label": "Palīgtehnoloģiju apraksts video atskaņošanas pogai",
+          "default": "Atskaņot video"
+        },
+        {
+          "label": "Palīgtehnoloģiju apraksts attēla kartītei",
+          "default": "Attēla kartīte"
+        },
+        {
+          "label": "Palīgtehnoloģiju apraksts video kartītei",
+          "default": "Video kartīte"
+        },
+        {
+          "label": "Palīgtehnoloģiju apraksts audio kartītei",
+          "default": "Audio kartīte"
         }
       ]
     }

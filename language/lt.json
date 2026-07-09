@@ -251,8 +251,20 @@
           "default": "Close modal"
         },
         {
-          "label": "Assistive technology description for video play button",
-          "default": "Play video"
+          "label": "Pagalbinių technologijų vaizdo įrašo paleidimo mygtuko aprašymas",
+          "default": "Leisti vaizdo įrašą"
+        },
+        {
+          "label": "Pagalbinių technologijų paveikslėlio kortelės aprašymas",
+          "default": "Paveikslėlio kortelė"
+        },
+        {
+          "label": "Pagalbinių technologijų vaizdo įrašo kortelės aprašymas",
+          "default": "Vaizdo įrašo kortelė"
+        },
+        {
+          "label": "Pagalbinių technologijų garso kortelės aprašymas",
+          "default": "Garso kortelė"
         }
       ]
     }

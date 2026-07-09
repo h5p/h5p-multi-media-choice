@@ -251,8 +251,20 @@
           "default": "Close modal"
         },
         {
-          "label": "Assistive technology description for video play button",
-          "default": "Play video"
+          "label": "Beschreibung für assistive Technologien für die Schaltfläche Video abspielen",
+          "default": "Video abspielen"
+        },
+        {
+          "label": "Beschreibung für assistive Technologien für die Bildkarte",
+          "default": "Bildkarte"
+        },
+        {
+          "label": "Beschreibung für assistive Technologien für die Videokarte",
+          "default": "Videokarte"
+        },
+        {
+          "label": "Beschreibung für assistive Technologien für die Audiokarte",
+          "default": "Audiokarte"
         }
       ]
     }

@@ -251,8 +251,20 @@
           "default": "Close modal"
         },
         {
-          "label": "Assistive technology description for video play button",
-          "default": "Play video"
+          "label": "Opis za podporne tehnologije za gumb za predvajanje videoposnetka",
+          "default": "Predvajaj videoposnetek"
+        },
+        {
+          "label": "Opis za podporne tehnologije za kartico s sliko",
+          "default": "Kartica s sliko"
+        },
+        {
+          "label": "Opis za podporne tehnologije za kartico z videoposnetkom",
+          "default": "Kartica z videoposnetkom"
+        },
+        {
+          "label": "Opis za podporne tehnologije za kartico z zvokom",
+          "default": "Kartica z zvokom"
         }
       ]
     }

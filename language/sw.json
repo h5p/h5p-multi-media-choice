@@ -251,8 +251,20 @@
           "default": "Close modal"
         },
         {
-          "label": "Assistive technology description for video play button",
-          "default": "Play video"
+          "label": "Maelezo ya teknolojia saidizi kwa kitufe cha kucheza video",
+          "default": "Cheza video"
+        },
+        {
+          "label": "Maelezo ya teknolojia saidizi kwa kadi ya picha",
+          "default": "Kadi ya picha"
+        },
+        {
+          "label": "Maelezo ya teknolojia saidizi kwa kadi ya video",
+          "default": "Kadi ya video"
+        },
+        {
+          "label": "Maelezo ya teknolojia saidizi kwa kadi ya sauti",
+          "default": "Kadi ya sauti"
         }
       ]
     }

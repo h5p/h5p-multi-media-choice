@@ -9,19 +9,14 @@ export class MultiMediaChoiceOption {
    * @param {number} contentId Content's id
    * @param {string} aspectRatio Aspect ratio used if all options should conform to the same size
    * @param {boolean} singleAnswer true for radio buttons, false for checkboxes
-   * @param {string} missingAltText translatable string for missing alt text
-   * @param {string} closeModalText translatable string for closing modal text
-   * @param {string} playVideo translatable string for playing video text
-   * @param {boolean} assetsFilePath //TODO: what is this?
+  * @param {object} l10n Translatable strings used by this option.
    * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(frame, option, contentId, aspectRatio, singleAnswer, missingAltText, closeModalText, playVideo, callbacks) {
+  constructor(frame, option, contentId, aspectRatio, singleAnswer, l10n, callbacks) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.singleAnswer = singleAnswer;
-    this.missingAltText = missingAltText;
-    this.closeModalText = closeModalText;
-    this.playVideo = playVideo;
+    this.l10n = l10n || {};
 
     this.frame = frame;
     this.option = option;
@@ -91,20 +86,16 @@ export class MultiMediaChoiceOption {
    * @returns {string} the description of the option
    */
   getDescription() {
-    const library = this.media?.library?.split(' ')[0];
-    const metadata = this.media?.metadata;
-    const contentType = metadata?.contentType || '';
-
-    if (library === 'H5P.Image') {
-      const altText = this.media?.params?.alt || '';
-      const alreadyContainsImage = /\b(image)\b/i.test(altText);
-
-      return alreadyContainsImage ? altText || this.missingAltText : `${altText} ${contentType}` || this.missingAltText;
+    switch (this.media.library.split(' ')[0]) {
+      case 'H5P.Image':
+        return `${this.media?.params?.alt || this.l10n.missingAltText} ${this.l10n.imageCardLabel}`;
+      case 'H5P.Video':
+        return `${this.media?.metadata?.title} ${this.l10n.videoCardLabel}`;
+      case 'H5P.Audio':
+        return `${this.media?.metadata?.title} ${this.l10n.audioCardLabel}`;
+      default:
+        return '';
     }
-
-    const title = metadata?.title || '';
-    const alreadyContainsType = /\b(image|audio|video)\b/i.test(title);
-    return alreadyContainsType ? title : `${title} ${contentType}`;
   }
 
   /**
@@ -118,7 +109,7 @@ export class MultiMediaChoiceOption {
         classList: ['h5p-multi-media-video-button'],
         attributes: {
           tabindex: '0',
-          'aria-label': this.playVideo,
+          'aria-label': this.l10n.playVideo,
         },
       });
       const videoIcon = createElement({ type: 'div', classList: ['play-icon'] });
@@ -226,7 +217,7 @@ export class MultiMediaChoiceOption {
     const modal = createElement({ type: 'div', classList: ['h5p-multi-media-modal'], attributes: { 'aria-modal': 'true' } });
     const modalContainer = createElement({ type: 'div', classList: ['h5p-multi-media-choice-modal-container'] });
     const modalContent = createElement({ type: 'div', classList: ['h5p-multi-media-choice-modal-content'] });
-    const closeButton = createElement({ type: 'button', classList: ['modal-close-button'], attributes: { 'aria-label': this.closeModalText } });
+    const closeButton = createElement({ type: 'button', classList: ['modal-close-button'], attributes: { 'aria-label': this.l10n.closeModalText } });
     const cross = createElement({ type: 'div', classList: ['icon-cross'] });
 
     modal.appendChild(modalContainer);

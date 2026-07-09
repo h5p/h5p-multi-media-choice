@@ -251,8 +251,20 @@
           "default": "Close modal"
         },
         {
-          "label": "Assistive technology description for video play button",
-          "default": "Play video"
+          "label": "Descrição para tecnologia assistiva do botão de reprodução de vídeo",
+          "default": "Reproduzir vídeo"
+        },
+        {
+          "label": "Descrição para tecnologia assistiva do cartão de imagem",
+          "default": "Cartão de imagem"
+        },
+        {
+          "label": "Descrição para tecnologia assistiva do cartão de vídeo",
+          "default": "Cartão de vídeo"
+        },
+        {
+          "label": "Descrição para tecnologia assistiva do cartão de áudio",
+          "default": "Cartão de áudio"
         }
       ]
     }

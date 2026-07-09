@@ -251,8 +251,20 @@
           "default": "Close modal"
         },
         {
-          "label": "Assistive technology description for video play button",
-          "default": "Play video"
+          "label": "影片播放按鈕的輔助科技描述",
+          "default": "播放影片"
+        },
+        {
+          "label": "圖片卡片的輔助科技描述",
+          "default": "圖片卡片"
+        },
+        {
+          "label": "影片卡片的輔助科技描述",
+          "default": "影片卡片"
+        },
+        {
+          "label": "音訊卡片的輔助科技描述",
+          "default": "音訊卡片"
         }
       ]
     }

@@ -251,8 +251,20 @@
           "default": "Pechar botón modal"
         },
         {
-          "label": "Assistive technology description for video play button",
-          "default": "Play video"
+          "label": "Descrición para tecnoloxía asistiva do botón de reprodución de vídeo",
+          "default": "Reproducir vídeo"
+        },
+        {
+          "label": "Descrición para tecnoloxía asistiva da tarxeta de imaxe",
+          "default": "Tarxeta de imaxe"
+        },
+        {
+          "label": "Descrición para tecnoloxía asistiva da tarxeta de vídeo",
+          "default": "Tarxeta de vídeo"
+        },
+        {
+          "label": "Descrición para tecnoloxía asistiva da tarxeta de audio",
+          "default": "Tarxeta de audio"
         }
       ]
     }

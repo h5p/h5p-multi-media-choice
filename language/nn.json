@@ -251,8 +251,20 @@
           "default": "Close modal"
         },
         {
-          "label": "Assistive technology description for video play button",
-          "default": "Play video"
+          "label": "Skildring for hjelpeteknologi for avspelingsknapp for video",
+          "default": "Spel av video"
+        },
+        {
+          "label": "Skildring for hjelpeteknologi for biletekort",
+          "default": "Biletekort"
+        },
+        {
+          "label": "Skildring for hjelpeteknologi for videokort",
+          "default": "Videokort"
+        },
+        {
+          "label": "Skildring for hjelpeteknologi for lydkort",
+          "default": "Lydkort"
         }
       ]
     }

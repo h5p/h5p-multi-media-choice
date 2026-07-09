@@ -522,6 +522,27 @@
         "label": "Assistive technology description for video play button",
         "importance": "low",
         "default": "Play video"
+      },
+      {
+        "name": "imageCardLabel",
+        "type": "text",
+        "label": "Assistive technology description for image card",
+        "importance": "low",
+        "default": "Image card"
+      },
+      {
+        "name": "videoCardLabel",
+        "type": "text",
+        "label": "Assistive technology description for video card",
+        "importance": "low",
+        "default": "Video card"
+      },
+      {
+        "name": "audioCardLabel",
+        "type": "text",
+        "label": "Assistive technology description for audio card",
+        "importance": "low",
+        "default": "Audio card"
       }
     ]
   }

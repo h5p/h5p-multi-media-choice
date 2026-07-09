@@ -251,8 +251,20 @@
           "default": "Close modal"
         },
         {
-          "label": "Assistive technology description for video play button",
-          "default": "Play video"
+          "label": "Beschrijving voor ondersteunende technologie voor de knop Video afspelen",
+          "default": "Video afspelen"
+        },
+        {
+          "label": "Beschrijving voor ondersteunende technologie voor de afbeeldingskaart",
+          "default": "Afbeeldingskaart"
+        },
+        {
+          "label": "Beschrijving voor ondersteunende technologie voor de videokaart",
+          "default": "Videokaart"
+        },
+        {
+          "label": "Beschrijving voor ondersteunende technologie voor de audiokaart",
+          "default": "Audiokaart"
         }
       ]
     }

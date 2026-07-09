@@ -251,8 +251,20 @@
           "default": "Close modal"
         },
         {
-          "label": "Assistive technology description for video play button",
-          "default": "Play video"
+          "label": "Video oynatma düğmesi için yardımcı teknoloji açıklaması",
+          "default": "Videoyu oynat"
+        },
+        {
+          "label": "Görsel kartı için yardımcı teknoloji açıklaması",
+          "default": "Görsel kartı"
+        },
+        {
+          "label": "Video kartı için yardımcı teknoloji açıklaması",
+          "default": "Video kartı"
+        },
+        {
+          "label": "Ses kartı için yardımcı teknoloji açıklaması",
+          "default": "Ses kartı"
         }
       ]
     }

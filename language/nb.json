@@ -251,8 +251,20 @@
           "default": "Close modal"
         },
         {
-          "label": "Assistive technology description for video play button",
-          "default": "Play video"
+          "label": "Beskrivelse for hjelpeteknologi for avspillingsknapp for video",
+          "default": "Spill av video"
+        },
+        {
+          "label": "Beskrivelse for hjelpeteknologi for bildekort",
+          "default": "Bildekort"
+        },
+        {
+          "label": "Beskrivelse for hjelpeteknologi for videokort",
+          "default": "Videokort"
+        },
+        {
+          "label": "Beskrivelse for hjelpeteknologi for lydkort",
+          "default": "Lydkort"
         }
       ]
     }

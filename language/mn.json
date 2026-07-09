@@ -251,8 +251,20 @@
           "default": "Close modal"
         },
         {
-          "label": "Assistive technology description for video play button",
-          "default": "Play video"
+          "label": "Видео тоглуулах товчны туслах технологийн тайлбар",
+          "default": "Видео тоглуулах"
+        },
+        {
+          "label": "Зургийн картын туслах технологийн тайлбар",
+          "default": "Зургийн карт"
+        },
+        {
+          "label": "Видео картын туслах технологийн тайлбар",
+          "default": "Видео карт"
+        },
+        {
+          "label": "Аудио картын туслах технологийн тайлбар",
+          "default": "Аудио карт"
         }
       ]
     }
