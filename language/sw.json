@@ -249,6 +249,22 @@
         {
           "label": "Close modal button label",
           "default": "Close modal"
+        },
+        {
+          "label": "Maelezo ya teknolojia saidizi kwa kitufe cha kucheza video",
+          "default": "Cheza video"
+        },
+        {
+          "label": "Maelezo ya teknolojia saidizi kwa kadi ya picha",
+          "default": "Kadi ya picha"
+        },
+        {
+          "label": "Maelezo ya teknolojia saidizi kwa kadi ya video",
+          "default": "Kadi ya video"
+        },
+        {
+          "label": "Maelezo ya teknolojia saidizi kwa kadi ya sauti",
+          "default": "Kadi ya sauti"
         }
       ]
     }

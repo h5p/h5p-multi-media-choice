@@ -249,6 +249,22 @@
         {
           "label": "Etichetă buton închidere fereastră modală",
           "default": "Închide fereastra modală"
+        },
+        {
+          "label": "Descriere pentru tehnologiile asistive pentru butonul de redare video",
+          "default": "Redă videoclipul"
+        },
+        {
+          "label": "Descriere pentru tehnologiile asistive pentru cardul de imagine",
+          "default": "Card imagine"
+        },
+        {
+          "label": "Descriere pentru tehnologiile asistive pentru cardul video",
+          "default": "Card video"
+        },
+        {
+          "label": "Descriere pentru tehnologiile asistive pentru cardul audio",
+          "default": "Card audio"
         }
       ]
     }

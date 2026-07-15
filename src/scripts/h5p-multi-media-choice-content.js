@@ -93,6 +93,15 @@ constructor(params = {}, contentId, callbacks = {}, answerState, introId) {
       }
     }
 
+    const optionL10n = {
+      missingAltText: this.params.l10n.missingAltText,
+      closeModalText: this.params.l10n.closeModalText,
+      playVideo: this.params.l10n.playVideo,
+      imageCardLabel: this.params.l10n.imageCardLabel,
+      videoCardLabel: this.params.l10n.videoCardLabel,
+      audioCardLabel: this.params.l10n.audioCardLabel,
+    };
+
     // Build n options
     this.options = this.params.options
       ? this.params.options.map(
@@ -102,8 +111,7 @@ constructor(params = {}, contentId, callbacks = {}, answerState, introId) {
           contentId,
           this.aspectRatio,
           this.isSingleAnswer,
-          this.params.l10n.missingAltText,
-          this.params.l10n.closeModalText,
+          optionL10n,
           {
             onClick: () => this.toggleSelected(index),
             onKeyboardSelect: () => this.toggleSelected(index),

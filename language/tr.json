@@ -249,6 +249,22 @@
         {
           "label": "Close modal button label",
           "default": "Close modal"
+        },
+        {
+          "label": "Video oynatma düğmesi için yardımcı teknoloji açıklaması",
+          "default": "Videoyu oynat"
+        },
+        {
+          "label": "Görsel kartı için yardımcı teknoloji açıklaması",
+          "default": "Görsel kartı"
+        },
+        {
+          "label": "Video kartı için yardımcı teknoloji açıklaması",
+          "default": "Video kartı"
+        },
+        {
+          "label": "Ses kartı için yardımcı teknoloji açıklaması",
+          "default": "Ses kartı"
         }
       ]
     }
