@@ -249,6 +249,22 @@
         {
           "label": "Close modal button label",
           "default": "Close modal"
+        },
+        {
+          "label": "Laguntza-teknologiarako bideoa erreproduzitzeko botoiaren deskribapena",
+          "default": "Erreproduzitu bideoa"
+        },
+        {
+          "label": "Laguntza-teknologiarako irudi-txartelaren deskribapena",
+          "default": "Irudi-txartela"
+        },
+        {
+          "label": "Laguntza-teknologiarako bideo-txartelaren deskribapena",
+          "default": "Bideo-txartela"
+        },
+        {
+          "label": "Laguntza-teknologiarako audio-txartelaren deskribapena",
+          "default": "Audio-txartela"
         }
       ]
     }

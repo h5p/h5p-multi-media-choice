@@ -249,6 +249,22 @@
         {
           "label": "Close modal button label",
           "default": "Close modal"
+        },
+        {
+          "label": "동영상 재생 버튼의 보조 기술 설명",
+          "default": "동영상 재생"
+        },
+        {
+          "label": "이미지 카드의 보조 기술 설명",
+          "default": "이미지 카드"
+        },
+        {
+          "label": "동영상 카드의 보조 기술 설명",
+          "default": "동영상 카드"
+        },
+        {
+          "label": "오디오 카드의 보조 기술 설명",
+          "default": "오디오 카드"
         }
       ]
     }
