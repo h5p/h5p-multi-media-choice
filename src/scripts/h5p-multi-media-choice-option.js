@@ -86,7 +86,7 @@ export class MultiMediaChoiceOption {
    * @returns {string} the description of the option
    */
   getDescription() {
-    switch (this.media.library.split(' ')[0]) {
+    switch (this.media?.library?.split(' ')[0]) {
       case 'H5P.Image':
         return `${this.media?.params?.alt || this.l10n.missingAltText} ${this.l10n.imageCardLabel}`;
       case 'H5P.Video':

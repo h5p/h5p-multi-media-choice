@@ -52,6 +52,7 @@
   }
 
   .h5p-multi-media-choice-option {
+    container-type: inline-size;
     position: relative;
 
     // Removes space below images
@@ -68,6 +69,12 @@
   @container (max-width: 100px) {
     .h5p-multi-media-choice-option {
         padding: var(--h5p-theme-spacing-xs);
+    }
+  }
+  
+  @container (max-width: 68px) {
+    .h5p-multi-media-choice-option {
+      padding: 0.25rem;
     }
   }
 
@@ -431,6 +438,13 @@
 
     .h5p-audio-minimal-play::before {
       font-weight: bold;
+    }
+  }
+  
+  @container (max-width: 68px) {
+    .h5p-multi-media-content-media-button-centered {
+      margin-top: -1.05rem;
+      margin-right: -1.1rem;
     }
   }
 }
