@@ -91,15 +91,6 @@ export default class MultiMediaChoiceContent {
       }
     }
 
-    const optionL10n = {
-      missingAltText: this.params.l10n.missingAltText,
-      closeModalText: this.params.l10n.closeModalText,
-      playVideo: this.params.l10n.playVideo,
-      imageCardLabel: this.params.l10n.imageCardLabel,
-      videoCardLabel: this.params.l10n.videoCardLabel,
-      audioCardLabel: this.params.l10n.audioCardLabel,
-    };
-
     // Build n options
     this.options = this.params.options
       ? this.params.options.map(
@@ -109,7 +100,8 @@ export default class MultiMediaChoiceContent {
           contentId,
           this.aspectRatio,
           this.isSingleAnswer,
-          optionL10n,
+          this.params.l10n.missingAltText,
+          this.params.l10n.closeModalText,
           {
             onClick: () => this.toggleSelected(index),
             onKeyboardSelect: () => this.toggleSelected(index),

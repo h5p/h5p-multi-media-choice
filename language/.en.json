@@ -249,22 +249,6 @@
         {
           "label": "Close modal button label",
           "default": "Close modal"
-        },
-        {
-          "label": "Assistive technology description for video play button",
-          "default": "Play video"
-        },
-        {
-        "label": "Assistive technology description for image card",
-        "default": "Image card"
-        },
-        {
-          "label": "Assistive technology description for video card",
-          "default": "Video card"
-        },
-        {
-          "label": "Assistive technology description for audio card",
-          "default": "Audio card"
         }
       ]
     }

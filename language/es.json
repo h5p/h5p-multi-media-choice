@@ -249,22 +249,6 @@
         {
           "label": "Etiqueta de cierre de botón modal",
           "default": "Cerrar botón modal"
-        },
-        {
-          "label": "Descripción para tecnologías de asistencia del botón de reproducción de vídeo",
-          "default": "Reproducir vídeo"
-        },
-        {
-          "label": "Descripción para tecnologías de asistencia de la tarjeta de imagen",
-          "default": "Tarjeta de imagen"
-        },
-        {
-          "label": "Descripción para tecnologías de asistencia de la tarjeta de vídeo",
-          "default": "Tarjeta de vídeo"
-        },
-        {
-          "label": "Descripción para tecnologías de asistencia de la tarjeta de audio",
-          "default": "Tarjeta de audio"
         }
       ]
     }

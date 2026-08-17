@@ -249,22 +249,6 @@
         {
           "label": "Close modal button label",
           "default": "Close modal"
-        },
-        {
-          "label": "Skildring for hjelpeteknologi for avspelingsknapp for video",
-          "default": "Spel av video"
-        },
-        {
-          "label": "Skildring for hjelpeteknologi for biletekort",
-          "default": "Biletekort"
-        },
-        {
-          "label": "Skildring for hjelpeteknologi for videokort",
-          "default": "Videokort"
-        },
-        {
-          "label": "Skildring for hjelpeteknologi for lydkort",
-          "default": "Lydkort"
         }
       ]
     }
