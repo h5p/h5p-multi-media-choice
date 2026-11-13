@@ -156,16 +156,8 @@
           "default": "Enviar"
         },
         {
-          "label": "Descrición do botón \"Comprobar\" para as tecnoloxías de asistencia",
-          "default": "Comproba as túas respostas. As respostas marcaranse como correctas, incorrectas ou non contestadas."
-        },
-        {
           "label": "Texto para o botón \"Amosar solución\"",
           "default": "Amosar Resposta"
-        },
-        {
-          "label": "Descrición para as tecnoloxías de asistencia para o botón \"Amosar solución\"",
-          "default": "Amosar a solución. Marcaranse as opcións correctas."
         },
         {
           "label": "Resposta Correcta (non amosada)",
@@ -190,10 +182,6 @@
         {
           "label": "Texto para o botón \"Tentar de novo\"",
           "default": "Tentar de novo"
-        },
-        {
-          "label": "Descrición para as tecnoloxías de asistencia do botón \"Tentar de novo\"",
-          "default": "Tenta de novo a tarefa. Borra todas as respostas e comeza a tarefa de novo."
         },
         {
           "label": "O teu resultado",

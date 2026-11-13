@@ -156,16 +156,8 @@
           "default": "Verzend"
         },
         {
-          "label": "Ondersteunende technologie beschrijving voor \"Controleer\"-knop",
-          "default": "Controleer de antwoorden. De antwoorden worden gemarkeerd als juist, onjuist, of niet-beantwoord."
-        },
-        {
           "label": "Tekst voor \"Toon oplossing\"-knop",
           "default": "Toon oplossing"
-        },
-        {
-          "label": "Ondersteunende technologie beschrijving voor \"Toon oplossing\"-knop",
-          "default": "Toon de oplossing. De juiste opties worden gemarkeerd."
         },
         {
           "label": "Juist antwoord (niet weergegeven)",
@@ -190,10 +182,6 @@
         {
           "label": "Tekst voor \"Opnieuw\"-knop",
           "default": "Opnieuw"
-        },
-        {
-          "label": "Assistive technology description for \"Retry\" button",
-          "default": "Retry the task. Reset all responses and start the task over again."
         },
         {
           "label": "Your result",

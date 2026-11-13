@@ -156,16 +156,8 @@
           "default": "Trimite"
         },
         {
-          "label": "Descriere pentru tehnologia asistivă a butonului \"Verifică\"",
-          "default": "Verifică răspunsurile. Răspunsurile vor fi marcate ca fiind corecte, incorecte sau fără răspuns."
-        },
-        {
           "label": "Text pentru butonul \"Arată soluția\"",
           "default": "Arată soluția"
-        },
-        {
-          "label": "Descriere pentru tehnologia asistivă a butonului \"Arată soluția\"",
-          "default": "Arată soluția. Opțiunile corecte vor fi marcate."
         },
         {
           "label": "Răspuns corect (nu se afișează)",
@@ -190,10 +182,6 @@
         {
           "label": "Text pentru butonul \"Încearcă din nou\"",
           "default": "Încearcă din nou"
-        },
-        {
-          "label": "Descriere pentru tehnologia asistivă a butonului \"Încearcă din nou\"",
-          "default": "Reîncercați sarcina. Resetați toate răspunsurile și începeți sarcina din nou."
         },
         {
           "label": "Rezultatul dumneavoastră",
