@@ -156,16 +156,8 @@
           "default": "Submit"
         },
         {
-          "label": "\"Kontrol Et\" düğmesi için yardımcı teknoloji açıklaması",
-          "default": "Cevapları kontrol edin. Cevaplar doğru, yanlış veya cevapsız olarak işaretlenecektir."
-        },
-        {
           "label": "\"Çözümü göster\" düğmesi için metin",
           "default": "Çözümü göster"
-        },
-        {
-          "label": "\"Çözümü Göster\" düğmesi için yardımcı teknoloji açıklaması",
-          "default": "Çözümü göster. Doğru seçenekler işaretlenecektir."
         },
         {
           "label": "Doğru Cevap (görüntülenmiyor)",
@@ -190,10 +182,6 @@
         {
           "label": "\"Yeniden Dene\" düğmesi metni",
           "default": "Yeniden Dene"
-        },
-        {
-          "label": "\"Yeniden Dene\" düğmesi için yardımcı teknoloji açıklaması",
-          "default": "Görevi yeniden deneyin. Tüm yanıtları sıfırlayın ve görevi yeniden başlatın."
         },
         {
           "label": "Sonucun",

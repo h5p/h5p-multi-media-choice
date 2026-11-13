@@ -156,16 +156,8 @@
           "default": "Iesniegt"
         },
         {
-          "label": "Pogas \"Pārbaudīt\" apraksts asistīvajām tehnoloģijām",
-          "default": "Pārbaudīt atbildes. Atbildes tiks atzīmētas kā pareizas, nepareizas, vai neatbildētas."
-        },
-        {
           "label": "Pogas \"Parādīt risinājumu\" teksts",
           "default": "Rādīt risinājumu"
-        },
-        {
-          "label": "Asistīvo tehnoloģiju apraksts pogai \"Rādīt risinājumu\"",
-          "default": "Rādīt risinājumu. Tiks atzīmētas pareizās izvēles."
         },
         {
           "label": "Pareiza atbilde (netiek rādīts)",
@@ -190,10 +182,6 @@
         {
           "label": "Pogas \"Mēģināt vēlreiz\" teksts",
           "default": "Atkārtot"
-        },
-        {
-          "label": "Asistīvo tehnoloģiju apraksts pogai \"Mēģināt vēlreiz\"",
-          "default": "Mēģināt uzdevumu vēlreiz. Atiestatīt visas sniegtās atbildes un sākt uzdevumu vēlreiz."
         },
         {
           "label": "Tavs rezultāts",

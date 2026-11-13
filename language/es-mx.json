@@ -156,16 +156,8 @@
           "default": "Submit"
         },
         {
-          "label": "Descripción de tecnología asistiva para botón \"Comprobar\"",
-          "default": "Comprobar las respuestas. Las respuestas serán marcadas como correcta, incorrecta, o sin contestar."
-        },
-        {
           "label": "Texto para botón \"Mostrar solución\"",
           "default": "Mostrar solución"
-        },
-        {
-          "label": "Descripción de tecnología asistiva para botón \"Mostrar Solución\"",
-          "default": "Mostrar la solución. Las opciones correctas serán marcadas."
         },
         {
           "label": "Respuesta Correcta (no se muestra)",
@@ -190,10 +182,6 @@
         {
           "label": "Texto para botón \"Reintentar\"",
           "default": "Reintentar"
-        },
-        {
-          "label": "Descripción de tecnología asistiva para botón \"Reintentar\"",
-          "default": "Reintentar el trabajo. Reiniciar todas las respuestas e iniciar el trabajo de nuevo."
         },
         {
           "label": "Su resultado",

@@ -156,16 +156,8 @@
           "default": "Wasilisha"
         },
         {
-          "label": "Maelezo ya teknolojia ya usaidizi kwa kitufe cha \"Weka alama\"",
-          "default": "Weka alama majibu. Majibu yatatiwa alama kuwa sahihi, siyo sahihi au haijajibiwa."
-        },
-        {
           "label": "Maandishi kwa kitufe cha \"Onyesha suluhisho\"",
           "default": "Onyesha suluhisho"
-        },
-        {
-          "label": "Maelezo ya teknolojia ya usaidizi kwa kitufe cha \"Onyesha Suluhisho\"",
-          "default": "Onyesha suluhisho hilo. Chaguzi sahihi zitawekwa alama."
         },
         {
           "label": "Jibu Sahihi (halijaonyeshwa)",
@@ -190,10 +182,6 @@
         {
           "label": "Maandishi kwa kitufe cha \"Jaribu tena\"",
           "default": "Jaribu tena"
-        },
-        {
-          "label": "Maelezo ya teknolojia ya usaidizi kwa kitufe cha \"Jaribu tena\"",
-          "default": "Jaribu tena kazi hiyo. Weka upya majibu yote na uanze kazi tena."
         },
         {
           "label": "Matokeo yako",

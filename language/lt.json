@@ -156,16 +156,8 @@
           "default": "Pateikti"
         },
         {
-          "label": "Mygtuko „Tikrinti“ pagalbinės technologijos aprašymas",
-          "default": "Tikrinti atsakymus. Atsakymai bus pažymėti kaip teisingi, neteisingi arba neatsakyti."
-        },
-        {
           "label": "Mygtuko „Rodyti sprendimą“ tekstas",
           "default": "Rodyti sprendimą"
-        },
-        {
-          "label": "Mygtuko „Rodyti sprendimą“ pagalbinės technologijos aprašymas",
-          "default": "Show the solution. The correct options will be marked."
         },
         {
           "label": "Teisingas atsakymas (nerodomas)",
@@ -190,10 +182,6 @@
         {
           "label": "Tekstas mygtukui „Bandyti dar kartą“",
           "default": "Bandyti dar kartą"
-        },
-        {
-          "label": "Assistive technology description for \"Retry\" button",
-          "default": "Retry the task. Reset all responses and start the task over again."
         },
         {
           "label": "Your result",
