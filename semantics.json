@@ -330,25 +330,11 @@
         "default": "Submit"
       },
       {
-        "name": "checkAnswer",
-        "type": "text",
-        "label": "Assistive technology description for \"Check\" button",
-        "importance": "low",
-        "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
-      },
-      {
         "name": "showSolutionButtonText",
         "type": "text",
         "label": "Text for \"Show solution\" button",
         "importance": "low",
         "default": "Show solution"
-      },
-      {
-        "name": "showSolution",
-        "type": "text",
-        "label": "Assistive technology description for \"Show Solution\" button",
-        "importance": "low",
-        "default": "Show the solution. The correct options will be marked."
       },
       {
         "name": "correctAnswer",
@@ -394,13 +380,6 @@
         "label": "Text for \"Retry\" button",
         "importance": "low",
         "default": "Retry"
-      },
-      {
-        "name": "retry",
-        "type": "text",
-        "label": "Assistive technology description for \"Retry\" button",
-        "importance": "low",
-        "default": "Retry the task. Reset all responses and start the task over again."
       },
       {
         "name": "result",

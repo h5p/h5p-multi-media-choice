@@ -156,16 +156,8 @@
           "default": "提交"
         },
         {
-          "label": "Assistive technology description for \"Check\" button",
-          "default": "查看答案。回答會評為正確、錯誤或未回答。"
-        },
-        {
           "label": "Text for \"Show solution\" button",
           "default": "顯示解答"
-        },
-        {
-          "label": "Assistive technology description for \"Show Solution\" button",
-          "default": "顯示解答。此測試會以正解評分。"
         },
         {
           "label": "Correct Answer (not displayed)",
@@ -190,10 +182,6 @@
         {
           "label": "Text for \"Retry\" button",
           "default": "重試"
-        },
-        {
-          "label": "Assistive technology description for \"Retry\" button",
-          "default": "重新嘗試。重置所有回答，重新開始測試。"
         },
         {
           "label": "Your result",

@@ -156,16 +156,8 @@
           "default": "Enviar"
         },
         {
-          "label": "Descripción para las tecnologías de asistencia del botón \"Comprobar\"",
-          "default": "Revisa tus respuestas. Las respuestas se marcarán como correcta, incorrecta o sin contestar."
-        },
-        {
           "label": "Texto para botón \"Mostrar solución\"",
           "default": "Mostrar solución"
-        },
-        {
-          "label": "Descripción para las tecnologías de asistencia del botón \"Mostrar solución\"",
-          "default": "Mostrar la solución. Se marcarán las opciones correctas."
         },
         {
           "label": "Respuesta Correcta (no se muestra)",
@@ -190,10 +182,6 @@
         {
           "label": "Texto para el botón \"Intentar de nuevo\"",
           "default": "Intentar de nuevo"
-        },
-        {
-          "label": "Descripción para las tecnologías de asistencia del botón \"Intentar de nuevo\"",
-          "default": "Vuelve a intentar la tarea. Borra todas tus respuestas y empieza de nuevo."
         },
         {
           "label": "Tu resultado",

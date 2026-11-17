@@ -156,16 +156,8 @@
           "default": "Submit"
         },
         {
-          "label": "Assistive technology description for \"Check\" button",
-          "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
-        },
-        {
           "label": "Text for \"Show solution\" button",
           "default": "Show solution"
-        },
-        {
-          "label": "Assistive technology description for \"Show Solution\" button",
-          "default": "Show the solution. The correct options will be marked."
         },
         {
           "label": "Correct Answer (not displayed)",
@@ -190,10 +182,6 @@
         {
           "label": "Text for \"Retry\" button",
           "default": "Retry"
-        },
-        {
-          "label": "Assistive technology description for \"Retry\" button",
-          "default": "Retry the task. Reset all responses and start the task over again."
         },
         {
           "label": "Your result",

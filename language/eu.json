@@ -156,16 +156,8 @@
           "default": "Submit"
         },
         {
-          "label": "\"Egiaztatu\" botoiaren laguntza-teknologientzako etiketa",
-          "default": "Egiaztatu erantzunak. Erantzunak zuzen, oker edo erantzun gabe gisa markatuko dira."
-        },
-        {
           "label": "\"Erakutsi emaitza\" botoiaren testua",
           "default": "Erakutsi emaitza"
-        },
-        {
-          "label": "\"Erakutsi emaitza\" botoiaren laguntza-teknologientzako etiketa",
-          "default": "Erakutsi emaitza. Aukera zuzenak markatuko dira."
         },
         {
           "label": "Erantzun zuzena (erakutsi gabe)",
@@ -190,10 +182,6 @@
         {
           "label": "\"Saiatu berriro\" botoiarentzako testua",
           "default": "Saiatu berriro"
-        },
-        {
-          "label": "\"Saiatu berriro\" botoiaren laguntza-teknologientzako etiketa",
-          "default": "Zeregina berriz egiten saiatu. Berrabiarazi erantzun guztiak eta hasi zeregina berriz."
         },
         {
           "label": "Zure emaitza",
