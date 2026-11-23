@@ -156,16 +156,8 @@
           "default": "Submit"
         },
         {
-          "label": "Opis gumba \"Preveri\" za bralnike zaslona",
-          "default": "Preveri pravilnost. Odgovori bodo označeni kot pravilni, napačni ali brez odgovorov."
-        },
-        {
           "label": "Besedilo za gumb \"Prikaži rešitev\"",
           "default": "Prikaži rešitev"
-        },
-        {
-          "label": "Opis gumba \"Prikaži rešitev\" za bralnike zaslona",
-          "default": "Prikaže rešitev. Pravilni odgovori bodo označeni."
         },
         {
           "label": "Pravilen odgovor (ni prikazan)",
@@ -190,10 +182,6 @@
         {
           "label": "Besedilo za gumb \"Poskusi ponovno\"",
           "default": "Poskusi ponovno"
-        },
-        {
-          "label": "Opis gumba \"Poskusi ponovno\" za bralnike zaslona",
-          "default": "Omogoči ponoven poskus. Ponastavi vse odzive in znova zažene nalogo."
         },
         {
           "label": "Rezultat reševanja",

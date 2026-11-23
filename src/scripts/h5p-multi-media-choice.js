@@ -238,7 +238,7 @@ export default class MultiMediaChoice extends H5P.Question {
           this.checkAnswer();
         },
         true,
-        { 'aria-label': this.params.l10n.checkAnswer },
+        { 'aria-label': this.params.l10n.checkAnswerButtonText },
         {
           confirmationDialog: {
             enable: this.params.behaviour.confirmCheckDialog,
@@ -257,7 +257,7 @@ export default class MultiMediaChoice extends H5P.Question {
         this.showSolutions(true);
       },
       false,
-      { 'aria-label': this.params.l10n.showSolution },
+      { 'aria-label': this.params.l10n.showSolutionButtonText },
       {}
     );
 
@@ -268,7 +268,7 @@ export default class MultiMediaChoice extends H5P.Question {
         this.resetTask();
       },
       false,
-      { 'aria-label': this.params.l10n.retry },
+      { 'aria-label': this.params.l10n.retryText },
       {
         confirmationDialog: {
           enable: this.params.behaviour.confirmRetryDialog,
