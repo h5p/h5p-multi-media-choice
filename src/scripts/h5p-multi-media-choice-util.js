@@ -23,17 +23,13 @@ export class Util {
         l10n: {
           checkAnswerButtonText: 'Check',
           submitAnswerButtonText: 'Submit',
-          checkAnswer:
-            'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
           showSolutionButtonText: 'Show solution',
-          showSolution: 'Show the solution. The task will be marked with its correct solution.',
           correctAnswer: 'Correct answer',
           wrongAnswer: 'Wrong answer',
           shouldCheck: 'Should have been checked',
           shouldNotCheck: 'Should not have been checked',
           noAnswer: 'Please answer before viewing the solution',
           retryText: 'Retry',
-          retry: 'Retry the task. Reset all responses and start the task over again.',
           result: 'You got :num out of :total points',
           confirmCheck: {
             header: 'Finish?',

@@ -156,16 +156,8 @@
           "default": "Soumettre"
         },
         {
-          "label": "Description de la technologie fonctionnelle pour la touche « Vérifier »",
-          "default": "Vérifier les réponses. Les réponses seront marquées comme correcte, incorrecte ou sans réponse."
-        },
-        {
           "label": "Texte pour la touche « Afficher la solution »",
           "default": "Afficher la solution"
-        },
-        {
-          "label": "Description de la technologie fonctionnelle pour la touche « Afficher la solution »",
-          "default": "Afficher la solution. Les options correctes seront marquées."
         },
         {
           "label": "Réponse correcte (non affichée)",
@@ -190,10 +182,6 @@
         {
           "label": "Texte pour la touche « Réessayer »",
           "default": "Réessayer"
-        },
-        {
-          "label": "Description de la technologie fonctionnelle pour la touche « Réessayer »",
-          "default": "Réessayer la tâche. Réinitialiser toutes les réponses et recommencer la tâche."
         },
         {
           "label": "Votre résultat",
